@@ -76,6 +76,18 @@ private:
         b2Body* body = m_world->CreateBody(&bd);
         body->CreateFixture(&shape, 5.0f);
     }
+    
+    bool isSceneStable()
+    {
+        b2Body* bodies = m_world->GetBodyList();
+        for (b2Body* b = bodies; b; b = b->GetNext())
+        {
+            if(b->IsAwake() && !(b->GetType() == b2_staticBody)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 public:
     static Test* Create()
