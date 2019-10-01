@@ -21,10 +21,10 @@ public:
     
     RemoveObjectSimulation()
     {
-        m_nNumberOfObjects = 10;
+        m_nNumberOfObjects = 15;
         m_nSimulationState = SS_CREATE_SCENE;
-        m_vThrowMin = b2Vec2(-5.0f, 3.0f);
-        m_vThrowMax = b2Vec2(5.0f, 7.0f);
+        m_vThrowMin = b2Vec2(-3.0f, 3.0f);
+        m_vThrowMax = b2Vec2(3.0f, 7.0f);
         
         {
             b2BodyDef bd;
@@ -34,18 +34,16 @@ public:
             shape.Set(b2Vec2(-40.0f, 0.0f), b2Vec2(40.0f, 0.0f));
             ground->CreateFixture(&shape, 0.0f);
         }
-
-        {
-            for (int32 i = 0; i < m_nNumberOfObjects; ++i)
-            {
-                addSimulationObject();
-            }
-        }
     }
 
     void Step(Settings* settings)
     {
         Test::Step(settings);
+        
+        if(isSceneStable() && m_nNumberOfObjects>0) {
+            addSimulationObject();
+            m_nNumberOfObjects--;
+        }
 
         //b2DynamicTree* tree = &m_world->m_contactManager.m_broadPhase.m_tree;
 
