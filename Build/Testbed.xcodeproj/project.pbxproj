@@ -101,6 +101,7 @@
 		6D4C538602C312B8715F69C6 /* stb_rect_pack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = stb_rect_pack.h; path = ../Testbed/imgui/stb_rect_pack.h; sourceTree = "<group>"; };
 		728C20CE56D32900DAC0570E /* HeavyOnLightTwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HeavyOnLightTwo.h; path = ../Testbed/Tests/HeavyOnLightTwo.h; sourceTree = "<group>"; };
 		7AE379EA3E4F3B9C7CF2E02A /* SensorTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SensorTest.h; path = ../Testbed/Tests/SensorTest.h; sourceTree = "<group>"; };
+		7C3A01F62343BD3A00E4E400 /* RemoveObjectSimulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RemoveObjectSimulation.h; path = ../Testbed/Tests/RemoveObjectSimulation.h; sourceTree = "<group>"; };
 		7DD68528414246DA7FE5EB68 /* EdgeShapes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EdgeShapes.h; path = ../Testbed/Tests/EdgeShapes.h; sourceTree = "<group>"; };
 		809F4D3A4EC2A0ECD5D0F37A /* MobileBalanced.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MobileBalanced.h; path = ../Testbed/Tests/MobileBalanced.h; sourceTree = "<group>"; };
 		84620CEEA62DBA20E2E2E32E /* ShapeCast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShapeCast.h; path = ../Testbed/Tests/ShapeCast.h; sourceTree = "<group>"; };
@@ -293,6 +294,7 @@
 				4A09E196DF80A0C84E1CF7D6 /* VerticalStack.h */,
 				B76D0CB2BADDDEE43C4A82F2 /* Web.h */,
 				E2FB7D5E14F4C8108ED4039E /* chainProblem.h */,
+				7C3A01F62343BD3A00E4E400 /* RemoveObjectSimulation.h */,
 			);
 			name = Tests;
 			sourceTree = "<group>";

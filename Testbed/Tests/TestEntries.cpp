@@ -18,6 +18,7 @@
 
 #include "../Framework/Test.h"
 
+#include "RemoveObjectSimulation.h"
 #include "AddPair.h"
 #include "ApplyForce.h"
 #include "BasicSliderCrank.h"
@@ -74,6 +75,7 @@
 
 TestEntry g_testEntries[] =
 {
+    {"Remove Object Simulation", RemoveObjectSimulation::Create},
 	{"Shape Cast", ShapeCast::Create },
 	{"Time of Impact", TimeOfImpact::Create},
 	{"Character Collision", CharacterCollision::Create},

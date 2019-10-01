@@ -1,1 +1,4 @@
 imgui.ini
+*.a
+Build/bin/x86_64/Debug
+*.xcworkspacedata
