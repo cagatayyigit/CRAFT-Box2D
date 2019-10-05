@@ -8,6 +8,9 @@
 #ifndef RemoveObjectSimulation_h
 #define RemoveObjectSimulation_h
 
+#include "SimulationColor.h"
+#include "Box2D/Extension/b2VisBody.hpp"
+
 class RemoveObjectSimulation : public Test
 {
 public:
@@ -25,6 +28,7 @@ public:
         m_nSimulationState = SS_CREATE_SCENE;
         m_vThrowMin = b2Vec2(-3.0f, 3.0f);
         m_vThrowMax = b2Vec2(3.0f, 7.0f);
+        m_nDistinctColorUsed = 8;
         
         {
             b2BodyDef bd;
@@ -58,6 +62,7 @@ private:
     SimulationState m_nSimulationState;
     b2Vec2 m_vThrowMin;
     b2Vec2 m_vThrowMax;
+    unsigned short m_nDistinctColorUsed;
 
     void addSimulationObject()
     {
@@ -71,8 +76,13 @@ private:
         b2BodyDef bd;
         bd.type = b2_dynamicBody;
         bd.position = b2Vec2(posX, posY);
-        b2Body* body = m_world->CreateBody(&bd);
+        b2VisBody* body = (b2VisBody*) m_world->CreateBody(&bd);
         body->CreateFixture(&shape, 5.0f);
+        
+        int colorIndex = (rand() & (RAND_LIMIT)) % m_nDistinctColorUsed;
+        SimulationColor col = SimulationColor((SimulationColor::TYPE) colorIndex);
+        
+        body->setColor(col.GetColor(SimulationMaterial::METAL));
     }
     
     bool isSceneStable()
