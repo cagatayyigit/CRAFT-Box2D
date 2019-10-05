@@ -26,6 +26,7 @@
 #include "DebugDraw.h"
 #else
 #include "SimulationRenderer.hpp"
+#include "Box2D/Extension/b2VisWorld.hpp"
 #endif
 
 #include "Camera.hpp"

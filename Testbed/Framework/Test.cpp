@@ -17,6 +17,7 @@
 */
 
 #include "Test.h"
+#include "SimulationDefines.h"
 #include <stdio.h>
 
 void DestructionListener::SayGoodbye(b2Joint* joint)
@@ -35,7 +36,12 @@ Test::Test()
 {
 	b2Vec2 gravity;
 	gravity.Set(0.0f, -10.0f);
+    
+#if USE_DEBUG_DRAW
 	m_world = new b2World(gravity);
+#else
+    m_world = new b2VisWorld(gravity);
+#endif
 	m_bomb = NULL;
 	m_textLine = 30;
 	m_mouseJoint = NULL;

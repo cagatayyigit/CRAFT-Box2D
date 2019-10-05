@@ -46,7 +46,7 @@ public:
 	b2World(const b2Vec2& gravity);
 
 	/// Destruct the world. All physics entities are destroyed and all heap memory is released.
-	~b2World();
+	virtual ~b2World();
 
 	/// Register a destruction listener. The listener is owned by you and must
 	/// remain in scope.
@@ -69,7 +69,7 @@ public:
 	/// Create a rigid body given a definition. No reference to the definition
 	/// is retained.
 	/// @warning This function is locked during callbacks.
-	b2Body* CreateBody(const b2BodyDef* def);
+	virtual b2Body* CreateBody(const b2BodyDef* def);
 
 	/// Destroy a rigid body given a definition. No reference to the definition
 	/// is retained. This function is locked during callbacks.
@@ -105,7 +105,7 @@ public:
 	void ClearForces();
 
 	/// Call this to draw shapes and other debug draw data. This is intentionally non-const.
-	void DrawDebugData();
+	virtual void DrawDebugData();
 
 	/// Query the world for all fixtures that potentially overlap the
 	/// provided AABB.
@@ -209,7 +209,7 @@ public:
 	/// @warning this should be called outside of a time step.
 	void Dump();
 
-private:
+protected:
 
 	// m_flags
 	enum
