@@ -25,7 +25,7 @@
 
 #include "Testbed/imgui/imgui.h"
 #include "Testbed/imgui/imgui_impl_glfw_gl3.h"
-#include "DebugDraw.h"
+#include "Camera.hpp"
 #include "Test.h"
 
 #include "Testbed/glfw/glfw3.h"

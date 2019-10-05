@@ -20,7 +20,15 @@
 #define TEST_H
 
 #include "Box2D/Box2D.h"
+#include "SimulationDefines.h"
+
+#if USE_DEBUG_DRAW
 #include "DebugDraw.h"
+#else
+#include "SimulationRenderer.hpp"
+#endif
+
+#include "Camera.hpp"
 
 #if defined(__APPLE__)
 #define GLFW_INCLUDE_GLCOREARB

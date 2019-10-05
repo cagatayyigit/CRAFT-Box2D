@@ -2,3 +2,5 @@ imgui.ini
 *.a
 Build/bin/x86_64/Debug
 *.xcworkspacedata
+Build/obj/x86_64/Debug/Testbed/Testbed.build
+Build/obj
