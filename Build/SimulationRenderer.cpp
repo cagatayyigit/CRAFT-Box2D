@@ -517,6 +517,8 @@ SimulationRenderer::SimulationRenderer()
     m_points = NULL;
     m_lines = NULL;
     m_triangles = NULL;
+    
+    m_bIsDebugMode = false;
 }
 
 //
@@ -570,7 +572,8 @@ void SimulationRenderer::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, 
 //
 void SimulationRenderer::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color)
 {
-    b2Color fillColor(0.5f * color.r, 0.5f * color.g, 0.5f * color.b, 1.0f);
+    const float transConst = m_bIsDebugMode ? 0.5 : 1.0;
+    b2Color fillColor(transConst * color.r, transConst * color.g, transConst * color.b, transConst);
 
     for (int32 i = 1; i < vertexCount - 1; ++i)
     {
@@ -579,14 +582,16 @@ void SimulationRenderer::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCo
         m_triangles->Vertex(vertices[i+1], fillColor);
     }
 
-//    b2Vec2 p1 = vertices[vertexCount - 1];
-//    for (int32 i = 0; i < vertexCount; ++i)
-//    {
-//        b2Vec2 p2 = vertices[i];
-//        m_lines->Vertex(p1, color);
-//        m_lines->Vertex(p2, color);
-//        p1 = p2;
-//    }
+    if(m_bIsDebugMode) {
+        b2Vec2 p1 = vertices[vertexCount - 1];
+        for (int32 i = 0; i < vertexCount; ++i)
+        {
+            b2Vec2 p2 = vertices[i];
+            m_lines->Vertex(p1, color);
+            m_lines->Vertex(p2, color);
+            p1 = p2;
+        }
+    }
 }
 
 //
@@ -740,5 +745,14 @@ void SimulationRenderer::Flush()
     m_triangles->Flush();
     m_lines->Flush();
     m_points->Flush();
+}
+
+//Setters and getters
+void SimulationRenderer::setIsDebugMode(const bool &isDebug) {
+    m_bIsDebugMode = isDebug;
+}
+
+bool SimulationRenderer::getIsDebugMode() const {
+    return m_bIsDebugMode;
 }
 

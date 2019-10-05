@@ -49,11 +49,17 @@ public:
     void DrawAABB(b2AABB* aabb, const b2Color& color);
 
     void Flush();
-
+    
+    //Setters and getters
+    void setIsDebugMode(const bool& isDebug);
+    bool getIsDebugMode() const;
+    
 private:
     GLRenderPoints* m_points;
     GLRenderLines* m_lines;
     GLRenderTriangles* m_triangles;
+    
+    bool m_bIsDebugMode;
 };
 
 #if USE_DEBUG_DRAW
