@@ -8,9 +8,9 @@
 #ifndef b2VisBody_hpp
 #define b2VisBody_hpp
 
-#include "b2Body.h"
-#include "b2Draw.h"
-#include "b2World.h"
+#include "Box2D/Dynamics/b2Body.h"
+#include "Box2D/Common/b2Draw.h"
+#include "Box2D/Dynamics/b2World.h"
 
 class b2VisBody : public b2Body
 {

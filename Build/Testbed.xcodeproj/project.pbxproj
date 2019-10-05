@@ -109,6 +109,8 @@
 		7C4127F62348BC5B002E75BA /* SimulationRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimulationRenderer.cpp; path = ../Testbed/Framework/SimulationRenderer.cpp; sourceTree = "<group>"; };
 		7C4127F72348BC5B002E75BA /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = ../Testbed/Framework/Camera.cpp; sourceTree = "<group>"; };
 		7C4127F82348BC5B002E75BA /* SimulationRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SimulationRenderer.hpp; path = ../Testbed/Framework/SimulationRenderer.hpp; sourceTree = "<group>"; };
+		7C4128042348D5F0002E75BA /* SimulationColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SimulationColor.h; path = ../Testbed/Framework/SimulationColor.h; sourceTree = "<group>"; };
+		7C4128052348D638002E75BA /* SimulationMaterial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SimulationMaterial.h; path = ../Testbed/Framework/SimulationMaterial.h; sourceTree = "<group>"; };
 		7DD68528414246DA7FE5EB68 /* EdgeShapes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EdgeShapes.h; path = ../Testbed/Tests/EdgeShapes.h; sourceTree = "<group>"; };
 		809F4D3A4EC2A0ECD5D0F37A /* MobileBalanced.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MobileBalanced.h; path = ../Testbed/Tests/MobileBalanced.h; sourceTree = "<group>"; };
 		84620CEEA62DBA20E2E2E32E /* ShapeCast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShapeCast.h; path = ../Testbed/Tests/ShapeCast.h; sourceTree = "<group>"; };
@@ -328,6 +330,8 @@
 				B56AD651DDA58F03C5411C91 /* Main.cpp */,
 				955B2487BD95DD39A5316AC7 /* Test.cpp */,
 				4571AE516B97DE03D29ED491 /* Test.h */,
+				7C4128042348D5F0002E75BA /* SimulationColor.h */,
+				7C4128052348D638002E75BA /* SimulationMaterial.h */,
 			);
 			name = Framework;
 			sourceTree = "<group>";
