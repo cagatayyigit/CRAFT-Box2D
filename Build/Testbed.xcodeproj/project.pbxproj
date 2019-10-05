@@ -20,8 +20,8 @@
 		6A239CD1B78693032DA59311 /* monitor.c in Sources */ = {isa = PBXBuildFile; fileRef = 29A523D9149149CB5C771219 /* monitor.c */; };
 		7011FFE9E134A0DB96FB4E29 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B56AD651DDA58F03C5411C91 /* Main.cpp */; };
 		713678D803C442CA6C9CE718 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BACC980CF188B320DBC2FC0 /* IOKit.framework */; };
-		7C4127E92348A95A002E75BA /* SimulationRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4127E72348A95A002E75BA /* SimulationRenderer.cpp */; };
-		7C4127EC2348AB91002E75BA /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4127EA2348AB91002E75BA /* Camera.cpp */; };
+		7C4127F92348BC5C002E75BA /* SimulationRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4127F62348BC5B002E75BA /* SimulationRenderer.cpp */; };
+		7C4127FA2348BC5C002E75BA /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4127F72348BC5B002E75BA /* Camera.cpp */; };
 		8399D0F84A27C86AB829EF38 /* TestEntries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E0416C0C37AD5F232172D00 /* TestEntries.cpp */; };
 		840EA602F136B474F2C9A442 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19352E0A6698243CDCB7244A /* OpenGL.framework */; };
 		9223EFD8340D8BCA2B349E18 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 606C44802E8F9832B59DEAC0 /* CoreVideo.framework */; };
@@ -103,12 +103,12 @@
 		6D4C538602C312B8715F69C6 /* stb_rect_pack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = stb_rect_pack.h; path = ../Testbed/imgui/stb_rect_pack.h; sourceTree = "<group>"; };
 		728C20CE56D32900DAC0570E /* HeavyOnLightTwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HeavyOnLightTwo.h; path = ../Testbed/Tests/HeavyOnLightTwo.h; sourceTree = "<group>"; };
 		7AE379EA3E4F3B9C7CF2E02A /* SensorTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SensorTest.h; path = ../Testbed/Tests/SensorTest.h; sourceTree = "<group>"; };
-		7C3A01F62343BD3A00E4E400 /* RemoveObjectSimulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RemoveObjectSimulation.h; path = ../Testbed/Tests/RemoveObjectSimulation.h; sourceTree = "<group>"; };
-		7C4127E72348A95A002E75BA /* SimulationRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SimulationRenderer.cpp; sourceTree = "<group>"; };
-		7C4127E82348A95A002E75BA /* SimulationRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SimulationRenderer.hpp; sourceTree = "<group>"; };
-		7C4127EA2348AB91002E75BA /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
-		7C4127EB2348AB91002E75BA /* Camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
-		7C4127ED2348AEB0002E75BA /* SimulationDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationDefines.h; sourceTree = "<group>"; };
+		7C3A01F62343BD3A00E4E400 /* RemoveObjectSimulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemoveObjectSimulation.h; sourceTree = "<group>"; };
+		7C4127F42348BC5B002E75BA /* Camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Camera.hpp; path = ../Testbed/Framework/Camera.hpp; sourceTree = "<group>"; };
+		7C4127F52348BC5B002E75BA /* SimulationDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimulationDefines.h; path = ../Testbed/Framework/SimulationDefines.h; sourceTree = "<group>"; };
+		7C4127F62348BC5B002E75BA /* SimulationRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimulationRenderer.cpp; path = ../Testbed/Framework/SimulationRenderer.cpp; sourceTree = "<group>"; };
+		7C4127F72348BC5B002E75BA /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = ../Testbed/Framework/Camera.cpp; sourceTree = "<group>"; };
+		7C4127F82348BC5B002E75BA /* SimulationRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SimulationRenderer.hpp; path = ../Testbed/Framework/SimulationRenderer.hpp; sourceTree = "<group>"; };
 		7DD68528414246DA7FE5EB68 /* EdgeShapes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EdgeShapes.h; path = ../Testbed/Tests/EdgeShapes.h; sourceTree = "<group>"; };
 		809F4D3A4EC2A0ECD5D0F37A /* MobileBalanced.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MobileBalanced.h; path = ../Testbed/Tests/MobileBalanced.h; sourceTree = "<group>"; };
 		84620CEEA62DBA20E2E2E32E /* ShapeCast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShapeCast.h; path = ../Testbed/Tests/ShapeCast.h; sourceTree = "<group>"; };
@@ -225,6 +225,15 @@
 			name = Data;
 			sourceTree = "<group>";
 		};
+		7C4127F32348BC0B002E75BA /* VQASimulations */ = {
+			isa = PBXGroup;
+			children = (
+				7C3A01F62343BD3A00E4E400 /* RemoveObjectSimulation.h */,
+			);
+			name = VQASimulations;
+			path = ../Testbed/Tests/VQASimulations;
+			sourceTree = "<group>";
+		};
 		9D968EAA920D05DCE0E0A4EA /* Projects */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +253,7 @@
 		B42EC94E04425E0086C08F8E /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				7C4127F32348BC0B002E75BA /* VQASimulations */,
 				C93BFC4011ACE072564BB280 /* AddPair.h */,
 				B9FF76207D6B37D2BC0EDC60 /* ApplyForce.h */,
 				03368CDE156069904951531E /* BasicSliderCrank.h */,
@@ -301,7 +311,6 @@
 				4A09E196DF80A0C84E1CF7D6 /* VerticalStack.h */,
 				B76D0CB2BADDDEE43C4A82F2 /* Web.h */,
 				E2FB7D5E14F4C8108ED4039E /* chainProblem.h */,
-				7C3A01F62343BD3A00E4E400 /* RemoveObjectSimulation.h */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -309,16 +318,16 @@
 		B7384E245A2674D6E94C5464 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				7C4127F72348BC5B002E75BA /* Camera.cpp */,
+				7C4127F42348BC5B002E75BA /* Camera.hpp */,
+				7C4127F52348BC5B002E75BA /* SimulationDefines.h */,
+				7C4127F62348BC5B002E75BA /* SimulationRenderer.cpp */,
+				7C4127F82348BC5B002E75BA /* SimulationRenderer.hpp */,
 				0852D7D19DC997030C65EE11 /* DebugDraw.cpp */,
 				4EC23CFB9C25332D1244333B /* DebugDraw.h */,
 				B56AD651DDA58F03C5411C91 /* Main.cpp */,
 				955B2487BD95DD39A5316AC7 /* Test.cpp */,
 				4571AE516B97DE03D29ED491 /* Test.h */,
-				7C4127E72348A95A002E75BA /* SimulationRenderer.cpp */,
-				7C4127E82348A95A002E75BA /* SimulationRenderer.hpp */,
-				7C4127EA2348AB91002E75BA /* Camera.cpp */,
-				7C4127EB2348AB91002E75BA /* Camera.hpp */,
-				7C4127ED2348AEB0002E75BA /* SimulationDefines.h */,
 			);
 			name = Framework;
 			sourceTree = "<group>";
@@ -458,8 +467,8 @@
 				7011FFE9E134A0DB96FB4E29 /* Main.cpp in Sources */,
 				BADF007F2C01A171E1C84EBF /* Test.cpp in Sources */,
 				8399D0F84A27C86AB829EF38 /* TestEntries.cpp in Sources */,
-				7C4127EC2348AB91002E75BA /* Camera.cpp in Sources */,
-				7C4127E92348A95A002E75BA /* SimulationRenderer.cpp in Sources */,
+				7C4127FA2348BC5C002E75BA /* Camera.cpp in Sources */,
+				7C4127F92348BC5C002E75BA /* SimulationRenderer.cpp in Sources */,
 				E868A985B68BFD373D9A4FC5 /* cocoa_init.m in Sources */,
 				DCB2417D74FF272FA34627BD /* cocoa_joystick.m in Sources */,
 				5D5F2D2DA172FE5F9544836D /* cocoa_monitor.m in Sources */,
