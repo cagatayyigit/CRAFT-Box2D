@@ -22,7 +22,8 @@
 		713678D803C442CA6C9CE718 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BACC980CF188B320DBC2FC0 /* IOKit.framework */; };
 		7C4127F92348BC5C002E75BA /* SimulationRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4127F62348BC5B002E75BA /* SimulationRenderer.cpp */; };
 		7C4127FA2348BC5C002E75BA /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4127F72348BC5B002E75BA /* Camera.cpp */; };
-		7CC417D9234935D800CD88E7 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CC417D8234935D800CD88E7 /* opencv2.framework */; };
+		7CC417DE2349F57900CD88E7 /* wall.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7CC417DD2349F57900CD88E7 /* wall.jpg */; };
+		7CC417E02349F70300CD88E7 /* terrain.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CC417DF2349F70300CD88E7 /* terrain.png */; };
 		8399D0F84A27C86AB829EF38 /* TestEntries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E0416C0C37AD5F232172D00 /* TestEntries.cpp */; };
 		840EA602F136B474F2C9A442 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19352E0A6698243CDCB7244A /* OpenGL.framework */; };
 		9223EFD8340D8BCA2B349E18 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 606C44802E8F9832B59DEAC0 /* CoreVideo.framework */; };
@@ -112,7 +113,9 @@
 		7C4127F82348BC5B002E75BA /* SimulationRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SimulationRenderer.hpp; path = ../Testbed/Framework/SimulationRenderer.hpp; sourceTree = "<group>"; };
 		7C4128042348D5F0002E75BA /* SimulationColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SimulationColor.h; path = ../Testbed/Framework/SimulationColor.h; sourceTree = "<group>"; };
 		7C4128052348D638002E75BA /* SimulationMaterial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SimulationMaterial.h; path = ../Testbed/Framework/SimulationMaterial.h; sourceTree = "<group>"; };
-		7CC417D8234935D800CD88E7 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		7CC417DD2349F57900CD88E7 /* wall.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wall.jpg; sourceTree = "<group>"; };
+		7CC417DF2349F70300CD88E7 /* terrain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = terrain.png; sourceTree = "<group>"; };
+		7CC417E82349FC7900CD88E7 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		7DD68528414246DA7FE5EB68 /* EdgeShapes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EdgeShapes.h; path = ../Testbed/Tests/EdgeShapes.h; sourceTree = "<group>"; };
 		809F4D3A4EC2A0ECD5D0F37A /* MobileBalanced.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MobileBalanced.h; path = ../Testbed/Tests/MobileBalanced.h; sourceTree = "<group>"; };
 		84620CEEA62DBA20E2E2E32E /* ShapeCast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShapeCast.h; path = ../Testbed/Tests/ShapeCast.h; sourceTree = "<group>"; };
@@ -180,7 +183,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				840EA602F136B474F2C9A442 /* OpenGL.framework in Frameworks */,
-				7CC417D9234935D800CD88E7 /* opencv2.framework in Frameworks */,
 				F8E8DBA28B76A594F44F49E2 /* Cocoa.framework in Frameworks */,
 				713678D803C442CA6C9CE718 /* IOKit.framework in Frameworks */,
 				1817955824A247CA9F871398 /* CoreFoundation.framework in Frameworks */,
@@ -226,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				0C93D4173D77CC0950900257 /* DroidSans.ttf */,
+				7CC417DC2349F57900CD88E7 /* Textures */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -239,10 +242,20 @@
 			path = ../Testbed/Tests/VQASimulations;
 			sourceTree = "<group>";
 		};
-		7CC417D52349355900CD88E7 /* opencv */ = {
+		7CC417DC2349F57900CD88E7 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
-				7CC417D8234935D800CD88E7 /* opencv2.framework */,
+				7CC417DD2349F57900CD88E7 /* wall.jpg */,
+				7CC417DF2349F70300CD88E7 /* terrain.png */,
+			);
+			name = Textures;
+			path = ../Testbed/Data/Textures;
+			sourceTree = "<group>";
+		};
+		7CC417E92349FC7900CD88E7 /* opencv */ = {
+			isa = PBXGroup;
+			children = (
+				7CC417E82349FC7900CD88E7 /* opencv2.framework */,
 			);
 			path = opencv;
 			sourceTree = "<group>";
@@ -350,6 +363,7 @@
 		BBF76781A7E87333FA200DC1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7CC417E92349FC7900CD88E7 /* opencv */,
 				19352E0A6698243CDCB7244A /* OpenGL.framework */,
 				8D6BC6AA50D7885C8F7B2CEA /* Cocoa.framework */,
 				0BACC980CF188B320DBC2FC0 /* IOKit.framework */,
@@ -397,7 +411,6 @@
 				BBF76781A7E87333FA200DC1 /* Frameworks */,
 				A6C936B49B3FADE6EA134CF4 /* Products */,
 				9D968EAA920D05DCE0E0A4EA /* Projects */,
-				7CC417D52349355900CD88E7 /* opencv */,
 			);
 			name = Testbed;
 			sourceTree = "<group>";
@@ -469,6 +482,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CC417DE2349F57900CD88E7 /* wall.jpg in Resources */,
+				7CC417E02349F70300CD88E7 /* terrain.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -38,4 +38,19 @@ void b2VisBody::setNextBody(b2VisBody* body)
     m_next = body;
 }
 
+b2VisTexture::Ptr b2VisBody::getTexture() const
+{
+    return m_pTexture;
+}
+
+void b2VisBody::setTexture(b2VisTexture::Ptr tex)
+{
+    m_pTexture = tex;
+}
+
+bool b2VisBody::hasAttachedTexture() const
+{
+    return m_pTexture.get() != nullptr && m_pTexture->getTextureId()>0;
+}
+
 

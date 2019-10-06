@@ -28,6 +28,7 @@
 		7120A6C70B7A8FB947B2F507 /* b2PolygonContact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FBCF19CF99B01A81712E600F /* b2PolygonContact.cpp */; };
 		7C4127FF2348C253002E75BA /* b2VisBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4127FD2348C253002E75BA /* b2VisBody.cpp */; };
 		7C4128022348CA64002E75BA /* b2VisWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4128002348CA64002E75BA /* b2VisWorld.cpp */; };
+		7CC417EC2349FCE400CD88E7 /* b2VisTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CC417EA2349FCE400CD88E7 /* b2VisTexture.cpp */; };
 		80270175DA281867A16F0FB5 /* b2PulleyJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D0CDCF1DEB9A3DCFEF6AD55D /* b2PulleyJoint.cpp */; };
 		860C756B7703E35DE30763AB /* b2RopeJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AC03CEB34450B4657297B4F3 /* b2RopeJoint.cpp */; };
 		8BD571BF2DBF0DB124E61FFF /* b2Joint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADBE7FC77BE1D37902F02607 /* b2Joint.cpp */; };
@@ -101,6 +102,8 @@
 		7C4127FE2348C253002E75BA /* b2VisBody.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = b2VisBody.hpp; sourceTree = "<group>"; };
 		7C4128002348CA64002E75BA /* b2VisWorld.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = b2VisWorld.cpp; sourceTree = "<group>"; };
 		7C4128012348CA64002E75BA /* b2VisWorld.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = b2VisWorld.hpp; sourceTree = "<group>"; };
+		7CC417EA2349FCE400CD88E7 /* b2VisTexture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = b2VisTexture.cpp; sourceTree = "<group>"; };
+		7CC417EB2349FCE400CD88E7 /* b2VisTexture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = b2VisTexture.hpp; sourceTree = "<group>"; };
 		80E6A35FDC31F391CA63D99F /* b2EdgeAndPolygonContact.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = b2EdgeAndPolygonContact.cpp; path = ../Box2D/Dynamics/Contacts/b2EdgeAndPolygonContact.cpp; sourceTree = "<group>"; };
 		81A3F6FF93CDD3B1C7BEBD3F /* b2BroadPhase.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = b2BroadPhase.cpp; path = ../Box2D/Collision/b2BroadPhase.cpp; sourceTree = "<group>"; };
 		836FA96DB568F41F2F482FAD /* b2Distance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = b2Distance.h; path = ../Box2D/Collision/b2Distance.h; sourceTree = "<group>"; };
@@ -244,6 +247,8 @@
 				7C4127FE2348C253002E75BA /* b2VisBody.hpp */,
 				7C4128002348CA64002E75BA /* b2VisWorld.cpp */,
 				7C4128012348CA64002E75BA /* b2VisWorld.hpp */,
+				7CC417EA2349FCE400CD88E7 /* b2VisTexture.cpp */,
+				7CC417EB2349FCE400CD88E7 /* b2VisTexture.hpp */,
 			);
 			name = Extension;
 			path = ../Box2D/Extension;
@@ -410,6 +415,7 @@
 				7C4127FF2348C253002E75BA /* b2VisBody.cpp in Sources */,
 				D1BC323E6BE027701C06087E /* b2CircleShape.cpp in Sources */,
 				BB0E9464CAF3C096B7674AA4 /* b2EdgeShape.cpp in Sources */,
+				7CC417EC2349FCE400CD88E7 /* b2VisTexture.cpp in Sources */,
 				62F0D2AA15E6DC5C670938EA /* b2PolygonShape.cpp in Sources */,
 				A13C259715966A899379F3D7 /* b2BroadPhase.cpp in Sources */,
 				BBE0C0A1C86B731343503EE1 /* b2CollideCircle.cpp in Sources */,
@@ -466,6 +472,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CONFIGURATION_BUILD_DIR = bin/x86_64/Release;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/opencv";
 				GCC_DYNAMIC_NO_PIC = NO;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = Box2D;
@@ -503,6 +510,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CONFIGURATION_BUILD_DIR = bin/x86_64/Debug;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/opencv";
 				GCC_DYNAMIC_NO_PIC = NO;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = Box2D;
