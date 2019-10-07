@@ -16,6 +16,7 @@
 * 3. This notice may not be removed or altered from any source distribution.
 */
 
+#include "SimulationDefines.h"
 #include "DebugDraw.h"
 #include "Camera.hpp"
 
@@ -32,11 +33,11 @@
 
 #include "Testbed/imgui/imgui.h"
 
+#if USE_DEBUG_DRAW
+
 #define BUFFER_OFFSET(x)  ((const void*) (x))
 
-#if USE_DEBUG_DRAW
 DebugDraw g_debugDraw;
-#endif
 
 //
 static void sCheckGLError()
@@ -577,6 +578,11 @@ void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2C
 	}
 }
 
+void DebugDraw::DrawTexturedSolidPolygon(const b2Vec2* vertices, const b2Vec2* textureCoordinates, uint32 texId, int32 vertexCount, const b2Color& color)
+{
+    DrawSolidPolygon(vertices, vertexCount, color);
+}
+
 //
 void DebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color)
 {
@@ -751,3 +757,4 @@ void DebugDraw::Flush()
     m_lines->Flush();
     m_points->Flush();
 }
+#endif

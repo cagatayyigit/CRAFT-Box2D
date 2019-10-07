@@ -94,6 +94,7 @@ private:
 #if !USE_DEBUG_DRAW
         int colorIndex = randWithBound(m_nDistinctColorUsed);
         SimulationColor col = SimulationColor((SimulationColor::TYPE) colorIndex);
+        body->setTexture(mat.getTexture());
         body->setColor(col.GetColor(mat.type));
 #endif
         

@@ -23,6 +23,8 @@ public:
     
     /// Call this to draw shapes and other debug draw data. This is intentionally non-const.
     virtual void DrawDebugData();
+    
+    virtual void DrawTexturedShape(b2Fixture* shape, const b2Transform& xf, const b2Color& color, const uint32& texId);
 
 };
 

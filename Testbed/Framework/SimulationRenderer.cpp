@@ -25,8 +25,8 @@
 
 #if USE_DEBUG_DRAW
 #else
+
 SimulationRenderer g_debugDraw;
-#endif
 
 //
 static void sCheckGLError()
@@ -390,34 +390,43 @@ struct GLRenderTriangles
             "uniform mat4 projectionMatrix;\n"
             "layout(location = 0) in vec2 v_position;\n"
             "layout(location = 1) in vec4 v_color;\n"
+            "layout(location = 2) in vec2 v_texCoord;\n"
             "out vec4 f_color;\n"
+            "out vec2 f_texCoord;\n"
             "void main(void)\n"
             "{\n"
             "    f_color = v_color;\n"
+            "    f_texCoord = v_texCoord;\n"
             "    gl_Position = projectionMatrix * vec4(v_position, 0.0f, 1.0f);\n"
             "}\n";
-
+        
         const char* fs = \
             "#version 330\n"
             "in vec4 f_color;\n"
+            "in vec2 f_texCoord;\n"
             "out vec4 color;\n"
+            "uniform sampler2D matTexture;\n"
             "void main(void)\n"
             "{\n"
-            "    color = f_color;\n"
+            "    vec4 texCol = texture(matTexture, f_texCoord);\n"
+            "    color = vec4(texCol.r * f_color.r, texCol.g * f_color.g, texCol.b * f_color.b, f_color.a);\n"
             "}\n";
 
         m_programId = sCreateShaderProgram(vs, fs);
         m_projectionUniform = glGetUniformLocation(m_programId, "projectionMatrix");
+        m_textureUniform = glGetUniformLocation(m_programId, "matTexture");
         m_vertexAttribute = 0;
         m_colorAttribute = 1;
+        m_TextureCoordAttribute = 2;
 
         // Generate
         glGenVertexArrays(1, &m_vaoId);
-        glGenBuffers(2, m_vboIds);
+        glGenBuffers(3, m_vboIds);
 
         glBindVertexArray(m_vaoId);
         glEnableVertexAttribArray(m_vertexAttribute);
         glEnableVertexAttribArray(m_colorAttribute);
+        glEnableVertexAttribArray(m_TextureCoordAttribute);
 
         // Vertex buffer
         glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[0]);
@@ -427,6 +436,10 @@ struct GLRenderTriangles
         glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[1]);
         glVertexAttribPointer(m_colorAttribute, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
         glBufferData(GL_ARRAY_BUFFER, sizeof(m_colors), m_colors, GL_DYNAMIC_DRAW);
+        
+        glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[2]);
+        glVertexAttribPointer(m_TextureCoordAttribute, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
+        glBufferData(GL_ARRAY_BUFFER, sizeof(m_texCoordinates), m_texCoordinates, GL_DYNAMIC_DRAW);
 
         sCheckGLError();
 
@@ -442,7 +455,7 @@ struct GLRenderTriangles
         if (m_vaoId)
         {
             glDeleteVertexArrays(1, &m_vaoId);
-            glDeleteBuffers(2, m_vboIds);
+            glDeleteBuffers(3, m_vboIds);
             m_vaoId = 0;
         }
 
@@ -453,13 +466,14 @@ struct GLRenderTriangles
         }
     }
 
-    void Vertex(const b2Vec2& v, const b2Color& c)
+    void Vertex(const b2Vec2& v, const b2Color& c, const b2Vec2& t)
     {
         if (m_count == e_maxVertices)
             Flush();
 
         m_vertices[m_count] = v;
         m_colors[m_count] = c;
+        m_texCoordinates[m_count] = t;
         ++m_count;
     }
 
@@ -483,6 +497,13 @@ struct GLRenderTriangles
         glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[1]);
         glBufferSubData(GL_ARRAY_BUFFER, 0, m_count * sizeof(b2Color), m_colors);
         
+        glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[2]);
+        glBufferSubData(GL_ARRAY_BUFFER, 0, m_count * sizeof(b2Vec2), m_texCoordinates);
+        
+        glActiveTexture(GL_TEXTURE0); // activate the texture unit first before binding texture
+        glBindTexture(GL_TEXTURE_2D, m_TextureId);
+        glUniform1i(m_textureUniform, 0);
+        
         glEnable(GL_BLEND);
         glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glDrawArrays(GL_TRIANGLES, 0, m_count);
@@ -500,15 +521,19 @@ struct GLRenderTriangles
     enum { e_maxVertices = 3 * 512 };
     b2Vec2 m_vertices[e_maxVertices];
     b2Color m_colors[e_maxVertices];
+    b2Vec2 m_texCoordinates[e_maxVertices];
 
     int32 m_count;
 
     GLuint m_vaoId;
-    GLuint m_vboIds[2];
+    GLuint m_vboIds[3];
     GLuint m_programId;
     GLint m_projectionUniform;
+    GLint m_textureUniform;
     GLint m_vertexAttribute;
     GLint m_colorAttribute;
+    GLint m_TextureCoordAttribute;
+    GLuint m_TextureId;
 };
 
 //
@@ -569,17 +594,18 @@ void SimulationRenderer::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, 
     }
 }
 
-//
-void SimulationRenderer::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color)
+void SimulationRenderer::DrawTexturedSolidPolygon(const b2Vec2* vertices, const b2Vec2* textureCoordinates, uint32 texId, int32 vertexCount, const b2Color& color)
 {
     const float transConst = m_bIsDebugMode ? 0.5 : 1.0;
     b2Color fillColor(transConst * color.r, transConst * color.g, transConst * color.b, transConst);
+    
+    m_triangles->m_TextureId = texId;
 
     for (int32 i = 1; i < vertexCount - 1; ++i)
     {
-        m_triangles->Vertex(vertices[0], fillColor);
-        m_triangles->Vertex(vertices[i], fillColor);
-        m_triangles->Vertex(vertices[i+1], fillColor);
+        m_triangles->Vertex(vertices[0], fillColor, textureCoordinates[0]);
+        m_triangles->Vertex(vertices[i], fillColor, textureCoordinates[i]);
+        m_triangles->Vertex(vertices[i+1], fillColor, textureCoordinates[i+1]);
     }
 
     if(m_bIsDebugMode) {
@@ -592,6 +618,31 @@ void SimulationRenderer::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCo
             p1 = p2;
         }
     }
+}
+
+//
+void SimulationRenderer::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color)
+{
+//    const float transConst = m_bIsDebugMode ? 0.5 : 1.0;
+//    b2Color fillColor(transConst * color.r, transConst * color.g, transConst * color.b, transConst);
+//
+//    for (int32 i = 1; i < vertexCount - 1; ++i)
+//    {
+//        m_triangles->Vertex(vertices[0], fillColor, texCoords[0]);
+//        m_triangles->Vertex(vertices[i], fillColor, texCoords[i]);
+//        m_triangles->Vertex(vertices[i+1], fillColor, texCoords[i+1]);
+//    }
+//
+//    if(m_bIsDebugMode) {
+//        b2Vec2 p1 = vertices[vertexCount - 1];
+//        for (int32 i = 0; i < vertexCount; ++i)
+//        {
+//            b2Vec2 p2 = vertices[i];
+//            m_lines->Vertex(p1, color);
+//            m_lines->Vertex(p2, color);
+//            p1 = p2;
+//        }
+//    }
 }
 
 //
@@ -620,46 +671,48 @@ void SimulationRenderer::DrawCircle(const b2Vec2& center, float32 radius, const 
 //
 void SimulationRenderer::DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color)
 {
-    const float32 k_segments = 16.0f;
-    const float32 k_increment = 2.0f * b2_pi / k_segments;
-    float32 sinInc = sinf(k_increment);
-    float32 cosInc = cosf(k_increment);
-    b2Vec2 v0 = center;
-    b2Vec2 r1(cosInc, sinInc);
-    b2Vec2 v1 = center + radius * r1;
-    b2Color fillColor(0.5f * color.r, 0.5f * color.g, 0.5f * color.b, 0.5f);
-    for (int32 i = 0; i < k_segments; ++i)
-    {
-        // Perform rotation to avoid additional trigonometry.
-        b2Vec2 r2;
-        r2.x = cosInc * r1.x - sinInc * r1.y;
-        r2.y = sinInc * r1.x + cosInc * r1.y;
-        b2Vec2 v2 = center + radius * r2;
-        m_triangles->Vertex(v0, fillColor);
-        m_triangles->Vertex(v1, fillColor);
-        m_triangles->Vertex(v2, fillColor);
-        r1 = r2;
-        v1 = v2;
-    }
-
-    r1.Set(1.0f, 0.0f);
-    v1 = center + radius * r1;
-    for (int32 i = 0; i < k_segments; ++i)
-    {
-        b2Vec2 r2;
-        r2.x = cosInc * r1.x - sinInc * r1.y;
-        r2.y = sinInc * r1.x + cosInc * r1.y;
-        b2Vec2 v2 = center + radius * r2;
-        m_lines->Vertex(v1, color);
-        m_lines->Vertex(v2, color);
-        r1 = r2;
-        v1 = v2;
-    }
-
-    // Draw a line fixed in the circle to animate rotation.
-    b2Vec2 p = center + radius * axis;
-    m_lines->Vertex(center, color);
-    m_lines->Vertex(p, color);
+    //TO DO: Open This by calculating texture coordinates
+    
+//    const float32 k_segments = 16.0f;
+//    const float32 k_increment = 2.0f * b2_pi / k_segments;
+//    float32 sinInc = sinf(k_increment);
+//    float32 cosInc = cosf(k_increment);
+//    b2Vec2 v0 = center;
+//    b2Vec2 r1(cosInc, sinInc);
+//    b2Vec2 v1 = center + radius * r1;
+//    b2Color fillColor(0.5f * color.r, 0.5f * color.g, 0.5f * color.b, 0.5f);
+//    for (int32 i = 0; i < k_segments; ++i)
+//    {
+//        // Perform rotation to avoid additional trigonometry.
+//        b2Vec2 r2;
+//        r2.x = cosInc * r1.x - sinInc * r1.y;
+//        r2.y = sinInc * r1.x + cosInc * r1.y;
+//        b2Vec2 v2 = center + radius * r2;
+//        m_triangles->Vertex(v0, fillColor);
+//        m_triangles->Vertex(v1, fillColor);
+//        m_triangles->Vertex(v2, fillColor);
+//        r1 = r2;
+//        v1 = v2;
+//    }
+//
+//    r1.Set(1.0f, 0.0f);
+//    v1 = center + radius * r1;
+//    for (int32 i = 0; i < k_segments; ++i)
+//    {
+//        b2Vec2 r2;
+//        r2.x = cosInc * r1.x - sinInc * r1.y;
+//        r2.y = sinInc * r1.x + cosInc * r1.y;
+//        b2Vec2 v2 = center + radius * r2;
+//        m_lines->Vertex(v1, color);
+//        m_lines->Vertex(v2, color);
+//        r1 = r2;
+//        v1 = v2;
+//    }
+//
+//    // Draw a line fixed in the circle to animate rotation.
+//    b2Vec2 p = center + radius * axis;
+//    m_lines->Vertex(center, color);
+//    m_lines->Vertex(p, color);
 }
 
 //
@@ -755,4 +808,5 @@ void SimulationRenderer::setIsDebugMode(const bool &isDebug) {
 bool SimulationRenderer::getIsDebugMode() const {
     return m_bIsDebugMode;
 }
+#endif
 
