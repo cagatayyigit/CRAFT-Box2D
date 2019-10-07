@@ -10,11 +10,13 @@
 
 #include "Box2D/Common/b2Math.h"
 #include <memory>
+#include <string>
 
 class b2VisTexture
 {
 public:
-    b2VisTexture(const unsigned int& texId, const int& atlasWidth, const int& atlasHeight, const b2Vec2& upperLeftRatio, const b2Vec2& lowerRightRatio);
+    b2VisTexture(const unsigned int& texId, const int& atlasWidth, const int& atlasHeight, const b2Vec2& upperLeftInPixels, const b2Vec2& lowerRightInPixels);
+    b2VisTexture(const std::string& filePath);
     virtual ~b2VisTexture();
     
     //Getters

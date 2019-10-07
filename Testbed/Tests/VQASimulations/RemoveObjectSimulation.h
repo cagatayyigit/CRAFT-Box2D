@@ -11,6 +11,12 @@
 #include "SimulationColor.h"
 #include "Box2D/Extension/b2VisBody.hpp"
 
+#if USE_DEBUG_DRAW
+#define BODY b2Body
+#else
+#define BODY b2VisBody
+#endif
+
 class RemoveObjectSimulation : public Test
 {
 public:
@@ -29,6 +35,7 @@ public:
         m_vThrowMin = b2Vec2(-3.0f, 3.0f);
         m_vThrowMax = b2Vec2(3.0f, 7.0f);
         m_nDistinctColorUsed = 8;
+        m_nDistinctMaterialsUsed = 2;
         
         {
             b2BodyDef bd;
@@ -63,6 +70,7 @@ private:
     b2Vec2 m_vThrowMin;
     b2Vec2 m_vThrowMax;
     unsigned short m_nDistinctColorUsed;
+    unsigned short m_nDistinctMaterialsUsed;
 
     void addSimulationObject()
     {
@@ -73,16 +81,27 @@ private:
         b2PolygonShape shape;
         shape.SetAsBox(a, a);
         
+        
+        int materialIndex = randWithBound(m_nDistinctMaterialsUsed);
+        SimulationMaterial mat = SimulationMaterial((SimulationMaterial::TYPE) materialIndex);
+        
         b2BodyDef bd;
         bd.type = b2_dynamicBody;
         bd.position = b2Vec2(posX, posY);
-        b2VisBody* body = (b2VisBody*) m_world->CreateBody(&bd);
-        body->CreateFixture(&shape, 5.0f);
+        BODY* body = (BODY*) m_world->CreateBody(&bd);
+        body->CreateFixture(&shape, mat.GetDensity());
         
-        int colorIndex = (rand() & (RAND_LIMIT)) % m_nDistinctColorUsed;
+#if !USE_DEBUG_DRAW
+        int colorIndex = randWithBound(m_nDistinctColorUsed);
         SimulationColor col = SimulationColor((SimulationColor::TYPE) colorIndex);
+        body->setColor(col.GetColor(mat.type));
+#endif
         
-        body->setColor(col.GetColor(SimulationMaterial::METAL));
+    }
+    
+    int randWithBound(const int& bound)
+    {
+        return (rand() & (RAND_LIMIT)) % bound;
     }
     
     bool isSceneStable()
