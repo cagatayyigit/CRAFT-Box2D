@@ -22,8 +22,8 @@
 		713678D803C442CA6C9CE718 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BACC980CF188B320DBC2FC0 /* IOKit.framework */; };
 		7C4127F92348BC5C002E75BA /* SimulationRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4127F62348BC5B002E75BA /* SimulationRenderer.cpp */; };
 		7C4127FA2348BC5C002E75BA /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4127F72348BC5B002E75BA /* Camera.cpp */; };
-		7CC417DE2349F57900CD88E7 /* wall.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7CC417DD2349F57900CD88E7 /* wall.jpg */; };
-		7CC417E02349F70300CD88E7 /* terrain.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CC417DF2349F70300CD88E7 /* terrain.png */; };
+		7C92AD30234E40A30074BFB6 /* rubber.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C92AD2F234E40A20074BFB6 /* rubber.png */; };
+		7C92AD32234E40D10074BFB6 /* metal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C92AD31234E40D00074BFB6 /* metal.png */; };
 		7CC417F2234A0AB200CD88E7 /* SimulationMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CC417F1234A0AB200CD88E7 /* SimulationMaterial.cpp */; };
 		8399D0F84A27C86AB829EF38 /* TestEntries.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E0416C0C37AD5F232172D00 /* TestEntries.cpp */; };
 		840EA602F136B474F2C9A442 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19352E0A6698243CDCB7244A /* OpenGL.framework */; };
@@ -112,11 +112,12 @@
 		7C4127F62348BC5B002E75BA /* SimulationRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimulationRenderer.cpp; path = ../Testbed/Framework/SimulationRenderer.cpp; sourceTree = "<group>"; };
 		7C4127F72348BC5B002E75BA /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = ../Testbed/Framework/Camera.cpp; sourceTree = "<group>"; };
 		7C4127F82348BC5B002E75BA /* SimulationRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SimulationRenderer.hpp; path = ../Testbed/Framework/SimulationRenderer.hpp; sourceTree = "<group>"; };
-		7C4128042348D5F0002E75BA /* SimulationColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SimulationColor.h; path = ../Testbed/Framework/SimulationColor.h; sourceTree = "<group>"; };
-		7C4128052348D638002E75BA /* SimulationMaterial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SimulationMaterial.h; path = ../Testbed/Framework/SimulationMaterial.h; sourceTree = "<group>"; };
-		7CC417DD2349F57900CD88E7 /* wall.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wall.jpg; sourceTree = "<group>"; };
-		7CC417DF2349F70300CD88E7 /* terrain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = terrain.png; sourceTree = "<group>"; };
-		7CC417F1234A0AB200CD88E7 /* SimulationMaterial.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SimulationMaterial.cpp; path = ../Testbed/Framework/SimulationMaterial.cpp; sourceTree = "<group>"; };
+		7C4128042348D5F0002E75BA /* SimulationColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationColor.h; sourceTree = "<group>"; };
+		7C4128052348D638002E75BA /* SimulationMaterial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationMaterial.h; sourceTree = "<group>"; };
+		7C92AD25234E37500074BFB6 /* SimulationObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationObject.h; sourceTree = "<group>"; };
+		7C92AD2F234E40A20074BFB6 /* rubber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rubber.png; sourceTree = "<group>"; };
+		7C92AD31234E40D00074BFB6 /* metal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = metal.png; sourceTree = "<group>"; };
+		7CC417F1234A0AB200CD88E7 /* SimulationMaterial.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SimulationMaterial.cpp; sourceTree = "<group>"; };
 		7DD68528414246DA7FE5EB68 /* EdgeShapes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EdgeShapes.h; path = ../Testbed/Tests/EdgeShapes.h; sourceTree = "<group>"; };
 		809F4D3A4EC2A0ECD5D0F37A /* MobileBalanced.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MobileBalanced.h; path = ../Testbed/Tests/MobileBalanced.h; sourceTree = "<group>"; };
 		84620CEEA62DBA20E2E2E32E /* ShapeCast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShapeCast.h; path = ../Testbed/Tests/ShapeCast.h; sourceTree = "<group>"; };
@@ -237,17 +238,29 @@
 		7C4127F32348BC0B002E75BA /* VQASimulations */ = {
 			isa = PBXGroup;
 			children = (
-				7C3A01F62343BD3A00E4E400 /* RemoveObjectSimulation.h */,
+				7C92AD26234E37C40074BFB6 /* RemoveObjectSimulation */,
 			);
 			name = VQASimulations;
 			path = ../Testbed/Tests/VQASimulations;
 			sourceTree = "<group>";
 		};
+		7C92AD26234E37C40074BFB6 /* RemoveObjectSimulation */ = {
+			isa = PBXGroup;
+			children = (
+				7C4128052348D638002E75BA /* SimulationMaterial.h */,
+				7CC417F1234A0AB200CD88E7 /* SimulationMaterial.cpp */,
+				7C4128042348D5F0002E75BA /* SimulationColor.h */,
+				7C92AD25234E37500074BFB6 /* SimulationObject.h */,
+				7C3A01F62343BD3A00E4E400 /* RemoveObjectSimulation.h */,
+			);
+			path = RemoveObjectSimulation;
+			sourceTree = "<group>";
+		};
 		7CC417DC2349F57900CD88E7 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
-				7CC417DD2349F57900CD88E7 /* wall.jpg */,
-				7CC417DF2349F70300CD88E7 /* terrain.png */,
+				7C92AD31234E40D00074BFB6 /* metal.png */,
+				7C92AD2F234E40A20074BFB6 /* rubber.png */,
 			);
 			name = Textures;
 			path = ../Testbed/Data/Textures;
@@ -347,9 +360,6 @@
 				B56AD651DDA58F03C5411C91 /* Main.cpp */,
 				955B2487BD95DD39A5316AC7 /* Test.cpp */,
 				4571AE516B97DE03D29ED491 /* Test.h */,
-				7C4128042348D5F0002E75BA /* SimulationColor.h */,
-				7C4128052348D638002E75BA /* SimulationMaterial.h */,
-				7CC417F1234A0AB200CD88E7 /* SimulationMaterial.cpp */,
 			);
 			name = Framework;
 			sourceTree = "<group>";
@@ -475,8 +485,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7CC417DE2349F57900CD88E7 /* wall.jpg in Resources */,
-				7CC417E02349F70300CD88E7 /* terrain.png in Resources */,
+				7C92AD30234E40A30074BFB6 /* rubber.png in Resources */,
+				7C92AD32234E40D10074BFB6 /* metal.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,7 +16,7 @@ class b2VisTexture
 {
 public:
     b2VisTexture(const unsigned int& texId, const int& atlasWidth, const int& atlasHeight, const b2Vec2& upperLeftInPixels, const b2Vec2& lowerRightInPixels);
-    b2VisTexture(const std::string& filePath);
+    b2VisTexture(const std::string& filePath, const int& materialIndex);
     virtual ~b2VisTexture();
     
     //Getters
@@ -27,6 +27,7 @@ public:
     int getAtlasHeight() const;
     b2Vec2 getUpperLeftCornerCoord() const;
     b2Vec2 getLowerRightCornerCoord() const;
+    int getMaterialIndex() const;
     
     typedef std::shared_ptr<b2VisTexture> Ptr;
     
@@ -40,6 +41,7 @@ private:
     
     b2Vec2 m_vUpperLeftCornerCoord;
     b2Vec2 m_vLowerRightCornerCoord;
+    int m_nMaterialIndex;
 };
 
 #endif /* b2VisTexture_hpp */

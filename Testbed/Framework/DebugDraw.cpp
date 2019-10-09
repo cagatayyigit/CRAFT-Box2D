@@ -578,7 +578,7 @@ void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2C
 	}
 }
 
-void DebugDraw::DrawTexturedSolidPolygon(const b2Vec2* vertices, const b2Vec2* textureCoordinates, uint32 texId, int32 vertexCount, const b2Color& color)
+void DebugDraw::DrawTexturedSolidPolygon(const b2Vec2* vertices, const b2Vec2* textureCoordinates,uint32 glTexId, int matTexId, int32 vertexCount, const b2Color& color)
 {
     DrawSolidPolygon(vertices, vertexCount, color);
 }

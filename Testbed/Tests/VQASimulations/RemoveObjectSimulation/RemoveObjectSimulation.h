@@ -9,7 +9,9 @@
 #define RemoveObjectSimulation_h
 
 #include "SimulationColor.h"
+#include "SimulationObject.h"
 #include "Box2D/Extension/b2VisBody.hpp"
+#include "Box2D/Extension/b2VisPolygonShape.hpp"
 
 #if USE_DEBUG_DRAW
 #define BODY b2Body
@@ -30,12 +32,16 @@ public:
     
     RemoveObjectSimulation()
     {
-        m_nNumberOfObjects = 15;
+        m_nNumberOfObjects = 8;
         m_nSimulationState = SS_CREATE_SCENE;
-        m_vThrowMin = b2Vec2(-3.0f, 3.0f);
-        m_vThrowMax = b2Vec2(3.0f, 7.0f);
         m_nDistinctColorUsed = 8;
         m_nDistinctMaterialsUsed = 2;
+        m_nDistinctObjectsUsed = 2;
+        
+        SimulationObject largestObject(SimulationObject::BIG_CUBE);
+        
+        m_vThrowMin = b2Vec2(-10.0f, largestObject.GetEdgeLength() * 5);
+        m_vThrowMax = b2Vec2(-5.0f, largestObject.GetEdgeLength() * 10);
         
         {
             b2BodyDef bd;
@@ -71,16 +77,19 @@ private:
     b2Vec2 m_vThrowMax;
     unsigned short m_nDistinctColorUsed;
     unsigned short m_nDistinctMaterialsUsed;
+    unsigned short m_nDistinctObjectsUsed;
 
     void addSimulationObject()
     {
         float posX = RandomFloat(m_vThrowMin.x, m_vThrowMax.x);
         float posY = RandomFloat(m_vThrowMin.y, m_vThrowMax.y);
         
-        float32 a = 0.5f;
-        b2PolygonShape shape;
+        int objectIndex = randWithBound(m_nDistinctObjectsUsed);
+        SimulationObject object = SimulationObject((SimulationObject::TYPE) objectIndex);
+    
+        float32 a = object.GetEdgeLength();
+        b2VisPolygonShape shape;
         shape.SetAsBox(a, a);
-        
         
         int materialIndex = randWithBound(m_nDistinctMaterialsUsed);
         SimulationMaterial mat = SimulationMaterial((SimulationMaterial::TYPE) materialIndex);

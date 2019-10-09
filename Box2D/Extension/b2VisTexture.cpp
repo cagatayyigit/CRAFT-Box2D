@@ -143,9 +143,11 @@ b2VisTexture::b2VisTexture(const unsigned int& texId, const int& atlasWidth, con
     
     m_nWidth = (lowerRightInPixels.x - upperLeftInPixels.x);
     m_nHeight = (lowerRightInPixels.y - upperLeftInPixels.y);
+    
+    m_nMaterialIndex = -1;
 }
 
-b2VisTexture::b2VisTexture(const std::string& filePath)
+b2VisTexture::b2VisTexture(const std::string& filePath, const int& materialIndex)
 {
     int width, height;
     bool hasAlpha;
@@ -162,11 +164,13 @@ b2VisTexture::b2VisTexture(const std::string& filePath)
         m_vUpperLeftCornerCoord = b2Vec2(0.0f, 0.0f);
         m_vLowerRightCornerCoord = b2Vec2(m_nWidth-1, m_nHeight-1);
         
+        m_nMaterialIndex = materialIndex;
+        
         GLuint texId;
         glGenTextures(1, &texId);
         glBindTexture(GL_TEXTURE_2D, texId);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -217,4 +221,9 @@ b2Vec2 b2VisTexture::getUpperLeftCornerCoord() const
 b2Vec2 b2VisTexture::getLowerRightCornerCoord() const
 {
     return m_vLowerRightCornerCoord;
+}
+
+int b2VisTexture::getMaterialIndex() const
+{
+    return m_nMaterialIndex;
 }

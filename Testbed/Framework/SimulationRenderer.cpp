@@ -18,6 +18,7 @@
 #include "Testbed/glfw/glfw3.h"
 #include <stdio.h>
 #include <stdarg.h>
+#include <vector>
 
 #include "Testbed/imgui/imgui.h"
 
@@ -391,12 +392,15 @@ struct GLRenderTriangles
             "layout(location = 0) in vec2 v_position;\n"
             "layout(location = 1) in vec4 v_color;\n"
             "layout(location = 2) in vec2 v_texCoord;\n"
+            "layout(location = 3) in int v_matIndex;\n"
             "out vec4 f_color;\n"
             "out vec2 f_texCoord;\n"
+            "flat out int f_matIndex;\n"
             "void main(void)\n"
             "{\n"
             "    f_color = v_color;\n"
             "    f_texCoord = v_texCoord;\n"
+            "    f_matIndex = v_matIndex;\n"
             "    gl_Position = projectionMatrix * vec4(v_position, 0.0f, 1.0f);\n"
             "}\n";
         
@@ -404,29 +408,37 @@ struct GLRenderTriangles
             "#version 330\n"
             "in vec4 f_color;\n"
             "in vec2 f_texCoord;\n"
+            "flat in int f_matIndex;\n"
             "out vec4 color;\n"
-            "uniform sampler2D matTexture;\n"
+            "uniform sampler2D metalTexture;\n"
+            "uniform sampler2D rubberTexture;\n"
             "void main(void)\n"
             "{\n"
-            "    vec4 texCol = texture(matTexture, f_texCoord);\n"
+            "    vec4 texCol = (f_matIndex==0) ? texture(metalTexture, f_texCoord) : texture(rubberTexture, f_texCoord);\n"
             "    color = vec4(texCol.r * f_color.r, texCol.g * f_color.g, texCol.b * f_color.b, f_color.a);\n"
             "}\n";
+        
+        m_textureUniforms = std::vector<GLint>(2, -1);
+        m_textureIds = std::vector<GLint>(2, -1);
 
         m_programId = sCreateShaderProgram(vs, fs);
         m_projectionUniform = glGetUniformLocation(m_programId, "projectionMatrix");
-        m_textureUniform = glGetUniformLocation(m_programId, "matTexture");
+        m_textureUniforms[0] = (glGetUniformLocation(m_programId, "metalTexture"));
+        m_textureUniforms[1] = (glGetUniformLocation(m_programId, "rubberTexture"));
         m_vertexAttribute = 0;
         m_colorAttribute = 1;
         m_TextureCoordAttribute = 2;
+        m_MaterialIndexAttribute = 3;
 
         // Generate
         glGenVertexArrays(1, &m_vaoId);
-        glGenBuffers(3, m_vboIds);
+        glGenBuffers(4, m_vboIds);
 
         glBindVertexArray(m_vaoId);
         glEnableVertexAttribArray(m_vertexAttribute);
         glEnableVertexAttribArray(m_colorAttribute);
         glEnableVertexAttribArray(m_TextureCoordAttribute);
+        glEnableVertexAttribArray(m_MaterialIndexAttribute);
 
         // Vertex buffer
         glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[0]);
@@ -440,6 +452,10 @@ struct GLRenderTriangles
         glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[2]);
         glVertexAttribPointer(m_TextureCoordAttribute, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
         glBufferData(GL_ARRAY_BUFFER, sizeof(m_texCoordinates), m_texCoordinates, GL_DYNAMIC_DRAW);
+        
+        glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[3]);
+        glVertexAttribPointer(m_MaterialIndexAttribute, 1, GL_INT, GL_FALSE, 0, BUFFER_OFFSET(0));
+        glBufferData(GL_ARRAY_BUFFER, sizeof(m_materials), m_materials, GL_DYNAMIC_DRAW);
 
         sCheckGLError();
 
@@ -455,7 +471,7 @@ struct GLRenderTriangles
         if (m_vaoId)
         {
             glDeleteVertexArrays(1, &m_vaoId);
-            glDeleteBuffers(3, m_vboIds);
+            glDeleteBuffers(4, m_vboIds);
             m_vaoId = 0;
         }
 
@@ -466,7 +482,7 @@ struct GLRenderTriangles
         }
     }
 
-    void Vertex(const b2Vec2& v, const b2Color& c, const b2Vec2& t)
+    void Vertex(const b2Vec2& v, const b2Color& c, const b2Vec2& t, const int& m)
     {
         if (m_count == e_maxVertices)
             Flush();
@@ -474,6 +490,7 @@ struct GLRenderTriangles
         m_vertices[m_count] = v;
         m_colors[m_count] = c;
         m_texCoordinates[m_count] = t;
+        m_materials[m_count] = m;
         ++m_count;
     }
 
@@ -500,9 +517,20 @@ struct GLRenderTriangles
         glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[2]);
         glBufferSubData(GL_ARRAY_BUFFER, 0, m_count * sizeof(b2Vec2), m_texCoordinates);
         
-        glActiveTexture(GL_TEXTURE0); // activate the texture unit first before binding texture
-        glBindTexture(GL_TEXTURE_2D, m_TextureId);
-        glUniform1i(m_textureUniform, 0);
+        glBindBuffer(GL_ARRAY_BUFFER, m_vboIds[3]);
+        glBufferSubData(GL_ARRAY_BUFFER, 0, m_count * sizeof(int), m_materials);
+        
+        if(m_textureIds[0]>0) {
+            glActiveTexture(GL_TEXTURE0); // activate the texture unit first before binding texture
+            glBindTexture(GL_TEXTURE_2D, m_textureIds[0]);
+            glUniform1i(m_textureUniforms[0], 0);
+        }
+        
+        if(m_textureIds[1]>0) {
+            glActiveTexture(GL_TEXTURE1); // activate the texture unit first before binding texture
+            glBindTexture(GL_TEXTURE_2D, m_textureIds[1]);
+            glUniform1i(m_textureUniforms[1], 1);
+        }
         
         glEnable(GL_BLEND);
         glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -522,6 +550,7 @@ struct GLRenderTriangles
     b2Vec2 m_vertices[e_maxVertices];
     b2Color m_colors[e_maxVertices];
     b2Vec2 m_texCoordinates[e_maxVertices];
+    int m_materials[e_maxVertices];
 
     int32 m_count;
 
@@ -529,11 +558,12 @@ struct GLRenderTriangles
     GLuint m_vboIds[3];
     GLuint m_programId;
     GLint m_projectionUniform;
-    GLint m_textureUniform;
+    std::vector<GLint> m_textureUniforms;
     GLint m_vertexAttribute;
     GLint m_colorAttribute;
     GLint m_TextureCoordAttribute;
-    GLuint m_TextureId;
+    GLint m_MaterialIndexAttribute;
+    std::vector<GLint> m_textureIds;
 };
 
 //
@@ -594,18 +624,18 @@ void SimulationRenderer::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, 
     }
 }
 
-void SimulationRenderer::DrawTexturedSolidPolygon(const b2Vec2* vertices, const b2Vec2* textureCoordinates, uint32 texId, int32 vertexCount, const b2Color& color)
+void SimulationRenderer::DrawTexturedSolidPolygon(const b2Vec2* vertices, const b2Vec2* textureCoordinates, uint32 glTexId, int matTexId, int32 vertexCount, const b2Color& color)
 {
     const float transConst = m_bIsDebugMode ? 0.5 : 1.0;
     b2Color fillColor(transConst * color.r, transConst * color.g, transConst * color.b, transConst);
     
-    m_triangles->m_TextureId = texId;
+    m_triangles->m_textureIds[matTexId] = glTexId;
 
     for (int32 i = 1; i < vertexCount - 1; ++i)
     {
-        m_triangles->Vertex(vertices[0], fillColor, textureCoordinates[0]);
-        m_triangles->Vertex(vertices[i], fillColor, textureCoordinates[i]);
-        m_triangles->Vertex(vertices[i+1], fillColor, textureCoordinates[i+1]);
+        m_triangles->Vertex(vertices[0], fillColor, textureCoordinates[0], matTexId);
+        m_triangles->Vertex(vertices[i], fillColor, textureCoordinates[i], matTexId);
+        m_triangles->Vertex(vertices[i+1], fillColor, textureCoordinates[i+1], matTexId);
     }
 
     if(m_bIsDebugMode) {

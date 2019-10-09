@@ -40,8 +40,10 @@ public:
     b2VisTexture::Ptr getTexture();
     
 private:
-    static const std::string filePath;
-    static b2VisTexture::Ptr materialTextures;
+    static const std::string metalFilePath;
+    static const std::string rubberFilePath;
+    static b2VisTexture::Ptr metalTexture;
+    static b2VisTexture::Ptr rubberTexture;
 };
 
 #endif /* SimulationMaterial_h */

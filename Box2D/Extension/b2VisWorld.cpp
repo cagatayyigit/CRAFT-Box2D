@@ -12,8 +12,8 @@
 #include "Box2D/Common/b2Draw.h"
 #include "Box2D/Common/b2Timer.h"
 #include "Box2D/Extension/b2VisBody.hpp"
+#include "Box2D/Extension/b2VisPolygonShape.hpp"
 #include "Box2D/Dynamics/b2Fixture.h"
-#include "Box2D/Collision/Shapes/b2PolygonShape.h"
 
 b2VisWorld::b2VisWorld(const b2Vec2& gravity) : b2World(gravity)
 {
@@ -49,7 +49,7 @@ b2Body* b2VisWorld::CreateBody(const b2BodyDef* def)
     return b;
 }
 
-void b2VisWorld::DrawTexturedShape(b2Fixture* fixture, const b2Transform& xf, const b2Color& color, const uint32& texId)
+void b2VisWorld::DrawTexturedShape(b2Fixture* fixture, const b2Transform& xf, const b2Color& color, const uint32& glTextureId, const int& textureMaterialId)
 {
     switch (fixture->GetType())
     {
@@ -57,7 +57,7 @@ void b2VisWorld::DrawTexturedShape(b2Fixture* fixture, const b2Transform& xf, co
 
     case b2Shape::e_polygon:
         {
-            b2PolygonShape* poly = (b2PolygonShape*)fixture->GetShape();
+            b2VisPolygonShape* poly = (b2VisPolygonShape*)fixture->GetShape();
             int32 vertexCount = poly->m_count;
             b2Assert(vertexCount <= b2_maxPolygonVertices);
             b2Vec2 vertices[b2_maxPolygonVertices];
@@ -66,23 +66,9 @@ void b2VisWorld::DrawTexturedShape(b2Fixture* fixture, const b2Transform& xf, co
             {
                 vertices[i] = b2Mul(xf, poly->m_vertices[i]);
             }
-
-            b2Vec2 texCoordinates[b2_maxPolygonVertices];
+            std::vector<b2Vec2> texCoords = poly->getTextureCoords();
             
-            //TODO: calculate per shape
-            b2Vec2 textureCoords[] = {
-                b2Vec2(0.0f, 0.0f),
-                b2Vec2(1.0f, 0.0f),
-                b2Vec2(1.0f, 1.0f),
-                b2Vec2(0.0f, 1.0f)
-            };
-            
-            for (int32 i = 0; i < vertexCount; ++i)
-            {
-                texCoordinates[i] = textureCoords[i];
-            }
-            
-            m_debugDraw->DrawTexturedSolidPolygon(vertices, texCoordinates, texId, vertexCount, color);
+            m_debugDraw->DrawTexturedSolidPolygon(vertices, texCoords.data(), glTextureId, textureMaterialId, vertexCount, color);
         }
         break;
             
@@ -107,9 +93,10 @@ void b2VisWorld::DrawDebugData()
             const b2Transform& xf = b->GetTransform();
             for (b2Fixture* f = b->GetFixtureList(); f; f = f->GetNext())
             {
+                const auto texture = b->getTexture();
                 if (b->IsActive() == false)
                 {
-                    DrawTexturedShape(f, xf, b2Color(0.5f, 0.5f, 0.3f), b->getTexture()->getTextureId());
+                    DrawTexturedShape(f, xf, b2Color(0.5f, 0.5f, 0.3f), texture->getTextureId(), texture->getMaterialIndex());
                 }
                 else if (b->GetType() == b2_staticBody)
                 {
@@ -117,15 +104,15 @@ void b2VisWorld::DrawDebugData()
                 }
                 else if (b->GetType() == b2_kinematicBody)
                 {
-                    DrawTexturedShape(f, xf, b2Color(0.5f, 0.5f, 0.9f), b->getTexture()->getTextureId());
+                    DrawTexturedShape(f, xf, b2Color(0.5f, 0.5f, 0.9f), texture->getTextureId(), texture->getMaterialIndex());
                 }
                 else if (b->IsAwake() == false)
                 {
-                    DrawTexturedShape(f, xf, b->getColor(), b->getTexture()->getTextureId());
+                    DrawTexturedShape(f, xf, b->getColor(), texture->getTextureId(), texture->getMaterialIndex());
                 }
                 else
                 {
-                    DrawTexturedShape(f, xf, b2Color(0.9f, 0.7f, 0.7f), b->getTexture()->getTextureId());
+                    DrawTexturedShape(f, xf, b2Color(0.9f, 0.7f, 0.7f), texture->getTextureId(), texture->getMaterialIndex());
                 }
             }
         }
