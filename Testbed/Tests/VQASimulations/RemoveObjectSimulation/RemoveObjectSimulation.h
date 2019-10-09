@@ -32,7 +32,7 @@ public:
     
     RemoveObjectSimulation()
     {
-        m_nNumberOfObjects = 8;
+        m_nNumberOfObjects = 15;
         m_nSimulationState = SS_CREATE_SCENE;
         m_nDistinctColorUsed = 8;
         m_nDistinctMaterialsUsed = 2;

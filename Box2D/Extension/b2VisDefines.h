@@ -8,6 +8,6 @@
 #ifndef b2VisDefines_h
 #define b2VisDefines_h
 
-#define TEXTURE_SQUARE_EDGE_LENGTH 1.0
+#define TEXTURE_SQUARE_EDGE_LENGTH 7.5
 
 #endif /* b2VisDefines_h */
