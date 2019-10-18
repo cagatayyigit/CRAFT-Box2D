@@ -19,6 +19,9 @@
 #define BODY b2VisBody
 #endif
 
+#define SET_FILE_OUTPUT_FALSE ((SimulationRenderer*)((b2VisWorld*)m_world)->getRenderer())->setFileOutput(false);
+#define SET_FILE_OUTPUT_TRUE(X) ((SimulationRenderer*)((b2VisWorld*)m_world)->getRenderer())->setFileOutput(true, (X), settings->bufferWidth, settings->bufferHeight);
+
 class RemoveObjectSimulation : public Test
 {
 public:
@@ -32,7 +35,7 @@ public:
     
     RemoveObjectSimulation()
     {
-        m_nNumberOfObjects = 15;
+        m_nNumberOfObjects = 7;
         m_nSimulationState = SS_CREATE_SCENE;
         m_nDistinctColorUsed = 8;
         m_nDistinctMaterialsUsed = 2;
@@ -55,19 +58,32 @@ public:
 
     void Step(Settings* settings)
     {
-        Test::Step(settings);
+
+        const bool addObject = isSceneStable() && m_nNumberOfObjects>0;
+        const bool terminateSimulation = m_nNumberOfObjects<=0 && isSceneStable();
         
-        if(isSceneStable() && m_nNumberOfObjects>0) {
+        if(addObject) {
             addSimulationObject();
             m_nNumberOfObjects--;
         }
-
-        //b2DynamicTree* tree = &m_world->m_contactManager.m_broadPhase.m_tree;
-
-        //if (m_stepCount == 400)
-        //{
-        //    tree->RebuildBottomUp();
-        //}
+        
+    #if USE_DEBUG_DRAW
+    #else
+            SET_FILE_OUTPUT_FALSE
+    #endif
+        
+        if(terminateSimulation) {
+    #if USE_DEBUG_DRAW
+    #else
+            SET_FILE_OUTPUT_TRUE("hede.png")
+    #endif
+        }
+        
+        Test::Step(settings);
+        
+        if(terminateSimulation) {
+            exit(0);
+        }
     }
     
 private:

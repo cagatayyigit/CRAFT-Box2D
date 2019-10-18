@@ -91,6 +91,8 @@ struct Settings
 		enableSleep = true;
 		pause = false;
 		singleStep = false;
+        bufferWidth = 2048;
+        bufferHeight = 1280;
 	}
 
 	float32 hz;
@@ -112,6 +114,8 @@ struct Settings
 	bool enableSleep;
 	bool pause;
 	bool singleStep;
+    int bufferWidth;
+    int bufferHeight;
 };
 
 struct TestEntry

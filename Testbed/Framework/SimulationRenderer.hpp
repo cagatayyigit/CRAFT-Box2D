@@ -10,6 +10,7 @@
 
 #include "SimulationDefines.h"
 #include "Box2D/Box2D.h"
+#include <string>
 
 struct b2AABB;
 struct GLRenderPoints;
@@ -22,6 +23,9 @@ struct GLRenderTriangles;
 class SimulationRenderer : public b2Draw
 {
 public:
+    
+    
+    
     SimulationRenderer();
     virtual ~SimulationRenderer();
 
@@ -49,6 +53,8 @@ public:
     void DrawString(const b2Vec2& p, const char* string, ...);
 
     void DrawAABB(b2AABB* aabb, const b2Color& color);
+    
+    void setFileOutput(bool saveAsPng, std::string filePath="", int width=0, int height=0);
 
     void Flush();
     
@@ -62,6 +68,10 @@ private:
     GLRenderTriangles* m_triangles;
     
     bool m_bIsDebugMode;
+    bool m_bSaveAsPng;
+    std::string m_sPngPath;
+    int m_nPngWidth;
+    int m_nPngHeight;
 };
 
 #if USE_DEBUG_DRAW

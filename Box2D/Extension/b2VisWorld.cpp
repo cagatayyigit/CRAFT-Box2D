@@ -77,6 +77,11 @@ void b2VisWorld::DrawTexturedShape(b2Fixture* fixture, const b2Transform& xf, co
     }
 }
 
+b2Draw* b2VisWorld::getRenderer()
+{
+    return m_debugDraw;
+}
+
 void b2VisWorld::DrawDebugData()
 {
     if (m_debugDraw == nullptr)

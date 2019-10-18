@@ -19,6 +19,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <vector>
+#include <png.h>
 
 #include "Testbed/imgui/imgui.h"
 
@@ -579,9 +580,6 @@ SimulationRenderer::SimulationRenderer()
 //
 SimulationRenderer::~SimulationRenderer()
 {
-    b2Assert(m_points == NULL);
-    b2Assert(m_lines == NULL);
-    b2Assert(m_triangles == NULL);
 }
 
 //
@@ -822,12 +820,73 @@ void SimulationRenderer::DrawAABB(b2AABB* aabb, const b2Color& c)
     m_lines->Vertex(p1, c);
 }
 
+bool save_png_libpng(const char *filename, unsigned char* pixels, int w, int h)
+{
+    png_structp png = png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
+    if (!png)
+        return false;
+
+    png_infop info = png_create_info_struct(png);
+    if (!info) {
+        png_destroy_write_struct(&png, &info);
+        return false;
+    }
+
+    FILE *fp = fopen(filename, "wb");
+    if (!fp) {
+        png_destroy_write_struct(&png, &info);
+        return false;
+    }
+
+    png_init_io(png, fp);
+    png_set_IHDR(png, info, w, h, 8 /* depth */, PNG_COLOR_TYPE_RGB, PNG_INTERLACE_NONE,
+        PNG_COMPRESSION_TYPE_BASE, PNG_FILTER_TYPE_BASE);
+    png_colorp palette = (png_colorp)png_malloc(png, PNG_MAX_PALETTE_LENGTH * sizeof(png_color));
+    if (!palette) {
+        fclose(fp);
+        png_destroy_write_struct(&png, &info);
+        return false;
+    }
+    png_set_PLTE(png, info, palette, PNG_MAX_PALETTE_LENGTH);
+    png_write_info(png, info);
+    png_set_packing(png);
+
+    png_bytepp rows = (png_bytepp)png_malloc(png, h * sizeof(png_bytep));
+    for (int i = 0; i < h; ++i)
+        rows[i] = (png_bytep)(pixels + (h - i - 1) * w * 3);
+
+    png_write_image(png, rows);
+    png_write_end(png, info);
+    png_free(png, palette);
+    png_destroy_write_struct(&png, &info);
+
+    fclose(fp);
+    delete[] rows;
+    return true;
+}
+    
+void saveAsImage(std::string path, int width, int height)
+{
+    //glFlush();
+    unsigned char* image = (unsigned char*)malloc(sizeof(unsigned char) * 3 * width * height);
+    glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, image);
+    
+    sCheckGLError();
+    
+    save_png_libpng(path.c_str(), image, width, height);
+    free(image);
+}
+
 //
 void SimulationRenderer::Flush()
 {
     m_triangles->Flush();
     m_lines->Flush();
     m_points->Flush();
+    
+    if(m_bSaveAsPng) {
+        saveAsImage(m_sPngPath, m_nPngWidth, m_nPngHeight);
+    }
 }
 
 //Setters and getters
@@ -838,5 +897,14 @@ void SimulationRenderer::setIsDebugMode(const bool &isDebug) {
 bool SimulationRenderer::getIsDebugMode() const {
     return m_bIsDebugMode;
 }
+
+void SimulationRenderer::setFileOutput(bool saveAsPng, std::string filePath, int width, int height)
+{
+    m_bSaveAsPng = saveAsPng;
+    m_sPngPath = filePath;
+    m_nPngWidth = width;
+    m_nPngHeight = height;
+}
+
 #endif
 
