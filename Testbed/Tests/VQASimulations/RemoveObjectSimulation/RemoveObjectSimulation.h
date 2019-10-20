@@ -15,6 +15,7 @@
 #include "RemoveObjectSimulationSettings.h"
 #include <iostream>
 #include "JSONHelper.h"
+#include "ObjectState.h"
 
 #if USE_DEBUG_DRAW
 #define BODY b2Body
@@ -90,7 +91,6 @@ public:
         json j;
         simSettings.to_json(j);
         JSONHelper::saveJSON(j, "test1.json");
-
         
         JSONHelper::loadJSON(j, "test2.json");
         
@@ -141,6 +141,13 @@ private:
         body->setTexture(mat.getTexture());
         body->setColor(col.GetColor(mat.type));
 #endif
+        
+        json j;
+        ObjectState state(body, mat, col, object);
+        state.to_json(j);
+        std::cout << j << std::endl;
+        
+        
         
     }
     

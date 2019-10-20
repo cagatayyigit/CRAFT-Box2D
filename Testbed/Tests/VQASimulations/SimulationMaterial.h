@@ -10,6 +10,7 @@
 
 #include <string>
 #include "Box2D/Extension/b2VisTexture.hpp"
+#include <nlohmann/json.hpp>
 
 class SimulationMaterial
 {
@@ -45,5 +46,10 @@ private:
     static b2VisTexture::Ptr metalTexture;
     static b2VisTexture::Ptr rubberTexture;
 };
+
+NLOHMANN_JSON_SERIALIZE_ENUM( SimulationMaterial::TYPE, {
+    {SimulationMaterial::METAL, "metal"},
+    {SimulationMaterial::RUBBER, "rubber"}
+})
 
 #endif /* SimulationMaterial_h */

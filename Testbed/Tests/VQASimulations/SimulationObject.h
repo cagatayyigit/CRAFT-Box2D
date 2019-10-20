@@ -8,6 +8,8 @@
 #ifndef SimulationObject_h
 #define SimulationObject_h
 
+#include <nlohmann/json.hpp>
+
 class SimulationObject
 {
 public:
@@ -16,6 +18,11 @@ public:
         SMALL_CUBE = 0,
         BIG_CUBE = 1,
     };
+    
+    NLOHMANN_JSON_SERIALIZE_ENUM( TYPE, {
+        {SMALL_CUBE, "small_cube"},
+        {BIG_CUBE, "big_cube"}
+    })
 
     SimulationObject(TYPE t)
     {

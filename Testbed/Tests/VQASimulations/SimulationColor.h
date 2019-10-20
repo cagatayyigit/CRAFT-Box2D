@@ -10,6 +10,7 @@
 
 #include "SimulationMaterial.h"
 #include "Box2D/Common/b2Draw.h"
+#include <nlohmann/json.hpp>
 
 class SimulationColor
 {
@@ -68,5 +69,16 @@ public:
     }
 
 };
+
+NLOHMANN_JSON_SERIALIZE_ENUM( SimulationColor::TYPE, {
+    {SimulationColor::BLUE, "blue"},
+    {SimulationColor::BROWN, "brown"},
+    {SimulationColor::CYAN, "cyan"},
+    {SimulationColor::GRAY, "gray"},
+    {SimulationColor::GREEN, "green"},
+    {SimulationColor::PURPLE, "purple"},
+    {SimulationColor::RED, "red"},
+    {SimulationColor::YELLOW, "yellow"}
+})
 
 #endif /* SimulationColor_h */
