@@ -54,8 +54,8 @@ struct ObjectState
         }
         
         j.emplace("materialType", materialType.type);
-        j.emplace("SimulationColor", colorType.type);
-        j.emplace("SimulationObject", objectType.type);
+        j.emplace("colorType", colorType.type);
+        j.emplace("objectType", objectType.type);
     }
     
    
