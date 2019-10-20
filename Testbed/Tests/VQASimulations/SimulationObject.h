@@ -18,11 +18,6 @@ public:
         SMALL_CUBE = 0,
         BIG_CUBE = 1,
     };
-    
-    NLOHMANN_JSON_SERIALIZE_ENUM( TYPE, {
-        {SMALL_CUBE, "small_cube"},
-        {BIG_CUBE, "big_cube"}
-    })
 
     SimulationObject(TYPE t)
     {
@@ -40,5 +35,10 @@ public:
 
     TYPE type;
 };
+
+NLOHMANN_JSON_SERIALIZE_ENUM( SimulationObject::TYPE, {
+    {SimulationObject::SMALL_CUBE, "small_cube"},
+    {SimulationObject::BIG_CUBE, "big_cube"}
+})
 
 #endif /* SimulationObject_h */

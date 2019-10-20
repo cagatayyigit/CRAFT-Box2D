@@ -39,7 +39,7 @@ struct ObjectState
     
     {}
     
-    void to_json(json& j) {
+    void to_json(json& j) const {
         if(body) {
             j.emplace("active", body->IsActive());
             j.emplace("posX", body->GetPosition().x);

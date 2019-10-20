@@ -118,6 +118,7 @@
 		7C48C727235C5C7300FFB396 /* RemoveObjectSimulationSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemoveObjectSimulationSettings.h; sourceTree = "<group>"; };
 		7C48C728235C675B00FFB396 /* JSONHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONHelper.h; sourceTree = "<group>"; };
 		7C48C729235C6F5B00FFB396 /* ObjectState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectState.h; sourceTree = "<group>"; };
+		7C48C72A235C819300FFB396 /* SceneState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneState.h; sourceTree = "<group>"; };
 		7C92AD25234E37500074BFB6 /* SimulationObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationObject.h; sourceTree = "<group>"; };
 		7C92AD2F234E40A20074BFB6 /* rubber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rubber.png; sourceTree = "<group>"; };
 		7C92AD31234E40D00074BFB6 /* metal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = metal.png; sourceTree = "<group>"; };
@@ -249,6 +250,7 @@
 				7C48C726235C5A8B00FFB396 /* SimulationSettings.h */,
 				7C48C728235C675B00FFB396 /* JSONHelper.h */,
 				7C48C729235C6F5B00FFB396 /* ObjectState.h */,
+				7C48C72A235C819300FFB396 /* SceneState.h */,
 				7C92AD26234E37C40074BFB6 /* RemoveObjectSimulation */,
 			);
 			name = VQASimulations;
