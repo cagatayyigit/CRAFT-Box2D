@@ -12,6 +12,9 @@
 #include "SimulationObject.h"
 #include "Box2D/Extension/b2VisBody.hpp"
 #include "Box2D/Extension/b2VisPolygonShape.hpp"
+#include "RemoveObjectSimulationSettings.h"
+#include <iostream>
+#include "JSONHelper.h"
 
 #if USE_DEBUG_DRAW
 #define BODY b2Body
@@ -81,7 +84,23 @@ public:
         
         Test::Step(settings);
         
-        if(terminateSimulation) {
+        // create a person
+        RemoveObjectSimulationSettings simSettings (0, 1024, 1024, "deneme.json", 10);
+
+        json j;
+        simSettings.to_json(j);
+        JSONHelper::saveJSON(j, "test1.json");
+
+        
+        JSONHelper::loadJSON(j, "test2.json");
+        
+        simSettings.from_json(j);
+
+        // that's it
+        //assert(simSettings.numberOfObjects == p2.numberOfObjects);
+        
+        if(terminateSimulation)
+        {
             exit(0);
         }
     }

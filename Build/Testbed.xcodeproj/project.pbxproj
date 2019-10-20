@@ -114,6 +114,9 @@
 		7C4127F82348BC5B002E75BA /* SimulationRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SimulationRenderer.hpp; path = ../Testbed/Framework/SimulationRenderer.hpp; sourceTree = "<group>"; };
 		7C4128042348D5F0002E75BA /* SimulationColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationColor.h; sourceTree = "<group>"; };
 		7C4128052348D638002E75BA /* SimulationMaterial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationMaterial.h; sourceTree = "<group>"; };
+		7C48C726235C5A8B00FFB396 /* SimulationSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationSettings.h; sourceTree = "<group>"; };
+		7C48C727235C5C7300FFB396 /* RemoveObjectSimulationSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemoveObjectSimulationSettings.h; sourceTree = "<group>"; };
+		7C48C728235C675B00FFB396 /* JSONHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONHelper.h; sourceTree = "<group>"; };
 		7C92AD25234E37500074BFB6 /* SimulationObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationObject.h; sourceTree = "<group>"; };
 		7C92AD2F234E40A20074BFB6 /* rubber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rubber.png; sourceTree = "<group>"; };
 		7C92AD31234E40D00074BFB6 /* metal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = metal.png; sourceTree = "<group>"; };
@@ -239,6 +242,8 @@
 			isa = PBXGroup;
 			children = (
 				7C92AD26234E37C40074BFB6 /* RemoveObjectSimulation */,
+				7C48C726235C5A8B00FFB396 /* SimulationSettings.h */,
+				7C48C728235C675B00FFB396 /* JSONHelper.h */,
 			);
 			name = VQASimulations;
 			path = ../Testbed/Tests/VQASimulations;
@@ -252,6 +257,7 @@
 				7C4128042348D5F0002E75BA /* SimulationColor.h */,
 				7C92AD25234E37500074BFB6 /* SimulationObject.h */,
 				7C3A01F62343BD3A00E4E400 /* RemoveObjectSimulation.h */,
+				7C48C727235C5C7300FFB396 /* RemoveObjectSimulationSettings.h */,
 			);
 			path = RemoveObjectSimulation;
 			sourceTree = "<group>";
@@ -565,7 +571,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_DYNAMIC_NO_PIC = NO;
-				HEADER_SEARCH_PATHS = /usr/local/Cellar/libpng/1.6.37/include/;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/libpng/1.6.37/include/,
+					"/usr/local/Cellar/nlohmann-json/3.7.0/include/",
+				);
 				INSTALL_PATH = /usr/local/bin;
 				LD_RUNPATH_SEARCH_PATHS = /usr/local/Cellar/libpng/1.6.37/lib/;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
@@ -587,7 +596,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_DYNAMIC_NO_PIC = NO;
-				HEADER_SEARCH_PATHS = /usr/local/Cellar/libpng/1.6.37/include/;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/libpng/1.6.37/include/,
+					"/usr/local/Cellar/nlohmann-json/3.7.0/include/",
+				);
 				INSTALL_PATH = /usr/local/bin;
 				LD_RUNPATH_SEARCH_PATHS = /usr/local/Cellar/libpng/1.6.37/lib/;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
