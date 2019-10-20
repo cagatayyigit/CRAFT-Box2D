@@ -15,13 +15,7 @@
 #include "RemoveObjectSimulationSettings.h"
 #include <iostream>
 #include "JSONHelper.h"
-#include "ObjectState.h"
-
-#if USE_DEBUG_DRAW
-#define BODY b2Body
-#else
-#define BODY b2VisBody
-#endif
+#include "SceneState.h"
 
 #define SET_FILE_OUTPUT_FALSE ((SimulationRenderer*)((b2VisWorld*)m_world)->getRenderer())->setFileOutput(false);
 #define SET_FILE_OUTPUT_TRUE(X) ((SimulationRenderer*)((b2VisWorld*)m_world)->getRenderer())->setFileOutput(true, (X), settings->bufferWidth, settings->bufferHeight);
@@ -39,7 +33,7 @@ public:
     
     RemoveObjectSimulation()
     {
-        m_nNumberOfObjects = 7;
+        m_nNumberOfObjects = 3;
         m_nSimulationState = SS_CREATE_SCENE;
         m_nDistinctColorUsed = 8;
         m_nDistinctMaterialsUsed = 2;
@@ -58,6 +52,8 @@ public:
             shape.Set(b2Vec2(-40.0f, 0.0f), b2Vec2(40.0f, 0.0f));
             ground->CreateFixture(&shape, 0.0f);
         }
+        
+        state.loadFromJSONFile("scene.json", m_world);
     }
 
     void Step(Settings* settings)
@@ -101,6 +97,7 @@ public:
         
         if(terminateSimulation)
         {
+            state.saveToJSONFile(m_world, "scene.json");
             exit(0);
         }
     }
@@ -113,6 +110,7 @@ private:
     unsigned short m_nDistinctColorUsed;
     unsigned short m_nDistinctMaterialsUsed;
     unsigned short m_nDistinctObjectsUsed;
+    SceneState state;
 
     void addSimulationObject()
     {
@@ -141,14 +139,8 @@ private:
         body->setTexture(mat.getTexture());
         body->setColor(col.GetColor(mat.type));
 #endif
-        
-        json j;
-        ObjectState state(body, mat, col, object);
-        state.to_json(j);
-        std::cout << j << std::endl;
-        
-        
-        
+    
+        state.add(ObjectState(body, mat.type, col.type, object.type));
     }
     
     int randWithBound(const int& bound)
