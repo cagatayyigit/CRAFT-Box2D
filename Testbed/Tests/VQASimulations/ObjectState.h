@@ -15,17 +15,6 @@
 #include "Box2D/Extension/b2VisBody.hpp"
 #include "Box2D/Extension/b2VisWorld.hpp"
 
-enum Mati
-{
-    METAL = 0,
-    RUBBER = 1,
-};
-
-NLOHMANN_JSON_SERIALIZE_ENUM( Mati, {
-    {METAL, "metal"},
-    {RUBBER, "rubber"}
-})
-
 struct ObjectState
 {
     friend class SceneState;
