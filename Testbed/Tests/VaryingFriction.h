@@ -19,7 +19,7 @@
 #ifndef VARYING_FRICTION_H
 #define VARYING_FRICTION_H
 
-class VaryingFriction : public Test
+class VaryingFriction : public Simulation
 {
 public:
 
@@ -115,7 +115,7 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new VaryingFriction;
 	}

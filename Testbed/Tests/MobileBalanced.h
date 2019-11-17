@@ -19,7 +19,7 @@
 #ifndef MOBILE_BALANCED_H
 #define MOBILE_BALANCED_H
 
-class MobileBalanced : public Test
+class MobileBalanced : public Simulation
 {
 public:
 
@@ -96,7 +96,7 @@ public:
 		return body;
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new MobileBalanced;
 	}

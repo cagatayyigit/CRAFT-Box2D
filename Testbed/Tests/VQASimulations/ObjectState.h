@@ -55,7 +55,7 @@ public:
         j.emplace("objectType", objectType);
     }
     
-    void from_json(const json& j, b2VisWorld* toWorld) {
+    void from_json(const json& j, WORLD* toWorld) {
         bool active;
         float x, y, angle, velx, vely, angVel, linearDamp, angDamp;
         int bodyType;

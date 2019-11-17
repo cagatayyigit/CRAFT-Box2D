@@ -19,7 +19,7 @@
 #ifndef CONTINUOUS_TEST_H
 #define CONTINUOUS_TEST_H
 
-class ContinuousTest : public Test
+class ContinuousTest : public Simulation
 {
 public:
 
@@ -109,7 +109,7 @@ public:
 
 	void Step(Settings* settings)
 	{
-		Test::Step(settings);
+		Simulation::Step(settings);
 
 		extern int32 b2_gjkCalls, b2_gjkIters, b2_gjkMaxIters;
 
@@ -145,7 +145,7 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new ContinuousTest;
 	}

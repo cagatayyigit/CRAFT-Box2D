@@ -19,7 +19,7 @@
 #ifndef CONVEYOR_BELT_H
 #define CONVEYOR_BELT_H
 
-class ConveyorBelt : public Test
+class ConveyorBelt : public Simulation
 {
 public:
 
@@ -66,7 +66,7 @@ public:
 
 	void PreSolve(b2Contact* contact, const b2Manifold* oldManifold)
 	{
-		Test::PreSolve(contact, oldManifold);
+		Simulation::PreSolve(contact, oldManifold);
 
 		b2Fixture* fixtureA = contact->GetFixtureA();
 		b2Fixture* fixtureB = contact->GetFixtureB();
@@ -84,10 +84,10 @@ public:
 
 	void Step(Settings* settings)
 	{
-		Test::Step(settings);
+		Simulation::Step(settings);
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new ConveyorBelt;
 	}

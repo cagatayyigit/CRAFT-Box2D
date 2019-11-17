@@ -23,7 +23,7 @@
 // You will have to use a high number of iterations to make them stiff.
 // So why not go ahead and use soft weld joints? They behave like a revolute
 // joint with a rotational spring.
-class Cantilever : public Test
+class Cantilever : public Simulation
 {
 public:
 
@@ -200,7 +200,7 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new Cantilever;
 	}

@@ -19,7 +19,7 @@
 #ifndef AddPair_H
 #define AddPair_H
 
-class AddPair : public Test
+class AddPair : public Simulation
 {
 public:
 
@@ -59,7 +59,7 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new AddPair;
 	}

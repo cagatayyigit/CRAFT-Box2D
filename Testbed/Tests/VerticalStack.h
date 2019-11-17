@@ -21,7 +21,7 @@
 
 extern bool g_blockSolve;
 
-class VerticalStack : public Test
+class VerticalStack : public Simulation
 {
 public:
 
@@ -124,7 +124,7 @@ public:
 
 	void Step(Settings* settings)
 	{
-		Test::Step(settings);
+		Simulation::Step(settings);
 		g_debugDraw.DrawString(5, m_textLine, "Press: (,) to launch a bullet.");
 		m_textLine += DRAW_STRING_NEW_LINE;
 		g_debugDraw.DrawString(5, m_textLine, "Blocksolve = %d", g_blockSolve);
@@ -158,7 +158,7 @@ public:
 		//}
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new VerticalStack;
 	}

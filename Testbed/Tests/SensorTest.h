@@ -20,7 +20,7 @@
 #define SENSOR_TEST_H
 
 // This is used to test sensor shapes.
-class SensorTest : public Test
+class SensorTest : public Simulation
 {
 public:
 
@@ -137,7 +137,7 @@ public:
 
 	void Step(Settings* settings)
 	{
-		Test::Step(settings);
+		Simulation::Step(settings);
 
 		// Traverse the contact results. Apply a force on shapes
 		// that overlap the sensor.
@@ -168,7 +168,7 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new SensorTest;
 	}

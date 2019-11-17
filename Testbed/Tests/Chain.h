@@ -19,7 +19,7 @@
 #ifndef CHAIN_H
 #define CHAIN_H
 
-class Chain : public Test
+class Chain : public Simulation
 {
 public:
 	Chain()
@@ -65,7 +65,7 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new Chain;
 	}

@@ -54,13 +54,21 @@ public:
 
     void DrawAABB(b2AABB* aabb, const b2Color& color);
     
-    void setFileOutput(bool saveAsPng, std::string filePath="", int width=0, int height=0);
+    void setFileOutput(const std::string& filePath, const int& width, const int& height);
 
     void Flush();
+    
+    void Finish();
     
     //Setters and getters
     void setIsDebugMode(const bool& isDebug);
     bool getIsDebugMode() const;
+    
+    bool writingToVideo()
+    {
+        //TODO: Check extension check
+        return m_sPath != "";
+    }
     
 private:
     GLRenderPoints* m_points;
@@ -68,10 +76,9 @@ private:
     GLRenderTriangles* m_triangles;
     
     bool m_bIsDebugMode;
-    bool m_bSaveAsPng;
-    std::string m_sPngPath;
-    int m_nPngWidth;
-    int m_nPngHeight;
+    std::string m_sPath;
+    int m_nWidth;
+    int m_nHeight;
 };
 
 #if USE_DEBUG_DRAW

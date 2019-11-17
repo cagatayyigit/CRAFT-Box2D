@@ -19,7 +19,7 @@
 #ifndef TUMBLER_H
 #define TUMBLER_H
 
-class Tumbler : public Test
+class Tumbler : public Simulation
 {
 public:
 
@@ -70,7 +70,7 @@ public:
 
 	void Step(Settings* settings)
 	{
-		Test::Step(settings);
+		Simulation::Step(settings);
 
 		if (m_count < e_count)
 		{
@@ -87,7 +87,7 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new Tumbler;
 	}

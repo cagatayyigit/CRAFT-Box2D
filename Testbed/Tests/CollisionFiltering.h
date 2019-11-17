@@ -37,7 +37,7 @@ const uint16 k_triangleMask = 0xFFFF;
 const uint16 k_boxMask = 0xFFFF ^ k_triangleCategory;
 const uint16 k_circleMask = 0xFFFF;
 
-class CollisionFiltering : public Test
+class CollisionFiltering : public Simulation
 {
 public:
 	CollisionFiltering()
@@ -168,7 +168,7 @@ public:
 		body6->CreateFixture(&circleShapeDef);
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new CollisionFiltering;
 	}

@@ -16,8 +16,10 @@
 * 3. This notice may not be removed or altered from any source distribution.
 */
 
-#ifndef TEST_H
-#define TEST_H
+//RENAMED AND UPDATED THE ORIGINAL VERSION FROM BOX2D
+
+#ifndef SIMULATION_H
+#define SIMULATION_H
 
 #include "Box2D/Box2D.h"
 #include "SimulationDefines.h"
@@ -41,10 +43,10 @@
 
 #include <stdlib.h>
 
-class Test;
+class Simulation;
 struct Settings;
 
-typedef Test* TestCreateFcn();
+typedef Simulation* TestCreateFcn();
 
 #define	RAND_LIMIT	32767
 #define DRAW_STRING_NEW_LINE 16
@@ -70,6 +72,8 @@ inline float32 RandomFloat(float32 lo, float32 hi)
 /// Test settings. Some can be controlled in the GUI.
 struct Settings
 {
+    typedef std::shared_ptr<Settings> Ptr;
+    
 	Settings()
 	{
 		hz = 60.0f;
@@ -91,9 +95,14 @@ struct Settings
 		enableSleep = true;
 		pause = false;
 		singleStep = false;
-        bufferWidth = 2048;
-        bufferHeight = 1280;
+        bufferWidth = 640;
+        bufferHeight = 320;
 	}
+    
+    virtual ~Settings()
+    {
+        
+    }
 
 	float32 hz;
 	int32 velocityIterations;
@@ -134,7 +143,7 @@ public:
 	void SayGoodbye(b2Fixture* fixture) override { B2_NOT_USED(fixture); }
 	void SayGoodbye(b2Joint* joint) override;
 
-	Test* test;
+	Simulation* test;
 };
 
 const int32 k_maxContactPoints = 2048;
@@ -151,12 +160,13 @@ struct ContactPoint
 	float32 separation;
 };
 
-class Test : public b2ContactListener
+class Simulation : public b2ContactListener
 {
 public:
+    typedef std::shared_ptr<Simulation> Ptr;
 
-	Test();
-	virtual ~Test();
+	Simulation();
+	virtual ~Simulation();
 
 	void DrawTitle(const char *string);
 	virtual void Step(Settings* settings);

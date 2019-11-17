@@ -16,7 +16,7 @@
 * 3. This notice may not be removed or altered from any source distribution.
 */
 
-class ShapeCast : public Test
+class ShapeCast : public Simulation
 {
 public:
     enum
@@ -50,14 +50,14 @@ public:
 #endif
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new ShapeCast;
 	}
 
 	void Step(Settings* settings)
 	{
-		Test::Step(settings);
+		Simulation::Step(settings);
 
 		b2Transform transformA;
 		transformA.p = b2Vec2(0.0f, 0.25f);

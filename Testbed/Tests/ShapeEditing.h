@@ -19,7 +19,7 @@
 #ifndef SHAPE_EDITING_H
 #define SHAPE_EDITING_H
 
-class ShapeEditing : public Test
+class ShapeEditing : public Simulation
 {
 public:
 
@@ -84,14 +84,14 @@ public:
 
 	void Step(Settings* settings)
 	{
-		Test::Step(settings);
+		Simulation::Step(settings);
 		g_debugDraw.DrawString(5, m_textLine, "Press: (c) create a shape, (d) destroy a shape.");
 		m_textLine += DRAW_STRING_NEW_LINE;
 		g_debugDraw.DrawString(5, m_textLine, "sensor = %d", m_sensor);
 		m_textLine += DRAW_STRING_NEW_LINE;
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new ShapeEditing;
 	}

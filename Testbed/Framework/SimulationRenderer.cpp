@@ -21,6 +21,10 @@
 #include <vector>
 #include <png.h>
 
+extern "C" {
+#include "VideoWriter.h"
+}
+
 #include "Testbed/imgui/imgui.h"
 
 #define BUFFER_OFFSET(x)  ((const void*) (x))
@@ -884,8 +888,16 @@ void SimulationRenderer::Flush()
     m_lines->Flush();
     m_points->Flush();
     
-    if(m_bSaveAsPng) {
-        saveAsImage(m_sPngPath, m_nPngWidth, m_nPngHeight);
+    if(writingToVideo()) {
+        videoFlush(m_nWidth, m_nHeight);
+    }
+    //saveAsImage(m_sPath, m_nWidth, m_nHeight);
+}
+
+void SimulationRenderer::Finish()
+{
+    if(writingToVideo()) {
+        deinit();
     }
 }
 
@@ -898,12 +910,16 @@ bool SimulationRenderer::getIsDebugMode() const {
     return m_bIsDebugMode;
 }
 
-void SimulationRenderer::setFileOutput(bool saveAsPng, std::string filePath, int width, int height)
+void SimulationRenderer::setFileOutput(const std::string& filePath, const int& width, const int& height)
 {
-    m_bSaveAsPng = saveAsPng;
-    m_sPngPath = filePath;
-    m_nPngWidth = width;
-    m_nPngHeight = height;
+    m_sPath = filePath;
+    m_nWidth = width;
+    m_nHeight = height;
+    
+    if(writingToVideo())
+    {
+        init(m_sPath, m_nWidth, m_nHeight);
+    }
 }
 
 #endif

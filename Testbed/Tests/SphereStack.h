@@ -19,7 +19,7 @@
 #ifndef SPHERE_STACK_H
 #define SPHERE_STACK_H
 
-class SphereStack : public Test
+class SphereStack : public Simulation
 {
 public:
 
@@ -60,7 +60,7 @@ public:
 
 	void Step(Settings* settings)
 	{
-		Test::Step(settings);
+		Simulation::Step(settings);
 
 		//for (int32 i = 0; i < e_count; ++i)
 		//{
@@ -75,7 +75,7 @@ public:
 		//printf("\n");
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new SphereStack;
 	}

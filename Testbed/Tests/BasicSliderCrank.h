@@ -20,7 +20,7 @@
 #define BASIC_SLIDER_CRANK_H
 
 // A basic slider crank created for GDC tutorial: Understanding Constraints
-class BasicSliderCrank : public Test
+class BasicSliderCrank : public Simulation
 {
 public:
 	BasicSliderCrank()
@@ -94,7 +94,7 @@ public:
   		}
 	}
     
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new BasicSliderCrank;
 	}

@@ -19,7 +19,7 @@
 #ifndef HEAVY_ON_LIGHT_H
 #define HEAVY_ON_LIGHT_H
 
-class HeavyOnLight : public Test
+class HeavyOnLight : public Simulation
 {
 public:
     
@@ -49,7 +49,7 @@ public:
         body->CreateFixture(&shape, 10.0f);
 	}
     
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new HeavyOnLight;
 	}

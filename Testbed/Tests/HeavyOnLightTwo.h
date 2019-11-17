@@ -19,7 +19,7 @@
 #ifndef HEAVY_ON_LIGHT_TWO_H
 #define HEAVY_ON_LIGHT_TWO_H
 
-class HeavyOnLightTwo : public Test
+class HeavyOnLightTwo : public Simulation
 {
 public:
     
@@ -80,7 +80,7 @@ public:
 		}
 	}
     
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new HeavyOnLightTwo;
 	}

@@ -28,9 +28,9 @@ public:
     {
         if(type == SMALL_CUBE)
         {
-            return 1.0f;
+            return 2.0f;
         }
-        return 2.0f;
+        return 4.0f;
     }
 
     TYPE type;

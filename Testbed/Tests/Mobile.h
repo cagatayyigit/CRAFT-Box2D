@@ -19,7 +19,7 @@
 #ifndef MOBILE_H
 #define MOBILE_H
 
-class Mobile : public Test
+class Mobile : public Simulation
 {
 public:
 
@@ -93,7 +93,7 @@ public:
 		return body;
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new Mobile;
 	}

@@ -19,7 +19,7 @@
 #ifndef DYNAMIC_TREE_TEST_H
 #define DYNAMIC_TREE_TEST_H
 
-class DynamicTreeTest : public Test
+class DynamicTreeTest : public Simulation
 {
 public:
 
@@ -57,7 +57,7 @@ public:
 		m_automated = false;
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new DynamicTreeTest;
 	}

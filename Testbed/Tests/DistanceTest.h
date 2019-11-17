@@ -19,7 +19,7 @@
 #ifndef DISTANCE_TEST_H
 #define DISTANCE_TEST_H
 
-class DistanceTest : public Test
+class DistanceTest : public Simulation
 {
 public:
 	DistanceTest()
@@ -39,14 +39,14 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new DistanceTest;
 	}
 
 	void Step(Settings* settings)
 	{
-		Test::Step(settings);
+		Simulation::Step(settings);
 
 		b2DistanceInput input;
 		input.proxyA.Set(&m_polygonA, 0);

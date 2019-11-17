@@ -21,7 +21,7 @@
 
 /// This tests bullet collision and provides an example of a gameplay scenario.
 /// This also uses a loop shape.
-class Pinball : public Test
+class Pinball : public Simulation
 {
 public:
 	Pinball()
@@ -126,7 +126,7 @@ public:
 			m_rightJoint->SetMotorSpeed(10.0f);
 		}
 
-		Test::Step(settings);
+		Simulation::Step(settings);
 
 		g_debugDraw.DrawString(5, m_textLine, "Press 'a' to control the flippers");
 		m_textLine += DRAW_STRING_NEW_LINE;
@@ -153,7 +153,7 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new Pinball;
 	}

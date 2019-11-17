@@ -20,7 +20,7 @@
 #define BREAKABLE_TEST_H
 
 // This is used to test sensor shapes.
-class Breakable : public Test
+class Breakable : public Simulation
 {
 public:
 
@@ -132,10 +132,10 @@ public:
 			m_angularVelocity = m_body1->GetAngularVelocity();
 		}
 
-		Test::Step(settings);
+		Simulation::Step(settings);
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new Breakable;
 	}

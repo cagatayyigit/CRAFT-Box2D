@@ -19,7 +19,7 @@
 #ifndef TIME_OF_IMPACT_H
 #define TIME_OF_IMPACT_H
 
-class TimeOfImpact : public Test
+class TimeOfImpact : public Simulation
 {
 public:
 	TimeOfImpact()
@@ -28,14 +28,14 @@ public:
 		m_shapeB.SetAsBox(2.5f, 2.5f);
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new TimeOfImpact;
 	}
 
 	void Step(Settings* settings)
 	{
-		Test::Step(settings);
+		Simulation::Step(settings);
 
 		b2Sweep sweepA;
 		sweepA.c0.Set(24.0f, -60.0f);

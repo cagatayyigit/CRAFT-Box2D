@@ -42,7 +42,7 @@ public:
 	b2Vec2 m_normal;
 };
 
-class EdgeShapes : public Test
+class EdgeShapes : public Simulation
 {
 public:
 
@@ -200,7 +200,7 @@ public:
 	{
 		bool advanceRay = settings->pause == 0 || settings->singleStep;
 
-		Test::Step(settings);
+		Simulation::Step(settings);
 		g_debugDraw.DrawString(5, m_textLine, "Press 1-5 to drop stuff");
 		m_textLine += DRAW_STRING_NEW_LINE;
 
@@ -233,7 +233,7 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new EdgeShapes;
 	}

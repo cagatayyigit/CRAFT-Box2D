@@ -19,7 +19,7 @@
 #ifndef CONVEX_HULL_H
 #define CONVEX_HULL_H
 
-class ConvexHull : public Test
+class ConvexHull : public Simulation
 {
 public:
 	enum
@@ -53,7 +53,7 @@ public:
 		m_count = e_count;
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new ConvexHull;
 	}
@@ -74,7 +74,7 @@ public:
 
 	void Step(Settings* settings)
 	{
-		Test::Step(settings);
+		Simulation::Step(settings);
 
 		b2PolygonShape shape;
 		shape.Set(m_points, m_count);

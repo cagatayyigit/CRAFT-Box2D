@@ -22,7 +22,7 @@
 /// This test shows how to use a motor joint. A motor joint
 /// can be used to animate a dynamic body. With finite motor forces
 /// the body can be blocked by collision with other bodies.
-class MotorJoint : public Test
+class MotorJoint : public Simulation
 {
 public:
 	MotorJoint()
@@ -96,12 +96,12 @@ public:
 
 		g_debugDraw.DrawPoint(linearOffset, 4.0f, b2Color(0.9f, 0.9f, 0.9f));
 
-		Test::Step(settings);
+		Simulation::Step(settings);
 		g_debugDraw.DrawString(5, m_textLine, "Keys: (s) pause");
 		m_textLine += 15;
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new MotorJoint;
 	}

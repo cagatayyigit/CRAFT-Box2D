@@ -21,7 +21,7 @@
 
 /// This stress tests the dynamic tree broad-phase. This also shows that tile
 /// based collision is _not_ smooth due to Box2D not knowing about adjacency.
-class Tiles : public Test
+class Tiles : public Simulation
 {
 public:
 	enum
@@ -130,7 +130,7 @@ public:
 		g_debugDraw.DrawString(5, m_textLine, "dynamic tree height = %d, min = %d", height, int32(minimumHeight));
 		m_textLine += DRAW_STRING_NEW_LINE;
 
-		Test::Step(settings);
+		Simulation::Step(settings);
 
 		g_debugDraw.DrawString(5, m_textLine, "create time = %6.2f ms, fixture count = %d",
 			m_createTime, m_fixtureCount);
@@ -144,7 +144,7 @@ public:
 		//}
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new Tiles;
 	}

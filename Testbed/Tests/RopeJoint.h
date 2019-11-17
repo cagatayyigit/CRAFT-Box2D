@@ -27,7 +27,7 @@
 /// densities, time step, and iterations to see how they affect stability.
 /// This test also shows how to use contact filtering. Filtering is configured
 /// so that the payload does not collide with the chain.
-class RopeJoint : public Test
+class RopeJoint : public Simulation
 {
 public:
 	RopeJoint()
@@ -119,7 +119,7 @@ public:
 
 	void Step(Settings* settings)
 	{
-		Test::Step(settings);
+		Simulation::Step(settings);
 		g_debugDraw.DrawString(5, m_textLine, "Press (j) to toggle the rope joint.");
 		m_textLine += DRAW_STRING_NEW_LINE;
 		if (m_rope)
@@ -133,7 +133,7 @@ public:
 		m_textLine += DRAW_STRING_NEW_LINE;
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new RopeJoint;
 	}

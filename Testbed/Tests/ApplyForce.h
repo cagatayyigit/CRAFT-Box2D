@@ -19,7 +19,7 @@
 #ifndef APPLY_FORCE_H
 #define APPLY_FORCE_H
 
-class ApplyForce : public Test
+class ApplyForce : public Simulation
 {
 public:
 	ApplyForce()
@@ -169,7 +169,7 @@ public:
 		}
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new ApplyForce;
 	}

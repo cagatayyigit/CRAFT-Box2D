@@ -20,7 +20,7 @@
 #define DUMP_SHELL_H
 
 // This test holds worlds dumped using b2World::Dump.
-class DumpShell : public Test
+class DumpShell : public Simulation
 {
 public:
 
@@ -166,7 +166,7 @@ public:
 
 	}
 
-	static Test* Create()
+	static Simulation* Create()
 	{
 		return new DumpShell;
 	}

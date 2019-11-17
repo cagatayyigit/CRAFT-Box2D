@@ -8,25 +8,23 @@
 #ifndef RemoveObjectSimulationSettings_h
 #define RemoveObjectSimulationSettings_h
 
-#include "SimulationSettings.h"
+#include "IPSSettings.h"
 
-struct RemoveObjectSimulationSettings : SimulationSettings
+struct RemoveObjectSimulationSettings : IPSSettings
 {
-    RemoveObjectSimulationSettings(const int& simId,
-                                   const int& width,
-                                   const int& height,
-                                   const std::string& scenePath,
-                                   const int& noObjects) : numberOfObjects(noObjects), SimulationSettings(simId, width, height, scenePath) {}
+    typedef std::shared_ptr<RemoveObjectSimulationSettings> Ptr;
+    
+    RemoveObjectSimulationSettings() {}
     
     int numberOfObjects;
     
     void to_json(json& j) {
         j.emplace("numberOfObjects", this->numberOfObjects);
-        SimulationSettings::to_json(j);
+        IPSSettings::to_json(j);
     }
 
     void from_json(const json& j) {
-        SimulationSettings::from_json(j);
+        IPSSettings::from_json(j);
         j.at("numberOfObjects").get_to(this->numberOfObjects);
     }
 };
