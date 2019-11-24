@@ -59,51 +59,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		01DEFB022A19B3B411B54142 /* Confined.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Confined.h; path = ../Testbed/Tests/Confined.h; sourceTree = "<group>"; };
-		03368CDE156069904951531E /* BasicSliderCrank.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BasicSliderCrank.h; path = ../Testbed/Tests/BasicSliderCrank.h; sourceTree = "<group>"; };
 		05361B63FEF7D7D538F6D9A3 /* nsgl_context.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = nsgl_context.h; path = ../Testbed/glfw/nsgl_context.h; sourceTree = "<group>"; };
 		0852D7D19DC997030C65EE11 /* DebugDraw.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = DebugDraw.cpp; path = ../Testbed/Framework/DebugDraw.cpp; sourceTree = "<group>"; };
 		096FF594ADC29346BFFADBD4 /* Testbed */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Testbed; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BACC980CF188B320DBC2FC0 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		0C93D4173D77CC0950900257 /* DroidSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = text; name = DroidSans.ttf; path = ../Testbed/Data/DroidSans.ttf; sourceTree = "<group>"; };
-		0E5B10AA3026BDDC6CDBE6EA /* RopeJoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RopeJoint.h; path = ../Testbed/Tests/RopeJoint.h; sourceTree = "<group>"; };
-		1151223A434A6CECBD29A87A /* TimeOfImpact.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TimeOfImpact.h; path = ../Testbed/Tests/TimeOfImpact.h; sourceTree = "<group>"; };
-		127C2708E09F7ABA67ADCD48 /* CompoundShapes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CompoundShapes.h; path = ../Testbed/Tests/CompoundShapes.h; sourceTree = "<group>"; };
-		190A04CC617AE8FEA619BB0C /* Tumbler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Tumbler.h; path = ../Testbed/Tests/Tumbler.h; sourceTree = "<group>"; };
 		19352E0A6698243CDCB7244A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		1CAC1956B222D88820BF2F96 /* PolyCollision.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PolyCollision.h; path = ../Testbed/Tests/PolyCollision.h; sourceTree = "<group>"; };
-		24F08BA2C7DEB254570491E2 /* Rope.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Rope.h; path = ../Testbed/Tests/Rope.h; sourceTree = "<group>"; };
 		281F41045A188BB6D3F7C744 /* stb_textedit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = stb_textedit.h; path = ../Testbed/imgui/stb_textedit.h; sourceTree = "<group>"; };
 		29024C9D58941B8F33A15ADD /* posix_tls.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = posix_tls.h; path = ../Testbed/glfw/posix_tls.h; sourceTree = "<group>"; };
 		29A523D9149149CB5C771219 /* monitor.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = monitor.c; path = ../Testbed/glfw/monitor.c; sourceTree = "<group>"; };
-		2A0A4E22727B3254B71A0462 /* Pyramid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Pyramid.h; path = ../Testbed/Tests/Pyramid.h; sourceTree = "<group>"; };
 		2C71086570BFADD7B2E6E6A5 /* cocoa_platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = cocoa_platform.h; path = ../Testbed/glfw/cocoa_platform.h; sourceTree = "<group>"; };
-		2ED74C60F2430E1230E6B2A0 /* MotorJoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MotorJoint.h; path = ../Testbed/Tests/MotorJoint.h; sourceTree = "<group>"; };
 		349D88392E0389AB219EE679 /* window.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = window.c; path = ../Testbed/glfw/window.c; sourceTree = "<group>"; };
-		3984524881F5367AC6940888 /* Dominos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Dominos.h; path = ../Testbed/Tests/Dominos.h; sourceTree = "<group>"; };
 		39E870F26BE1BBA4E5C0F732 /* stb_truetype.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = stb_truetype.h; path = ../Testbed/imgui/stb_truetype.h; sourceTree = "<group>"; };
 		3A73B94B6B57B13D7E6FE78B /* egl_context.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = egl_context.h; path = ../Testbed/glfw/egl_context.h; sourceTree = "<group>"; };
-		3C7083C484E167F6C9803A04 /* RayCast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RayCast.h; path = ../Testbed/Tests/RayCast.h; sourceTree = "<group>"; };
-		3C70878C6E69D23EE8490DCC /* DistanceTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DistanceTest.h; path = ../Testbed/Tests/DistanceTest.h; sourceTree = "<group>"; };
-		3FF734A8D8441A5A068B1AE8 /* CharacterCollision.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CharacterCollision.h; path = ../Testbed/Tests/CharacterCollision.h; sourceTree = "<group>"; };
-		4123681262EF15449FA43E52 /* DumpShell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DumpShell.h; path = ../Testbed/Tests/DumpShell.h; sourceTree = "<group>"; };
 		4571AE516B97DE03D29ED491 /* Simulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Simulation.h; path = ../Testbed/Framework/Simulation.h; sourceTree = "<group>"; };
-		4A09E196DF80A0C84E1CF7D6 /* VerticalStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VerticalStack.h; path = ../Testbed/Tests/VerticalStack.h; sourceTree = "<group>"; };
 		4B92D0718FE175E3D208AEB1 /* iokit_joystick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = iokit_joystick.h; path = ../Testbed/glfw/iokit_joystick.h; sourceTree = "<group>"; };
 		4DF39BF44D967F2687EB3234 /* imgui_impl_glfw_gl3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_impl_glfw_gl3.cpp; path = ../Testbed/imgui/imgui_impl_glfw_gl3.cpp; sourceTree = "<group>"; };
 		4EC23CFB9C25332D1244333B /* DebugDraw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DebugDraw.h; path = ../Testbed/Framework/DebugDraw.h; sourceTree = "<group>"; };
-		57DA3B228014F3D467B08162 /* Revolute.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Revolute.h; path = ../Testbed/Tests/Revolute.h; sourceTree = "<group>"; };
 		59836E928B7CB944055BF4D2 /* imgui_demo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_demo.cpp; path = ../Testbed/imgui/imgui_demo.cpp; sourceTree = "<group>"; };
-		59AD80861D1942385BBCE6C6 /* ConvexHull.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ConvexHull.h; path = ../Testbed/Tests/ConvexHull.h; sourceTree = "<group>"; };
 		606C44802E8F9832B59DEAC0 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
-		61A9DC92AA1AC0C4EEB992D2 /* Pulleys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Pulleys.h; path = ../Testbed/Tests/Pulleys.h; sourceTree = "<group>"; };
 		6519D6F1D6A4EF6385A61531 /* init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = init.c; path = ../Testbed/glfw/init.c; sourceTree = "<group>"; };
-		66916B9C885D18CEC51241DC /* BodyTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BodyTypes.h; path = ../Testbed/Tests/BodyTypes.h; sourceTree = "<group>"; };
 		68A558A4B1163CD6F5B50EE4 /* imgui.ini */ = {isa = PBXFileReference; lastKnownFileType = text; name = imgui.ini; path = ../Testbed/imgui/imgui.ini; sourceTree = "<group>"; };
-		6BBDE4D0B920DB022F3FDB10 /* SphereStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SphereStack.h; path = ../Testbed/Tests/SphereStack.h; sourceTree = "<group>"; };
 		6D4C538602C312B8715F69C6 /* stb_rect_pack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = stb_rect_pack.h; path = ../Testbed/imgui/stb_rect_pack.h; sourceTree = "<group>"; };
-		728C20CE56D32900DAC0570E /* HeavyOnLightTwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HeavyOnLightTwo.h; path = ../Testbed/Tests/HeavyOnLightTwo.h; sourceTree = "<group>"; };
-		7AE379EA3E4F3B9C7CF2E02A /* SensorTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SensorTest.h; path = ../Testbed/Tests/SensorTest.h; sourceTree = "<group>"; };
 		7C3A01F62343BD3A00E4E400 /* RemoveObjectSimulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemoveObjectSimulation.h; sourceTree = "<group>"; };
 		7C4127F42348BC5B002E75BA /* Camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Camera.hpp; path = ../Testbed/Framework/Camera.hpp; sourceTree = "<group>"; };
 		7C4127F52348BC5B002E75BA /* SimulationDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimulationDefines.h; path = ../Testbed/Framework/SimulationDefines.h; sourceTree = "<group>"; };
@@ -112,11 +89,15 @@
 		7C4127F82348BC5B002E75BA /* SimulationRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SimulationRenderer.hpp; path = ../Testbed/Framework/SimulationRenderer.hpp; sourceTree = "<group>"; };
 		7C4128042348D5F0002E75BA /* SimulationColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationColor.h; sourceTree = "<group>"; };
 		7C4128052348D638002E75BA /* SimulationMaterial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationMaterial.h; sourceTree = "<group>"; };
-		7C48C726235C5A8B00FFB396 /* IPSSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPSSettings.h; sourceTree = "<group>"; };
+		7C48C726235C5A8B00FFB396 /* Settings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		7C48C727235C5C7300FFB396 /* RemoveObjectSimulationSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemoveObjectSimulationSettings.h; sourceTree = "<group>"; };
 		7C48C728235C675B00FFB396 /* JSONHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONHelper.h; sourceTree = "<group>"; };
 		7C48C729235C6F5B00FFB396 /* ObjectState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectState.h; sourceTree = "<group>"; };
 		7C48C72A235C819300FFB396 /* SceneState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneState.h; sourceTree = "<group>"; };
+		7C5271A0238A803D00816DFC /* ObstructedPathSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObstructedPathSettings.h; sourceTree = "<group>"; };
+		7C5271A1238A815B00816DFC /* ObstructedPathSimulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObstructedPathSimulation.h; sourceTree = "<group>"; };
+		7C5271A2238A828B00816DFC /* SimulationBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationBase.h; sourceTree = "<group>"; };
+		7C5271A3238A88C500816DFC /* SimulationID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationID.h; sourceTree = "<group>"; };
 		7C6D1CDB23813A4E00BB74E0 /* SimulationMain.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SimulationMain.cpp; path = ../Testbed/Framework/SimulationMain.cpp; sourceTree = "<group>"; };
 		7C6D1CDF2381443D00BB74E0 /* ControllerParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ControllerParser.h; path = ../Testbed/Framework/ControllerParser.h; sourceTree = "<group>"; };
 		7C6D1CE2238156E400BB74E0 /* VideoWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VideoWriter.h; path = ../Testbed/Framework/VideoWriter.h; sourceTree = "<group>"; };
@@ -124,63 +105,30 @@
 		7C92AD2F234E40A20074BFB6 /* rubber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rubber.png; sourceTree = "<group>"; };
 		7C92AD31234E40D00074BFB6 /* metal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = metal.png; sourceTree = "<group>"; };
 		7CC417F1234A0AB200CD88E7 /* SimulationMaterial.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SimulationMaterial.cpp; sourceTree = "<group>"; };
-		7DD68528414246DA7FE5EB68 /* EdgeShapes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EdgeShapes.h; path = ../Testbed/Tests/EdgeShapes.h; sourceTree = "<group>"; };
-		809F4D3A4EC2A0ECD5D0F37A /* MobileBalanced.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MobileBalanced.h; path = ../Testbed/Tests/MobileBalanced.h; sourceTree = "<group>"; };
-		84620CEEA62DBA20E2E2E32E /* ShapeCast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShapeCast.h; path = ../Testbed/Tests/ShapeCast.h; sourceTree = "<group>"; };
 		85B39C4ACE24807C12C3528A /* imgui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = imgui.cpp; path = ../Testbed/imgui/imgui.cpp; sourceTree = "<group>"; };
 		8799E40B80FFE57D749B424B /* vulkan.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vulkan.c; path = ../Testbed/glfw/vulkan.c; sourceTree = "<group>"; };
 		8D6BC6AA50D7885C8F7B2CEA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8E8E800FE9CFD381BD2A1E4F /* cocoa_time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = cocoa_time.c; path = ../Testbed/glfw/cocoa_time.c; sourceTree = "<group>"; };
 		929C92CD8C5E4F3FC65D510D /* nsgl_context.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = nsgl_context.m; path = ../Testbed/glfw/nsgl_context.m; sourceTree = "<group>"; };
-		94D8E1145844A2C696E84754 /* TheoJansen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TheoJansen.h; path = ../Testbed/Tests/TheoJansen.h; sourceTree = "<group>"; };
 		955B2487BD95DD39A5316AC7 /* Simulation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Simulation.cpp; path = ../Testbed/Framework/Simulation.cpp; sourceTree = "<group>"; };
-		962A95687547AF9A51510BA8 /* CollisionProcessing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CollisionProcessing.h; path = ../Testbed/Tests/CollisionProcessing.h; sourceTree = "<group>"; };
 		97FDA81E5B6969D09A0D0E5E /* Box2D.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Box2D.xcodeproj; sourceTree = SOURCE_ROOT; };
-		9C0196A29F7268D420DF0CE2 /* Car.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Car.h; path = ../Testbed/Tests/Car.h; sourceTree = "<group>"; };
 		A2FA7724D4F3C1D64ED2FD64 /* imgui_draw.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_draw.cpp; path = ../Testbed/imgui/imgui_draw.cpp; sourceTree = "<group>"; };
 		A312F476CB4DAD28B2E93AB6 /* imconfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = imconfig.h; path = ../Testbed/imgui/imconfig.h; sourceTree = "<group>"; };
-		A7B7199AD9B0644C538F9FDA /* HeavyOnLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HeavyOnLight.h; path = ../Testbed/Tests/HeavyOnLight.h; sourceTree = "<group>"; };
-		A83F98506BAB5A02AA4EFE90 /* Cantilever.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Cantilever.h; path = ../Testbed/Tests/Cantilever.h; sourceTree = "<group>"; };
-		AA92756EDC8BC020566AFBAE /* ConveyorBelt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ConveyorBelt.h; path = ../Testbed/Tests/ConveyorBelt.h; sourceTree = "<group>"; };
 		AD11A319ADC4A00B21A67159 /* glfw3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = glfw3.h; path = ../Testbed/glfw/glfw3.h; sourceTree = "<group>"; };
-		ADA3590091EA613215D78F40 /* DynamicTreeTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DynamicTreeTest.h; path = ../Testbed/Tests/DynamicTreeTest.h; sourceTree = "<group>"; };
-		B1367E16498363C877CA6456 /* CollisionFiltering.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CollisionFiltering.h; path = ../Testbed/Tests/CollisionFiltering.h; sourceTree = "<group>"; };
 		B2DAB5E7E3BEADD9F6D6E427 /* glfw3native.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = glfw3native.h; path = ../Testbed/glfw/glfw3native.h; sourceTree = "<group>"; };
-		B689455ACD9BE08CBDB7DB9A /* Gears.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Gears.h; path = ../Testbed/Tests/Gears.h; sourceTree = "<group>"; };
-		B76D0CB2BADDDEE43C4A82F2 /* Web.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Web.h; path = ../Testbed/Tests/Web.h; sourceTree = "<group>"; };
-		B9FF76207D6B37D2BC0EDC60 /* ApplyForce.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ApplyForce.h; path = ../Testbed/Tests/ApplyForce.h; sourceTree = "<group>"; };
-		BCF7F6D0E31E26824A251D10 /* Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Bridge.h; path = ../Testbed/Tests/Bridge.h; sourceTree = "<group>"; };
 		BDBBC4CC8BDF187E12ED6B0C /* imgui_internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = imgui_internal.h; path = ../Testbed/imgui/imgui_internal.h; sourceTree = "<group>"; };
-		C570280EE73BD54023F0FE4E /* Prismatic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Prismatic.h; path = ../Testbed/Tests/Prismatic.h; sourceTree = "<group>"; };
-		C77B9A18DE8E354ACEAA3058 /* Tiles.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Tiles.h; path = ../Testbed/Tests/Tiles.h; sourceTree = "<group>"; };
-		C93BFC4011ACE072564BB280 /* AddPair.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AddPair.h; path = ../Testbed/Tests/AddPair.h; sourceTree = "<group>"; };
 		CAB1C893B59DEE85FD83B6D3 /* context.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = context.c; path = ../Testbed/glfw/context.c; sourceTree = "<group>"; };
 		CC2E3313FBC00205D6CD4153 /* posix_tls.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = posix_tls.c; path = ../Testbed/glfw/posix_tls.c; sourceTree = "<group>"; };
-		D13B96C694A75878D34AFD06 /* PolyShapes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PolyShapes.h; path = ../Testbed/Tests/PolyShapes.h; sourceTree = "<group>"; };
-		D19E7A200397C4D27D770060 /* ShapeEditing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShapeEditing.h; path = ../Testbed/Tests/ShapeEditing.h; sourceTree = "<group>"; };
 		D478CE4D2FBA21BF03146C8D /* cocoa_init.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = cocoa_init.m; path = ../Testbed/glfw/cocoa_init.m; sourceTree = "<group>"; };
-		D4CFB9DA2232B00C9851B01A /* SliderCrank.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SliderCrank.h; path = ../Testbed/Tests/SliderCrank.h; sourceTree = "<group>"; };
-		D88C36869BF7F838DA9B9CC6 /* BulletTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BulletTest.h; path = ../Testbed/Tests/BulletTest.h; sourceTree = "<group>"; };
 		D8BBCA81099FC2731CB7F8C1 /* egl_context.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = egl_context.c; path = ../Testbed/glfw/egl_context.c; sourceTree = "<group>"; };
-		D9A3FD0A71F0E2BCA037E34A /* VaryingRestitution.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VaryingRestitution.h; path = ../Testbed/Tests/VaryingRestitution.h; sourceTree = "<group>"; };
-		DB0F8E88FCDB3BBA399064C8 /* Breakable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Breakable.h; path = ../Testbed/Tests/Breakable.h; sourceTree = "<group>"; };
-		DD6DC76005A88012ED440DA0 /* EdgeTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EdgeTest.h; path = ../Testbed/Tests/EdgeTest.h; sourceTree = "<group>"; };
-		DEADECF2C2F4F52446E22332 /* VaryingFriction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VaryingFriction.h; path = ../Testbed/Tests/VaryingFriction.h; sourceTree = "<group>"; };
 		E01C3229E0CF2F1B54B10069 /* input.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = input.c; path = ../Testbed/glfw/input.c; sourceTree = "<group>"; };
-		E0CE656606F495186DFB8BA6 /* Mobile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Mobile.h; path = ../Testbed/Tests/Mobile.h; sourceTree = "<group>"; };
 		E1ED9F8D387B09FF10F41DCD /* internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = internal.h; path = ../Testbed/glfw/internal.h; sourceTree = "<group>"; };
 		E2BBB55EC1D8CF909DE22B9E /* imgui_impl_glfw_gl3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = imgui_impl_glfw_gl3.h; path = ../Testbed/imgui/imgui_impl_glfw_gl3.h; sourceTree = "<group>"; };
-		E2FB3B56F525180829160196 /* OneSidedPlatform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OneSidedPlatform.h; path = ../Testbed/Tests/OneSidedPlatform.h; sourceTree = "<group>"; };
-		E2FB7D5E14F4C8108ED4039E /* chainProblem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = chainProblem.h; path = ../Testbed/Tests/chainProblem.h; sourceTree = "<group>"; };
 		E4CDDEC5291C84376B43BD05 /* cocoa_joystick.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = cocoa_joystick.m; path = ../Testbed/glfw/cocoa_joystick.m; sourceTree = "<group>"; };
 		E63222755754C3670D1B70B5 /* cocoa_monitor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = cocoa_monitor.m; path = ../Testbed/glfw/cocoa_monitor.m; sourceTree = "<group>"; };
-		E7C91632FEDBB164EEF7AC72 /* Skier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Skier.h; path = ../Testbed/Tests/Skier.h; sourceTree = "<group>"; };
 		EA5C1300C9792D32A5828940 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		EC51B815E613748720127655 /* cocoa_window.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = cocoa_window.m; path = ../Testbed/glfw/cocoa_window.m; sourceTree = "<group>"; };
 		F14C40B4085EDBE6F87AD6F4 /* imgui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = imgui.h; path = ../Testbed/imgui/imgui.h; sourceTree = "<group>"; };
-		F526C1A4C34A15564A5867E4 /* ContinuousTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ContinuousTest.h; path = ../Testbed/Tests/ContinuousTest.h; sourceTree = "<group>"; };
-		F69382DC0DA61E0EFDC2191C /* Chain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Chain.h; path = ../Testbed/Tests/Chain.h; sourceTree = "<group>"; };
-		F7C8B3FA4039982C84D86A3A /* Pinball.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Pinball.h; path = ../Testbed/Tests/Pinball.h; sourceTree = "<group>"; };
 		FE5875DD2F3C6DCF4254A41D /* glfw_config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = glfw_config.h; path = ../Testbed/glfw/glfw_config.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -240,21 +188,33 @@
 			name = Data;
 			sourceTree = "<group>";
 		};
-		7C4127F32348BC0B002E75BA /* VQASimulations */ = {
+		7C4127F32348BC0B002E75BA /* SVQA */ = {
 			isa = PBXGroup;
 			children = (
 				7C92AD25234E37500074BFB6 /* SimulationObject.h */,
 				7C4128042348D5F0002E75BA /* SimulationColor.h */,
 				7C4128052348D638002E75BA /* SimulationMaterial.h */,
 				7CC417F1234A0AB200CD88E7 /* SimulationMaterial.cpp */,
-				7C48C726235C5A8B00FFB396 /* IPSSettings.h */,
+				7C48C726235C5A8B00FFB396 /* Settings.h */,
 				7C48C728235C675B00FFB396 /* JSONHelper.h */,
 				7C48C729235C6F5B00FFB396 /* ObjectState.h */,
 				7C48C72A235C819300FFB396 /* SceneState.h */,
+				7C5271A2238A828B00816DFC /* SimulationBase.h */,
+				7C52719F238A800800816DFC /* ObstructedPath */,
 				7C92AD26234E37C40074BFB6 /* RemoveObjectSimulation */,
+				7C5271A3238A88C500816DFC /* SimulationID.h */,
 			);
-			name = VQASimulations;
-			path = ../Testbed/Tests/VQASimulations;
+			name = SVQA;
+			path = ../Testbed/Tests/SVQA;
+			sourceTree = "<group>";
+		};
+		7C52719F238A800800816DFC /* ObstructedPath */ = {
+			isa = PBXGroup;
+			children = (
+				7C5271A0238A803D00816DFC /* ObstructedPathSettings.h */,
+				7C5271A1238A815B00816DFC /* ObstructedPathSimulation.h */,
+			);
+			path = ObstructedPath;
 			sourceTree = "<group>";
 		};
 		7C92AD26234E37C40074BFB6 /* RemoveObjectSimulation */ = {
@@ -295,63 +255,7 @@
 		B42EC94E04425E0086C08F8E /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				7C4127F32348BC0B002E75BA /* VQASimulations */,
-				C93BFC4011ACE072564BB280 /* AddPair.h */,
-				B9FF76207D6B37D2BC0EDC60 /* ApplyForce.h */,
-				03368CDE156069904951531E /* BasicSliderCrank.h */,
-				66916B9C885D18CEC51241DC /* BodyTypes.h */,
-				DB0F8E88FCDB3BBA399064C8 /* Breakable.h */,
-				BCF7F6D0E31E26824A251D10 /* Bridge.h */,
-				D88C36869BF7F838DA9B9CC6 /* BulletTest.h */,
-				A83F98506BAB5A02AA4EFE90 /* Cantilever.h */,
-				9C0196A29F7268D420DF0CE2 /* Car.h */,
-				F69382DC0DA61E0EFDC2191C /* Chain.h */,
-				3FF734A8D8441A5A068B1AE8 /* CharacterCollision.h */,
-				B1367E16498363C877CA6456 /* CollisionFiltering.h */,
-				962A95687547AF9A51510BA8 /* CollisionProcessing.h */,
-				127C2708E09F7ABA67ADCD48 /* CompoundShapes.h */,
-				01DEFB022A19B3B411B54142 /* Confined.h */,
-				F526C1A4C34A15564A5867E4 /* ContinuousTest.h */,
-				59AD80861D1942385BBCE6C6 /* ConvexHull.h */,
-				AA92756EDC8BC020566AFBAE /* ConveyorBelt.h */,
-				3C70878C6E69D23EE8490DCC /* DistanceTest.h */,
-				3984524881F5367AC6940888 /* Dominos.h */,
-				4123681262EF15449FA43E52 /* DumpShell.h */,
-				ADA3590091EA613215D78F40 /* DynamicTreeTest.h */,
-				7DD68528414246DA7FE5EB68 /* EdgeShapes.h */,
-				DD6DC76005A88012ED440DA0 /* EdgeTest.h */,
-				B689455ACD9BE08CBDB7DB9A /* Gears.h */,
-				A7B7199AD9B0644C538F9FDA /* HeavyOnLight.h */,
-				728C20CE56D32900DAC0570E /* HeavyOnLightTwo.h */,
-				E0CE656606F495186DFB8BA6 /* Mobile.h */,
-				809F4D3A4EC2A0ECD5D0F37A /* MobileBalanced.h */,
-				2ED74C60F2430E1230E6B2A0 /* MotorJoint.h */,
-				E2FB3B56F525180829160196 /* OneSidedPlatform.h */,
-				F7C8B3FA4039982C84D86A3A /* Pinball.h */,
-				1CAC1956B222D88820BF2F96 /* PolyCollision.h */,
-				D13B96C694A75878D34AFD06 /* PolyShapes.h */,
-				C570280EE73BD54023F0FE4E /* Prismatic.h */,
-				61A9DC92AA1AC0C4EEB992D2 /* Pulleys.h */,
-				2A0A4E22727B3254B71A0462 /* Pyramid.h */,
-				3C7083C484E167F6C9803A04 /* RayCast.h */,
-				57DA3B228014F3D467B08162 /* Revolute.h */,
-				24F08BA2C7DEB254570491E2 /* Rope.h */,
-				0E5B10AA3026BDDC6CDBE6EA /* RopeJoint.h */,
-				7AE379EA3E4F3B9C7CF2E02A /* SensorTest.h */,
-				84620CEEA62DBA20E2E2E32E /* ShapeCast.h */,
-				D19E7A200397C4D27D770060 /* ShapeEditing.h */,
-				E7C91632FEDBB164EEF7AC72 /* Skier.h */,
-				D4CFB9DA2232B00C9851B01A /* SliderCrank.h */,
-				6BBDE4D0B920DB022F3FDB10 /* SphereStack.h */,
-				94D8E1145844A2C696E84754 /* TheoJansen.h */,
-				C77B9A18DE8E354ACEAA3058 /* Tiles.h */,
-				1151223A434A6CECBD29A87A /* TimeOfImpact.h */,
-				190A04CC617AE8FEA619BB0C /* Tumbler.h */,
-				DEADECF2C2F4F52446E22332 /* VaryingFriction.h */,
-				D9A3FD0A71F0E2BCA037E34A /* VaryingRestitution.h */,
-				4A09E196DF80A0C84E1CF7D6 /* VerticalStack.h */,
-				B76D0CB2BADDDEE43C4A82F2 /* Web.h */,
-				E2FB7D5E14F4C8108ED4039E /* chainProblem.h */,
+				7C4127F32348BC0B002E75BA /* SVQA */,
 			);
 			name = Tests;
 			sourceTree = "<group>";

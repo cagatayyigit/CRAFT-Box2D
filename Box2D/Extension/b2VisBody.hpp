@@ -28,15 +28,6 @@ public:
     void setTexture(b2VisTexture::Ptr tex);
     bool hasAttachedTexture() const;
     
-protected:
-    friend class b2VisWorld;
-    
-    //Sets previous body of this
-    void setPrevBody(b2VisBody* body);
-    
-    //Sets next body of this
-    void setNextBody(b2VisBody* body);
-    
 private:
     b2Color m_Color;
     b2VisTexture::Ptr m_pTexture;

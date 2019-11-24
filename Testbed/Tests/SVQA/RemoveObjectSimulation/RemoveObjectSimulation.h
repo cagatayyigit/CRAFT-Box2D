@@ -16,14 +16,11 @@
 #include <iostream>
 #include "JSONHelper.h"
 #include "SceneState.h"
+#include "SimulationBase.h"
 
-namespace ips
+namespace svqa
 {
-    #define SET_FILE_OUTPUT_FALSE ((SimulationRenderer*)((b2VisWorld*)m_world)->getRenderer())->setFileOutput(false);
-    #define SET_FILE_OUTPUT_TRUE(X) ((SimulationRenderer*)((b2VisWorld*)m_world)->getRenderer())->setFileOutput((X), m_pSettings->bufferWidth, m_pSettings->bufferHeight);
-    #define FINISH_SIMULATION {((SimulationRenderer*)((b2VisWorld*)m_world)->getRenderer())->Finish(); exit(0);};
-
-    class RemoveObjectSimulation : public Simulation
+    class RemoveObjectSimulation : public SimulationBase
     {
     public:
         typedef std::shared_ptr<RemoveObjectSimulation> Ptr;
@@ -36,20 +33,18 @@ namespace ips
             SS_SEGMENTATION_SCREENSHOT = 3
         };
         
-        RemoveObjectSimulation(RemoveObjectSimulationSettings::Ptr _settings_)
+        RemoveObjectSimulation(RemoveObjectSimulationSettings::Ptr _settings_) : SimulationBase(_settings_)
         {
-            m_pSettings = _settings_;
-            m_nNumberOfObjects = m_pSettings->numberOfObjects;
+            m_nNumberOfObjects = _settings_->numberOfObjects;
             m_nSimulationState = SS_CREATE_SCENE;
-            m_nDistinctColorUsed = 8;
             m_nDistinctMaterialsUsed = 2;
             m_nDistinctObjectsUsed = 2;
             m_vInitialDropVelocity = b2Vec2(0.0f, -20.0f);
             
             SimulationObject largestObject(SimulationObject::BIG_CUBE);
             
-            m_vThrowMin = b2Vec2(-10.0f, largestObject.GetEdgeLength() * 5);
-            m_vThrowMax = b2Vec2(-5.0f, largestObject.GetEdgeLength() * 10);
+            m_vThrowMin = b2Vec2(-10.0f, 20.0f);
+            m_vThrowMax = b2Vec2(-5.0f, 40.0f);
             
             {
                 b2BodyDef bd;
@@ -63,7 +58,7 @@ namespace ips
             SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
         }
 
-        void Step(Settings* settings)
+        virtual void Step(SettingsBase* settings) override
         {
             const bool stable = isSceneStable();
             const bool addObject = stable && m_nNumberOfObjects>0;
@@ -83,14 +78,17 @@ namespace ips
             }
         }
         
+        virtual SimulationID getIdentifier() override
+        {
+            return SimulationID::ID_RemoveObject;
+        }
+        
     private:
-        RemoveObjectSimulationSettings::Ptr m_pSettings;
         int m_nNumberOfObjects;
         SimulationState m_nSimulationState;
         b2Vec2 m_vThrowMin;
         b2Vec2 m_vThrowMax;
         b2Vec2 m_vInitialDropVelocity;
-        unsigned short m_nDistinctColorUsed;
         unsigned short m_nDistinctMaterialsUsed;
         unsigned short m_nDistinctObjectsUsed;
         SceneState state;
@@ -103,9 +101,7 @@ namespace ips
             int objectIndex = randWithBound(m_nDistinctObjectsUsed);
             SimulationObject object = SimulationObject((SimulationObject::TYPE) objectIndex);
         
-            float32 a = object.GetEdgeLength();
-            b2VisPolygonShape shape;
-            shape.SetAsBox(a, a);
+            b2VisPolygonShape shape = object.getShape();
             
             int materialIndex = randWithBound(m_nDistinctMaterialsUsed);
             SimulationMaterial mat = SimulationMaterial((SimulationMaterial::TYPE) materialIndex);
@@ -115,7 +111,7 @@ namespace ips
             bd.position = b2Vec2(posX, posY);
             bd.linearVelocity = m_vInitialDropVelocity;
             BODY* body = (BODY*) m_world->CreateBody(&bd);
-            body->CreateFixture(&shape, mat.GetDensity());
+            body->CreateFixture(&shape, mat.getDensity());
             
     #if !USE_DEBUG_DRAW
             int colorIndex = randWithBound(m_nDistinctColorUsed);
@@ -123,37 +119,8 @@ namespace ips
             body->setTexture(mat.getTexture());
             body->setColor(col.GetColor(mat.type));
             
-             state.add(ObjectState(body, mat.type, col.type, object.type));
+            state.add(ObjectState(body, mat.type, col.type, object.type));
     #endif
-        }
-        
-        int randWithBound(const int& bound)
-        {
-            return (rand() & (RAND_LIMIT)) % bound;
-        }
-        
-        bool isSceneStable()
-        {
-            b2Body* bodies = m_world->GetBodyList();
-            for (b2Body* b = bodies; b; b = b->GetNext())
-            {
-                if(b->IsAwake() && !(b->GetType() == b2_staticBody)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-    public:
-        
-        RemoveObjectSimulationSettings::Ptr getSettings()
-        {
-            return m_pSettings;
-        }
-        
-        static std::string name()
-        {
-            return "RemoveObjectSimulation";
         }
     };
 }

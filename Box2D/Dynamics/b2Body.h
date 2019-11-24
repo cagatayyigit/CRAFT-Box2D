@@ -392,6 +392,7 @@ public:
 protected:
 
 	friend class b2World;
+    friend class b2VisWorld;
 	friend class b2Island;
 	friend class b2ContactManager;
 	friend class b2ContactSolver;

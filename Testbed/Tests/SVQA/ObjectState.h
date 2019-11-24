@@ -73,11 +73,8 @@ public:
         j.at("materialType").get_to(materialType);
         j.at("colorType").get_to(colorType);
         j.at("objectType").get_to(objectType);
-                
             
-        float32 a = SimulationObject(objectType).GetEdgeLength();
-        b2VisPolygonShape shape;
-        shape.SetAsBox(a, a);
+        b2VisPolygonShape shape = SimulationObject(objectType).getShape();
         
         SimulationMaterial mat = SimulationMaterial(materialType);
         
@@ -91,7 +88,7 @@ public:
         bd.angularDamping = angDamp;
         
         body = (BODY*) toWorld->CreateBody(&bd);
-        body->CreateFixture(&shape, mat.GetDensity());
+        body->CreateFixture(&shape, mat.getDensity());
         body->SetActive(active);
         
 #if !USE_DEBUG_DRAW

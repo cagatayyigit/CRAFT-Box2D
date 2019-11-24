@@ -44,7 +44,7 @@
 #include <stdlib.h>
 
 class Simulation;
-struct Settings;
+struct SettingsBase;
 
 typedef Simulation* TestCreateFcn();
 
@@ -70,11 +70,11 @@ inline float32 RandomFloat(float32 lo, float32 hi)
 }
 
 /// Test settings. Some can be controlled in the GUI.
-struct Settings
+struct SettingsBase
 {
-    typedef std::shared_ptr<Settings> Ptr;
+    typedef std::shared_ptr<SettingsBase> Ptr;
     
-	Settings()
+	SettingsBase()
 	{
 		hz = 60.0f;
 		velocityIterations = 8;
@@ -99,7 +99,7 @@ struct Settings
         bufferHeight = 320;
 	}
     
-    virtual ~Settings()
+    virtual ~SettingsBase()
     {
         
     }
@@ -169,7 +169,7 @@ public:
 	virtual ~Simulation();
 
 	void DrawTitle(const char *string);
-	virtual void Step(Settings* settings);
+	virtual void Step(SettingsBase* settings);
 	virtual void Keyboard(int key) { B2_NOT_USED(key); }
 	virtual void KeyboardUp(int key) { B2_NOT_USED(key); }
 	void ShiftMouseDown(const b2Vec2& p);

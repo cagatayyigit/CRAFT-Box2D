@@ -75,7 +75,7 @@ public:
 	/// is retained. This function is locked during callbacks.
 	/// @warning This automatically deletes all associated shapes and joints.
 	/// @warning This function is locked during callbacks.
-	void DestroyBody(b2Body* body);
+	virtual void DestroyBody(b2Body* body);
 
 	/// Create a joint to constrain bodies together. No reference to the definition
 	/// is retained. This may cause the connected bodies to cease colliding.

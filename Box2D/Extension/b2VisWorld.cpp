@@ -6,14 +6,25 @@
 //
 
 #include "b2VisWorld.hpp"
+#include "Box2D/Extension/b2VisBody.hpp"
+#include "Box2D/Extension/b2VisPolygonShape.hpp"
+#include "Box2D/Dynamics/b2World.h"
 #include "Box2D/Dynamics/b2Body.h"
 #include "Box2D/Dynamics/b2Fixture.h"
 #include "Box2D/Dynamics/b2Island.h"
+#include "Box2D/Dynamics/Joints/b2PulleyJoint.h"
+#include "Box2D/Dynamics/Contacts/b2Contact.h"
+#include "Box2D/Dynamics/Contacts/b2ContactSolver.h"
+#include "Box2D/Collision/b2Collision.h"
+#include "Box2D/Collision/b2BroadPhase.h"
+#include "Box2D/Collision/Shapes/b2CircleShape.h"
+#include "Box2D/Collision/Shapes/b2EdgeShape.h"
+#include "Box2D/Collision/Shapes/b2ChainShape.h"
+#include "Box2D/Collision/Shapes/b2PolygonShape.h"
+#include "Box2D/Collision/b2TimeOfImpact.h"
 #include "Box2D/Common/b2Draw.h"
 #include "Box2D/Common/b2Timer.h"
-#include "Box2D/Extension/b2VisBody.hpp"
-#include "Box2D/Extension/b2VisPolygonShape.hpp"
-#include "Box2D/Dynamics/b2Fixture.h"
+
 
 b2VisWorld::b2VisWorld(const b2Vec2& gravity) : b2World(gravity)
 {
@@ -33,20 +44,101 @@ b2Body* b2VisWorld::CreateBody(const b2BodyDef* def)
         return nullptr;
     }
 
-    void* mem = m_blockAllocator.Allocate(sizeof(b2VisWorld));
+    void* mem = m_blockAllocator.Allocate(sizeof(b2VisBody));
     b2VisBody* b = new (mem) b2VisBody(def, this);
 
     // Add to world doubly linked list.
-    b->setPrevBody(nullptr);
-    b->setNextBody((b2VisBody*)m_bodyList);
+    b->m_prev = nullptr;
+    b->m_next = m_bodyList;
     if (m_bodyList)
     {
-        ((b2VisBody*) m_bodyList)->setPrevBody(b);
+        m_bodyList->m_prev = b;
     }
     m_bodyList = b;
     ++m_bodyCount;
 
     return b;
+}
+
+void b2VisWorld::DestroyBody(b2Body* b)
+{
+    b2Assert(m_bodyCount > 0);
+    b2Assert(IsLocked() == false);
+    if (IsLocked())
+    {
+        return;
+    }
+
+    // Delete the attached joints.
+    b2JointEdge* je = b->m_jointList;
+    while (je)
+    {
+        b2JointEdge* je0 = je;
+        je = je->next;
+
+        if (m_destructionListener)
+        {
+            m_destructionListener->SayGoodbye(je0->joint);
+        }
+
+        DestroyJoint(je0->joint);
+
+        b->m_jointList = je;
+    }
+    b->m_jointList = nullptr;
+
+    // Delete the attached contacts.
+    b2ContactEdge* ce = b->m_contactList;
+    while (ce)
+    {
+        b2ContactEdge* ce0 = ce;
+        ce = ce->next;
+        m_contactManager.Destroy(ce0->contact);
+    }
+    b->m_contactList = nullptr;
+
+    // Delete the attached fixtures. This destroys broad-phase proxies.
+    b2Fixture* f = b->m_fixtureList;
+    while (f)
+    {
+        b2Fixture* f0 = f;
+        f = f->m_next;
+
+        if (m_destructionListener)
+        {
+            m_destructionListener->SayGoodbye(f0);
+        }
+
+        f0->DestroyProxies(&m_contactManager.m_broadPhase);
+        f0->Destroy(&m_blockAllocator);
+        f0->~b2Fixture();
+        m_blockAllocator.Free(f0, sizeof(b2Fixture));
+
+        b->m_fixtureList = f;
+        b->m_fixtureCount -= 1;
+    }
+    b->m_fixtureList = nullptr;
+    b->m_fixtureCount = 0;
+
+    // Remove world body list.
+    if (b->m_prev)
+    {
+        b->m_prev->m_next = b->m_next;
+    }
+
+    if (b->m_next)
+    {
+        b->m_next->m_prev = b->m_prev;
+    }
+
+    if (b == m_bodyList)
+    {
+        m_bodyList = b->m_next;
+    }
+
+    --m_bodyCount;
+    ((b2VisBody*)b)->~b2VisBody();
+    m_blockAllocator.Free(b, sizeof(b2VisBody));
 }
 
 void b2VisWorld::DrawTexturedShape(b2Fixture* fixture, const b2Transform& xf, const b2Color& color, const uint32& glTextureId, const int& textureMaterialId)
@@ -105,7 +197,11 @@ void b2VisWorld::DrawDebugData()
                 }
                 else if (b->GetType() == b2_staticBody)
                 {
-                    DrawShape(f, xf, b2Color(0.5f, 0.9f, 0.5f));
+                    if(texture) {
+                        DrawTexturedShape(f, xf, b->getColor(), texture->getTextureId(), texture->getMaterialIndex());
+                    } else {
+                        DrawShape(f, xf, b2Color(0.5f, 0.9f, 0.5f));
+                    }
                 }
                 else if (b->GetType() == b2_kinematicBody)
                 {

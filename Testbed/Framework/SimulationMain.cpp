@@ -69,7 +69,7 @@ static void sResizeWindow(GLFWwindow*, int width, int height)
 }
 
 //
-static void sSimulate(Simulation* simulation, Settings* settings)
+static void sSimulate(Simulation* simulation, SettingsBase* settings)
 {
     glEnable(GL_DEPTH_TEST);
     simulation->Step(settings);
@@ -84,7 +84,7 @@ void glfwErrorCallback(int error, const char *description)
     fprintf(stderr, "GLFW error occured. Code: %d. Description: %s\n", error, description);
 }
 
-void renderLoop(Simulation* simulation, Settings* settings)
+void renderLoop(Simulation* simulation, SettingsBase* settings)
 {
     while (!glfwWindowShouldClose(mainWindow))
     {
@@ -111,7 +111,7 @@ void renderLoop(Simulation* simulation, Settings* settings)
 int main(int, char**)
 {
     std::string controllerJSONPath = "controller.json";
-    const ips::RemoveObjectSimulation::Ptr& simulation = ips::parse(controllerJSONPath);
+    const svqa::SimulationBase::Ptr& simulation = svqa::parse(controllerJSONPath);
     const auto& settings = simulation->getSettings();
 
     glfwSetErrorCallback(glfwErrorCallback);

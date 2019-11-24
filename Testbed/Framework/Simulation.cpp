@@ -267,7 +267,7 @@ void Simulation::LaunchBomb(const b2Vec2& position, const b2Vec2& velocity)
 	m_bomb->CreateFixture(&fd);
 }
 
-void Simulation::Step(Settings* settings)
+void Simulation::Step(SettingsBase* settings)
 {
 	float32 timeStep = settings->hz > 0.0f ? 1.0f / settings->hz : float32(0.0f);
 

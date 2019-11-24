@@ -19,10 +19,16 @@ public:
     /// Create a rigid body given a definition. No reference to the definition
     /// is retained.
     /// @warning This function is locked during callbacks.
-    virtual b2Body* CreateBody(const b2BodyDef* def);
+    virtual b2Body* CreateBody(const b2BodyDef* def) override;
+    
+    /// Destroy a rigid body given a definition. No reference to the definition
+    /// is retained. This function is locked during callbacks.
+    /// @warning This automatically deletes all associated shapes and joints.
+    /// @warning This function is locked during callbacks.
+    virtual void DestroyBody(b2Body* body) override;
     
     /// Call this to draw shapes and other debug draw data. This is intentionally non-const.
-    virtual void DrawDebugData();
+    virtual void DrawDebugData() override;
     
     virtual void DrawTexturedShape(b2Fixture* fixture, const b2Transform& xf, const b2Color& color, const uint32& glTextureId, const int& textureMaterialId);
     

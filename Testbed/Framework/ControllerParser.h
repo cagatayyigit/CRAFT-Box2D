@@ -8,22 +8,26 @@
 #ifndef ControllerParser_h
 #define ControllerParser_h
 
-#include "RemoveObjectSimulationSettings.h"
 #include "RemoveObjectSimulation.h"
+#include "ObstructedPathSimulation.h"
 #include "JSONHelper.h"
 
-namespace ips {
-    RemoveObjectSimulation::Ptr parse(const std::string& inputFile)
+namespace svqa {
+    SimulationBase::Ptr parse(const std::string& inputFile)
     {
-        IPSSettings set;
+        Settings set;
         json j;
         bool fileLoadRes = JSONHelper::loadJSON(j, inputFile);
         if(fileLoadRes) {
             set.from_json(j);
-            if(set.simulationName == RemoveObjectSimulation::name()) {
+            if(set.simulationID == SimulationID::ID_RemoveObject) {
                 RemoveObjectSimulationSettings::Ptr setPtr = std::make_shared<RemoveObjectSimulationSettings>();
                 setPtr->from_json(j);
                 return std::make_shared<RemoveObjectSimulation>(setPtr);
+            } else if(set.simulationID == SimulationID::ID_ObstructedPath) {
+                ObstructedPathSettings::Ptr setPtr = std::make_shared<ObstructedPathSettings>();
+                setPtr->from_json(j);
+                return std::make_shared<ObstructedPathSimulation>(setPtr);
             }
         }
         return nullptr;

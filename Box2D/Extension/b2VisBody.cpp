@@ -28,16 +28,6 @@ void b2VisBody::setColor(const b2Color& col)
     m_Color = col;
 }
 
-void b2VisBody::setPrevBody(b2VisBody* body)
-{
-    m_prev = body;
-}
-
-void b2VisBody::setNextBody(b2VisBody* body)
-{
-    m_next = body;
-}
-
 b2VisTexture::Ptr b2VisBody::getTexture() const
 {
     return m_pTexture;

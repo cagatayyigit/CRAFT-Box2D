@@ -26,7 +26,7 @@ public:
         type = t;
     }
 
-    float GetDensity()
+    float getDensity()
     {
         if(type == METAL)
         {
