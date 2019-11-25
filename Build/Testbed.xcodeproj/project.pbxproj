@@ -104,6 +104,8 @@
 		7C92AD25234E37500074BFB6 /* SimulationObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationObject.h; sourceTree = "<group>"; };
 		7C92AD2F234E40A20074BFB6 /* rubber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rubber.png; sourceTree = "<group>"; };
 		7C92AD31234E40D00074BFB6 /* metal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = metal.png; sourceTree = "<group>"; };
+		7C94932E238C56AF00BE6CE3 /* PendulumObstaclesSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PendulumObstaclesSettings.h; sourceTree = "<group>"; };
+		7C94932F238C570E00BE6CE3 /* PendulumObstaclesSimulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PendulumObstaclesSimulation.h; sourceTree = "<group>"; };
 		7CC417F1234A0AB200CD88E7 /* SimulationMaterial.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SimulationMaterial.cpp; sourceTree = "<group>"; };
 		85B39C4ACE24807C12C3528A /* imgui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = imgui.cpp; path = ../Testbed/imgui/imgui.cpp; sourceTree = "<group>"; };
 		8799E40B80FFE57D749B424B /* vulkan.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vulkan.c; path = ../Testbed/glfw/vulkan.c; sourceTree = "<group>"; };
@@ -200,8 +202,9 @@
 				7C48C729235C6F5B00FFB396 /* ObjectState.h */,
 				7C48C72A235C819300FFB396 /* SceneState.h */,
 				7C5271A2238A828B00816DFC /* SimulationBase.h */,
+				7C94932D238C566F00BE6CE3 /* PendulumObstacles */,
 				7C52719F238A800800816DFC /* ObstructedPath */,
-				7C92AD26234E37C40074BFB6 /* RemoveObjectSimulation */,
+				7C92AD26234E37C40074BFB6 /* RemoveObject */,
 				7C5271A3238A88C500816DFC /* SimulationID.h */,
 			);
 			name = SVQA;
@@ -217,13 +220,22 @@
 			path = ObstructedPath;
 			sourceTree = "<group>";
 		};
-		7C92AD26234E37C40074BFB6 /* RemoveObjectSimulation */ = {
+		7C92AD26234E37C40074BFB6 /* RemoveObject */ = {
 			isa = PBXGroup;
 			children = (
 				7C3A01F62343BD3A00E4E400 /* RemoveObjectSimulation.h */,
 				7C48C727235C5C7300FFB396 /* RemoveObjectSimulationSettings.h */,
 			);
-			path = RemoveObjectSimulation;
+			path = RemoveObject;
+			sourceTree = "<group>";
+		};
+		7C94932D238C566F00BE6CE3 /* PendulumObstacles */ = {
+			isa = PBXGroup;
+			children = (
+				7C94932E238C56AF00BE6CE3 /* PendulumObstaclesSettings.h */,
+				7C94932F238C570E00BE6CE3 /* PendulumObstaclesSimulation.h */,
+			);
+			path = PendulumObstacles;
 			sourceTree = "<group>";
 		};
 		7CC417DC2349F57900CD88E7 /* Textures */ = {

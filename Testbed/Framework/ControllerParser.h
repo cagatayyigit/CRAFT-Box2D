@@ -10,6 +10,7 @@
 
 #include "RemoveObjectSimulation.h"
 #include "ObstructedPathSimulation.h"
+#include "PendulumObstaclesSimulation.h"
 #include "JSONHelper.h"
 
 namespace svqa {
@@ -28,6 +29,10 @@ namespace svqa {
                 ObstructedPathSettings::Ptr setPtr = std::make_shared<ObstructedPathSettings>();
                 setPtr->from_json(j);
                 return std::make_shared<ObstructedPathSimulation>(setPtr);
+            } else if(set.simulationID == SimulationID::ID_PendulumObstacles) {
+                PendulumObstaclesSettings::Ptr setPtr = std::make_shared<PendulumObstaclesSettings>();
+                setPtr->from_json(j);
+                return std::make_shared<PendulumObstaclesSimulation>(setPtr);
             }
         }
         return nullptr;

@@ -22,7 +22,9 @@ public:
         SMALL_TRIANGLE = 3,
         BIG_TRIANGLE = 4,
         SMALL_HEXAGON = 5,
-        BIG_HEXAGON = 6
+        BIG_HEXAGON = 6,
+        WALL_PIN = 7,
+        ROPE_UNIT = 8
     };
 
     SimulationObject(TYPE t)
@@ -47,6 +49,10 @@ public:
                 return getPolygon(2.0f, 3);
             case BIG_TRIANGLE:
                 return getPolygon(3.0f, 3);
+            case WALL_PIN:
+                return getPolygon(0.5f, 4);
+            case ROPE_UNIT:
+                return getPolygon(0.1f, 4);
             
             default:
                 break;

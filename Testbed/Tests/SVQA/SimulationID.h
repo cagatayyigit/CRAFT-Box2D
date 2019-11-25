@@ -11,7 +11,8 @@
 enum SimulationID
 {
     ID_RemoveObject = 0,
-    ID_ObstructedPath = 1
+    ID_ObstructedPath = 1,
+    ID_PendulumObstacles = 2
 };
 
 #endif /* SimulationID_h */

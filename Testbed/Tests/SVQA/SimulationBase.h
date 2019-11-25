@@ -51,7 +51,7 @@ namespace svqa {
             return (rand() & (RAND_LIMIT)) % bound;
         }
         
-        bool isSceneStable()
+        virtual bool isSceneStable()
         {
             b2Body* bodies = m_world->GetBodyList();
             for (b2Body* b = bodies; b; b = b->GetNext())

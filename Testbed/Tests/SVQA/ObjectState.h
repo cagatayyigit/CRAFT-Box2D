@@ -94,7 +94,7 @@ public:
 #if !USE_DEBUG_DRAW
         SimulationColor col = SimulationColor(colorType);
         body->setTexture(mat.getTexture());
-        body->setColor(col.GetColor(mat.type));
+        body->setColor(col.GetColor());
 #endif
     }
     

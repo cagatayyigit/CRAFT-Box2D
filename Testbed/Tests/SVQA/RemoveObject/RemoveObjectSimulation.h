@@ -117,7 +117,7 @@ namespace svqa
             int colorIndex = randWithBound(m_nDistinctColorUsed);
             SimulationColor col = SimulationColor((SimulationColor::TYPE) colorIndex);
             body->setTexture(mat.getTexture());
-            body->setColor(col.GetColor(mat.type));
+            body->setColor(col.GetColor());
             
             state.add(ObjectState(body, mat.type, col.type, object.type));
     #endif

@@ -205,27 +205,39 @@ void b2VisWorld::DrawDebugData()
                 }
                 else if (b->GetType() == b2_kinematicBody)
                 {
-                    DrawTexturedShape(f, xf, b2Color(0.5f, 0.5f, 0.9f), texture->getTextureId(), texture->getMaterialIndex());
+                    if(texture) {
+                          DrawTexturedShape(f, xf, b->getColor(), texture->getTextureId(), texture->getMaterialIndex());
+                      } else {
+                          DrawShape(f, xf, b2Color(0.5f, 0.5f, 0.9f));
+                      }
                 }
                 else if (b->IsAwake() == false)
                 {
-                    DrawTexturedShape(f, xf, b->getColor(), texture->getTextureId(), texture->getMaterialIndex());
+                    if(texture) {
+                        DrawTexturedShape(f, xf, b->getColor(), texture->getTextureId(), texture->getMaterialIndex());
+                    } else {
+                        DrawShape(f, xf, b->getColor());
+                    }
                 }
                 else
                 {
-                    DrawTexturedShape(f, xf, b2Color(0.9f, 0.7f, 0.7f), texture->getTextureId(), texture->getMaterialIndex());
+                    if(texture) {
+                        DrawTexturedShape(f, xf, b2Color(0.9f, 0.7f, 0.7f), texture->getTextureId(), texture->getMaterialIndex());
+                    } else {
+                        DrawShape(f, xf, b->getColor());
+                    }
                 }
             }
         }
     }
 
-//    if (flags & b2Draw::e_jointBit)
-//    {
-//        for (b2Joint* j = m_jointList; j; j = j->GetNext())
-//        {
-//            DrawJoint(j);
-//        }
-//    }
+    if (flags & b2Draw::e_jointBit)
+    {
+        for (b2Joint* j = m_jointList; j; j = j->GetNext())
+        {
+            DrawJoint(j);
+        }
+    }
 //
 //    if (flags & b2Draw::e_pairBit)
 //    {
