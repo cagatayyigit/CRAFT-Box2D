@@ -74,7 +74,7 @@ public:
         j.at("colorType").get_to(colorType);
         j.at("objectType").get_to(objectType);
             
-        b2VisPolygonShape shape = SimulationObject(objectType).getShape();
+        ShapePtr shape = SimulationObject(objectType).getShape();
         
         SimulationMaterial mat = SimulationMaterial(materialType);
         
@@ -88,7 +88,7 @@ public:
         bd.angularDamping = angDamp;
         
         body = (BODY*) toWorld->CreateBody(&bd);
-        body->CreateFixture(&shape, mat.getDensity());
+        body->CreateFixture(shape.get(), mat.getDensity());
         body->SetActive(active);
         
 #if !USE_DEBUG_DRAW

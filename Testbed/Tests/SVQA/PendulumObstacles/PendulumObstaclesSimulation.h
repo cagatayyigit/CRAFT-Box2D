@@ -102,7 +102,7 @@ namespace svqa {
         BODY* createRopeUnit(const b2Vec2& pos)
         {
             SimulationObject object = SimulationObject(SimulationObject::ROPE_UNIT);
-            b2VisPolygonShape shape = object.getShape();
+            ShapePtr shape = object.getShape();
             
             SimulationMaterial mat = SimulationMaterial(SimulationMaterial::RUBBER);
             
@@ -112,11 +112,11 @@ namespace svqa {
             bd.position = pos;
             
             BODY* pin = (BODY*) m_world->CreateBody(&bd);
-            b2FixtureDef fd;
-            fd.shape = &shape;
-            fd.density = 1.0f; //Kind of elasticity of the rope
-            fd.friction = 0.2f;
-            pin->CreateFixture(&shape, 50.0f);
+//            b2FixtureDef fd;
+//            fd.shape = shape.get();
+//            fd.density = 1.0f; //Kind of elasticity of the rope
+//            fd.friction = 0.2f;
+            pin->CreateFixture(shape.get(), 50.0f);
             
             SimulationColor col = SimulationColor(SimulationColor::GRAY);
             pin->setTexture(mat.getTexture());
@@ -128,7 +128,7 @@ namespace svqa {
         BODY* createPin()
         {
             SimulationObject object = SimulationObject(SimulationObject::WALL_PIN);
-            b2VisPolygonShape shape = object.getShape();
+            ShapePtr shape = object.getShape();
             
             float posX, posY;
             posX = RandomFloat(m_vObstacleMin.x, m_vObstacleMax.x);
@@ -145,7 +145,7 @@ namespace svqa {
             BODY* weight = (BODY*) m_world->CreateBody(&bd);
             
             b2FixtureDef fd;
-            fd.shape = &shape;
+            fd.shape = shape.get();
             fd.density = mat.getDensity();
             fd.friction = 0.2f;
             weight->CreateFixture(&fd);
@@ -190,7 +190,7 @@ namespace svqa {
         bool createObstacle()
         {
             SimulationObject object = SimulationObject(SimulationObject::WALL_PIN);
-            b2VisPolygonShape pin = object.getShape();
+            b2VisPolygonShape pin = *(std::static_pointer_cast<b2VisPolygonShape>(object.getShape()));
             const float edgeLength = fabs(pin.m_vertices[0].x - pin.m_vertices[1].x);
             
             BODY* pin1 = createPin();
@@ -241,22 +241,6 @@ namespace svqa {
             return true;
         }
         
-        void createBoundaries()
-        {
-            std::vector<std::pair<b2Vec2, b2Vec2>> boundaries;
-            boundaries.push_back(std::make_pair(b2Vec2(-40.0f, 0.0f), b2Vec2(40.0f, 0.0f)));
-            boundaries.push_back(std::make_pair(b2Vec2(-30.0f, 0.0f), b2Vec2(-30.0f, 50.0f)));
-            boundaries.push_back(std::make_pair(b2Vec2(30.0f, 0.0f), b2Vec2(30.0f, 50.0f)));
-            
-            for(auto&& bound: boundaries) {
-                b2BodyDef bd;
-                BODY* boundBody =(BODY*) m_world->CreateBody(&bd);
-                b2EdgeShape shape;
-                shape.Set(bound.first, bound.second);
-                boundBody->CreateFixture(&shape, 0.0f);
-            }
-        }
-        
         bool m_bObstaclesCreated;
         int m_nNumberOfObjects;
         int m_nNumberOfObstacles;
@@ -280,7 +264,7 @@ namespace svqa {
             int objectIndex = randWithBound(m_vSimulationObjectTypes.size());
             SimulationObject object = SimulationObject(m_vSimulationObjectTypes[objectIndex]);
         
-            b2VisPolygonShape shape = object.getShape();
+            ShapePtr shape = object.getShape();
             
             SimulationMaterial mat = SimulationMaterial(SimulationMaterial::METAL);
             
@@ -289,7 +273,7 @@ namespace svqa {
             bd.position = b2Vec2(posX, posY);
             bd.linearVelocity = m_vInitialDropVelocity;
             BODY* body = (BODY*) m_world->CreateBody(&bd);
-            body->CreateFixture(&shape, mat.getDensity());
+            body->CreateFixture(shape.get(), mat.getDensity());
             
             int colorIndex = randWithBound(m_nDistinctColorUsed);
             SimulationColor col = SimulationColor((SimulationColor::TYPE) colorIndex);

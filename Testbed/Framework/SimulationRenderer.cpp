@@ -32,6 +32,8 @@ extern "C" {
 #if USE_DEBUG_DRAW
 #else
 
+#define TEXTURE_SQUARE_EDGE_LENGTH 7.5
+
 SimulationRenderer g_debugDraw;
 
 //
@@ -626,7 +628,7 @@ void SimulationRenderer::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, 
     }
 }
 
-void SimulationRenderer::DrawTexturedSolidPolygon(const b2Vec2* vertices, const b2Vec2* textureCoordinates, uint32 glTexId, int matTexId, int32 vertexCount, const b2Color& color)
+void SimulationRenderer::DrawTexturedPolygon(const b2Vec2* vertices, const b2Vec2* textureCoordinates, int32 vertexCount, const b2Color& color, uint32 glTexId, int matTexId)
 {
     const float transConst = m_bIsDebugMode ? 0.5 : 1.0;
     b2Color fillColor(transConst * color.r, transConst * color.g, transConst * color.b, transConst);
@@ -689,6 +691,56 @@ void SimulationRenderer::DrawCircle(const b2Vec2& center, float32 radius, const 
     for (int32 i = 0; i < k_segments; ++i)
     {
         // Perform rotation to avoid additional trigonometry.
+        b2Vec2 r2;
+        r2.x = cosInc * r1.x - sinInc * r1.y;
+        r2.y = sinInc * r1.x + cosInc * r1.y;
+        b2Vec2 v2 = center + radius * r2;
+        m_lines->Vertex(v1, color);
+        m_lines->Vertex(v2, color);
+        r1 = r2;
+        v1 = v2;
+    }
+}
+
+void SimulationRenderer::DrawTexturedCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color, uint32 glTexId, int matTexId)
+{
+    //TO DO: Open This by calculating texture coordinates
+    
+    const float32 k_segments = 16.0f;
+    const float32 k_increment = 2.0f * b2_pi / k_segments;
+    float32 sinInc = sinf(k_increment);
+    float32 cosInc = cosf(k_increment);
+    b2Vec2 v0 = center;
+    b2Vec2 r1(cosInc, sinInc);
+    b2Vec2 v1 = center + radius * r1;
+    b2Color fillColor(0.5f * color.r, 0.5f * color.g, 0.5f * color.b, 0.5f);
+    
+    m_triangles->m_textureIds[matTexId] = glTexId;
+    
+    for (int32 i = 0; i < k_segments; ++i)
+    {
+        // Perform rotation to avoid additional trigonometry.
+        b2Vec2 r2;
+        r2.x = cosInc * r1.x - sinInc * r1.y;
+        r2.y = sinInc * r1.x + cosInc * r1.y;
+        b2Vec2 v2 = center + radius * r2;
+        
+        b2Vec2 t0 = b2Vec2(v0.x / TEXTURE_SQUARE_EDGE_LENGTH, v0.y / TEXTURE_SQUARE_EDGE_LENGTH);
+        b2Vec2 t1 = b2Vec2(v1.x / TEXTURE_SQUARE_EDGE_LENGTH, v1.y / TEXTURE_SQUARE_EDGE_LENGTH);
+        b2Vec2 t2 = b2Vec2(v2.x / TEXTURE_SQUARE_EDGE_LENGTH, v2.y / TEXTURE_SQUARE_EDGE_LENGTH);
+        
+        
+        m_triangles->Vertex(v0, fillColor, t0, matTexId);
+        m_triangles->Vertex(v1, fillColor, t1, matTexId);
+        m_triangles->Vertex(v2, fillColor, t2, matTexId);
+        r1 = r2;
+        v1 = v2;
+    }
+
+    r1.Set(1.0f, 0.0f);
+    v1 = center + radius * r1;
+    for (int32 i = 0; i < k_segments; ++i)
+    {
         b2Vec2 r2;
         r2.x = cosInc * r1.x - sinInc * r1.y;
         r2.y = sinInc * r1.x + cosInc * r1.y;

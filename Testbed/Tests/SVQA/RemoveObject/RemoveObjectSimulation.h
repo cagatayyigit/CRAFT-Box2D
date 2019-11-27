@@ -101,7 +101,7 @@ namespace svqa
             int objectIndex = randWithBound(m_nDistinctObjectsUsed);
             SimulationObject object = SimulationObject((SimulationObject::TYPE) objectIndex);
         
-            b2VisPolygonShape shape = object.getShape();
+            ShapePtr shape = object.getShape();
             
             int materialIndex = randWithBound(m_nDistinctMaterialsUsed);
             SimulationMaterial mat = SimulationMaterial((SimulationMaterial::TYPE) materialIndex);
@@ -111,7 +111,7 @@ namespace svqa
             bd.position = b2Vec2(posX, posY);
             bd.linearVelocity = m_vInitialDropVelocity;
             BODY* body = (BODY*) m_world->CreateBody(&bd);
-            body->CreateFixture(&shape, mat.getDensity());
+            body->CreateFixture(shape.get(), mat.getDensity());
             
     #if !USE_DEBUG_DRAW
             int colorIndex = randWithBound(m_nDistinctColorUsed);

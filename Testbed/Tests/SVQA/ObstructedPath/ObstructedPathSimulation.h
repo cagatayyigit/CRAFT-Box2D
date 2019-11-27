@@ -85,7 +85,7 @@ namespace svqa {
         bool createObstacle()
         {
             SimulationObject object = SimulationObject(SimulationObject::STANDARD_RECTANGLE);
-            b2VisPolygonShape shape = object.getShape();
+            ShapePtr shape = object.getShape();
             
             float posX = RandomFloat(m_vObstacleMin.x, m_vObstacleMax.x);
             float posY = RandomFloat(m_vObstacleMin.y, m_vObstacleMax.y);
@@ -99,7 +99,7 @@ namespace svqa {
             bd.angle = orientation;
             
             BODY* dynamicObstacle = (BODY*) m_world->CreateBody(&bd);
-            dynamicObstacle->CreateFixture(&shape, mat.getDensity());
+            dynamicObstacle->CreateFixture(shape.get(), mat.getDensity());
             m_world->Step(0.0f, 0, 0);
             
             b2ContactEdge* contact = dynamicObstacle->GetContactList();
@@ -114,7 +114,7 @@ namespace svqa {
                 bd.angle = orientation;
                 
                 BODY* staticObstacle = (BODY*) m_world->CreateBody(&bd);
-                staticObstacle->CreateFixture(&shape, mat.getDensity());
+                staticObstacle->CreateFixture(shape.get(), mat.getDensity());
                 
                 int colorIndex = randWithBound(m_nDistinctColorUsed);
                 SimulationColor col = SimulationColor((SimulationColor::TYPE) colorIndex);
@@ -124,23 +124,6 @@ namespace svqa {
                 state.add(ObjectState(staticObstacle, mat.type, col.type, object.type));
             }
             return true;
-        }
-        
-        void createBoundaries()
-        {
-            std::vector<std::pair<b2Vec2, b2Vec2>> boundaries;
-            boundaries.push_back(std::make_pair(b2Vec2(-40.0f, 0.0f), b2Vec2(40.0f, 0.0f)));
-            boundaries.push_back(std::make_pair(b2Vec2(-30.0f, 0.0f), b2Vec2(-30.0f, 50.0f)));
-            boundaries.push_back(std::make_pair(b2Vec2(30.0f, 0.0f), b2Vec2(30.0f, 50.0f)));
-            
-            for(auto&& bound: boundaries) {
-                b2BodyDef bd;
-                b2Body* boundBody = m_world->CreateBody(&bd);
-
-                b2EdgeShape shape;
-                shape.Set(bound.first, bound.second);
-                boundBody->CreateFixture(&shape, 0.0f);
-            }
         }
         
         bool m_bObstaclesCreated;
@@ -165,7 +148,7 @@ namespace svqa {
             int objectIndex = randWithBound(m_vSimulationObjectTypes.size());
             SimulationObject object = SimulationObject(m_vSimulationObjectTypes[objectIndex]);
         
-            b2VisPolygonShape shape = object.getShape();
+            ShapePtr shape = object.getShape();
             
             SimulationMaterial mat = SimulationMaterial(SimulationMaterial::RUBBER);
             
@@ -174,7 +157,7 @@ namespace svqa {
             bd.position = b2Vec2(posX, posY);
             bd.linearVelocity = m_vInitialDropVelocity;
             BODY* body = (BODY*) m_world->CreateBody(&bd);
-            body->CreateFixture(&shape, mat.getDensity());
+            body->CreateFixture(shape.get(), mat.getDensity());
             
             int colorIndex = randWithBound(m_nDistinctColorUsed);
             SimulationColor col = SimulationColor((SimulationColor::TYPE) colorIndex);

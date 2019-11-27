@@ -11,6 +11,7 @@
 #include "Simulation.h"
 #include "Settings.h"
 #include "SimulationID.h"
+#include <math.h>
 
 namespace svqa {
     #define SET_FILE_OUTPUT_FALSE ((SimulationRenderer*)((b2VisWorld*)m_world)->getRenderer())->setFileOutput(false);
@@ -61,6 +62,69 @@ namespace svqa {
                 }
             }
             return true;
+        }
+        
+        virtual void createBoundaries()
+        {
+            std::vector<std::pair<b2Vec2, b2Vec2>> boundaries;
+            boundaries.push_back(std::make_pair(b2Vec2(-40.0f, 0.0f), b2Vec2(40.0f, 0.0f)));
+            boundaries.push_back(std::make_pair(b2Vec2(-30.0f, 0.0f), b2Vec2(-30.0f, 50.0f)));
+            boundaries.push_back(std::make_pair(b2Vec2(30.0f, 0.0f), b2Vec2(30.0f, 50.0f)));
+            
+            for(auto&& bound: boundaries) {
+                b2BodyDef bd;
+                BODY* boundBody =(BODY*) m_world->CreateBody(&bd);
+                b2EdgeShape shape;
+                shape.Set(bound.first, bound.second);
+                boundBody->CreateFixture(&shape, 0.0f);
+            }
+        }
+        
+        virtual void createImmediateInitialScene(const size_t& numberOfObjects,
+                                                 const std::vector<SimulationObject::TYPE>& objectTypes,
+                                                 const b2Vec2& throwMinPos,
+                                                 const b2Vec2& throwMaxPos,
+                                                 const b2Vec2& dropVelocity)
+        {
+            float32 timeStep = m_pSettings->hz > 0.0f ? 1.0f / m_pSettings->hz : float32(0.0f);
+            for(size_t i=0; i < numberOfObjects; i++) {
+                addSceneObject(objectTypes, throwMinPos, throwMaxPos, dropVelocity);
+                while (!isSceneStable()) {
+                    m_world->Step(timeStep, m_pSettings->velocityIterations, m_pSettings->positionIterations);
+                }
+            }
+        }
+        
+        virtual ObjectState addSceneObject(const std::vector<SimulationObject::TYPE>& objectTypes,
+                                    const b2Vec2& throwMinPos,
+                                    const b2Vec2& throwMaxPos,
+                                    const b2Vec2& dropVelocity)
+        {
+            float posX = RandomFloat(throwMinPos.x, throwMaxPos.x);
+            float posY = RandomFloat(throwMinPos.y, throwMaxPos.y);
+            
+            int objectIndex = randWithBound(objectTypes.size());
+            SimulationObject object = SimulationObject(objectTypes[objectIndex]);
+        
+            ShapePtr shape = object.getShape();
+            
+            int materialIndex = randWithBound(2);
+            SimulationMaterial mat = SimulationMaterial((SimulationMaterial::TYPE) materialIndex);
+            
+            b2BodyDef bd;
+            bd.angle = M_PI / 4;
+            bd.type = b2_dynamicBody;
+            bd.position = b2Vec2(posX, posY);
+            bd.linearVelocity = dropVelocity;
+            BODY* body = (BODY*) m_world->CreateBody(&bd);
+            body->CreateFixture(shape.get(), mat.getDensity());
+            
+            int colorIndex = randWithBound(m_nDistinctColorUsed);
+            SimulationColor col = SimulationColor((SimulationColor::TYPE) colorIndex);
+            body->setTexture(mat.getTexture());
+            body->setColor(col.GetColor());
+            
+            return ObjectState(body, mat.type, col.type, object.type);
         }
     };
 }

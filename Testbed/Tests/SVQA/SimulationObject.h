@@ -11,9 +11,12 @@
 #include <nlohmann/json.hpp>
 #include "Box2D/Extension/b2VisPolygonShape.hpp"
 
+typedef std::shared_ptr<b2Shape> ShapePtr;
+
 class SimulationObject
 {
 public:
+    
     enum TYPE
     {
         SMALL_CUBE = 0,
@@ -24,7 +27,9 @@ public:
         SMALL_HEXAGON = 5,
         BIG_HEXAGON = 6,
         WALL_PIN = 7,
-        ROPE_UNIT = 8
+        ROPE_UNIT = 8,
+        SMALL_CIRCLE = 9,
+        BIG_CIRCLE = 10
     };
 
     SimulationObject(TYPE t)
@@ -32,31 +37,36 @@ public:
         type = t;
     }
 
-    b2VisPolygonShape getShape()
+    ShapePtr getShape()
     {
         switch (type) {
             case SMALL_CUBE:
-                return getPolygon(2.0f, 4);
+                return std::make_shared<b2PolygonShape>(getPolygon(2.0f, 4));
             case BIG_CUBE:
-                return getPolygon(3.0f, 4);
+                return std::make_shared<b2PolygonShape>(getPolygon(3.0f, 4));
             case STANDARD_RECTANGLE:
-                return getRectangle(8.0f, 2.0f);
+                return std::make_shared<b2PolygonShape>(getRectangle(8.0f, 2.0f));
             case SMALL_HEXAGON:
-                return getPolygon(2.0f, 6);
+                return std::make_shared<b2PolygonShape>(getPolygon(2.0f, 6));
             case BIG_HEXAGON:
-                return getPolygon(3.0f, 6);
+                return std::make_shared<b2PolygonShape>(getPolygon(3.0f, 6));
             case SMALL_TRIANGLE:
-                return getPolygon(2.0f, 3);
+                return std::make_shared<b2PolygonShape>(getPolygon(2.0f, 3));
             case BIG_TRIANGLE:
-                return getPolygon(3.0f, 3);
+                return std::make_shared<b2PolygonShape>(getPolygon(3.0f, 3));
             case WALL_PIN:
-                return getPolygon(0.5f, 4);
+                return std::make_shared<b2PolygonShape>(getPolygon(0.5f, 4));
             case ROPE_UNIT:
-                return getPolygon(0.1f, 4);
+                return std::make_shared<b2PolygonShape>(getPolygon(0.1f, 4));
+            case SMALL_CIRCLE:
+                return std::make_shared<b2CircleShape>(getCircle(2.0f));
+            case BIG_CIRCLE:
+                return std::make_shared<b2CircleShape>(getCircle(3.0f));
             
             default:
                 break;
         }
+        return nullptr;
     }
 
     TYPE type;
@@ -105,6 +115,13 @@ private:
         b2VisPolygonShape shape;
         shape.Set(points.data(), nPoints);
         return shape;
+    }
+    
+    b2CircleShape getCircle(const float& radius)
+    {
+        b2CircleShape circle;
+        circle.m_radius = radius;
+        return circle;
     }
     
 };

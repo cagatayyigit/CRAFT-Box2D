@@ -160,7 +160,19 @@ void b2VisWorld::DrawTexturedShape(b2Fixture* fixture, const b2Transform& xf, co
             }
             std::vector<b2Vec2> texCoords = poly->getTextureCoords();
             
-            m_debugDraw->DrawTexturedSolidPolygon(vertices, texCoords.data(), glTextureId, textureMaterialId, vertexCount, color);
+            m_debugDraw->DrawTexturedPolygon(vertices, texCoords.data(), vertexCount, color, glTextureId, textureMaterialId);
+        }
+        break;
+            
+    case b2Shape::e_circle:
+        {
+            b2CircleShape* circle = (b2CircleShape*)fixture->GetShape();
+
+            b2Vec2 center = b2Mul(xf, circle->m_p);
+            float32 radius = circle->m_radius;
+            b2Vec2 axis = b2Mul(xf.q, b2Vec2(1.0f, 0.0f));
+
+            m_debugDraw->DrawTexturedCircle(center, radius, axis, color, glTextureId, textureMaterialId);
         }
         break;
             
@@ -211,7 +223,8 @@ void b2VisWorld::DrawDebugData()
                           DrawShape(f, xf, b2Color(0.5f, 0.5f, 0.9f));
                       }
                 }
-                else if (b->IsAwake() == false)
+//                else if (b->IsAwake() == false)
+                else
                 {
                     if(texture) {
                         DrawTexturedShape(f, xf, b->getColor(), texture->getTextureId(), texture->getMaterialIndex());
@@ -219,14 +232,14 @@ void b2VisWorld::DrawDebugData()
                         DrawShape(f, xf, b->getColor());
                     }
                 }
-                else
-                {
-                    if(texture) {
-                        DrawTexturedShape(f, xf, b2Color(0.9f, 0.7f, 0.7f), texture->getTextureId(), texture->getMaterialIndex());
-                    } else {
-                        DrawShape(f, xf, b->getColor());
-                    }
-                }
+//                else
+//                {
+//                    if(texture) {
+//                        DrawTexturedShape(f, xf, b2Color(0.9f, 0.7f, 0.7f), texture->getTextureId(), texture->getMaterialIndex());
+//                    } else {
+//                        DrawShape(f, xf, b->getColor());
+//                    }
+//                }
             }
         }
     }
