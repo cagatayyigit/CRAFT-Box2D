@@ -48,12 +48,7 @@ namespace svqa {
             }
             
             const bool stable = isSceneStable();
-            const bool terminateSimulation = (m_nNumberOfObjects<=0 && stable);
-
-//            if(addObject) {
-//                addSimulationObject();
-//                m_nNumberOfObjects--;
-//            }
+            const bool terminateSimulation = (m_bInitialSceneCreated && m_bCreatedPulley && stable);
 
             Simulation::Step(settings);
 
@@ -63,18 +58,6 @@ namespace svqa {
                 FINISH_SIMULATION
             }
         }
-        
-//        virtual bool isSceneStable() override
-//        {
-//            b2Body* bodies = m_world->GetBodyList();
-//            for (b2Body* b = bodies; b; b = b->GetNext())
-//            {
-//                if(b->IsAwake() && !(b->GetType() == b2_staticBody)) {
-//                    return false;
-//                }
-//            }
-//            return true;
-//        }
         
         virtual SimulationID getIdentifier() override
         {
@@ -86,7 +69,6 @@ namespace svqa {
         void createPulley()
         {
             b2BodyDef bd;
-            b2Body* ceiling = m_world->CreateBody(&bd);
 
             float32 y = 16.0f;
             float32 L = 24.0f;
@@ -150,7 +132,7 @@ namespace svqa {
                 b2Vec2 groundAnchor2(10.0f, y + L);
                 pulleyDef.Initialize(body1, body2, groundAnchor1, groundAnchor2, anchor1, anchor2, 1.5f);
             
-                b2PulleyJoint* m_joint1 = (b2PulleyJoint*)m_world->CreateJoint(&pulleyDef);
+                (b2PulleyJoint*)m_world->CreateJoint(&pulleyDef);
             }
         }
         
