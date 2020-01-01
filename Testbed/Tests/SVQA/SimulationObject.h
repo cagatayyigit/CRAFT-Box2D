@@ -29,7 +29,9 @@ public:
         WALL_PIN = 7,
         ROPE_UNIT = 8,
         SMALL_CIRCLE = 9,
-        BIG_CIRCLE = 10
+        BIG_CIRCLE = 10,
+        CAR_BODY = 11,
+        CAR_WHEEL = 12
     };
 
     SimulationObject(TYPE t)
@@ -41,27 +43,31 @@ public:
     {
         switch (type) {
             case SMALL_CUBE:
-                return std::make_shared<b2PolygonShape>(getPolygon(2.0f, 4));
+                return std::make_shared<b2PolygonShape>(getRegularPolygon(2.0f, 4));
             case BIG_CUBE:
-                return std::make_shared<b2PolygonShape>(getPolygon(3.0f, 4));
+                return std::make_shared<b2PolygonShape>(getRegularPolygon(3.0f, 4));
             case STANDARD_RECTANGLE:
                 return std::make_shared<b2PolygonShape>(getRectangle(8.0f, 2.0f));
             case SMALL_HEXAGON:
-                return std::make_shared<b2PolygonShape>(getPolygon(2.0f, 6));
+                return std::make_shared<b2PolygonShape>(getRegularPolygon(2.0f, 6));
             case BIG_HEXAGON:
-                return std::make_shared<b2PolygonShape>(getPolygon(3.0f, 6));
+                return std::make_shared<b2PolygonShape>(getRegularPolygon(3.0f, 6));
             case SMALL_TRIANGLE:
-                return std::make_shared<b2PolygonShape>(getPolygon(2.0f, 3));
+                return std::make_shared<b2PolygonShape>(getRegularPolygon(2.0f, 3));
             case BIG_TRIANGLE:
-                return std::make_shared<b2PolygonShape>(getPolygon(3.0f, 3));
+                return std::make_shared<b2PolygonShape>(getRegularPolygon(3.0f, 3));
             case WALL_PIN:
-                return std::make_shared<b2PolygonShape>(getPolygon(0.5f, 4));
+                return std::make_shared<b2PolygonShape>(getRegularPolygon(0.5f, 4));
             case ROPE_UNIT:
-                return std::make_shared<b2PolygonShape>(getPolygon(0.1f, 4));
+                return std::make_shared<b2PolygonShape>(getRegularPolygon(0.1f, 4));
             case SMALL_CIRCLE:
                 return std::make_shared<b2CircleShape>(getCircle(2.0f));
             case BIG_CIRCLE:
                 return std::make_shared<b2CircleShape>(getCircle(3.0f));
+            case CAR_BODY:
+                return std::make_shared<b2PolygonShape>(getCarBodyIrregularPolygon());
+            case CAR_WHEEL:
+                return std::make_shared<b2CircleShape>(getCircle(1.0f));
             
             default:
                 break;
@@ -100,7 +106,7 @@ private:
         return ret;
     }
     
-    b2VisPolygonShape getPolygon(const float& edgeLength, const int& nPoints)
+    b2VisPolygonShape getRegularPolygon(const float& edgeLength, const int& nPoints)
     {
         const float twoPi =  2.0f * 3.14159265f;
         std::vector<b2Vec2> points(nPoints);
@@ -122,6 +128,21 @@ private:
         b2CircleShape circle;
         circle.m_radius = radius;
         return circle;
+    }
+    
+    b2VisPolygonShape getCarBodyIrregularPolygon()
+    {
+        b2VisPolygonShape chassis;
+        b2Vec2 vertices[8];
+        const float scale = 3.0;
+        vertices[0].Set(scale * -1.5f, scale * -0.5f);
+        vertices[1].Set(scale * 1.5f, scale * -0.5f);
+        vertices[2].Set(scale * 1.5f, scale *  0.0f);
+        vertices[3].Set(scale * 0.0f, scale *  0.9f);
+        vertices[4].Set(scale * -1.15f,scale *  0.9f);
+        vertices[5].Set(scale * -1.5f,scale *  0.2f);
+        chassis.Set(vertices, 6);
+        return chassis;
     }
     
 };

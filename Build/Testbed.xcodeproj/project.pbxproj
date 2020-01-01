@@ -82,6 +82,8 @@
 		68A558A4B1163CD6F5B50EE4 /* imgui.ini */ = {isa = PBXFileReference; lastKnownFileType = text; name = imgui.ini; path = ../Testbed/imgui/imgui.ini; sourceTree = "<group>"; };
 		6D4C538602C312B8715F69C6 /* stb_rect_pack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = stb_rect_pack.h; path = ../Testbed/imgui/stb_rect_pack.h; sourceTree = "<group>"; };
 		7C3A01F62343BD3A00E4E400 /* RemoveObjectSimulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemoveObjectSimulation.h; sourceTree = "<group>"; };
+		7C40378623BCED9800BD8538 /* ConnectedCarsSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConnectedCarsSettings.h; sourceTree = "<group>"; };
+		7C40378723BCEDA500BD8538 /* ConnectedCarsSimulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConnectedCarsSimulation.h; sourceTree = "<group>"; };
 		7C4127F42348BC5B002E75BA /* Camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Camera.hpp; path = ../Testbed/Framework/Camera.hpp; sourceTree = "<group>"; };
 		7C4127F52348BC5B002E75BA /* SimulationDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimulationDefines.h; path = ../Testbed/Framework/SimulationDefines.h; sourceTree = "<group>"; };
 		7C4127F62348BC5B002E75BA /* SimulationRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimulationRenderer.cpp; path = ../Testbed/Framework/SimulationRenderer.cpp; sourceTree = "<group>"; };
@@ -192,6 +194,15 @@
 			name = Data;
 			sourceTree = "<group>";
 		};
+		7C40378523BCED6D00BD8538 /* ConnectedCars */ = {
+			isa = PBXGroup;
+			children = (
+				7C40378623BCED9800BD8538 /* ConnectedCarsSettings.h */,
+				7C40378723BCEDA500BD8538 /* ConnectedCarsSimulation.h */,
+			);
+			path = ConnectedCars;
+			sourceTree = "<group>";
+		};
 		7C4127F32348BC0B002E75BA /* SVQA */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +215,7 @@
 				7C48C729235C6F5B00FFB396 /* ObjectState.h */,
 				7C48C72A235C819300FFB396 /* SceneState.h */,
 				7C5271A2238A828B00816DFC /* SimulationBase.h */,
+				7C40378523BCED6D00BD8538 /* ConnectedCars */,
 				7C615582238EFFC100702158 /* FixedPulley */,
 				7C94932D238C566F00BE6CE3 /* PendulumObstacles */,
 				7C52719F238A800800816DFC /* ObstructedPath */,

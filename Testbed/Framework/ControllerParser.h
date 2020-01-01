@@ -12,6 +12,7 @@
 #include "ObstructedPathSimulation.h"
 #include "PendulumObstaclesSimulation.h"
 #include "FixedPulleySimulation.h"
+#include "ConnectedCarsSimulation.h"
 #include "JSONHelper.h"
 
 namespace svqa {
@@ -38,6 +39,10 @@ namespace svqa {
                 FixedPulleySettings::Ptr setPtr = std::make_shared<FixedPulleySettings>();
                 setPtr->from_json(j);
                 return std::make_shared<FixedPulleySimulation>(setPtr);
+            } else if(set.simulationID == SimulationID::ID_ConnectedCars) {
+                ConnectedCarsSettings::Ptr setPtr = std::make_shared<ConnectedCarsSettings>();
+                setPtr->from_json(j);
+                return std::make_shared<ConnectedCarsSimulation>(setPtr);
             }
         }
         return nullptr;
