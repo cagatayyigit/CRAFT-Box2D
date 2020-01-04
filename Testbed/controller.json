@@ -1,1 +1,10 @@
-{"simulationID":3, "offline":true, "outputFilePath":"output.mpg", "width":1024, "height":640, "inputScenePath":"", "numberOfObjects":10}
+{
+  "simulationID": 4,
+  "offline": true,
+  "outputFilePath": "output.mpg",
+  "width": 1024,
+  "height": 640,
+  "inputScenePath": "",
+  "numberOfObjects": 2,
+  "numberOfObstacles": 1
+}

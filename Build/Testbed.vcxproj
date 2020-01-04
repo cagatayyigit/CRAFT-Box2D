@@ -114,7 +114,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\RemoveObject;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\PendulumObstacles;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\ObstructedPath;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\FixedPulley;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\ObstructionDemo;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\RemoveObject;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\PendulumObstacles;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\ObstructedPath;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\FixedPulley;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
@@ -152,7 +152,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\RemoveObject;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\PendulumObstacles;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\ObstructedPath;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\FixedPulley;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\ObstructionDemo;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\RemoveObject;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\PendulumObstacles;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\ObstructedPath;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\FixedPulley;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -184,6 +184,8 @@
     <ClInclude Include="..\Testbed\Tests\SVQA\ObjectState.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\ObstructedPath\ObstructedPathSettings.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\ObstructedPath\ObstructedPathSimulation.h" />
+    <ClInclude Include="..\Testbed\Tests\SVQA\ObstructionDemo\ObstructionDemoSettings.h" />
+    <ClInclude Include="..\Testbed\Tests\SVQA\ObstructionDemo\ObstructionDemoSimulation.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\PendulumObstacles\PendulumObstaclesSettings.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\PendulumObstacles\PendulumObstaclesSimulation.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\RemoveObject\RemoveObjectSimulation.h" />

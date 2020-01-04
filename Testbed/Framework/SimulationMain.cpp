@@ -33,6 +33,7 @@
 #include <stdio.h>
 
 #include "ControllerParser.h"
+#include <time.h>
 
 //
 namespace
@@ -110,6 +111,9 @@ void renderLoop(Simulation* simulation, SettingsBase* settings)
 //
 int main(int, char**)
 {
+	// To produce random numbers rather than getting same numbers on every run.
+	srand(time(NULL)); 
+
 	std::string controllerJSONPath = "controller.json";
 	const svqa::SimulationBase::Ptr& simulation = svqa::parse(controllerJSONPath);
 	const auto& settings = simulation->getSettings();

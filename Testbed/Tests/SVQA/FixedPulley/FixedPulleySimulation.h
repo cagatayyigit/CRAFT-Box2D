@@ -48,12 +48,13 @@ namespace svqa {
             }
             
             const bool stable = isSceneStable();
-            const bool terminateSimulation = (m_nNumberOfObjects<=0 && stable);
+			//const bool addObject = stable && m_nNumberOfObjects > 0;
+			const bool terminateSimulation = m_nNumberOfObjects <= 0 && stable; 
 
-//            if(addObject) {
-//                addSimulationObject();
-//                m_nNumberOfObjects--;
-//            }
+            /*if(addObject) {
+                addSimulationObject();
+                m_nNumberOfObjects--;
+            }*/
 
             Simulation::Step(settings);
 
@@ -160,7 +161,7 @@ namespace svqa {
         b2Vec2 m_vThrowMin;
         b2Vec2 m_vThrowMax;
         b2Vec2 m_vInitialDropVelocity;
-        
+
         const std::vector<SimulationObject::TYPE> m_vSimulationObjectTypes = {SimulationObject::SMALL_CUBE, SimulationObject::BIG_CUBE, SimulationObject::SMALL_HEXAGON, SimulationObject::BIG_HEXAGON,
             SimulationObject::SMALL_TRIANGLE, SimulationObject::BIG_TRIANGLE};
         
