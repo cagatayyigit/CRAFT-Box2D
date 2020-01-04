@@ -18,4 +18,6 @@
 #define WORLD b2VisWorld
 #endif
 
+#define VECTOR b2Vec2
+
 #endif /* SimulationDefines_h */
