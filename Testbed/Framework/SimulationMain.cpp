@@ -118,7 +118,7 @@ int main(int, char**)
 	const svqa::SimulationBase::Ptr& simulation = svqa::parse(controllerJSONPath);
 	const auto& settings = simulation->getSettings();
 
-	glfwSetErrorCallback(glfwErrorCallback);
+	glfwSetErrorCallback(glfwErrorCallback);	
 
 	g_camera.m_width = settings->bufferWidth;
 	g_camera.m_height = settings->bufferHeight;

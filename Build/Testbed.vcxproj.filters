@@ -37,6 +37,9 @@
     <Filter Include="Tests\SVQA\ObstructionDemo">
       <UniqueIdentifier>{162a7f7b-6a4a-47fc-9abd-41d138b3ec42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tests\SVQA\Scene1">
+      <UniqueIdentifier>{ec80df51-b55a-45d4-a651-2d39fe4d2b51}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Testbed\Framework\Camera.hpp">
@@ -168,6 +171,13 @@
     <ClInclude Include="..\Testbed\Tests\SVQA\ObstructionDemo\ObstructionDemoSimulation.h">
       <Filter>Tests\SVQA\ObstructionDemo</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scene1\Scene1Settings.h">
+      <Filter>Tests\SVQA\Scene1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scene1\Scene1Simulation.h">
+      <Filter>Tests\SVQA\Scene1</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Testbed\Framework\Camera.cpp">
@@ -253,5 +263,8 @@
     <None Include="..\Testbed\imgui\imgui.ini">
       <Filter>imgui</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Testbed.rc" />
   </ItemGroup>
 </Project>
