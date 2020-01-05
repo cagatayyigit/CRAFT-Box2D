@@ -114,7 +114,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\ObstructionDemo;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\RemoveObject;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\PendulumObstacles;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\ObstructedPath;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\FixedPulley;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Testbed\Framework;..\Testbed\Tests\SVQA\ObstructionDemo;..\Testbed\Tests\SVQA\RemoveObject;..\Testbed\Tests\SVQA\PendulumObstacles;..\Testbed\Tests\SVQA\Scene1;..\Testbed\Tests\SVQA\FixedPulley;..\Testbed\Tests\SVQA\ObstructedPath;..\Testbed\Tests\SVQA;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
@@ -152,7 +152,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\ObstructionDemo;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\RemoveObject;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\PendulumObstacles;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\ObstructedPath;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA\FixedPulley;D:\archive\research\intuitive-physics\intuitive-physics\simulation\2d\Box2D\Testbed\Tests\SVQA;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Testbed\Framework;..\Testbed\Tests\SVQA\ObstructionDemo;..\Testbed\Tests\SVQA\RemoveObject;..\Testbed\Tests\SVQA\PendulumObstacles;..\Testbed\Tests\SVQA\Scene1;..\Testbed\Tests\SVQA\FixedPulley;..\Testbed\Tests\SVQA\ObstructedPath;..\Testbed\Tests\SVQA;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -190,6 +190,8 @@
     <ClInclude Include="..\Testbed\Tests\SVQA\PendulumObstacles\PendulumObstaclesSimulation.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\RemoveObject\RemoveObjectSimulation.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\RemoveObject\RemoveObjectSimulationSettings.h" />
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scene1\Scene1Settings.h" />
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scene1\Scene1Simulation.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\SceneState.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\Settings.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\SimulationBase.h" />
@@ -214,6 +216,7 @@
     <ClInclude Include="..\Testbed\imgui\stb_rect_pack.h" />
     <ClInclude Include="..\Testbed\imgui\stb_textedit.h" />
     <ClInclude Include="..\Testbed\imgui\stb_truetype.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Testbed\Framework\Camera.cpp" />
@@ -250,6 +253,9 @@
     <ProjectReference Include="Box2D.vcxproj">
       <Project>{A434E80C-1049-10BE-D9CA-B31D459E0CEF}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Testbed.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

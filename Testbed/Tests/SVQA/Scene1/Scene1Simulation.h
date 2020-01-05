@@ -1,34 +1,28 @@
 #pragma once
 
 #include "SimulationColor.h"
-#include "ObstructionDemoSettings.h"
+#include "Scene1Settings.h"
 #include "SimulationBase.h"
 #include "Box2D/Extension/b2VisBody.hpp"
 #include "Box2D/Extension/b2VisPolygonShape.hpp"
-#include <math.h>
+#include <math.h> 
 
 namespace svqa {
-	class ObstructionDemoSimulation : public SimulationBase
+	class Scene1Simulation : public SimulationBase
 	{
 	public:
-		typedef std::shared_ptr<ObstructionDemoSimulation> Ptr;
+		typedef std::shared_ptr<Scene1Simulation> Ptr;
 
-		ObstructionDemoSimulation(ObstructionDemoSettings::Ptr _settings_) : SimulationBase(_settings_)
+		Scene1Simulation(Scene1Settings::Ptr settings) : SimulationBase(settings)
 		{
-			m_nNumberOfObjects = _settings_->numberOfObjects;
-			m_nNumberOfObstacles = _settings_->numberOfObstacles;
+			m_nNumberOfObjects = settings->numberOfObjects;
+			m_nNumberOfObstacles = settings->numberOfObstacles;
 
 			m_fSpeed = RandomFloat(15.0f, 30.0f);
 
-			/*m_vDropDirection = RandomUnitVector();
-			m_vDropDirection.y = -abs(m_vDropDirection.y);
-			m_vDropDirection.x = RandomFloat(-0.05f, 0.75f);
-			m_vDropDirection.operator*=(dropSpeedFactor);*/
-
 			m_vObstaclePosition = VECTOR(RandomFloat(-10.0f, 10.0f), RandomFloat(15.0f, 40.0f));
-			m_vMovingObjPosition = VECTOR(RandomFloat(-25.0f, -10.0), 2.5f); 
+			m_vMovingObjPosition = VECTOR(RandomFloat(-25.0f, -10.0), 2.5f);
 			m_vStagnantObjPosition = VECTOR(RandomFloat(10.0f, 30.0f), 2.5f);
-
 			m_vInitialDropVelocity = VECTOR(0.0f, RandomFloat(-20.0f, -40.0f));
 
 			createBoundaries();

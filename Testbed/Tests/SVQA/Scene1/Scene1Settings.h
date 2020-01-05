@@ -1,17 +1,14 @@
-
-
-#ifndef ObstructionDemoSettings_h
-#define  ObstructionDemoSettings_h
+#pragma once
 
 #include "Settings.h"
 
 namespace svqa
 {
-	struct  ObstructionDemoSettings : Settings
+	struct Scene1Settings : Settings
 	{
-		typedef std::shared_ptr< ObstructionDemoSettings> Ptr;
+		typedef std::shared_ptr<Scene1Settings> Ptr;
 
-		ObstructionDemoSettings() {}
+		Scene1Settings() {}
 
 		int numberOfObjects;
 		int numberOfObstacles;
@@ -29,5 +26,3 @@ namespace svqa
 		}
 	};
 }
-
-#endif /* ObstructionDemoSettings_h */
