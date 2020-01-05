@@ -83,6 +83,22 @@ namespace svqa {
                 boundBody->CreateFixture(&shape, 0.0f);
             }
         }
+
+        virtual void createBoundaries(float32 x, float32 y)
+        {
+            std::vector<std::pair<b2Vec2, b2Vec2>> boundaries;
+            boundaries.push_back(std::make_pair(b2Vec2(-x, -5.0f), b2Vec2(x, -5.0f)));
+            boundaries.push_back(std::make_pair(b2Vec2(-x, -5.0f), b2Vec2(-x, y)));
+            boundaries.push_back(std::make_pair(b2Vec2(x, -5.0f), b2Vec2(x, y)));
+
+            for (auto&& bound : boundaries) {
+                b2BodyDef bd;
+                BODY* boundBody = (BODY*)m_world->CreateBody(&bd);
+                b2EdgeShape shape;
+                shape.Set(bound.first, bound.second);
+                boundBody->CreateFixture(&shape, 0.0f);
+            }
+        }
         
         virtual void createImmediateInitialScene(const size_t& numberOfObjects,
                                                  const std::vector<SimulationObject::TYPE>& objectTypes,
