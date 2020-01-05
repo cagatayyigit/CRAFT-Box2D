@@ -15,34 +15,48 @@ namespace svqa {
 
 		Scene1Simulation(Scene1Settings::Ptr settings) : SimulationBase(settings)
 		{
-			m_nNumberOfObjects = settings->numberOfObjects;
-			m_nNumberOfObstacles = settings->numberOfObstacles;
-
-			m_fSpeed = RandomFloat(15.0f, 30.0f);
-
-			m_vObstaclePosition = VECTOR(RandomFloat(-10.0f, 10.0f), RandomFloat(15.0f, 40.0f));
-			m_vMovingObjPosition = VECTOR(RandomFloat(-25.0f, -10.0), 2.5f);
-			m_vStagnantObjPosition = VECTOR(RandomFloat(10.0f, 30.0f), 2.5f);
-			m_vInitialDropVelocity = VECTOR(0.0f, RandomFloat(-20.0f, -40.0f));
-
-			createBoundaries();
-
+			m_nNumberOfObjects = 1;
 			SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
+
+				createBoundaries(40.0f, 50.0f);
 		}
 
+		// Our "game loop".
 		virtual void Step(SettingsBase* settings) override
 		{
 			const bool stable = isSceneStable();
 			const bool addObject = stable && m_nNumberOfObjects > 0;
-			const bool terminateSimulation = m_nNumberOfObjects <= 0 && stable;
+			const bool terminateSimulation = false && stable;
 
 			if (addObject) {
-				addSimulationObject(m_vMovingObjPosition, VECTOR(m_fSpeed, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationColor::TYPE::BROWN);
 
-				addSimulationObject(m_vObstaclePosition, m_vInitialDropVelocity, SimulationObject::BIG_CUBE, SimulationColor::TYPE::RED);
+				// Setup static objects.
+				//addStaticObject(VECTOR(5.0f, 5.0f), M_PI / 2, SimulationObject::BIG_RAMP, SimulationMaterial::METAL, SimulationColor::BLUE);
+				addStaticObject(VECTOR(-30.0f, 3.0f), 0,
+					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(30.0f, 1.0f)), SimulationObject::CUSTOM_RECTANGLE,
+					SimulationMaterial::METAL, SimulationColor::BROWN);
 
-				addSimulationObject(m_vStagnantObjPosition, b2Vec2_zero, SimulationObject::SMALL_CIRCLE, SimulationColor::TYPE::BLUE);
-				m_nNumberOfObjects = 0;
+				addStaticObject(VECTOR(35.0f, 3.0f), 0,
+					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(25.0f, 1.0f)), SimulationObject::CUSTOM_RECTANGLE,
+					SimulationMaterial::METAL, SimulationColor::BROWN);
+
+				addStaticObject(VECTOR(-26.0f, 5.0f), M_PI , SimulationObject::BIG_TRIANGLE,
+					SimulationMaterial::METAL, SimulationColor::BROWN);
+
+				addStaticObject(VECTOR(-10.0f, 33.0f), 0,
+					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(10.0f, 1.0f,VECTOR(15.0f,0.5f),M_PI / 4)), SimulationObject::CUSTOM_RECTANGLE,
+					SimulationMaterial::METAL, SimulationColor::BROWN);
+
+				addStaticObject(VECTOR(-40.0f, 25.0f), 0,
+					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(-5.0f, 1.0f, VECTOR(17.0f, 6.5f), -M_PI / 4)), SimulationObject::CUSTOM_RECTANGLE,
+					SimulationMaterial::METAL, SimulationColor::BROWN);
+
+				addDynamicObject(VECTOR(-30.0f, -3.0f), VECTOR(15.0f, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				addDynamicObject(VECTOR(30.0f, -3.0f), VECTOR(-15.0f, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				addDynamicObject(VECTOR(30.0f, 6.0f), VECTOR(-15.0f, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				addDynamicObject(VECTOR(-25.0f, 40.0f), VECTOR(0.0f, -5.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+
+				m_nNumberOfObjects--;
 			}
 
 			Simulation::Step(settings);
@@ -70,25 +84,20 @@ namespace svqa {
 		VECTOR m_vObstaclePosition;
 		VECTOR m_vInitialDropVelocity;
 
-
-		const std::vector<SimulationObject::TYPE> m_vSimulationObjectTypes = { SimulationObject::SMALL_CUBE,
-			SimulationObject::BIG_CUBE, SimulationObject::SMALL_HEXAGON, SimulationObject::BIG_HEXAGON,
-			SimulationObject::SMALL_TRIANGLE, SimulationObject::BIG_TRIANGLE };
-
 		SceneState state;
 
-		void addSimulationObject(b2Vec2 position, b2Vec2 velocity, SimulationObject::TYPE objType, SimulationColor color)
+		void addDynamicObject(VECTOR position, VECTOR velocity, SimulationObject::TYPE objType, SimulationMaterial::TYPE materialType, SimulationColor color)
 		{
 			SimulationObject object = SimulationObject(objType);
 
 			ShapePtr shape = object.getShape();
 
-			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::RUBBER);
+			SimulationMaterial mat = SimulationMaterial(materialType);
 
 			b2BodyDef bd;
 			bd.type = b2_dynamicBody;
 			bd.position = position;
-			bd.angle = RandomFloat(0.0f, M_PI);
+			bd.angle = RandomFloat(M_PI, M_PI);
 			bd.linearVelocity = velocity;
 			BODY* body = (BODY*)m_world->CreateBody(&bd);
 			body->CreateFixture(shape.get(), mat.getDensity());
@@ -99,10 +108,40 @@ namespace svqa {
 			state.add(ObjectState(body, mat.type, color.type, object.type));
 		}
 
-		VECTOR getRandomDropVector(float32 movingObjX, float32 dropObjX, float32 stagnantObjX, float32 movingObjVelX, float32 dropObjVelY)
+		void addStaticObject(VECTOR position, float32 angle, SimulationObject::TYPE objType, SimulationMaterial::TYPE materialType, SimulationColor color)
 		{
+			SimulationObject object = SimulationObject(objType);
+			ShapePtr shape = object.getShape();
+			SimulationMaterial material = SimulationMaterial(materialType);
+			b2BodyDef bd;
+			bd.type = b2_staticBody;
+			bd.position = position;
+			bd.angle = angle;
+			BODY* body = (BODY*)m_world->CreateBody(&bd);
+			body->CreateFixture(shape.get(), material.getDensity());
+			body->setTexture(material.getTexture());
+			body->setColor(color.GetColor());
 
-			return VECTOR();
+			state.add(ObjectState(body, material.type, color.type, object.type));
 		}
+
+		void addStaticObject(VECTOR position, float32 angle, ShapePtr shape,
+			SimulationObject::TYPE objType, SimulationMaterial::TYPE materialType, SimulationColor color)
+		{
+			SimulationObject object = SimulationObject(objType);
+			SimulationMaterial material = SimulationMaterial(materialType);
+			b2BodyDef bd;
+			bd.type = b2_staticBody;
+			bd.position = position;
+			bd.angle = angle;
+			BODY* body = (BODY*)m_world->CreateBody(&bd);
+			body->CreateFixture(shape.get(), material.getDensity());
+			body->setTexture(material.getTexture());
+			body->setColor(color.GetColor());
+
+			state.add(ObjectState(body, material.type, color.type, object.type));
+		}
+
+
 	};
 }
