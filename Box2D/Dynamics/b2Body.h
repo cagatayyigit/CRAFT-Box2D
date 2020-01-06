@@ -389,9 +389,10 @@ public:
 	/// Dump this body to a log file
 	void Dump();
 
-private:
+protected:
 
 	friend class b2World;
+    friend class b2VisWorld;
 	friend class b2Island;
 	friend class b2ContactManager;
 	friend class b2ContactSolver;
@@ -422,7 +423,7 @@ private:
 	};
 
 	b2Body(const b2BodyDef* bd, b2World* world);
-	~b2Body();
+	virtual ~b2Body();
 
 	void SynchronizeFixtures();
 	void SynchronizeTransform();

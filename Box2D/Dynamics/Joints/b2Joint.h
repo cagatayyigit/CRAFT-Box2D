@@ -150,6 +150,7 @@ public:
 	virtual void ShiftOrigin(const b2Vec2& newOrigin) { B2_NOT_USED(newOrigin);  }
 
 protected:
+    friend class b2VisWorld;
 	friend class b2World;
 	friend class b2Body;
 	friend class b2Island;

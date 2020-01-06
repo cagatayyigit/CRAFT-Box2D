@@ -23,9 +23,10 @@
 #include "Testbed/glad/glad.h"
 #endif
 
+#include "SimulationDefines.h"
 #include "Testbed/imgui/imgui.h"
 #include "Testbed/imgui/imgui_impl_glfw_gl3.h"
-#include "DebugDraw.h"
+#include "Camera.hpp"
 #include "Test.h"
 
 #include "Testbed/glfw/glfw3.h"
@@ -443,8 +444,13 @@ int main(int, char**)
 
 	glfwSetErrorCallback(glfwErrorCallback);
 
-	g_camera.m_width = 1024;
-	g_camera.m_height = 640;
+#if USE_DEBUG_DRAW
+    g_camera.m_width = 1024;
+    g_camera.m_height = 640;
+#else
+	g_camera.m_width = 512;
+	g_camera.m_height = 320;
+#endif
 
 	if (glfwInit() == 0)
 	{
@@ -481,6 +487,7 @@ int main(int, char**)
 
 	printf("OpenGL %s, GLSL %s\n", glGetString(GL_VERSION), glGetString(GL_SHADING_LANGUAGE_VERSION));
 
+#if USE_DEBUG_DRAW
 	glfwSetScrollCallback(mainWindow, sScrollCallback);
 	glfwSetWindowSizeCallback(mainWindow, sResizeWindow);
 	glfwSetKeyCallback(mainWindow, sKeyCallback);
@@ -488,6 +495,7 @@ int main(int, char**)
 	glfwSetMouseButtonCallback(mainWindow, sMouseButton);
 	glfwSetCursorPosCallback(mainWindow, sMouseMotion);
 	glfwSetScrollCallback(mainWindow, sScrollCallback);
+#endif
 
 	g_debugDraw.Create();
 
@@ -517,9 +525,8 @@ int main(int, char**)
 	{
 		glfwGetWindowSize(mainWindow, &g_camera.m_width, &g_camera.m_height);
         
-        int bufferWidth, bufferHeight;
-        glfwGetFramebufferSize(mainWindow, &bufferWidth, &bufferHeight);
-        glViewport(0, 0, bufferWidth, bufferHeight);
+        glfwGetFramebufferSize(mainWindow, &settings.bufferWidth, &settings.bufferHeight);
+        glViewport(0, 0, settings.bufferWidth, settings.bufferHeight);
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -540,7 +547,9 @@ int main(int, char**)
 		frameTime = alpha * frameTime + (1.0 - alpha) * (time2 - time1);
 		time1 = time2;
 
+#if USE_DEBUG_DRAW
 		ImGui::Render();
+#endif
 
 		glfwSwapBuffers(mainWindow);
 

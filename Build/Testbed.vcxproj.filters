@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Data">
+      <UniqueIdentifier>{3F05847C-2B3C-850D-D428-6B10C03E010F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{1362EE31-7FCC-A2A8-C80A-544E34B480FD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{5865280E-C479-50BF-8DFB-F31EF9CE4CF0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\SVQA">
+      <UniqueIdentifier>{02F8F690-EEAF-38DE-57B7-113A438ED3CE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\SVQA\FixedPulley">
+      <UniqueIdentifier>{DCED7223-C8E7-9B75-B154-32869DED01E2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\SVQA\ObstructedPath">
+      <UniqueIdentifier>{1D2F3DD7-89F1-7061-D2A1-FFED3EA3493F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\SVQA\PendulumObstacles">
+      <UniqueIdentifier>{7B21C726-67DC-B6D2-1094-2F1DFC2D0163}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\SVQA\RemoveObject">
+      <UniqueIdentifier>{163EFCBB-8275-4453-8B7F-A876F7356B4C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="glad">
+      <UniqueIdentifier>{DD62977C-C999-980D-7286-7E105E9C140F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="glfw">
+      <UniqueIdentifier>{9563977C-819A-980D-2A87-7E10169D140F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui">
+      <UniqueIdentifier>{0098A80F-6CAC-D0C0-352E-7420A101CDF1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\SVQA\ObstructionDemo">
+      <UniqueIdentifier>{162a7f7b-6a4a-47fc-9abd-41d138b3ec42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\SVQA\Scene1">
+      <UniqueIdentifier>{ec80df51-b55a-45d4-a651-2d39fe4d2b51}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Testbed\Framework\Camera.hpp">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Framework\ControllerParser.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Framework\DebugDraw.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Framework\Simulation.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Framework\SimulationDefines.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Framework\SimulationRenderer.hpp">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Framework\VideoWriter.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\FixedPulley\FixedPulleySettings.h">
+      <Filter>Tests\SVQA\FixedPulley</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\FixedPulley\FixedPulleySimulation.h">
+      <Filter>Tests\SVQA\FixedPulley</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\JSONHelper.h">
+      <Filter>Tests\SVQA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\ObjectState.h">
+      <Filter>Tests\SVQA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\ObstructedPath\ObstructedPathSettings.h">
+      <Filter>Tests\SVQA\ObstructedPath</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\ObstructedPath\ObstructedPathSimulation.h">
+      <Filter>Tests\SVQA\ObstructedPath</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\PendulumObstacles\PendulumObstaclesSettings.h">
+      <Filter>Tests\SVQA\PendulumObstacles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\PendulumObstacles\PendulumObstaclesSimulation.h">
+      <Filter>Tests\SVQA\PendulumObstacles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\RemoveObject\RemoveObjectSimulation.h">
+      <Filter>Tests\SVQA\RemoveObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\RemoveObject\RemoveObjectSimulationSettings.h">
+      <Filter>Tests\SVQA\RemoveObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\SceneState.h">
+      <Filter>Tests\SVQA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Settings.h">
+      <Filter>Tests\SVQA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\SimulationBase.h">
+      <Filter>Tests\SVQA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\SimulationColor.h">
+      <Filter>Tests\SVQA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\SimulationID.h">
+      <Filter>Tests\SVQA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\SimulationMaterial.h">
+      <Filter>Tests\SVQA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\SimulationObject.h">
+      <Filter>Tests\SVQA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\glad\glad.h">
+      <Filter>glad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\glad\khrplatform.h">
+      <Filter>glad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\glfw\egl_context.h">
+      <Filter>glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\glfw\glfw3.h">
+      <Filter>glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\glfw\glfw3native.h">
+      <Filter>glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\glfw\glfw_config.h">
+      <Filter>glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\glfw\internal.h">
+      <Filter>glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\glfw\wgl_context.h">
+      <Filter>glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\glfw\win32_joystick.h">
+      <Filter>glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\glfw\win32_platform.h">
+      <Filter>glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\imgui\imconfig.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\imgui\imgui.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\imgui\imgui_impl_glfw_gl3.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\imgui\imgui_internal.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\imgui\stb_rect_pack.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\imgui\stb_textedit.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\imgui\stb_truetype.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\ObstructionDemo\ObstructionDemoSettings.h">
+      <Filter>Tests\SVQA\ObstructionDemo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\ObstructionDemo\ObstructionDemoSimulation.h">
+      <Filter>Tests\SVQA\ObstructionDemo</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scene1\Scene1Settings.h">
+      <Filter>Tests\SVQA\Scene1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scene1\Scene1Simulation.h">
+      <Filter>Tests\SVQA\Scene1</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Testbed\Framework\Camera.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\Framework\DebugDraw.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\Framework\Simulation.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\Framework\SimulationMain.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\Framework\SimulationRenderer.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\Tests\SVQA\SimulationMaterial.cpp">
+      <Filter>Tests\SVQA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\glad\glad.c">
+      <Filter>glad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\glfw\context.c">
+      <Filter>glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\glfw\egl_context.c">
+      <Filter>glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\glfw\init.c">
+      <Filter>glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\glfw\input.c">
+      <Filter>glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\glfw\monitor.c">
+      <Filter>glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\glfw\vulkan.c">
+      <Filter>glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\glfw\wgl_context.c">
+      <Filter>glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\glfw\win32_init.c">
+      <Filter>glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\glfw\win32_joystick.c">
+      <Filter>glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\glfw\win32_monitor.c">
+      <Filter>glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\glfw\win32_time.c">
+      <Filter>glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\glfw\win32_tls.c">
+      <Filter>glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\glfw\win32_window.c">
+      <Filter>glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\glfw\window.c">
+      <Filter>glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\imgui\imgui.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\imgui\imgui_demo.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\imgui\imgui_draw.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\imgui\imgui_impl_glfw_gl3.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Testbed\Data\DroidSans.ttf">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\Testbed\imgui\imgui.ini">
+      <Filter>imgui</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Testbed.rc" />
+  </ItemGroup>
+</Project>

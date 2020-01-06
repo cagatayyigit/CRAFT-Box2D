@@ -199,6 +199,7 @@ protected:
 
 	friend class b2Body;
 	friend class b2World;
+    friend class b2VisWorld;
 	friend class b2Contact;
 	friend class b2ContactManager;
 

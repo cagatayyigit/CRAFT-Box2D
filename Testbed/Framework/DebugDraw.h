@@ -20,32 +20,12 @@
 #define DEBUGDRAW_H
 
 #include "Box2D/Box2D.h"
+#include "SimulationDefines.h"
 
 struct b2AABB;
 struct GLRenderPoints;
 struct GLRenderLines;
 struct GLRenderTriangles;
-
-//
-struct Camera
-{
-	Camera()
-	{
-		m_center.Set(0.0f, 20.0f);
-		m_zoom = 1.0f;
-		m_width = 1280;
-		m_height = 800;
-	}
-
-	b2Vec2 ConvertScreenToWorld(const b2Vec2& screenPoint);
-	b2Vec2 ConvertWorldToScreen(const b2Vec2& worldPoint);
-	void BuildProjectionMatrix(float32* m, float32 zBias);
-
-	b2Vec2 m_center;
-	float32 m_zoom;
-	int32 m_width;
-	int32 m_height;
-};
 
 // This class implements debug drawing callbacks that are invoked
 // inside b2World::Step.
@@ -61,6 +41,8 @@ public:
 	void DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color) override;
 
 	void DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color) override;
+    
+    void DrawTexturedPolygon(const b2Vec2* vertices, const b2Vec2* textureCoordinates, int32 vertexCount, const b2Color& color, uint32 glTexId, int matTexId) override;
 
 	void DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color) override;
 
@@ -86,7 +68,9 @@ private:
 	GLRenderTriangles* m_triangles;
 };
 
+#if USE_DEBUG_DRAW
 extern DebugDraw g_debugDraw;
-extern Camera g_camera;
+#endif
+
 
 #endif

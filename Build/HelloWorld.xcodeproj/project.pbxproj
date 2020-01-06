@@ -1,0 +1,270 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		14CD621A591C078C9B43405A /* HelloWorld.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43137EA264DF2BD4A19454E2 /* HelloWorld.cpp */; };
+		B7066D864F5353387D9A53C6 /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 40779C0E84C64180C6ED7A4E /* libBox2D.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		409CC11A2B88E70C736EAF5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 97FDA81E5B6969D09A0D0E5E /* Box2D.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A1B83274A52904A62695A8B4;
+			remoteInfo = libBox2D.a;
+		};
+		EE624E81D94E747321343CC1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 97FDA81E5B6969D09A0D0E5E /* Box2D.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 92FBAC4E0486C4C0B387EA8E;
+			remoteInfo = libBox2D.a;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		16A24965882D61D7372E87A5 /* HelloWorld */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = HelloWorld; path = HelloWorld; sourceTree = BUILT_PRODUCTS_DIR; };
+		43137EA264DF2BD4A19454E2 /* HelloWorld.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = HelloWorld.cpp; path = ../HelloWorld/HelloWorld.cpp; sourceTree = "<group>"; };
+		97FDA81E5B6969D09A0D0E5E /* libBox2D.a */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Box2D.xcodeproj"; path = Box2D.xcodeproj; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AC255455B8E203C72DCC7295 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7066D864F5353387D9A53C6 /* libBox2D.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		59DDF15C45CEFD0E9806979C /* HelloWorld */ = {
+			isa = PBXGroup;
+			children = (
+				43137EA264DF2BD4A19454E2 /* HelloWorld.cpp */,
+				A6C936B49B3FADE6EA134CF4 /* Products */,
+				9D968EAA920D05DCE0E0A4EA /* Projects */,
+			);
+			name = HelloWorld;
+			sourceTree = "<group>";
+		};
+		9D968EAA920D05DCE0E0A4EA /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				97FDA81E5B6969D09A0D0E5E /* Box2D.xcodeproj */,
+			);
+			name = Projects;
+			sourceTree = "<group>";
+		};
+		A6C936B49B3FADE6EA134CF4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				16A24965882D61D7372E87A5 /* HelloWorld */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C6B18FA1ECD7BF5353DEB5E1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				40779C0E84C64180C6ED7A4E /* libBox2D.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5FE408AB6354DADDE4C17EEB /* HelloWorld */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9A609CB4A71D4C261C07BAF4 /* Build configuration list for PBXNativeTarget "HelloWorld" */;
+			buildPhases = (
+				1C0CD4F528C984679DB3F335 /* Resources */,
+				85B9EE4C92769DBE07610C8C /* Sources */,
+				AC255455B8E203C72DCC7295 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B469CCAADA8FFC5C4196F2EA /* PBXTargetDependency */,
+			);
+			name = HelloWorld;
+			productInstallPath = "$(HOME)/bin";
+			productName = HelloWorld;
+			productReference = 16A24965882D61D7372E87A5 /* HelloWorld */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "HelloWorld" */;
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 1;
+			mainGroup = 59DDF15C45CEFD0E9806979C /* HelloWorld */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C6B18FA1ECD7BF5353DEB5E1 /* Products */;
+					ProjectRef = 97FDA81E5B6969D09A0D0E5E /* Box2D.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				5FE408AB6354DADDE4C17EEB /* HelloWorld */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		40779C0E84C64180C6ED7A4E /* libBox2D.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBox2D.a;
+			remoteRef = EE624E81D94E747321343CC1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1C0CD4F528C984679DB3F335 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		85B9EE4C92769DBE07610C8C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14CD621A591C078C9B43405A /* HelloWorld.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B469CCAADA8FFC5C4196F2EA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libBox2D.a;
+			targetProxy = 409CC11A2B88E70C736EAF5A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		275A40F456EC0FE631F94F34 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = bin/x86_64/Release;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_DYNAMIC_NO_PIC = NO;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = HelloWorld;
+			};
+			name = Release;
+		};
+		2AC15F7A814EC9EC59C7DDBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = bin/x86_64/Debug;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_DYNAMIC_NO_PIC = NO;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = HelloWorld;
+			};
+			name = Debug;
+		};
+		E006A96B0EACFD5D67EE57AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = x86_64;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++11";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OBJROOT = obj/x86_64/Debug/HelloWorld;
+				ONLY_ACTIVE_ARCH = YES;
+				SYMROOT = bin/x86_64/Debug;
+				USER_HEADER_SEARCH_PATHS = (
+					..,
+				);
+				WARNING_CFLAGS = "-Wall -Wextra";
+			};
+			name = Debug;
+		};
+		F0BE8A656249A2D7114AC8A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = x86_64;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++11";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OBJROOT = obj/x86_64/Release/HelloWorld;
+				ONLY_ACTIVE_ARCH = NO;
+				SYMROOT = bin/x86_64/Release;
+				USER_HEADER_SEARCH_PATHS = (
+					..,
+				);
+				WARNING_CFLAGS = "-Wall -Wextra";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "HelloWorld" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E006A96B0EACFD5D67EE57AB /* Debug */,
+				F0BE8A656249A2D7114AC8A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9A609CB4A71D4C261C07BAF4 /* Build configuration list for PBXNativeTarget "HelloWorld" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2AC15F7A814EC9EC59C7DDBA /* Debug */,
+				275A40F456EC0FE631F94F34 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+};
+rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
