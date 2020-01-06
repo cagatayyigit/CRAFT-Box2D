@@ -18,7 +18,7 @@ namespace svqa {
 			m_nNumberOfObjects = 1;
 			SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
 
-				createBoundaries(40.0f, 50.0f);
+				createBoundaries(40.0f, 50.0f, 5.0f);
 		}
 
 		// Our "game loop".
@@ -26,35 +26,47 @@ namespace svqa {
 		{
 			const bool stable = isSceneStable();
 			const bool addObject = stable && m_nNumberOfObjects > 0;
-			const bool terminateSimulation = false && stable;
+			const bool terminateSimulation = m_nNumberOfObjects == 0 && stable;
 
 			if (addObject) {
 
 				// Setup static objects.
 				//addStaticObject(VECTOR(5.0f, 5.0f), M_PI / 2, SimulationObject::BIG_RAMP, SimulationMaterial::METAL, SimulationColor::BLUE);
-				addStaticObject(VECTOR(-30.0f, 3.0f), 0,
-					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(30.0f, 1.0f)), SimulationObject::CUSTOM_RECTANGLE,
-					SimulationMaterial::METAL, SimulationColor::BROWN);
 
+				// Right  Floor
+				addStaticObject(VECTOR(-30.0f, 3.0f), 0,
+					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(28.0f, 1.0f)), SimulationObject::CUSTOM_RECTANGLE,
+					SimulationMaterial::METAL, SimulationColor::GRAY);
+				// Left Floor
 				addStaticObject(VECTOR(35.0f, 3.0f), 0,
 					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(25.0f, 1.0f)), SimulationObject::CUSTOM_RECTANGLE,
-					SimulationMaterial::METAL, SimulationColor::BROWN);
+					SimulationMaterial::METAL, SimulationColor::GRAY);
 
-				addStaticObject(VECTOR(-26.0f, 5.0f), M_PI , SimulationObject::BIG_TRIANGLE,
-					SimulationMaterial::METAL, SimulationColor::BROWN);
 
-				addStaticObject(VECTOR(-10.0f, 33.0f), 0,
-					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(10.0f, 1.0f,VECTOR(15.0f,0.5f),M_PI / 4)), SimulationObject::CUSTOM_RECTANGLE,
-					SimulationMaterial::METAL, SimulationColor::BROWN);
+				// Inclined Floor
+				addStaticObject(VECTOR(-33.0f, 35.0f), 2.75 * M_PI / 4 ,
+					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(6.0f, 1.0f)), SimulationObject::CUSTOM_RECTANGLE,
+					SimulationMaterial::METAL, SimulationColor::GRAY);
 
-				addStaticObject(VECTOR(-40.0f, 25.0f), 0,
-					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(-5.0f, 1.0f, VECTOR(17.0f, 6.5f), -M_PI / 4)), SimulationObject::CUSTOM_RECTANGLE,
-					SimulationMaterial::METAL, SimulationColor::BROWN);
+				// Inclined Floor
+				addStaticObject(VECTOR(-10.0f, 25.0f), M_PI / 4,
+					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(10.0f, 1.0f)), SimulationObject::CUSTOM_RECTANGLE,
+					SimulationMaterial::METAL, SimulationColor::GRAY);
 
-				addDynamicObject(VECTOR(-30.0f, -3.0f), VECTOR(15.0f, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(VECTOR(30.0f, -3.0f), VECTOR(-15.0f, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(VECTOR(30.0f, 6.0f), VECTOR(-15.0f, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(VECTOR(-25.0f, 40.0f), VECTOR(0.0f, -5.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				// Ramp
+				addStaticObject(VECTOR(-35.0f, 4.0f), 0,
+					std::make_shared<b2PolygonShape>(SimulationObject::getRightTriangle(25, 25)), SimulationObject::BIG_TRIANGLE,
+					SimulationMaterial::METAL, SimulationColor::PURPLE);
+
+
+
+
+				// Circles
+				addDynamicObject(VECTOR(-30.0f, -3.0f), VECTOR(0.0f, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::CYAN);
+				addDynamicObject(VECTOR(30.0f, -3.0f), VECTOR(0.0f, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::PURPLE);
+				addDynamicObject(VECTOR(30.0f, 6.0f), VECTOR(-20.0f, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::RED);
+				addDynamicObject(VECTOR(-30.0f, 42.0f), VECTOR(0.0f, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+
 
 				m_nNumberOfObjects--;
 			}
@@ -100,7 +112,13 @@ namespace svqa {
 			bd.angle = RandomFloat(M_PI, M_PI);
 			bd.linearVelocity = velocity;
 			BODY* body = (BODY*)m_world->CreateBody(&bd);
-			body->CreateFixture(shape.get(), mat.getDensity());
+
+			b2FixtureDef fd = b2FixtureDef();
+			fd.density = mat.getDensity();
+			fd.shape = shape.get();
+			fd.restitution = mat.getRestitution();
+
+			body->CreateFixture(&fd);
 
 			body->setTexture(mat.getTexture());
 			body->setColor(color.GetColor());
@@ -112,17 +130,24 @@ namespace svqa {
 		{
 			SimulationObject object = SimulationObject(objType);
 			ShapePtr shape = object.getShape();
-			SimulationMaterial material = SimulationMaterial(materialType);
+			SimulationMaterial mat = SimulationMaterial(materialType);
 			b2BodyDef bd;
 			bd.type = b2_staticBody;
 			bd.position = position;
 			bd.angle = angle;
 			BODY* body = (BODY*)m_world->CreateBody(&bd);
-			body->CreateFixture(shape.get(), material.getDensity());
-			body->setTexture(material.getTexture());
+
+			b2FixtureDef fd = b2FixtureDef();
+			fd.density = mat.getDensity();
+			fd.shape = shape.get();
+			fd.restitution = mat.getRestitution();
+
+			body->CreateFixture(&fd);
+
+			body->setTexture(mat.getTexture());
 			body->setColor(color.GetColor());
 
-			state.add(ObjectState(body, material.type, color.type, object.type));
+			state.add(ObjectState(body, mat.type, color.type, object.type));
 		}
 
 		void addStaticObject(VECTOR position, float32 angle, ShapePtr shape,
