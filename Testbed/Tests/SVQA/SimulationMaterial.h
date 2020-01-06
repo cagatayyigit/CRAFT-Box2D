@@ -15,41 +15,53 @@
 class SimulationMaterial
 {
 public:
-    enum TYPE
-    {
-        METAL = 0,
-        RUBBER = 1,
-    };
+	enum TYPE
+	{
+		METAL = 0,
+		RUBBER = 1,
+	};
 
-    SimulationMaterial(TYPE t)
-    {
-        type = t;
-    }
+	SimulationMaterial(TYPE t)
+	{
+		type = t;
+	}
 
-    float getDensity()
-    {
-        if(type == METAL)
-        {
-            return 10.0F;
-        }
-        return 5.0F;
-    }
+	float getDensity()
+	{
+		if (type == METAL)
+		{
+			return 10.0F;
+		}
+		return 5.0F;
+	}
 
-    TYPE type;
-    
-    //Creates the texture associated with the material
-    b2VisTexture::Ptr getTexture();
-    
+	float getRestitution()
+	{
+		switch (type)
+		{
+		case METAL:
+			return 0.02f;
+		case RUBBER:
+			return 0.35f;
+		}
+		return 0.0f;
+	}
+
+	TYPE type;
+
+	//Creates the texture associated with the material
+	b2VisTexture::Ptr getTexture();
+
 private:
-    static const std::string metalFilePath;
-    static const std::string rubberFilePath;
-    static b2VisTexture::Ptr metalTexture;
-    static b2VisTexture::Ptr rubberTexture;
+	static const std::string metalFilePath;
+	static const std::string rubberFilePath;
+	static b2VisTexture::Ptr metalTexture;
+	static b2VisTexture::Ptr rubberTexture;
 };
 
-NLOHMANN_JSON_SERIALIZE_ENUM( SimulationMaterial::TYPE, {
-    {SimulationMaterial::METAL, "metal"},
-    {SimulationMaterial::RUBBER, "rubber"}
-})
+NLOHMANN_JSON_SERIALIZE_ENUM(SimulationMaterial::TYPE, {
+	{SimulationMaterial::METAL, "metal"},
+	{SimulationMaterial::RUBBER, "rubber"}
+	})
 
 #endif /* SimulationMaterial_h */

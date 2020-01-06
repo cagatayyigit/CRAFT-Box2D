@@ -1,17 +1,1 @@
-[
-  {
-    "active": true,
-    "angle": 0.0,
-    "angularDamping": 0.0,
-    "angularVelocity": 0.0,
-    "bodyType": 0,
-    "colorType": "blue",
-    "linearDamping": 0.0,
-    "linearVelocityX": 0.0,
-    "linearVelocityY": 0.0,
-    "materialType": "metal",
-    "objectType": "small_cube",
-    "posX": 0.0,
-    "posY": 0.0
-  }
-]
+[{"active":true,"angle":0.0,"angularDamping":0.0,"angularVelocity":0.0,"bodyType":0,"colorType":"gray","linearDamping":0.0,"linearVelocityX":0.0,"linearVelocityY":0.0,"materialType":"metal","objectType":"custom_rectangle","posX":-30.0,"posY":3.0},{"active":true,"angle":0.0,"angularDamping":0.0,"angularVelocity":0.0,"bodyType":0,"colorType":"gray","linearDamping":0.0,"linearVelocityX":0.0,"linearVelocityY":0.0,"materialType":"metal","objectType":"custom_rectangle","posX":35.0,"posY":3.0},{"active":true,"angle":2.1598448753356934,"angularDamping":0.0,"angularVelocity":0.0,"bodyType":0,"colorType":"gray","linearDamping":0.0,"linearVelocityX":0.0,"linearVelocityY":0.0,"materialType":"metal","objectType":"custom_rectangle","posX":-33.0,"posY":35.0},{"active":true,"angle":0.7853981852531433,"angularDamping":0.0,"angularVelocity":0.0,"bodyType":0,"colorType":"gray","linearDamping":0.0,"linearVelocityX":0.0,"linearVelocityY":0.0,"materialType":"metal","objectType":"custom_rectangle","posX":-10.0,"posY":25.0},{"active":true,"angle":0.0,"angularDamping":0.0,"angularVelocity":0.0,"bodyType":0,"colorType":"purple","linearDamping":0.0,"linearVelocityX":0.0,"linearVelocityY":0.0,"materialType":"metal","objectType":"small_cube","posX":-35.0,"posY":4.0},{"active":true,"angle":7.140470027923584,"angularDamping":0.0,"angularVelocity":0.0,"bodyType":2,"colorType":"cyan","linearDamping":0.0,"linearVelocityX":0.0,"linearVelocityY":0.0,"materialType":"rubber","objectType":"small_cube","posX":-37.9949836730957,"posY":-2.992978096008301},{"active":true,"angle":-0.8742239475250244,"angularDamping":0.0,"angularVelocity":0.0,"bodyType":2,"colorType":"purple","linearDamping":0.0,"linearVelocityX":0.0,"linearVelocityY":0.0,"materialType":"rubber","objectType":"small_cube","posX":37.993255615234375,"posY":-2.993772268295288},{"active":true,"angle":-7.015217304229736,"angularDamping":0.0,"angularVelocity":0.0,"bodyType":2,"colorType":"red","linearDamping":0.0,"linearVelocityX":0.0,"linearVelocityY":0.0,"materialType":"rubber","objectType":"small_cube","posX":33.992435455322266,"posY":-2.993035316467285},{"active":true,"angle":2.4923150539398193,"angularDamping":0.0,"angularVelocity":0.0,"bodyType":2,"colorType":"blue","linearDamping":0.0,"linearVelocityX":0.0,"linearVelocityY":0.0,"materialType":"rubber","objectType":"small_cube","posX":-33.99854278564453,"posY":-2.990992784500122}]
