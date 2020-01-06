@@ -74,8 +74,6 @@ public:
 
 	TYPE type;
 
-
-
 	static b2VisPolygonShape getCube(const float& edgeLength)
 	{
 		b2VisPolygonShape shape;
@@ -90,10 +88,10 @@ public:
 		return shape;
 	}
 
-	static b2VisPolygonShape getRectangle(const float& w, const float& h,VECTOR center,float32 angle)
+	static b2VisPolygonShape getRectangle(const float& w, const float& h, VECTOR center, float32 angle)
 	{
 		b2VisPolygonShape shape;
-		shape.SetAsBox(w, h,center,angle);
+		shape.SetAsBox(w, h, center, angle);
 		return shape;
 	}
 
@@ -134,10 +132,21 @@ public:
 		return circle;
 	}
 
-	static b2VisPolygonShape getRightTriangle(const float& hEdgeLength, const float& vEdgeLength)
+	static b2VisPolygonShape getRightTriangle(const float& vEdgeLength, const float& hEdgeLength)
 	{
 		b2VisPolygonShape shape;
 		// TODO
+		VECTOR vertex1 = VECTOR(vEdgeLength, 0);
+		VECTOR vertex2 = VECTOR(0, hEdgeLength);
+		VECTOR vertex3 = VECTOR(0, 0);
+
+		std::vector<VECTOR>  vertices = std::vector<VECTOR>();
+		vertices.push_back(vertex1);
+		vertices.push_back(vertex2);
+		vertices.push_back(vertex3);
+
+		shape.Set(vertices.data(), 3);
+		return shape;
 	}
 
 
