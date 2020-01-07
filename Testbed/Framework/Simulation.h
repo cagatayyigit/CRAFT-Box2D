@@ -76,10 +76,31 @@ inline float32 RandomFloat(float32 lo, float32 hi)
 	return r;
 }
 
-inline float32 RandomFloatFromHardware(float32 lo, float32 hi) {
+inline float32 RandomFloatFromHardware(float32 lo, float32 hi)
+{
 	std::random_device rd; // obtain a random number from hardware
 	std::mt19937 eng(rd()); // seed the generator
-	std::uniform_real_distribution<> distr(lo, hi); // define the range
+	std::uniform_real_distribution<> distr(lo, hi); // define the range 
+	return distr(eng);
+}
+
+inline int RandomInteger(int lo, int hi)
+{
+	std::random_device rd; // obtain a random number from hardware
+	std::mt19937 eng(rd()); // seed the generator
+	std::uniform_int_distribution<> distr(lo, hi); // define the range 
+	return distr(eng);
+}
+
+inline float32 RandomFloatWithinRanges(std::vector<float32> minimums, std::vector<float32> maximums)
+{
+	if (minimums.size() != maximums.size()) throw "The two extremum lists must have the same size!";
+
+	int rand_range_i = RandomInteger(0, minimums.size() - 1);
+
+	std::random_device rd; // obtain a random number from hardware
+	std::mt19937 eng(rd()); // seed the generator
+	std::uniform_real_distribution<> distr(minimums[rand_range_i], maximums[rand_range_i]); // define the range 
 	return distr(eng);
 }
 

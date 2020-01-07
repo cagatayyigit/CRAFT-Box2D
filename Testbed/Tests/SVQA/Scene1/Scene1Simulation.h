@@ -31,7 +31,19 @@ namespace svqa {
 				// Setup static objects.
 
 				VECTOR rampPosition = VECTOR(RandomFloatFromHardware(-36.5f, -33.5f), 4.0f);
-				float32 angle = (RandomFloatFromHardware(-2.75, 2.75)) * M_PI / 4;
+
+				float32 min_angle1 = M_PI / 7.0f;
+				float32 max_angle1 = M_PI / 2.0f - min_angle1;
+				float32 min_angle2 = M_PI / 2.0f + min_angle1;
+				float32 max_angle2 = M_PI / 2.0f + max_angle1;
+				std::vector<float32> mins = std::vector<float32>();
+				mins.push_back(min_angle1);
+				mins.push_back(min_angle2);
+				std::vector<float32> maxs = std::vector<float32>();
+				maxs.push_back(max_angle1);
+				maxs.push_back(max_angle2);
+
+				float32 angle = RandomFloatWithinRanges(mins, maxs);
 
 				// Left  Floor
 				addStaticObject(
