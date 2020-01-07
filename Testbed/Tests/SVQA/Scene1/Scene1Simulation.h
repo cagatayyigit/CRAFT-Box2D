@@ -45,11 +45,17 @@ namespace svqa {
 
 				float32 angle = RandomFloatWithinRanges(mins, maxs);
 
+				float32 leftFloorLen = (RandomFloatFromHardware(15.0, 18.0));
+				float32 rightFloorCoorX = (RandomFloatFromHardware(40.0, 46.0));
+
+				float32 leftBottomCircleCoorX = (RandomFloatFromHardware(-30.0, 10.0)) ;
+				float32 rightBottomCircleCoorX = (RandomFloatFromHardware(12.0, 30.0));
+
 				// Left  Floor
 				addStaticObject(
-					VECTOR(-18.0f, 3.0f),
+					VECTOR(-16.0f, 3.0f),
 					0,
-					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(15.0f, 1.0f)),
+					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(leftFloorLen, 1.0f)),
 					SimulationObject::CUSTOM_RECTANGLE,
 					SimulationMaterial::METAL,
 					SimulationColor::GRAY
@@ -57,9 +63,9 @@ namespace svqa {
 
 				// Right Floor
 				addStaticObject(
-					VECTOR(22.5f, 3.0f),
+					VECTOR(rightFloorCoorX, 3.0f),
 					0,
-					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(15.0f, 1.0f)),
+					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(35.0f, 1.0f)),
 					SimulationObject::CUSTOM_RECTANGLE,
 					SimulationMaterial::METAL,
 					SimulationColor::GRAY
@@ -86,7 +92,7 @@ namespace svqa {
 					SimulationColor::GRAY
 				);
 
-				// Ramp
+				// Big Ramp
 				addStaticObject(
 					rampPosition,
 					0,
@@ -96,29 +102,40 @@ namespace svqa {
 					SimulationColor::PURPLE
 				);
 
-
+				// Small Ramp
+				addStaticObject(
+					VECTOR(-40.0f, -6.0f),
+					0,
+					std::make_shared<b2PolygonShape>(SimulationObject::getRightTriangle(3, 3)),
+					SimulationObject::BIG_TRIANGLE,
+					SimulationMaterial::METAL,
+					SimulationColor::PURPLE
+				);
 
 
 				// Circles
+				// Stationary Bottom-Left
 				addDynamicObject(
-					VECTOR(-30.0f, -3.0f),
+					VECTOR(leftBottomCircleCoorX, -3.0f),
 					VECTOR(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
 					SimulationColor::TYPE::CYAN
 				);
 
+				// Stationary Bottom-Right
 				addDynamicObject(
-					VECTOR(30.0f, -3.0f),
+					VECTOR(rightBottomCircleCoorX, -3.0f),
 					VECTOR(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
 					SimulationColor::TYPE::PURPLE
 				);
 
+				// Moving on the Right Floor
 				addDynamicObject(
 					VECTOR(30.0f, 6.0f),
-					VECTOR(-20.0f, 0.0f),
+					VECTOR(-10.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
 					SimulationColor::TYPE::RED
@@ -132,13 +149,6 @@ namespace svqa {
 					SimulationColor::TYPE::BLUE
 				);
 
-				addDynamicObject(
-					VECTOR(-38.0f, 38.0f),
-					VECTOR(0.0f, 0.0f),
-					SimulationObject::SMALL_CIRCLE,
-					SimulationMaterial::RUBBER,
-					SimulationColor::TYPE::BLUE
-				);
 
 				m_nNumberOfObjects--;
 			}
