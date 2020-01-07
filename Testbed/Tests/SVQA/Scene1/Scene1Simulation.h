@@ -12,7 +12,6 @@ namespace svqa {
 	{
 	public:
 		typedef std::shared_ptr<Scene1Simulation> Ptr;
-
 		Scene1Simulation(Scene1Settings::Ptr settings) : SimulationBase(settings)
 		{
 			m_nNumberOfObjects = 1;
@@ -26,47 +25,108 @@ namespace svqa {
 		{
 			const bool stable = isSceneStable();
 			const bool addObject = stable && m_nNumberOfObjects > 0;
-			const bool terminateSimulation = m_nNumberOfObjects == 0 && stable;
+			const bool terminateSimulation = false; // m_nNumberOfObjects == 0 && stable;
 
 			if (addObject) {
-
 				// Setup static objects.
-				//addStaticObject(VECTOR(5.0f, 5.0f), M_PI / 2, SimulationObject::BIG_RAMP, SimulationMaterial::METAL, SimulationColor::BLUE);
 
-				// Right  Floor
-				addStaticObject(VECTOR(-30.0f, 3.0f), 0,
-					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(28.0f, 1.0f)), SimulationObject::CUSTOM_RECTANGLE,
-					SimulationMaterial::METAL, SimulationColor::GRAY);
-				// Left Floor
-				addStaticObject(VECTOR(35.0f, 3.0f), 0,
-					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(25.0f, 1.0f)), SimulationObject::CUSTOM_RECTANGLE,
-					SimulationMaterial::METAL, SimulationColor::GRAY);
+				VECTOR rampPosition = VECTOR(RandomFloatFromHardware(-36.5f, -33.5f), 4.0f);
+				float32 angle = (RandomFloatFromHardware(-2.75, 2.75)) * M_PI / 4;
+
+				// Left  Floor
+				addStaticObject(
+					VECTOR(-18.0f, 3.0f),
+					0,
+					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(15.0f, 1.0f)),
+					SimulationObject::CUSTOM_RECTANGLE,
+					SimulationMaterial::METAL,
+					SimulationColor::GRAY
+				);
+
+				// Right Floor
+				addStaticObject(
+					VECTOR(22.5f, 3.0f),
+					0,
+					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(15.0f, 1.0f)),
+					SimulationObject::CUSTOM_RECTANGLE,
+					SimulationMaterial::METAL,
+					SimulationColor::GRAY
+				);
 
 
 				// Inclined Floor
-				addStaticObject(VECTOR(-33.0f, 35.0f), 2.75 * M_PI / 4 ,
-					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(6.0f, 1.0f)), SimulationObject::CUSTOM_RECTANGLE,
-					SimulationMaterial::METAL, SimulationColor::GRAY);
+				addStaticObject(
+					VECTOR(-28.0f, 35.0f),
+					angle,
+					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(6.0f, 0.5f)),
+					SimulationObject::CUSTOM_RECTANGLE,
+					SimulationMaterial::METAL,
+					SimulationColor::GRAY
+				);
 
 				// Inclined Floor
-				addStaticObject(VECTOR(-10.0f, 25.0f), M_PI / 4,
-					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(10.0f, 1.0f)), SimulationObject::CUSTOM_RECTANGLE,
-					SimulationMaterial::METAL, SimulationColor::GRAY);
+				addStaticObject(
+					VECTOR(-10.0f, 25.0f),
+					M_PI / 4,
+					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(10.0f, 1.0f)),
+					SimulationObject::CUSTOM_RECTANGLE,
+					SimulationMaterial::METAL,
+					SimulationColor::GRAY
+				);
 
 				// Ramp
-				addStaticObject(VECTOR(-35.0f, 4.0f), 0,
-					std::make_shared<b2PolygonShape>(SimulationObject::getRightTriangle(25, 25)), SimulationObject::BIG_TRIANGLE,
-					SimulationMaterial::METAL, SimulationColor::PURPLE);
+				addStaticObject(
+					rampPosition,
+					0,
+					std::make_shared<b2PolygonShape>(SimulationObject::getRightTriangle(25, 20)),
+					SimulationObject::BIG_TRIANGLE,
+					SimulationMaterial::METAL,
+					SimulationColor::PURPLE
+				);
 
 
 
 
 				// Circles
-				addDynamicObject(VECTOR(-30.0f, -3.0f), VECTOR(0.0f, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::CYAN);
-				addDynamicObject(VECTOR(30.0f, -3.0f), VECTOR(0.0f, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::PURPLE);
-				addDynamicObject(VECTOR(30.0f, 6.0f), VECTOR(-20.0f, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::RED);
-				addDynamicObject(VECTOR(-30.0f, 42.0f), VECTOR(0.0f, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				addDynamicObject(
+					VECTOR(-30.0f, -3.0f),
+					VECTOR(0.0f, 0.0f),
+					SimulationObject::SMALL_CIRCLE,
+					SimulationMaterial::RUBBER,
+					SimulationColor::TYPE::CYAN
+				);
 
+				addDynamicObject(
+					VECTOR(30.0f, -3.0f),
+					VECTOR(0.0f, 0.0f),
+					SimulationObject::SMALL_CIRCLE,
+					SimulationMaterial::RUBBER,
+					SimulationColor::TYPE::PURPLE
+				);
+
+				addDynamicObject(
+					VECTOR(30.0f, 6.0f),
+					VECTOR(-20.0f, 0.0f),
+					SimulationObject::SMALL_CIRCLE,
+					SimulationMaterial::RUBBER,
+					SimulationColor::TYPE::RED
+				);
+
+				addDynamicObject(
+					VECTOR(-30.0f, 42.0f),
+					VECTOR(0.0f, 0.0f),
+					SimulationObject::BIG_CIRCLE,
+					SimulationMaterial::RUBBER,
+					SimulationColor::TYPE::BLUE
+				);
+
+				addDynamicObject(
+					VECTOR(-38.0f, 38.0f),
+					VECTOR(0.0f, 0.0f),
+					SimulationObject::SMALL_CIRCLE,
+					SimulationMaterial::RUBBER,
+					SimulationColor::TYPE::BLUE
+				);
 
 				m_nNumberOfObjects--;
 			}

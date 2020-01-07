@@ -47,6 +47,9 @@
 #endif
 #include <math.h>
 
+#include <random>
+#include <iostream>
+
 class Simulation;
 struct SettingsBase;
 
@@ -73,6 +76,13 @@ inline float32 RandomFloat(float32 lo, float32 hi)
 	return r;
 }
 
+inline float32 RandomFloatFromHardware(float32 lo, float32 hi) {
+	std::random_device rd; // obtain a random number from hardware
+	std::mt19937 eng(rd()); // seed the generator
+	std::uniform_real_distribution<> distr(lo, hi); // define the range
+	return distr(eng);
+}
+
 inline b2Vec2 RandomUnitVector()
 {
 	float32 r = 1.0f * sqrt(RandomFloat(0.0f, 1.0f));
@@ -84,7 +94,7 @@ inline b2Vec2 RandomUnitVector()
 	return randUnitVector;
 }
 
-inline VECTOR DifferenceVector(VECTOR v1, VECTOR v2) 
+inline VECTOR DifferenceVector(VECTOR v1, VECTOR v2)
 {
 	return VECTOR(v2.x - v1.x, v2.y - v1.y);
 }

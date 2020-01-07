@@ -112,7 +112,7 @@ void renderLoop(Simulation* simulation, SettingsBase* settings)
 int main(int, char**)
 {
 	// To produce random numbers rather than getting same numbers on every run.
-	srand(time(NULL)); 
+	srand(time(NULL) + 42); 
 
 	std::string controllerJSONPath = "controller.json";
 	const svqa::SimulationBase::Ptr& simulation = svqa::parse(controllerJSONPath);
