@@ -51,6 +51,10 @@ namespace svqa {
 				float32 leftBottomCircleCoorX = (RandomFloatFromHardware(-30.0, 10.0)) ;
 				float32 rightBottomCircleCoorX = (RandomFloatFromHardware(12.0, 30.0));
 
+				float32 inclinedFloorLen = (RandomFloatFromHardware(9.0, 12.0));
+				float32 circleV = (RandomFloatFromHardware(-5.0, -15.0));
+
+
 				// Left  Floor
 				addStaticObject(
 					VECTOR(-16.0f, 3.0f),
@@ -86,7 +90,7 @@ namespace svqa {
 				addStaticObject(
 					VECTOR(-10.0f, 25.0f),
 					M_PI / 4,
-					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(10.0f, 1.0f)),
+					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(inclinedFloorLen, 1.0f)),
 					SimulationObject::CUSTOM_RECTANGLE,
 					SimulationMaterial::METAL,
 					SimulationColor::GRAY
@@ -135,7 +139,7 @@ namespace svqa {
 				// Moving on the Right Floor
 				addDynamicObject(
 					VECTOR(30.0f, 6.0f),
-					VECTOR(-10.0f, 0.0f),
+					VECTOR(circleV, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
 					SimulationColor::TYPE::RED
