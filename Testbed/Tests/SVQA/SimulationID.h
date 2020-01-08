@@ -14,7 +14,9 @@ enum SimulationID
     ID_ObstructedPath = 1,
     ID_PendulumObstacles = 2,
     ID_FixedPulley = 3,
-    ID_ConnectedCars = 4
+    ID_ConnectedCars = 4,
+	ID_ObstructionDemo = 5,
+	ID_Scene1 = 6
 };
 
 #endif /* SimulationID_h */

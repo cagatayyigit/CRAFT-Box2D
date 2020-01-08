@@ -41,7 +41,14 @@
 #endif
 #include "Testbed/glfw/glfw3.h"
 
-#include <stdlib.h>
+#include <stdlib.h> 
+#ifdef _MSC_VER
+#define _USE_MATH_DEFINES
+#endif
+#include <math.h>
+
+#include <random>
+#include <iostream>
 
 class Simulation;
 struct SettingsBase;
@@ -69,11 +76,55 @@ inline float32 RandomFloat(float32 lo, float32 hi)
 	return r;
 }
 
+inline float32 RandomFloatFromHardware(float32 lo, float32 hi)
+{
+	std::random_device rd; // obtain a random number from hardware
+	std::mt19937 eng(rd()); // seed the generator
+	std::uniform_real_distribution<> distr(lo, hi); // define the range 
+	return distr(eng);
+}
+
+inline int RandomInteger(int lo, int hi)
+{
+	std::random_device rd; // obtain a random number from hardware
+	std::mt19937 eng(rd()); // seed the generator
+	std::uniform_int_distribution<> distr(lo, hi); // define the range 
+	return distr(eng);
+}
+
+inline float32 RandomFloatWithinRanges(std::vector<float32> minimums, std::vector<float32> maximums)
+{
+	if (minimums.size() != maximums.size()) throw "The two extremum lists must have the same size!";
+
+	int rand_range_i = RandomInteger(0, minimums.size() - 1);
+
+	std::random_device rd; // obtain a random number from hardware
+	std::mt19937 eng(rd()); // seed the generator
+	std::uniform_real_distribution<> distr(minimums[rand_range_i], maximums[rand_range_i]); // define the range 
+	return distr(eng);
+}
+
+inline b2Vec2 RandomUnitVector()
+{
+	float32 r = 1.0f * sqrt(RandomFloat(0.0f, 1.0f));
+	float32 theta = RandomFloat(0.0f, 1.0f) * M_PI * 2;
+	float32 x = cos(theta) * r;
+	float32 y = sin(theta) * r;
+	b2Vec2 randUnitVector = b2Vec2();
+	randUnitVector.Set(x, y);
+	return randUnitVector;
+}
+
+inline VECTOR DifferenceVector(VECTOR v1, VECTOR v2)
+{
+	return VECTOR(v2.x - v1.x, v2.y - v1.y);
+}
+
 /// Test settings. Some can be controlled in the GUI.
 struct SettingsBase
 {
-    typedef std::shared_ptr<SettingsBase> Ptr;
-    
+	typedef std::shared_ptr<SettingsBase> Ptr;
+
 	SettingsBase()
 	{
 		hz = 60.0f;
@@ -95,14 +146,14 @@ struct SettingsBase
 		enableSleep = true;
 		pause = false;
 		singleStep = false;
-        bufferWidth = 640;
-        bufferHeight = 320;
+		bufferWidth = 640;
+		bufferHeight = 320;
 	}
-    
-    virtual ~SettingsBase()
-    {
-        
-    }
+
+	virtual ~SettingsBase()
+	{
+
+	}
 
 	float32 hz;
 	int32 velocityIterations;
@@ -123,14 +174,14 @@ struct SettingsBase
 	bool enableSleep;
 	bool pause;
 	bool singleStep;
-    int bufferWidth;
-    int bufferHeight;
+	int bufferWidth;
+	int bufferHeight;
 };
 
 struct TestEntry
 {
-	const char *name;
-	TestCreateFcn *createFcn;
+	const char* name;
+	TestCreateFcn* createFcn;
 };
 
 extern TestEntry g_testEntries[];
@@ -163,12 +214,12 @@ struct ContactPoint
 class Simulation : public b2ContactListener
 {
 public:
-    typedef std::shared_ptr<Simulation> Ptr;
+	typedef std::shared_ptr<Simulation> Ptr;
 
 	Simulation();
 	virtual ~Simulation();
 
-	void DrawTitle(const char *string);
+	void DrawTitle(const char* string);
 	virtual void Step(SettingsBase* settings);
 	virtual void Keyboard(int key) { B2_NOT_USED(key); }
 	virtual void KeyboardUp(int key) { B2_NOT_USED(key); }
@@ -178,7 +229,7 @@ public:
 	void MouseMove(const b2Vec2& p);
 	void LaunchBomb();
 	void LaunchBomb(const b2Vec2& position, const b2Vec2& velocity);
-	
+
 	void SpawnBomb(const b2Vec2& worldPt);
 	void CompleteBombSpawn(const b2Vec2& p);
 

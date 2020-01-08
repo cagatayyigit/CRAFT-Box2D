@@ -59,7 +59,13 @@ project 'Testbed'
 		'Testbed/glfw/monitor.c',
 		'Testbed/glfw/vulkan.c',
 		'Testbed/glfw/window.c',
-		'Testbed/imgui/*'
+		'Testbed/imgui/*',
+		'Testbed/Tests/SVQA/*',
+		'Testbed/Tests/SVQA/FixedPulley/*',
+		'Testbed/Tests/SVQA/ObstructedPath/*',
+		'Testbed/Tests/SVQA/PendulumObstacles/*',
+		'Testbed/Tests/SVQA/RemoveObject/*'
+		
 	}
 
     filter { 'system:windows' }
