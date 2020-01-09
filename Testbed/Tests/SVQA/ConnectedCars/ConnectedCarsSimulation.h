@@ -30,6 +30,9 @@ namespace svqa {
             m_bSceneWithCarsCreated = false;
             m_vSpeedBoundaries = b2Vec2(80.0f, 120.0f);
             m_vXPosBoundaries = b2Vec2(-25.0f, 25.0f);
+            
+            m_nNumberOfCars = _settings_->numberOfCars;
+            
             createBoundaries();
             SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
         }
@@ -102,56 +105,77 @@ namespace svqa {
         virtual std::vector<CarInfo> createCars(const int& numberOfCars)
         {
             std::vector<CarInfo> res;
-            for(int i=0; i < numberOfCars; i++) {
+            while(1) {
                 const bool& reverseDirection = randWithBound(2)==1;
                 float speed = RandomFloat(m_vSpeedBoundaries.x, m_vSpeedBoundaries.y);
                 if(reverseDirection) {
                     speed *= -1;
                 }
                 const float& xPos = RandomFloat(m_vXPosBoundaries.x, m_vXPosBoundaries.y);
-                res.push_back(createCar(speed, xPos));
+                bool safe = true;
+                for(size_t c=0; c<res.size();c++) {
+                    CarInfo currentCarInfo = res[c];
+                    if(fabs(xPos - currentCarInfo.car->GetPosition().x)<10.0f) {
+                        safe = false;
+                        break;
+                    }
+                }
+                
+                if(safe) {
+                    CarInfo newCarInfo = createCar(speed, xPos);
+                    res.push_back(newCarInfo);
+                    
+                }
+                
+                if(res.size() >= numberOfCars) {
+                    break;
+                }
             }
             return res;
         }
         
         virtual void createCarRelations(const std::vector<CarInfo>& cars)
         {
-            const float& length = fabs(cars[0].car->GetPosition().x - cars[1].car->GetPosition().x);
-            
-            b2RopeJointDef jd;
-            jd.maxLength = length;
-            jd.collideConnected = true;
-            b2Vec2 p1, p2, d;
-
-    //            jd.frequencyHz = 2.0f;
-    //            jd.dampingRatio = 0.0f;
-            //jd.type = e_distanceJoint;
-            
-            jd.bodyA = cars[0].car;
-            jd.bodyB = cars[1].car;
-            jd.localAnchorA.Set(0.0f, 0.0f);
-            jd.localAnchorB.Set(0.0f, 0.0f);;
-            p1 = jd.bodyA->GetWorldPoint(jd.localAnchorA);
-            p2 = jd.bodyB->GetWorldPoint(jd.localAnchorB);
-            d = p2 - p1;
-            b2Joint* joint = m_world->CreateJoint(&jd);
+            for(int i=0; i < cars.size()-1; i++) {
+                
+                int createRelation = randWithBound(2);
+                if(createRelation) {
+                    const float& length = fabs(cars[i].car->GetPosition().x - cars[i+1].car->GetPosition().x);
+                    
+                    b2RopeJointDef jd;
+                    jd.maxLength = length;
+                    jd.collideConnected = true;
+                    b2Vec2 p1, p2, d;
+                    
+                    jd.bodyA = cars[i].car;
+                    jd.bodyB = cars[i+1].car;
+                    jd.localAnchorA.Set(0.0f, 0.0f);
+                    jd.localAnchorB.Set(0.0f, 0.0f);;
+                    p1 = jd.bodyA->GetWorldPoint(jd.localAnchorA);
+                    p2 = jd.bodyB->GetWorldPoint(jd.localAnchorB);
+                    d = p2 - p1;
+                    b2Joint* joint = m_world->CreateJoint(&jd);
+                }
+            }
         }
         
         virtual void createInitialScene(const int& numberOfCars)
         {
-            const auto& cars = createCars(numberOfCars);
+            auto cars = createCars(numberOfCars);
+            
+            std::sort(cars.begin(), cars.end(), [] (CarInfo const& a, CarInfo const& b) { return a.car->GetPosition().x < b.car->GetPosition().x; });
+            
             createCarRelations(cars);
         }
 
         virtual void Step(SettingsBase* settings) override
         {
+            const bool terminateSimulation = false;
+            
             if(!m_bSceneWithCarsCreated) {
-                createInitialScene(2);
+                createInitialScene(m_nNumberOfCars);
                 m_bSceneWithCarsCreated=true;
             }
-
-            const bool stable = isSceneStable();
-            const bool terminateSimulation = false;
 
             Simulation::Step(settings);
 
@@ -172,6 +196,8 @@ namespace svqa {
         bool m_bSceneWithCarsCreated;
         b2Vec2 m_vSpeedBoundaries;
         b2Vec2 m_vXPosBoundaries;
+        
+        int m_nNumberOfCars;
         
         SceneState state;
     };
