@@ -111,6 +111,10 @@
 		7C94932E238C56AF00BE6CE3 /* PendulumObstaclesSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PendulumObstaclesSettings.h; sourceTree = "<group>"; };
 		7C94932F238C570E00BE6CE3 /* PendulumObstaclesSimulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PendulumObstaclesSimulation.h; sourceTree = "<group>"; };
 		7CC417F1234A0AB200CD88E7 /* SimulationMaterial.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SimulationMaterial.cpp; sourceTree = "<group>"; };
+		7CC77DC323C7A70200BFFAFE /* ObstructionDemoSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObstructionDemoSettings.h; sourceTree = "<group>"; };
+		7CC77DC423C7A70200BFFAFE /* ObstructionDemoSimulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObstructionDemoSimulation.h; sourceTree = "<group>"; };
+		7CC77DC623C7A71700BFFAFE /* Scene1Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene1Settings.h; sourceTree = "<group>"; };
+		7CC77DC723C7A71700BFFAFE /* Scene1Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene1Simulation.h; sourceTree = "<group>"; };
 		85B39C4ACE24807C12C3528A /* imgui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = imgui.cpp; path = ../Testbed/imgui/imgui.cpp; sourceTree = "<group>"; };
 		8799E40B80FFE57D749B424B /* vulkan.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vulkan.c; path = ../Testbed/glfw/vulkan.c; sourceTree = "<group>"; };
 		8D6BC6AA50D7885C8F7B2CEA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -215,8 +219,10 @@
 				7C48C729235C6F5B00FFB396 /* ObjectState.h */,
 				7C48C72A235C819300FFB396 /* SceneState.h */,
 				7C5271A2238A828B00816DFC /* SimulationBase.h */,
+				7CC77DC523C7A71700BFFAFE /* Scene1 */,
 				7C40378523BCED6D00BD8538 /* ConnectedCars */,
 				7C615582238EFFC100702158 /* FixedPulley */,
+				7CC77DC223C7A70200BFFAFE /* ObstructionDemo */,
 				7C94932D238C566F00BE6CE3 /* PendulumObstacles */,
 				7C52719F238A800800816DFC /* ObstructedPath */,
 				7C92AD26234E37C40074BFB6 /* RemoveObject */,
@@ -270,6 +276,24 @@
 			);
 			name = Textures;
 			path = ../Testbed/Data/Textures;
+			sourceTree = "<group>";
+		};
+		7CC77DC223C7A70200BFFAFE /* ObstructionDemo */ = {
+			isa = PBXGroup;
+			children = (
+				7CC77DC323C7A70200BFFAFE /* ObstructionDemoSettings.h */,
+				7CC77DC423C7A70200BFFAFE /* ObstructionDemoSimulation.h */,
+			);
+			path = ObstructionDemo;
+			sourceTree = "<group>";
+		};
+		7CC77DC523C7A71700BFFAFE /* Scene1 */ = {
+			isa = PBXGroup;
+			children = (
+				7CC77DC623C7A71700BFFAFE /* Scene1Settings.h */,
+				7CC77DC723C7A71700BFFAFE /* Scene1Simulation.h */,
+			);
+			path = Scene1;
 			sourceTree = "<group>";
 		};
 		9D968EAA920D05DCE0E0A4EA /* Projects */ = {

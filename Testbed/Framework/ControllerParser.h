@@ -37,6 +37,7 @@ namespace svqa {
                 PendulumObstaclesSettings::Ptr setPtr = std::make_shared<PendulumObstaclesSettings>();
                 setPtr->from_json(j);
                 return std::make_shared<PendulumObstaclesSimulation>(setPtr);
+            }
             else if (set.simulationID == SimulationID::ID_FixedPulley) {
                 FixedPulleySettings::Ptr setPtr = std::make_shared<FixedPulleySettings>();
                 setPtr->from_json(j);
