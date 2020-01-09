@@ -12,20 +12,18 @@
 #include "Box2D/Box2D.h"
 #include <string>
 
+#define RENDER_TEXTURES 0
+
 struct b2AABB;
 struct GLRenderPoints;
 struct GLRenderLines;
 struct GLRenderTriangles;
-
 
 // This class implements debug drawing callbacks that are invoked
 // inside b2World::Step.
 class SimulationRenderer : public b2Draw
 {
 public:
-    
-    
-    
     SimulationRenderer();
     virtual ~SimulationRenderer();
 
