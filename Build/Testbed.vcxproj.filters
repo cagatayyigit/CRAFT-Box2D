@@ -43,6 +43,9 @@
     <Filter Include="Tests\SVQA\JumpingBall">
       <UniqueIdentifier>{793151bc-59f5-40d3-98dc-08324f57c35a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tests\SVQA\Scene2">
+      <UniqueIdentifier>{12c67529-6b36-46f0-b91f-6920ac1be608}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Testbed\Framework\Camera.hpp">
@@ -186,6 +189,12 @@
     </ClInclude>
     <ClInclude Include="..\Testbed\Tests\SVQA\JumpingBall\JumpingBallSimulation.h">
       <Filter>Tests\SVQA\JumpingBall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scene2\Scene2Settings.h">
+      <Filter>Tests\SVQA\Scene2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scene2\Scene2Simulation.h">
+      <Filter>Tests\SVQA\Scene2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

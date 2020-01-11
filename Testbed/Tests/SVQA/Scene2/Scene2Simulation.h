@@ -1,18 +1,18 @@
 #pragma once
 
 #include "SimulationColor.h"
-#include "Scene1Settings.h"
+#include "Scene2Settings.h"
 #include "SimulationBase.h"
 #include "Box2D/Extension/b2VisBody.hpp"
 #include "Box2D/Extension/b2VisPolygonShape.hpp"
 #include <math.h> 
 
 namespace svqa {
-	class Scene1Simulation : public SimulationBase
+	class Scene2Simulation : public SimulationBase
 	{
 	public:
-		typedef std::shared_ptr<Scene1Simulation> Ptr;
-		Scene1Simulation(Scene1Settings::Ptr settings) : SimulationBase(settings)
+		typedef std::shared_ptr<Scene2Simulation> Ptr;
+		Scene2Simulation(Scene2Settings::Ptr settings) : SimulationBase(settings)
 		{
 			m_nNumberOfObjects = 1;
 			SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
@@ -30,116 +30,106 @@ namespace svqa {
 			if (addObject) {
 				// Setup static objects.
 
-				VECTOR rampPosition = VECTOR(RandomFloatFromHardware(-36.5f, -33.5f), 4.0f);
-
-				float32 min_angle1 = M_PI / 7.0f;
-				float32 max_angle1 = M_PI / 2.0f - min_angle1;
-				float32 min_angle2 = M_PI / 2.0f + min_angle1;
-				float32 max_angle2 = M_PI / 2.0f + max_angle1;
-				std::vector<float32> mins = std::vector<float32>();
-				mins.push_back(min_angle1);
-				mins.push_back(min_angle2);
-				std::vector<float32> maxs = std::vector<float32>();
-				maxs.push_back(max_angle1);
-				maxs.push_back(max_angle2);
-
-				float32 angle = RandomFloatWithinRanges(mins, maxs);
-
-				float32 leftFloorLen = (RandomFloatFromHardware(15.0, 18.0));
-				float32 rightFloorCoorX = (RandomFloatFromHardware(40.0, 46.0));
-
-				float32 leftBottomCircleCoorX = (RandomFloatFromHardware(-30.0, 10.0)) ;
-				float32 rightBottomCircleCoorX = (RandomFloatFromHardware(12.0, 30.0));
-
-				float32 inclinedFloorLen = (RandomFloatFromHardware(9.0, 12.0));
-				float32 circleV = (RandomFloatFromHardware(-5.0, -15.0));
-
-
-				// Left  Floor
+				// Up  Floor
 				addStaticObject(
-					VECTOR(-16.0f, 3.0f),
+					VECTOR(5.0f, 20.0f),
 					0,
-					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(leftFloorLen, 1.0f)),
+					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(15.0f, 0.5f)),
 					SimulationObject::CUSTOM_RECTANGLE,
 					SimulationMaterial::METAL,
-					SimulationColor::GRAY
+					SimulationColor::RED
 				);
 
-				// Right Floor
+				// Down Floor
 				addStaticObject(
-					VECTOR(rightFloorCoorX, 3.0f),
+					VECTOR(0, 14.0f),
 					0,
-					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(35.0f, 1.0f)),
+					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(10.0f, 0.5f)),
 					SimulationObject::CUSTOM_RECTANGLE,
 					SimulationMaterial::METAL,
-					SimulationColor::GRAY
+					SimulationColor::RED
 				);
 
-
-				// Inclined Floor
+				// First Rec
 				addStaticObject(
-					VECTOR(-28.0f, 35.0f),
-					angle,
-					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(6.0f, 0.5f)),
+					VECTOR(20, 0.0f),
+					0,
+					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(1.5f, 6.0f)),
 					SimulationObject::CUSTOM_RECTANGLE,
 					SimulationMaterial::METAL,
-					SimulationColor::GRAY
+					SimulationColor::GREEN
 				);
 
-				// Inclined Floor
+				addDynamicObject(
+					VECTOR(20.0f, 7.0f),
+					VECTOR(0.0f, 0.0f),
+					SimulationObject::SMALL_CIRCLE,
+					SimulationMaterial::RUBBER,
+					SimulationColor::TYPE::YELLOW
+				);
+
+				// Second Rec
 				addStaticObject(
-					VECTOR(-10.0f, 25.0f),
-					M_PI / 4,
-					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(inclinedFloorLen, 1.0f)),
+					VECTOR(28, 0.0f),
+					0,
+					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(1.5f, 10.0f)),
 					SimulationObject::CUSTOM_RECTANGLE,
 					SimulationMaterial::METAL,
-					SimulationColor::GRAY
+					SimulationColor::GREEN
+				);
+
+				addDynamicObject(
+					VECTOR(28.0f, 11.0f),
+					VECTOR(0.0f, 0.0f),
+					SimulationObject::SMALL_CIRCLE,
+					SimulationMaterial::RUBBER,
+					SimulationColor::TYPE::YELLOW
+				);
+
+				// Third Rec
+				addStaticObject(
+					VECTOR(35, -2.0f),
+					0,
+					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(1.5f, 4.0f)),
+					SimulationObject::CUSTOM_RECTANGLE,
+					SimulationMaterial::METAL,
+					SimulationColor::GREEN
+				);
+
+				addDynamicObject(
+					VECTOR(35.0f, 4.0f),
+					VECTOR(0.0f, 0.0f),
+					SimulationObject::SMALL_CIRCLE,
+					SimulationMaterial::RUBBER,
+					SimulationColor::TYPE::YELLOW
 				);
 
 				// Big Ramp
 				addStaticObject(
-					rampPosition,
+					VECTOR(-35.0f,14.0f),
 					0,
 					std::make_shared<b2PolygonShape>(SimulationObject::getRightTriangle(25, 20)),
 					SimulationObject::BIG_TRIANGLE,
 					SimulationMaterial::METAL,
-					SimulationColor::PURPLE
+					SimulationColor::GRAY
 				);
 
-				// Small Ramp
-				addStaticObject(
-					VECTOR(-40.0f, -6.0f),
-					0,
-					std::make_shared<b2PolygonShape>(SimulationObject::getRightTriangle(3, 3)),
-					SimulationObject::BIG_TRIANGLE,
-					SimulationMaterial::METAL,
-					SimulationColor::PURPLE
-				);
 
 
 				// Circles
 				// Stationary Bottom-Left
+			
 				addDynamicObject(
-					VECTOR(leftBottomCircleCoorX, -3.0f),
-					VECTOR(0.0f, 0.0f),
-					SimulationObject::SMALL_CIRCLE,
-					SimulationMaterial::RUBBER,
-					SimulationColor::TYPE::CYAN
-				);
-
-				// Stationary Bottom-Right
-				addDynamicObject(
-					VECTOR(rightBottomCircleCoorX, -3.0f),
+					VECTOR(7.0f, 22.0f),
 					VECTOR(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
 					SimulationColor::TYPE::PURPLE
 				);
 
-				// Moving on the Right Floor
 				addDynamicObject(
-					VECTOR(30.0f, 6.0f),
-					VECTOR(circleV, 0.0f),
+					VECTOR(5.0f, 16.0f),
+					VECTOR(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
 					SimulationColor::TYPE::RED
@@ -148,7 +138,7 @@ namespace svqa {
 				addDynamicObject(
 					VECTOR(-30.0f, 42.0f),
 					VECTOR(0.0f, 0.0f),
-					SimulationObject::BIG_CIRCLE,
+					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
 					SimulationColor::TYPE::BLUE
 				);

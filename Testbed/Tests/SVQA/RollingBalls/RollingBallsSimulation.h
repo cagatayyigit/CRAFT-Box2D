@@ -1,23 +1,23 @@
 #pragma once
 
 #include "SimulationColor.h"
-#include "Scene1Settings.h"
+#include "RollingBallsSettings.h"
 #include "SimulationBase.h"
 #include "Box2D/Extension/b2VisBody.hpp"
 #include "Box2D/Extension/b2VisPolygonShape.hpp"
 #include <math.h> 
 
 namespace svqa {
-	class Scene1Simulation : public SimulationBase
+	class RollingBallsSimulation : public SimulationBase
 	{
 	public:
-		typedef std::shared_ptr<Scene1Simulation> Ptr;
-		Scene1Simulation(Scene1Settings::Ptr settings) : SimulationBase(settings)
+		typedef std::shared_ptr<RollingBallsSimulation> Ptr;
+		RollingBallsSimulation(RollingBallsSettings::Ptr settings) : SimulationBase(settings)
 		{
 			m_nNumberOfObjects = 1;
 			SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
 
-				createBoundaries(40.0f, 50.0f, 10.0f);
+				createBoundaries(40.0f, 50.0f, 5.0f);
 		}
 
 		// Our "game loop".
@@ -25,7 +25,7 @@ namespace svqa {
 		{
 			const bool stable = isSceneStable();
 			const bool addObject = stable && m_nNumberOfObjects > 0;
-			const bool terminateSimulation = m_nNumberOfObjects == 0 && stable;
+			const bool terminateSimulation = false; // m_nNumberOfObjects == 0 && stable;
 
 			if (addObject) {
 				// Setup static objects.
@@ -48,7 +48,7 @@ namespace svqa {
 				float32 leftFloorLen = (RandomFloatFromHardware(15.0, 18.0));
 				float32 rightFloorCoorX = (RandomFloatFromHardware(40.0, 46.0));
 
-				float32 leftBottomCircleCoorX = (RandomFloatFromHardware(-30.0, 10.0)) ;
+				float32 leftBottomCircleCoorX = (RandomFloatFromHardware(-30.0, 10.0));
 				float32 rightBottomCircleCoorX = (RandomFloatFromHardware(12.0, 30.0));
 
 				float32 inclinedFloorLen = (RandomFloatFromHardware(9.0, 12.0));
@@ -203,7 +203,7 @@ namespace svqa {
 			fd.density = mat.getDensity();
 			fd.shape = shape.get();
 			fd.restitution = mat.getRestitution();
-			fd.friction = 100.0f;
+
 			body->CreateFixture(&fd);
 
 			body->setTexture(mat.getTexture());
