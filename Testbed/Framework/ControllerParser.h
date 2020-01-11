@@ -15,6 +15,7 @@
 #include "ConnectedCarsSimulation.h"
 #include "ObstructionDemoSimulation.h"
 #include "Scene1Simulation.h"
+#include "JumpingBallSimulation.h"
 #include "JSONHelper.h"
 
 namespace svqa {
@@ -58,6 +59,12 @@ namespace svqa {
 				setPtr->from_json(j);
 				return std::make_shared<Scene1Simulation>(setPtr);
 			}
+            else if (set.simulationID == SimulationID::ID_JumpingBall) {
+                JumpingBallSettings::Ptr setPtr = std::make_shared<JumpingBallSettings>();
+                setPtr->from_json(j);
+                return std::make_shared<JumpingBallSimulation>(setPtr);
+            }
+            
         }
         return nullptr;
         

@@ -32,8 +32,10 @@ public:
 		BIG_CIRCLE = 10,
 		BIG_RAMP = 11,
 		CUSTOM_RECTANGLE = 12,
-        CAR_BODY = 13,
-        CAR_WHEEL = 14
+		CAR_BODY = 13,
+		CAR_WHEEL = 14,
+		ROD_RECTANGLE = 15,
+		SQUARE = 16
 
 	};
 
@@ -73,6 +75,10 @@ public:
             return std::make_shared<b2PolygonShape>(getCarBodyIrregularPolygon());
         case CAR_WHEEL:
             return std::make_shared<b2CircleShape>(getCircle(1.0f));
+		case ROD_RECTANGLE:
+			return std::make_shared<b2PolygonShape>(getRectangle(10.0f, 1.0f));
+		case SQUARE:
+			return std::make_shared<b2PolygonShape>(getRectangle(1.0f, 1.0f));
 		default:
 			break;
 		}

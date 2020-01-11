@@ -40,6 +40,9 @@
     <Filter Include="Tests\SVQA\Scene1">
       <UniqueIdentifier>{ec80df51-b55a-45d4-a651-2d39fe4d2b51}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tests\SVQA\JumpingBall">
+      <UniqueIdentifier>{793151bc-59f5-40d3-98dc-08324f57c35a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Testbed\Framework\Camera.hpp">
@@ -178,6 +181,12 @@
     <ClInclude Include="..\Testbed\Tests\SVQA\Scene1\Scene1Simulation.h">
       <Filter>Tests\SVQA\Scene1</Filter>
     </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\JumpingBall\JumpingBallSettings.h">
+      <Filter>Tests\SVQA\JumpingBall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\JumpingBall\JumpingBallSimulation.h">
+      <Filter>Tests\SVQA\JumpingBall</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Testbed\Framework\Camera.cpp">
@@ -263,6 +272,7 @@
     <None Include="..\Testbed\imgui\imgui.ini">
       <Filter>imgui</Filter>
     </None>
+    <None Include="..\..\intuitive-physics\simulation\2d\Box2D\Testbed\controller.json" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Testbed.rc" />
