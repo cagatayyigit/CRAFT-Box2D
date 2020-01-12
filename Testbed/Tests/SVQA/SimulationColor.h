@@ -24,7 +24,12 @@ public:
         GREEN = 4,
         PURPLE = 5,
         RED = 6,
-        YELLOW = 7
+        YELLOW = 7,
+        BLACK = 8,
+        GREEN2 = 9,
+        BLUE2 = 10,
+        RED2 = 11,
+        YELLOW2 = 12
     };
 
     SimulationColor(TYPE t)
@@ -46,6 +51,12 @@ public:
             case PURPLE: return b2Color(175.0F / 255.0F, 101.0f / 255.0F, 221.0f / 255.0F);
             case RED: return b2Color(152.0F / 255.0F, 40.0f / 255.0F, 40.0f / 255.0F);
             case YELLOW: return b2Color(243.0F / 255.0F, 242.0f / 255.0F, 81.0f / 255.0F);
+            case BLACK: return b2Color(0.0F / 255.0F, 0.0f / 255.0F, 0.0f / 255.0F);
+            case GREEN2: return b2Color(0.0F, 255.0F, 0.0f);
+            case BLUE2: return b2Color(0.0F, 0.0f, 255.0f);
+            case RED2: return b2Color(255.0F, 0.0f, 0.0f);
+            case YELLOW2: return b2Color(1, 1, 0);
+
         }
         return b2Color(0.0f, 0.0f, 0.0f, 0.0f);
     }
@@ -60,7 +71,12 @@ NLOHMANN_JSON_SERIALIZE_ENUM( SimulationColor::TYPE, {
     {SimulationColor::GREEN, "green"},
     {SimulationColor::PURPLE, "purple"},
     {SimulationColor::RED, "red"},
-    {SimulationColor::YELLOW, "yellow"}
+    {SimulationColor::YELLOW, "yellow"},
+    {SimulationColor::BLACK, "black"},
+    {SimulationColor::GREEN2, "green2"},
+    {SimulationColor::BLUE2, "blue2"},
+    {SimulationColor::RED2, "red2"},
+    {SimulationColor::YELLOW2, "yellow2"}
 })
 
 #endif /* SimulationColor_h */
