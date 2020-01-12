@@ -15,9 +15,9 @@ namespace svqa {
 		Scene2Simulation(Scene2Settings::Ptr settings) : SimulationBase(settings)
 		{
 			m_nNumberOfObjects = 1;
-			SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
+			SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath);
 
-				createBoundaries(40.0f, 50.0f, 10.0f);
+			createBoundaries(40.0f, 50.0f, 10.0f);
 		}
 
 		// Our "game loop".
@@ -104,11 +104,22 @@ namespace svqa {
 					SimulationColor::TYPE::YELLOW
 				);
 
-				// Big Ramp
+
+				//
+				// Curved Ramp
+				//
+
+
+				ShapePtr chainShape = std::make_shared<b2ChainShape>(SimulationObject::getCurve(
+					[](float x) {
+						return std::pow(x, 2);
+					}, -2, 0.5, 0.05f
+				));
+
 				addStaticObject(
-					VECTOR(-35.0f,14.0f),
+					VECTOR(-35.0f, 14.0f),
 					0,
-					std::make_shared<b2PolygonShape>(SimulationObject::getRightTriangle(25, 20)),
+					chainShape,
 					SimulationObject::BIG_TRIANGLE,
 					SimulationMaterial::METAL,
 					SimulationColor::GRAY
@@ -118,7 +129,7 @@ namespace svqa {
 
 				// Circles
 				// Stationary Bottom-Left
-			
+
 				addDynamicObject(
 					VECTOR(7.0f, 22.0f),
 					VECTOR(0.0f, 0.0f),
@@ -173,6 +184,8 @@ namespace svqa {
 		VECTOR m_vInitialDropVelocity;
 
 		SceneState state;
+
+		// TODO: We can embed these "addObject" methods in SimulationBase.h
 
 		void addDynamicObject(VECTOR position, VECTOR velocity, SimulationObject::TYPE objType, SimulationMaterial::TYPE materialType, SimulationColor color)
 		{
@@ -242,7 +255,6 @@ namespace svqa {
 
 			state.add(ObjectState(body, material.type, color.type, object.type));
 		}
-
 
 	};
 }
