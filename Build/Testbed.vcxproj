@@ -114,7 +114,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Testbed\Framework;..\Testbed\Tests\SVQA\ObstructionDemo;..\Testbed\Tests\SVQA\RemoveObject;..\Testbed\Tests\SVQA\PendulumObstacles;..\Testbed\Tests\SVQA\Scene1;..\Testbed\Tests\SVQA\FixedPulley;..\Testbed\Tests\SVQA\JumpingBall;..\Testbed\Tests\SVQA\ObstructedPath;..\Testbed\Tests\SVQA;..\Testbed\Tests\SVQA\ConnectedCars;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Testbed\Framework;..\Testbed\Tests\SVQA\ObstructionDemo;..\Testbed\Tests\SVQA\RemoveObject;..\Testbed\Tests\SVQA\PendulumObstacles;..\Testbed\Tests\SVQA\Scene2;..\Testbed\Tests\SVQA\Scene1;..\Testbed\Tests\SVQA\FixedPulley;..\Testbed\Tests\SVQA\JumpingBall;..\Testbed\Tests\SVQA\ObstructedPath;..\Testbed\Tests\SVQA;..\Testbed\Tests\SVQA\ConnectedCars;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
@@ -152,7 +152,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Testbed\Framework;..\Testbed\Tests\SVQA\ObstructionDemo;..\Testbed\Tests\SVQA\RemoveObject;..\Testbed\Tests\SVQA\PendulumObstacles;..\Testbed\Tests\SVQA\Scene1;..\Testbed\Tests\SVQA\FixedPulley;..\Testbed\Tests\SVQA\JumpingBall;..\Testbed\Tests\SVQA\ObstructedPath;..\Testbed\Tests\SVQA;..\Testbed\Tests\SVQA\ConnectedCars;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Testbed\Framework;..\Testbed\Tests\SVQA\ObstructionDemo;..\Testbed\Tests\SVQA\RemoveObject;..\Testbed\Tests\SVQA\PendulumObstacles;..\Testbed\Tests\SVQA\Scene2;..\Testbed\Tests\SVQA\Scene1;..\Testbed\Tests\SVQA\FixedPulley;..\Testbed\Tests\SVQA\JumpingBall;..\Testbed\Tests\SVQA\ObstructedPath;..\Testbed\Tests\SVQA;..\Testbed\Tests\SVQA\ConnectedCars;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -194,6 +194,8 @@
     <ClInclude Include="..\Testbed\Tests\SVQA\RemoveObject\RemoveObjectSimulationSettings.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\Scene1\Scene1Settings.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\Scene1\Scene1Simulation.h" />
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scene2\Scene2Settings.h" />
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scene2\Scene2Simulation.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\SceneState.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\Settings.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\SimulationBase.h" />

@@ -17,7 +17,8 @@ enum SimulationID
     ID_ConnectedCars = 4,
 	ID_ObstructionDemo = 5,
 	ID_Scene1 = 6,
-    ID_JumpingBall = 7
+    ID_JumpingBall = 7,
+    ID_Scene2 = 8,
 };
 
 #endif /* SimulationID_h */

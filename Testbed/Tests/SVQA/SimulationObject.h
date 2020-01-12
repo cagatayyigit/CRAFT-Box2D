@@ -71,10 +71,10 @@ public:
 			return std::make_shared<b2CircleShape>(getCircle(3.0f));
 		case BIG_RAMP:
 			return std::make_shared<b2PolygonShape>(getPolygon(3.0f, 3));
-        case CAR_BODY:
-            return std::make_shared<b2PolygonShape>(getCarBodyIrregularPolygon());
-        case CAR_WHEEL:
-            return std::make_shared<b2CircleShape>(getCircle(1.0f));
+		case CAR_BODY:
+			return std::make_shared<b2PolygonShape>(getCarBodyIrregularPolygon());
+		case CAR_WHEEL:
+			return std::make_shared<b2CircleShape>(getCircle(1.0f));
 		case ROD_RECTANGLE:
 			return std::make_shared<b2PolygonShape>(getRectangle(10.0f, 1.0f));
 		case SQUARE:
@@ -145,6 +145,21 @@ public:
 		return circle;
 	}
 
+	static b2ChainShape getCurve(std::function<float(float)> function, float fromX, float toX, float step)  
+	{
+		b2ChainShape shape = b2ChainShape();
+		std::vector<VECTOR> vertices = std::vector<VECTOR>();
+		float x = fromX;
+		while (x <= toX) 
+		{
+			vertices.push_back(VECTOR(x, function(x)));
+			x += step;
+		}
+
+		shape.CreateChain(vertices.data(), vertices.size());
+		return shape;
+	}
+
 	static b2VisPolygonShape getRightTriangle(const float& vEdgeLength, const float& hEdgeLength)
 	{
 		b2VisPolygonShape shape;
@@ -162,20 +177,20 @@ public:
 		return shape;
 	}
 
-    b2VisPolygonShape getCarBodyIrregularPolygon()
-    {
-        b2VisPolygonShape chassis;
-        b2Vec2 vertices[8];
-        const float scale = 3.0;
-        vertices[0].Set(scale * -1.5f, scale * -0.5f);
-        vertices[1].Set(scale * 1.5f, scale * -0.5f);
-        vertices[2].Set(scale * 1.5f, scale *  0.0f);
-        vertices[3].Set(scale * 0.0f, scale *  0.9f);
-        vertices[4].Set(scale * -1.15f,scale *  0.9f);
-        vertices[5].Set(scale * -1.5f,scale *  0.2f);
-        chassis.Set(vertices, 6);
-        return chassis;
-    }
+	b2VisPolygonShape getCarBodyIrregularPolygon()
+	{
+		b2VisPolygonShape chassis;
+		b2Vec2 vertices[8];
+		const float scale = 3.0;
+		vertices[0].Set(scale * -1.5f, scale * -0.5f);
+		vertices[1].Set(scale * 1.5f, scale * -0.5f);
+		vertices[2].Set(scale * 1.5f, scale * 0.0f);
+		vertices[3].Set(scale * 0.0f, scale * 0.9f);
+		vertices[4].Set(scale * -1.15f, scale * 0.9f);
+		vertices[5].Set(scale * -1.5f, scale * 0.2f);
+		chassis.Set(vertices, 6);
+		return chassis;
+	}
 };
 
 NLOHMANN_JSON_SERIALIZE_ENUM(SimulationObject::TYPE, {
