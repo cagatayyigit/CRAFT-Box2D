@@ -37,7 +37,7 @@ namespace svqa {
 					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(15.0f, 0.5f)),
 					SimulationObject::CUSTOM_RECTANGLE,
 					SimulationMaterial::METAL,
-					SimulationColor::RED
+					SimulationColor::GRAY
 				);
 
 				// Down Floor
@@ -47,7 +47,7 @@ namespace svqa {
 					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(10.0f, 0.5f)),
 					SimulationObject::CUSTOM_RECTANGLE,
 					SimulationMaterial::METAL,
-					SimulationColor::RED
+					SimulationColor::GRAY
 				);
 
 				// First Rec
@@ -57,7 +57,7 @@ namespace svqa {
 					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(1.5f, 6.0f)),
 					SimulationObject::CUSTOM_RECTANGLE,
 					SimulationMaterial::METAL,
-					SimulationColor::GREEN
+					SimulationColor::GRAY
 				);
 
 				addDynamicObject(
@@ -65,7 +65,7 @@ namespace svqa {
 					VECTOR(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
-					SimulationColor::TYPE::YELLOW
+					SimulationColor::TYPE::BLUE2
 				);
 
 				// Second Rec
@@ -75,7 +75,7 @@ namespace svqa {
 					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(1.5f, 10.0f)),
 					SimulationObject::CUSTOM_RECTANGLE,
 					SimulationMaterial::METAL,
-					SimulationColor::GREEN
+					SimulationColor::GRAY
 				);
 
 				addDynamicObject(
@@ -83,7 +83,7 @@ namespace svqa {
 					VECTOR(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
-					SimulationColor::TYPE::YELLOW
+					SimulationColor::TYPE::GREEN2
 				);
 
 				// Third Rec
@@ -93,7 +93,7 @@ namespace svqa {
 					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(1.5f, 4.0f)),
 					SimulationObject::CUSTOM_RECTANGLE,
 					SimulationMaterial::METAL,
-					SimulationColor::GREEN
+					SimulationColor::GRAY
 				);
 
 				addDynamicObject(
@@ -101,7 +101,7 @@ namespace svqa {
 					VECTOR(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
-					SimulationColor::TYPE::YELLOW
+					SimulationColor::TYPE::RED2
 				);
 
 
@@ -135,7 +135,7 @@ namespace svqa {
 					VECTOR(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
-					SimulationColor::TYPE::PURPLE
+					SimulationColor::TYPE::RED2
 				);
 
 				addDynamicObject(
@@ -143,7 +143,7 @@ namespace svqa {
 					VECTOR(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
-					SimulationColor::TYPE::RED
+					SimulationColor::TYPE::BLUE2
 				);
 
 				addDynamicObject(
@@ -151,7 +151,7 @@ namespace svqa {
 					VECTOR(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
-					SimulationColor::TYPE::BLUE
+					SimulationColor::TYPE::BLACK
 				);
 
 
