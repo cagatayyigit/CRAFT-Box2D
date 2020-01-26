@@ -19,6 +19,7 @@ enum SimulationID
 	ID_Scene1 = 6,
     ID_JumpingBall = 7,
     ID_Scene2 = 8,
+    ID_MultiplePendulums = 9
 };
 
 #endif /* SimulationID_h */

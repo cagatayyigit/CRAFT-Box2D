@@ -17,6 +17,7 @@
 #include "Scene1Simulation.h"
 #include "Scene2Simulation.h"
 #include "JumpingBallSimulation.h"
+#include "MultiplePendulumsSimulation.h"
 #include "JSONHelper.h"
 
 namespace svqa {
@@ -69,6 +70,11 @@ namespace svqa {
                 Scene2Settings::Ptr setPtr = std::make_shared<Scene2Settings>();
                 setPtr->from_json(j);
                 return std::make_shared<Scene2Simulation>(setPtr);
+            }
+            else if (set.simulationID == SimulationID::ID_MultiplePendulums) {
+                MultiplePendulumsSettings::Ptr setPtr = std::make_shared<MultiplePendulumsSettings>();
+                setPtr->from_json(j);
+                return std::make_shared<MultiplePendulumsSimulation>(setPtr);
             }
             
         }

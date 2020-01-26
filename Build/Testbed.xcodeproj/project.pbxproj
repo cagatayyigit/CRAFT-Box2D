@@ -105,6 +105,14 @@
 		7C6D1CDB23813A4E00BB74E0 /* SimulationMain.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SimulationMain.cpp; path = ../Testbed/Framework/SimulationMain.cpp; sourceTree = "<group>"; };
 		7C6D1CDF2381443D00BB74E0 /* ControllerParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ControllerParser.h; path = ../Testbed/Framework/ControllerParser.h; sourceTree = "<group>"; };
 		7C6D1CE2238156E400BB74E0 /* VideoWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VideoWriter.h; path = ../Testbed/Framework/VideoWriter.h; sourceTree = "<group>"; };
+		7C80743923DDD11400D6BF1B /* MultiplePendulumsSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplePendulumsSettings.h; sourceTree = "<group>"; };
+		7C80743A23DDD11400D6BF1B /* MultiplePendulumsSimulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplePendulumsSimulation.h; sourceTree = "<group>"; };
+		7C80743C23DDD16E00D6BF1B /* Scene2Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene2Settings.h; sourceTree = "<group>"; };
+		7C80743D23DDD16E00D6BF1B /* Scene2Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene2Simulation.h; sourceTree = "<group>"; };
+		7C80743F23DDD17D00D6BF1B /* JumpingBallSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JumpingBallSettings.h; sourceTree = "<group>"; };
+		7C80744023DDD17D00D6BF1B /* JumpingBallSimulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JumpingBallSimulation.h; sourceTree = "<group>"; };
+		7C80744223DDD18800D6BF1B /* RollingBallsSimulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RollingBallsSimulation.h; sourceTree = "<group>"; };
+		7C80744323DDD18800D6BF1B /* RollingBallsSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RollingBallsSettings.h; sourceTree = "<group>"; };
 		7C92AD25234E37500074BFB6 /* SimulationObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationObject.h; sourceTree = "<group>"; };
 		7C92AD2F234E40A20074BFB6 /* rubber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rubber.png; sourceTree = "<group>"; };
 		7C92AD31234E40D00074BFB6 /* metal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = metal.png; sourceTree = "<group>"; };
@@ -219,7 +227,11 @@
 				7C48C729235C6F5B00FFB396 /* ObjectState.h */,
 				7C48C72A235C819300FFB396 /* SceneState.h */,
 				7C5271A2238A828B00816DFC /* SimulationBase.h */,
+				7C80744123DDD18800D6BF1B /* RollingBalls */,
+				7C80743E23DDD17D00D6BF1B /* JumpingBall */,
 				7CC77DC523C7A71700BFFAFE /* Scene1 */,
+				7C80743B23DDD16E00D6BF1B /* Scene2 */,
+				7C80743823DDD11400D6BF1B /* MultiplePendulums */,
 				7C40378523BCED6D00BD8538 /* ConnectedCars */,
 				7C615582238EFFC100702158 /* FixedPulley */,
 				7CC77DC223C7A70200BFFAFE /* ObstructionDemo */,
@@ -248,6 +260,42 @@
 				7C615584238F004C00702158 /* FixedPulleySimulation.h */,
 			);
 			path = FixedPulley;
+			sourceTree = "<group>";
+		};
+		7C80743823DDD11400D6BF1B /* MultiplePendulums */ = {
+			isa = PBXGroup;
+			children = (
+				7C80743923DDD11400D6BF1B /* MultiplePendulumsSettings.h */,
+				7C80743A23DDD11400D6BF1B /* MultiplePendulumsSimulation.h */,
+			);
+			path = MultiplePendulums;
+			sourceTree = "<group>";
+		};
+		7C80743B23DDD16E00D6BF1B /* Scene2 */ = {
+			isa = PBXGroup;
+			children = (
+				7C80743C23DDD16E00D6BF1B /* Scene2Settings.h */,
+				7C80743D23DDD16E00D6BF1B /* Scene2Simulation.h */,
+			);
+			path = Scene2;
+			sourceTree = "<group>";
+		};
+		7C80743E23DDD17D00D6BF1B /* JumpingBall */ = {
+			isa = PBXGroup;
+			children = (
+				7C80743F23DDD17D00D6BF1B /* JumpingBallSettings.h */,
+				7C80744023DDD17D00D6BF1B /* JumpingBallSimulation.h */,
+			);
+			path = JumpingBall;
+			sourceTree = "<group>";
+		};
+		7C80744123DDD18800D6BF1B /* RollingBalls */ = {
+			isa = PBXGroup;
+			children = (
+				7C80744223DDD18800D6BF1B /* RollingBallsSimulation.h */,
+				7C80744323DDD18800D6BF1B /* RollingBallsSettings.h */,
+			);
+			path = RollingBalls;
 			sourceTree = "<group>";
 		};
 		7C92AD26234E37C40074BFB6 /* RemoveObject */ = {
