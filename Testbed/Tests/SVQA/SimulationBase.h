@@ -11,6 +11,7 @@
 #include "Simulation.h"
 #include "Settings.h"
 #include "SimulationID.h"
+#include "CausalEventListener.hpp"
 
 #ifdef _MSC_VER
 #define _USE_MATH_DEFINES
@@ -33,9 +34,12 @@ namespace svqa {
 			m_nDistinctColorUsed = 8;
 		}
 
-		/// A single step of the simulation
-		/// Derive simulations must implement this
-		virtual void Step(SettingsBase* settings) = 0;
+		/// Derived simulations must call this in order to construct causal graph
+		virtual void Step(SettingsBase* settings)
+        {
+            Simulation::Step(settings);
+            CausalEventListener::getCurrentEvents(m_stepCount, m_world);
+        }
 
 		/// Gets the common settings object
 		Settings::Ptr getSettings()
@@ -134,6 +138,15 @@ namespace svqa {
 				}
 			}
 		}
+        
+        virtual void BeginContact(b2Contact* contact)  override {
+            int a = 2;
+            int b = a;
+        }
+        virtual void EndContact(b2Contact* contact)  override {
+            int a = 2;
+            int b = a;
+        }
 
 		virtual ObjectState addSceneObject(const std::vector<SimulationObject::TYPE>& objectTypes,
 			const b2Vec2& throwMinPos,

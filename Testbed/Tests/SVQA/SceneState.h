@@ -19,7 +19,7 @@ using json = nlohmann::json;
 
 struct SceneState {
 
-    void add(const ObjectState& objState)
+    void add(const ObjectState::Ptr& objState)
     {
         objects.push_back(objState);
     }
@@ -38,8 +38,8 @@ struct SceneState {
                 clear();
                 
                 for (auto& [key, value] : j.items()) {
-                    ObjectState oState;
-                    oState.from_json(value, toWorld);
+                    ObjectState::Ptr oState = std::make_shared<ObjectState>();
+                    oState->from_json(value, toWorld);
                     add(oState);
                 }
                 
@@ -54,7 +54,7 @@ struct SceneState {
         json jScene;
         for (auto& object: objects) {
             json jObject;
-            object.to_json(jObject);
+            object->to_json(jObject);
             jScene.push_back(jObject);
         }
         return jScene;
@@ -74,7 +74,7 @@ struct SceneState {
     }
     
 private:
-    std::vector<ObjectState> objects;
+    std::vector<ObjectState::Ptr> objects;
 };
 
 #endif /* SceneState_h */

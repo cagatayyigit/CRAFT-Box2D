@@ -14,15 +14,13 @@
 #include "Box2D/Common/b2Math.h"
 #include "Box2D/Extension/b2VisBody.hpp"
 #include "Box2D/Extension/b2VisWorld.hpp"
+#include "SimulationDefines.h"
 
 using json = nlohmann::json;
 
 struct ObjectState
 {
     friend class SceneState;
-    
-private:
-    ObjectState() : body(nullptr) {}
     
 public:
     
@@ -37,6 +35,20 @@ public:
                 objectType(objectType)
     
     {}
+    
+    ObjectState() {
+        body = nullptr;
+    }
+    
+    typedef std::shared_ptr<ObjectState> Ptr;
+    
+    static Ptr create(b2VisBody* body,
+                      const SimulationMaterial::TYPE& materialType,
+                      const SimulationColor::TYPE& colorType,
+                      const SimulationObject::TYPE& objectType)
+    {
+        return std::make_shared<ObjectState>(body, materialType, colorType, objectType);
+    }
     
     void to_json(json& j) const {
         if(body) {
@@ -98,6 +110,8 @@ public:
         body->setTexture(mat.getTexture());
         body->setColor(col.GetColor());
 #endif
+        
+        body->SetUserData(this);
     }
     
     BODY* body;

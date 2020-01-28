@@ -8,7 +8,7 @@
 #include "CausalGraph.hpp"
 
 namespace svqa {
-    void CausalGraph::addEdge(const CausalEvent::Ptr& edge)
+    void CausalGraph::addEvent(const CausalEvent::Ptr& edge)
     {
         
     }

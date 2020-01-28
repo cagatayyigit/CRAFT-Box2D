@@ -121,7 +121,10 @@ namespace svqa {
                 staticObstacle->setTexture(mat.getTexture());
                 staticObstacle->setColor(col.GetColor());
                 
-                state.add(ObjectState(staticObstacle, mat.type, col.type, object.type));
+                auto objectState = ObjectState::create(staticObstacle, mat.type, col.type, object.type);
+                staticObstacle->SetUserData(objectState.get());
+
+                state.add(objectState);
             }
             return true;
         }
@@ -164,7 +167,10 @@ namespace svqa {
             body->setTexture(mat.getTexture());
             body->setColor(col.GetColor());
             
-            state.add(ObjectState(body, mat.type, col.type, object.type));
+            auto objectState = ObjectState::create(body, mat.type, col.type, object.type);
+            body->SetUserData(objectState.get());
+
+            state.add(objectState);
         }
     };
 }

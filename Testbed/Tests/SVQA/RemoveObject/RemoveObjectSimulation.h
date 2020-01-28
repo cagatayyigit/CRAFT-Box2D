@@ -119,7 +119,10 @@ namespace svqa
             body->setTexture(mat.getTexture());
             body->setColor(col.GetColor());
             
-            state.add(ObjectState(body, mat.type, col.type, object.type));
+            auto objectState = ObjectState::create(body, mat.type, col.type, object.type);
+            body->SetUserData(objectState.get());
+
+            state.add(objectState);
     #endif
         }
     };

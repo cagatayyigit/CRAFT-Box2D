@@ -61,7 +61,7 @@ namespace svqa {
 				);
 
 				addDynamicObject(
-					b2Vec2(20.0f, 7.0f),
+					b2Vec2(20.0f, 14.0f),
 					b2Vec2(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
@@ -158,7 +158,7 @@ namespace svqa {
 				m_nNumberOfObjects--;
 			}
 
-			Simulation::Step(settings);
+			SimulationBase::Step(settings);
 
 			if (terminateSimulation)
 			{
@@ -212,7 +212,10 @@ namespace svqa {
 			body->setTexture(mat.getTexture());
 			body->setColor(color.GetColor());
 
-			state.add(ObjectState(body, mat.type, color.type, object.type));
+            auto objectState = ObjectState::create(body, mat.type, color.type, object.type);
+            body->SetUserData(objectState.get());
+
+            state.add(objectState);
 		}
 
 		void addStaticObject(b2Vec2 position, float32 angle, SimulationObject::TYPE objType, SimulationMaterial::TYPE materialType, SimulationColor color)
@@ -236,7 +239,10 @@ namespace svqa {
 			body->setTexture(mat.getTexture());
 			body->setColor(color.GetColor());
 
-			state.add(ObjectState(body, mat.type, color.type, object.type));
+            auto objectState = ObjectState::create(body, mat.type, color.type, object.type);
+            body->SetUserData(objectState.get());
+
+            state.add(objectState);
 		}
 
 		void addStaticObject(b2Vec2 position, float32 angle, ShapePtr shape,
@@ -252,8 +258,11 @@ namespace svqa {
 			body->CreateFixture(shape.get(), material.getDensity());
 			body->setTexture(material.getTexture());
 			body->setColor(color.GetColor());
+        
+            auto objectState = ObjectState::create(body, material.type, color.type, object.type);
+            body->SetUserData(objectState.get());
 
-			state.add(ObjectState(body, material.type, color.type, object.type));
+			state.add(objectState);
 		}
 
 	};

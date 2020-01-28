@@ -102,7 +102,10 @@ namespace svqa {
 			body->setTexture(mat.getTexture());
 			body->setColor(color.GetColor());
 
-			state.add(ObjectState(body, mat.type, color.type, object.type));
+            auto objectState = ObjectState::create(body, mat.type, color.type, object.type);
+            body->SetUserData(objectState.get());
+
+            state.add(objectState);
 		}
 
 		b2Vec2 getRandomDropVector(float32 movingObjX, float32 dropObjX, float32 stagnantObjX, float32 movingObjVelX, float32 dropObjVelY)

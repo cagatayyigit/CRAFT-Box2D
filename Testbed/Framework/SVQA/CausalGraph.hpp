@@ -20,7 +20,7 @@ namespace svqa
             CausalGraph() {};
             virtual ~CausalGraph() {};
         
-            void addEdge(const CausalEvent::Ptr& edge);
+            void addEvent(const CausalEvent::Ptr& edge);
     };
 }
 

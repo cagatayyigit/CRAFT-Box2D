@@ -9,6 +9,7 @@
 #define CausalEdge_hpp
 
 #include "CausalObject.hpp"
+#include "CausalEventType.h"
 
 namespace svqa
 {
@@ -17,11 +18,13 @@ namespace svqa
         public:
             typedef std::shared_ptr<CausalEvent> Ptr;
         
-            CausalEvent(const int& frame) : m_nFrameIndex(frame) {};
+            CausalEvent(const int& step) : m_nStepCount(step) {};
             virtual ~CausalEvent() {};
         
+            virtual CausalEventType getType() = 0;
+        
         private:
-            int m_nFrameIndex;
+            int m_nStepCount;
         
     };
 }
