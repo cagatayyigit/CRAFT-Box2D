@@ -36,7 +36,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Users/tates/Workspace/self/hacettepe/intuitive-physics/simulation/2d/Box2D/Testbed"
+      customWorkingDirectory = "/Users/tates/Workspace/self/hacettepe/intuitive-physics/simulation/2d/SVQA-Box2D/Testbed"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"

@@ -10,6 +10,12 @@
 
 #include <nlohmann/json.hpp>
 #include "Box2D/Extension/b2VisPolygonShape.hpp"
+#include "Box2D/Collision/Shapes/b2CircleShape.h"
+#include "Box2D/Collision/Shapes/b2EdgeShape.h"
+#include "Box2D/Collision/Shapes/b2PolygonShape.h"
+#include "Box2D/Collision/Shapes/b2ChainShape.h"
+
+#include "SimulationDefines.h"
 
 typedef std::shared_ptr<b2Shape> ShapePtr;
 
@@ -101,7 +107,7 @@ public:
 		return shape;
 	}
 
-	static b2VisPolygonShape getRectangle(const float& w, const float& h, VECTOR center, float32 angle)
+	static b2VisPolygonShape getRectangle(const float& w, const float& h, b2Vec2 center, float32 angle)
 	{
 		b2VisPolygonShape shape;
 		shape.SetAsBox(w, h, center, angle);
@@ -148,11 +154,11 @@ public:
 	static b2ChainShape getCurve(std::function<float(float)> function, float fromX, float toX, float step)  
 	{
 		b2ChainShape shape = b2ChainShape();
-		std::vector<VECTOR> vertices = std::vector<VECTOR>();
+		std::vector<b2Vec2> vertices = std::vector<b2Vec2>();
 		float x = fromX;
 		while (x <= toX) 
 		{
-			vertices.push_back(VECTOR(x, function(x)));
+			vertices.push_back(b2Vec2(x, function(x)));
 			x += step;
 		}
 
@@ -164,11 +170,11 @@ public:
 	{
 		b2VisPolygonShape shape;
 		// TODO
-		VECTOR vertex1 = VECTOR(vEdgeLength, 0);
-		VECTOR vertex2 = VECTOR(0, hEdgeLength);
-		VECTOR vertex3 = VECTOR(0, 0);
+		b2Vec2 vertex1 = b2Vec2(vEdgeLength, 0);
+		b2Vec2 vertex2 = b2Vec2(0, hEdgeLength);
+		b2Vec2 vertex3 = b2Vec2(0, 0);
 
-		std::vector<VECTOR>  vertices = std::vector<VECTOR>();
+		std::vector<b2Vec2>  vertices = std::vector<b2Vec2>();
 		vertices.push_back(vertex1);
 		vertices.push_back(vertex2);
 		vertices.push_back(vertex3);

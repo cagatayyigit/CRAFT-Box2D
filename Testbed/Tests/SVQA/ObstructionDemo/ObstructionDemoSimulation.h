@@ -25,11 +25,11 @@ namespace svqa {
 			m_vDropDirection.x = RandomFloat(-0.05f, 0.75f);
 			m_vDropDirection.operator*=(dropSpeedFactor);*/
 
-			m_vObstaclePosition = VECTOR(RandomFloat(-10.0f, 10.0f), RandomFloat(15.0f, 40.0f));
-			m_vMovingObjPosition = VECTOR(RandomFloat(-25.0f, -10.0), 2.5f); 
-			m_vStagnantObjPosition = VECTOR(RandomFloat(10.0f, 30.0f), 2.5f);
+			m_vObstaclePosition = b2Vec2(RandomFloat(-10.0f, 10.0f), RandomFloat(15.0f, 40.0f));
+			m_vMovingObjPosition = b2Vec2(RandomFloat(-25.0f, -10.0), 2.5f); 
+			m_vStagnantObjPosition = b2Vec2(RandomFloat(10.0f, 30.0f), 2.5f);
 
-			m_vInitialDropVelocity = VECTOR(0.0f, RandomFloat(-20.0f, -40.0f));
+			m_vInitialDropVelocity = b2Vec2(0.0f, RandomFloat(-20.0f, -40.0f));
 
 			createBoundaries();
 
@@ -43,7 +43,7 @@ namespace svqa {
 			const bool terminateSimulation = m_nNumberOfObjects <= 0 && stable;
 
 			if (addObject) {
-				addSimulationObject(m_vMovingObjPosition, VECTOR(m_fSpeed, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationColor::TYPE::BROWN);
+				addSimulationObject(m_vMovingObjPosition, b2Vec2(m_fSpeed, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationColor::TYPE::BROWN);
 
 				addSimulationObject(m_vObstaclePosition, m_vInitialDropVelocity, SimulationObject::BIG_CUBE, SimulationColor::TYPE::RED);
 
@@ -71,10 +71,10 @@ namespace svqa {
 		int m_nNumberOfObjects;
 		int m_nNumberOfObstacles;
 		float32 m_fSpeed;
-		VECTOR m_vMovingObjPosition;
-		VECTOR m_vStagnantObjPosition;
-		VECTOR m_vObstaclePosition;
-		VECTOR m_vInitialDropVelocity;
+		b2Vec2 m_vMovingObjPosition;
+		b2Vec2 m_vStagnantObjPosition;
+		b2Vec2 m_vObstaclePosition;
+		b2Vec2 m_vInitialDropVelocity;
 
 
 		const std::vector<SimulationObject::TYPE> m_vSimulationObjectTypes = { SimulationObject::SMALL_CUBE,
@@ -105,10 +105,10 @@ namespace svqa {
 			state.add(ObjectState(body, mat.type, color.type, object.type));
 		}
 
-		VECTOR getRandomDropVector(float32 movingObjX, float32 dropObjX, float32 stagnantObjX, float32 movingObjVelX, float32 dropObjVelY)
+		b2Vec2 getRandomDropVector(float32 movingObjX, float32 dropObjX, float32 stagnantObjX, float32 movingObjVelX, float32 dropObjVelY)
 		{
 
-			return VECTOR();
+			return b2Vec2();
 		}
 	};
 }

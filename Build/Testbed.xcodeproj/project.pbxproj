@@ -25,6 +25,10 @@
 		7C92AD30234E40A30074BFB6 /* rubber.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C92AD2F234E40A20074BFB6 /* rubber.png */; };
 		7C92AD32234E40D10074BFB6 /* metal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C92AD31234E40D00074BFB6 /* metal.png */; };
 		7CC417F2234A0AB200CD88E7 /* SimulationMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CC417F1234A0AB200CD88E7 /* SimulationMaterial.cpp */; };
+		7CDCBD8923E0A2E900BC9E50 /* CollisionEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD8223E0A2E900BC9E50 /* CollisionEvent.cpp */; };
+		7CDCBD8A23E0A2E900BC9E50 /* CausalGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD8323E0A2E900BC9E50 /* CausalGraph.cpp */; };
+		7CDCBD8B23E0A2E900BC9E50 /* CausalEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD8523E0A2E900BC9E50 /* CausalEvent.cpp */; };
+		7CDCBD8C23E0A2E900BC9E50 /* CausalObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD8623E0A2E900BC9E50 /* CausalObject.cpp */; };
 		840EA602F136B474F2C9A442 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19352E0A6698243CDCB7244A /* OpenGL.framework */; };
 		9223EFD8340D8BCA2B349E18 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 606C44802E8F9832B59DEAC0 /* CoreVideo.framework */; };
 		B7066D864F5353387D9A53C6 /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 40779C0E84C64180C6ED7A4E /* libBox2D.a */; };
@@ -123,6 +127,14 @@
 		7CC77DC423C7A70200BFFAFE /* ObstructionDemoSimulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObstructionDemoSimulation.h; sourceTree = "<group>"; };
 		7CC77DC623C7A71700BFFAFE /* Scene1Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene1Settings.h; sourceTree = "<group>"; };
 		7CC77DC723C7A71700BFFAFE /* Scene1Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene1Simulation.h; sourceTree = "<group>"; };
+		7CDCBD7F23E0A2E900BC9E50 /* CausalEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CausalEvent.hpp; sourceTree = "<group>"; };
+		7CDCBD8023E0A2E900BC9E50 /* CausalObject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CausalObject.hpp; sourceTree = "<group>"; };
+		7CDCBD8223E0A2E900BC9E50 /* CollisionEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionEvent.cpp; sourceTree = "<group>"; };
+		7CDCBD8323E0A2E900BC9E50 /* CausalGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CausalGraph.cpp; sourceTree = "<group>"; };
+		7CDCBD8423E0A2E900BC9E50 /* CausalGraph.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CausalGraph.hpp; sourceTree = "<group>"; };
+		7CDCBD8523E0A2E900BC9E50 /* CausalEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CausalEvent.cpp; sourceTree = "<group>"; };
+		7CDCBD8623E0A2E900BC9E50 /* CausalObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CausalObject.cpp; sourceTree = "<group>"; };
+		7CDCBD8823E0A2E900BC9E50 /* CollisionEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CollisionEvent.hpp; sourceTree = "<group>"; };
 		85B39C4ACE24807C12C3528A /* imgui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = imgui.cpp; path = ../Testbed/imgui/imgui.cpp; sourceTree = "<group>"; };
 		8799E40B80FFE57D749B424B /* vulkan.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vulkan.c; path = ../Testbed/glfw/vulkan.c; sourceTree = "<group>"; };
 		8D6BC6AA50D7885C8F7B2CEA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -344,6 +356,22 @@
 			path = Scene1;
 			sourceTree = "<group>";
 		};
+		7CDCBD7E23E0A2E900BC9E50 /* SVQA */ = {
+			isa = PBXGroup;
+			children = (
+				7CDCBD8423E0A2E900BC9E50 /* CausalGraph.hpp */,
+				7CDCBD8323E0A2E900BC9E50 /* CausalGraph.cpp */,
+				7CDCBD7F23E0A2E900BC9E50 /* CausalEvent.hpp */,
+				7CDCBD8523E0A2E900BC9E50 /* CausalEvent.cpp */,
+				7CDCBD8823E0A2E900BC9E50 /* CollisionEvent.hpp */,
+				7CDCBD8223E0A2E900BC9E50 /* CollisionEvent.cpp */,
+				7CDCBD8023E0A2E900BC9E50 /* CausalObject.hpp */,
+				7CDCBD8623E0A2E900BC9E50 /* CausalObject.cpp */,
+			);
+			name = SVQA;
+			path = ../Testbed/Framework/SVQA;
+			sourceTree = "<group>";
+		};
 		9D968EAA920D05DCE0E0A4EA /* Projects */ = {
 			isa = PBXGroup;
 			children = (
@@ -371,6 +399,7 @@
 		B7384E245A2674D6E94C5464 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				7CDCBD7E23E0A2E900BC9E50 /* SVQA */,
 				7C4127F72348BC5B002E75BA /* Camera.cpp */,
 				7C4127F42348BC5B002E75BA /* Camera.hpp */,
 				7C4127F52348BC5B002E75BA /* SimulationDefines.h */,
@@ -521,6 +550,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F333A69F5C131DB63C358A9 /* DebugDraw.cpp in Sources */,
+				7CDCBD8C23E0A2E900BC9E50 /* CausalObject.cpp in Sources */,
 				7C6D1CDC23813A4E00BB74E0 /* SimulationMain.cpp in Sources */,
 				BADF007F2C01A171E1C84EBF /* Simulation.cpp in Sources */,
 				7C4127FA2348BC5C002E75BA /* Camera.cpp in Sources */,
@@ -544,6 +574,9 @@
 				C7C8F36A1F2E665CD13C81AA /* imgui_demo.cpp in Sources */,
 				FE580E1C55BD810E07CB9C5C /* imgui_draw.cpp in Sources */,
 				5FECF8EC3E8F945EF371972C /* imgui_impl_glfw_gl3.cpp in Sources */,
+				7CDCBD8923E0A2E900BC9E50 /* CollisionEvent.cpp in Sources */,
+				7CDCBD8B23E0A2E900BC9E50 /* CausalEvent.cpp in Sources */,
+				7CDCBD8A23E0A2E900BC9E50 /* CausalGraph.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

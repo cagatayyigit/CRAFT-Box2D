@@ -15,6 +15,8 @@
 #include "Box2D/Extension/b2VisBody.hpp"
 #include "Box2D/Extension/b2VisWorld.hpp"
 
+using json = nlohmann::json;
+
 struct ObjectState
 {
     friend class SceneState;

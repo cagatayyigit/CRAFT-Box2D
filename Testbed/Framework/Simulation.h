@@ -115,11 +115,6 @@ inline b2Vec2 RandomUnitVector()
 	return randUnitVector;
 }
 
-inline VECTOR DifferenceVector(VECTOR v1, VECTOR v2)
-{
-	return VECTOR(v2.x - v1.x, v2.y - v1.y);
-}
-
 /// Test settings. Some can be controlled in the GUI.
 struct SettingsBase
 {

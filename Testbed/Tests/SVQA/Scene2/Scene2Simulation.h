@@ -32,7 +32,7 @@ namespace svqa {
 
 				// Up  Floor
 				addStaticObject(
-					VECTOR(5.0f, 20.0f),
+					b2Vec2(5.0f, 20.0f),
 					0,
 					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(15.0f, 0.5f)),
 					SimulationObject::CUSTOM_RECTANGLE,
@@ -42,7 +42,7 @@ namespace svqa {
 
 				// Down Floor
 				addStaticObject(
-					VECTOR(0, 14.0f),
+					b2Vec2(0, 14.0f),
 					0,
 					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(10.0f, 0.5f)),
 					SimulationObject::CUSTOM_RECTANGLE,
@@ -52,7 +52,7 @@ namespace svqa {
 
 				// First Rec
 				addStaticObject(
-					VECTOR(20, 0.0f),
+					b2Vec2(20, 0.0f),
 					0,
 					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(1.5f, 6.0f)),
 					SimulationObject::CUSTOM_RECTANGLE,
@@ -61,8 +61,8 @@ namespace svqa {
 				);
 
 				addDynamicObject(
-					VECTOR(20.0f, 7.0f),
-					VECTOR(0.0f, 0.0f),
+					b2Vec2(20.0f, 7.0f),
+					b2Vec2(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
 					SimulationColor::TYPE::BLUE2
@@ -70,7 +70,7 @@ namespace svqa {
 
 				// Second Rec
 				addStaticObject(
-					VECTOR(28, 0.0f),
+					b2Vec2(28, 0.0f),
 					0,
 					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(1.5f, 10.0f)),
 					SimulationObject::CUSTOM_RECTANGLE,
@@ -79,8 +79,8 @@ namespace svqa {
 				);
 
 				addDynamicObject(
-					VECTOR(28.0f, 11.0f),
-					VECTOR(0.0f, 0.0f),
+					b2Vec2(28.0f, 11.0f),
+					b2Vec2(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
 					SimulationColor::TYPE::GREEN2
@@ -88,7 +88,7 @@ namespace svqa {
 
 				// Third Rec
 				addStaticObject(
-					VECTOR(35, -2.0f),
+					b2Vec2(35, -2.0f),
 					0,
 					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(1.5f, 4.0f)),
 					SimulationObject::CUSTOM_RECTANGLE,
@@ -97,8 +97,8 @@ namespace svqa {
 				);
 
 				addDynamicObject(
-					VECTOR(35.0f, 4.0f),
-					VECTOR(0.0f, 0.0f),
+					b2Vec2(35.0f, 4.0f),
+					b2Vec2(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
 					SimulationColor::TYPE::RED2
@@ -117,7 +117,7 @@ namespace svqa {
 				));
 
 				addStaticObject(
-					VECTOR(-35.0f, 14.0f),
+					b2Vec2(-35.0f, 14.0f),
 					0,
 					chainShape,
 					SimulationObject::BIG_TRIANGLE,
@@ -131,24 +131,24 @@ namespace svqa {
 				// Stationary Bottom-Left
 
 				addDynamicObject(
-					VECTOR(7.0f, 22.0f),
-					VECTOR(0.0f, 0.0f),
+					b2Vec2(7.0f, 22.0f),
+					b2Vec2(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
 					SimulationColor::TYPE::RED2
 				);
 
 				addDynamicObject(
-					VECTOR(5.0f, 16.0f),
-					VECTOR(0.0f, 0.0f),
+					b2Vec2(5.0f, 16.0f),
+					b2Vec2(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
 					SimulationColor::TYPE::BLUE2
 				);
 
 				addDynamicObject(
-					VECTOR(-30.0f, 42.0f),
-					VECTOR(0.0f, 0.0f),
+					b2Vec2(-30.0f, 42.0f),
+					b2Vec2(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
 					SimulationColor::TYPE::BLACK
@@ -178,16 +178,16 @@ namespace svqa {
 		int m_nNumberOfObjects;
 		int m_nNumberOfObstacles;
 		float32 m_fSpeed;
-		VECTOR m_vMovingObjPosition;
-		VECTOR m_vStagnantObjPosition;
-		VECTOR m_vObstaclePosition;
-		VECTOR m_vInitialDropVelocity;
+		b2Vec2 m_vMovingObjPosition;
+		b2Vec2 m_vStagnantObjPosition;
+		b2Vec2 m_vObstaclePosition;
+		b2Vec2 m_vInitialDropVelocity;
 
 		SceneState state;
 
 		// TODO: We can embed these "addObject" methods in SimulationBase.h
 
-		void addDynamicObject(VECTOR position, VECTOR velocity, SimulationObject::TYPE objType, SimulationMaterial::TYPE materialType, SimulationColor color)
+		void addDynamicObject(b2Vec2 position, b2Vec2 velocity, SimulationObject::TYPE objType, SimulationMaterial::TYPE materialType, SimulationColor color)
 		{
 			SimulationObject object = SimulationObject(objType);
 
@@ -215,7 +215,7 @@ namespace svqa {
 			state.add(ObjectState(body, mat.type, color.type, object.type));
 		}
 
-		void addStaticObject(VECTOR position, float32 angle, SimulationObject::TYPE objType, SimulationMaterial::TYPE materialType, SimulationColor color)
+		void addStaticObject(b2Vec2 position, float32 angle, SimulationObject::TYPE objType, SimulationMaterial::TYPE materialType, SimulationColor color)
 		{
 			SimulationObject object = SimulationObject(objType);
 			ShapePtr shape = object.getShape();
@@ -239,7 +239,7 @@ namespace svqa {
 			state.add(ObjectState(body, mat.type, color.type, object.type));
 		}
 
-		void addStaticObject(VECTOR position, float32 angle, ShapePtr shape,
+		void addStaticObject(b2Vec2 position, float32 angle, ShapePtr shape,
 			SimulationObject::TYPE objType, SimulationMaterial::TYPE materialType, SimulationColor color)
 		{
 			SimulationObject object = SimulationObject(objType);
