@@ -9,7 +9,10 @@
 #define CausalEventType_h
 
 enum CausalEventType {
-    Collision_Event = 0
+    Start_Event = 0,
+    Collision_Event = 1,
+    StartTouching_Event = 2,
+    EndTouching_Event = 3
 };
 
 #endif /* CausalEventType_h */

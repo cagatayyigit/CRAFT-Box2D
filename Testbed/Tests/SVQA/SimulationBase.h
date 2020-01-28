@@ -11,7 +11,6 @@
 #include "Simulation.h"
 #include "Settings.h"
 #include "SimulationID.h"
-#include "CausalEventListener.hpp"
 
 #ifdef _MSC_VER
 #define _USE_MATH_DEFINES
@@ -38,7 +37,7 @@ namespace svqa {
 		virtual void Step(SettingsBase* settings)
         {
             Simulation::Step(settings);
-            CausalEventListener::getCurrentEvents(m_stepCount, m_world);
+            detectStartTouchingEvents();
         }
 
 		/// Gets the common settings object
@@ -139,13 +138,42 @@ namespace svqa {
 			}
 		}
         
-        virtual void BeginContact(b2Contact* contact)  override {
-            int a = 2;
-            int b = a;
+        void detectStartTouchingEvents()
+        {
+            for (auto it = m_Contacts.begin(); it != m_Contacts.end(); it++) {
+                if (m_stepCount - it->step > COLLISION_DETECTION_STEP_DIFF) {
+                    //DETECTED StartTouching_Event
+                    m_Contacts.erase(it--);
+                }
+            }
         }
+        
+        virtual void BeginContact(b2Contact* contact)  override {
+            ContactInfo info;
+            info.contact = contact;
+            info.step = m_stepCount;
+
+            m_Contacts.push_back(info);
+        }
+        
         virtual void EndContact(b2Contact* contact)  override {
-            int a = 2;
-            int b = a;
+            for (auto it = m_Contacts.begin(); it != m_Contacts.end(); it++) {
+                if(it->contact == contact) {
+                    if (m_stepCount - it->step > COLLISION_DETECTION_STEP_DIFF) {
+                        //DETECTED EndTouching_Event
+                        int a = 2;
+                        int b = a;
+                        
+                    } else {
+                        //DETECTED Collision_Event
+                        int a = 2;
+                        int b = a;
+                    }
+                    m_Contacts.erase(it--);
+                }
+                
+
+            }
         }
 
 		virtual ObjectState addSceneObject(const std::vector<SimulationObject::TYPE>& objectTypes,
@@ -179,6 +207,15 @@ namespace svqa {
 
 			return ObjectState(body, mat.type, col.type, object.type);
 		}
+        
+        private:
+            struct ContactInfo
+            {
+                b2Contact* contact;
+                int step;
+            };
+
+            std::vector<ContactInfo> m_Contacts;
 	};
 }
 

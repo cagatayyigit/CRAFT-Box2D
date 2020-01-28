@@ -20,8 +20,6 @@ using json = nlohmann::json;
 
 struct ObjectState
 {
-    friend class SceneState;
-    
 public:
     
     ObjectState(b2VisBody* body,

@@ -29,7 +29,9 @@
 		7CDCBD8A23E0A2E900BC9E50 /* CausalGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD8323E0A2E900BC9E50 /* CausalGraph.cpp */; };
 		7CDCBD8B23E0A2E900BC9E50 /* CausalEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD8523E0A2E900BC9E50 /* CausalEvent.cpp */; };
 		7CDCBD8C23E0A2E900BC9E50 /* CausalObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD8623E0A2E900BC9E50 /* CausalObject.cpp */; };
-		7CDCBD9023E0A97E00BC9E50 /* CausalEventListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD8E23E0A97E00BC9E50 /* CausalEventListener.cpp */; };
+		7CDCBD9423E0BB4F00BC9E50 /* StartTouchingEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD9223E0BB4F00BC9E50 /* StartTouchingEvent.cpp */; };
+		7CDCBD9723E0BB9400BC9E50 /* EndTouchingEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD9523E0BB9400BC9E50 /* EndTouchingEvent.cpp */; };
+		7CDCBD9A23E0BC8400BC9E50 /* StartEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD9823E0BC8400BC9E50 /* StartEvent.cpp */; };
 		840EA602F136B474F2C9A442 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19352E0A6698243CDCB7244A /* OpenGL.framework */; };
 		9223EFD8340D8BCA2B349E18 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 606C44802E8F9832B59DEAC0 /* CoreVideo.framework */; };
 		B7066D864F5353387D9A53C6 /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 40779C0E84C64180C6ED7A4E /* libBox2D.a */; };
@@ -136,9 +138,13 @@
 		7CDCBD8523E0A2E900BC9E50 /* CausalEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CausalEvent.cpp; sourceTree = "<group>"; };
 		7CDCBD8623E0A2E900BC9E50 /* CausalObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CausalObject.cpp; sourceTree = "<group>"; };
 		7CDCBD8823E0A2E900BC9E50 /* CollisionEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CollisionEvent.hpp; sourceTree = "<group>"; };
-		7CDCBD8E23E0A97E00BC9E50 /* CausalEventListener.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CausalEventListener.cpp; sourceTree = "<group>"; };
-		7CDCBD8F23E0A97E00BC9E50 /* CausalEventListener.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CausalEventListener.hpp; sourceTree = "<group>"; };
 		7CDCBD9123E0AAEF00BC9E50 /* CausalEventType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CausalEventType.h; sourceTree = "<group>"; };
+		7CDCBD9223E0BB4F00BC9E50 /* StartTouchingEvent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StartTouchingEvent.cpp; sourceTree = "<group>"; };
+		7CDCBD9323E0BB4F00BC9E50 /* StartTouchingEvent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StartTouchingEvent.hpp; sourceTree = "<group>"; };
+		7CDCBD9523E0BB9400BC9E50 /* EndTouchingEvent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EndTouchingEvent.cpp; sourceTree = "<group>"; };
+		7CDCBD9623E0BB9400BC9E50 /* EndTouchingEvent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EndTouchingEvent.hpp; sourceTree = "<group>"; };
+		7CDCBD9823E0BC8400BC9E50 /* StartEvent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StartEvent.cpp; sourceTree = "<group>"; };
+		7CDCBD9923E0BC8400BC9E50 /* StartEvent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StartEvent.hpp; sourceTree = "<group>"; };
 		85B39C4ACE24807C12C3528A /* imgui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = imgui.cpp; path = ../Testbed/imgui/imgui.cpp; sourceTree = "<group>"; };
 		8799E40B80FFE57D749B424B /* vulkan.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vulkan.c; path = ../Testbed/glfw/vulkan.c; sourceTree = "<group>"; };
 		8D6BC6AA50D7885C8F7B2CEA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -370,10 +376,14 @@
 				7CDCBD8523E0A2E900BC9E50 /* CausalEvent.cpp */,
 				7CDCBD8823E0A2E900BC9E50 /* CollisionEvent.hpp */,
 				7CDCBD8223E0A2E900BC9E50 /* CollisionEvent.cpp */,
+				7CDCBD9223E0BB4F00BC9E50 /* StartTouchingEvent.cpp */,
+				7CDCBD9323E0BB4F00BC9E50 /* StartTouchingEvent.hpp */,
+				7CDCBD9523E0BB9400BC9E50 /* EndTouchingEvent.cpp */,
+				7CDCBD9623E0BB9400BC9E50 /* EndTouchingEvent.hpp */,
+				7CDCBD9823E0BC8400BC9E50 /* StartEvent.cpp */,
+				7CDCBD9923E0BC8400BC9E50 /* StartEvent.hpp */,
 				7CDCBD8023E0A2E900BC9E50 /* CausalObject.hpp */,
 				7CDCBD8623E0A2E900BC9E50 /* CausalObject.cpp */,
-				7CDCBD8E23E0A97E00BC9E50 /* CausalEventListener.cpp */,
-				7CDCBD8F23E0A97E00BC9E50 /* CausalEventListener.hpp */,
 			);
 			name = SVQA;
 			path = ../Testbed/Framework/SVQA;
@@ -556,12 +566,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CDCBD9A23E0BC8400BC9E50 /* StartEvent.cpp in Sources */,
 				2F333A69F5C131DB63C358A9 /* DebugDraw.cpp in Sources */,
 				7CDCBD8C23E0A2E900BC9E50 /* CausalObject.cpp in Sources */,
 				7C6D1CDC23813A4E00BB74E0 /* SimulationMain.cpp in Sources */,
+				7CDCBD9723E0BB9400BC9E50 /* EndTouchingEvent.cpp in Sources */,
 				BADF007F2C01A171E1C84EBF /* Simulation.cpp in Sources */,
 				7C4127FA2348BC5C002E75BA /* Camera.cpp in Sources */,
 				7C4127F92348BC5C002E75BA /* SimulationRenderer.cpp in Sources */,
+				7CDCBD9423E0BB4F00BC9E50 /* StartTouchingEvent.cpp in Sources */,
 				E868A985B68BFD373D9A4FC5 /* cocoa_init.m in Sources */,
 				DCB2417D74FF272FA34627BD /* cocoa_joystick.m in Sources */,
 				5D5F2D2DA172FE5F9544836D /* cocoa_monitor.m in Sources */,
@@ -580,7 +593,6 @@
 				6308CDA25CCA8A1496C98BE2 /* imgui.cpp in Sources */,
 				C7C8F36A1F2E665CD13C81AA /* imgui_demo.cpp in Sources */,
 				FE580E1C55BD810E07CB9C5C /* imgui_draw.cpp in Sources */,
-				7CDCBD9023E0A97E00BC9E50 /* CausalEventListener.cpp in Sources */,
 				5FECF8EC3E8F945EF371972C /* imgui_impl_glfw_gl3.cpp in Sources */,
 				7CDCBD8923E0A2E900BC9E50 /* CollisionEvent.cpp in Sources */,
 				7CDCBD8B23E0A2E900BC9E50 /* CausalEvent.cpp in Sources */,

@@ -19,12 +19,12 @@ namespace svqa
         public:
             typedef std::shared_ptr<CausalObject> Ptr;
         
-            CausalObject(const ObjectState& object, const int& identifier) : m_Object(object), m_nIdentifier(identifier) {};
+            CausalObject(BODY* body, const int& identifier) : m_pBody(body), m_nIdentifier(identifier) {};
             virtual ~CausalObject() {};
         
         private:
         
-            ObjectState         m_Object;
+            BODY*               m_pBody;
             int                 m_nIdentifier;
     };
 }
