@@ -17,7 +17,7 @@ namespace svqa
         public:
             typedef std::shared_ptr<StartEvent> Ptr;
         
-            StartEvent() : CausalEvent(0) {};
+            StartEvent() : CausalEvent(-1) {};
             virtual ~StartEvent() {};
         
             static Ptr create()

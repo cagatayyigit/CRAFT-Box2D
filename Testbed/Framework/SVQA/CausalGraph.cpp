@@ -6,7 +6,6 @@
 //
 
 #include "CausalGraph.hpp"
-#include <iostream>
 
 namespace svqa {
     void CausalGraph::addEvent(const CausalEvent::Ptr& event)
@@ -32,6 +31,8 @@ namespace svqa {
         for(auto object : effectedObjects) {
             m_ObjectEvents[object].push_back(event);
         }
+    
+        m_EventQueue.push(event);
         
         if(eventType == End_Event) {
             constructCausalGraph();
@@ -40,13 +41,14 @@ namespace svqa {
 
     void CausalGraph::constructCausalGraph()
     {
-        for(auto obj : m_ObjectEvents) {
-            const auto& events = obj.second;
-            for(auto event : events) {
-                std::cout << event->getStepCount() << " " <<event->getTypeStr() << std::endl;
-            }
-            std::cout << "************************************" << std::endl;
-        }
+//        for(auto obj : m_ObjectEvents) {
+//            const auto& events = obj.second;
+//            for(auto event : events) {
+//                std::cout << event->getStepCount() << " " <<event->getTypeStr() << std::endl;
+//            }
+//            std::cout << "************************************" << std::endl;
+//        }
+        printEventQueue(m_EventQueue);
     }
 }
 

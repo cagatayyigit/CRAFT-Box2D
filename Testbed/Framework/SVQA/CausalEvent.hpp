@@ -40,6 +40,14 @@ namespace svqa
             int m_nStepCount;
         
     };
+
+    struct EventOrder
+    {
+      bool operator()(const CausalEvent::Ptr& lhs, const CausalEvent::Ptr& rhs) const
+      {
+        return lhs->getStepCount() > rhs->getStepCount();
+      }
+    };
 }
 
 #endif /* CausalEdge_hpp */

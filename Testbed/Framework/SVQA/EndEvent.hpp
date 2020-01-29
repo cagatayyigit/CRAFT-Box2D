@@ -17,12 +17,12 @@ namespace svqa
         public:
             typedef std::shared_ptr<EndEvent> Ptr;
         
-            EndEvent() : CausalEvent(0) {};
+            EndEvent(const int& step) : CausalEvent(step) {};
             virtual ~EndEvent() {};
         
-            static Ptr create()
+            static Ptr create(const int& step)
             {
-                return std::make_shared<EndEvent>();
+                return std::make_shared<EndEvent>(step);
             }
         
             virtual CausalEventType getType() override

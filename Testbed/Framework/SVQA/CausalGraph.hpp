@@ -10,6 +10,8 @@
 
 #include "CausalEvents.h"
 #include <map>
+#include <queue>
+#include <iostream>
 
 namespace svqa
 {
@@ -28,10 +30,20 @@ namespace svqa
         
             void addEvent(const CausalEvent::Ptr& event);
         
+            template<typename T> void printEventQueue(T& q) {
+                while(!q.empty()) {
+                    std::cout << q.top()->getStepCount() << " " << q.top()->getTypeStr() << std::endl;;
+                    q.pop();
+                }
+                std::cout << '\n';
+            }
+        
         private:
-            StartEvent::Ptr                                                 m_pStartEvent;      //Root of the graph
-            EndEvent::Ptr                                                   m_pEndEvent;        //Single leaf of the graph
-            std::map<CausalObject::Ptr, std::vector<CausalEvent::Ptr> >     m_ObjectEvents;     //Map of objects an their events
+            StartEvent::Ptr                                                                         m_pStartEvent;      //Root of the graph
+            EndEvent::Ptr                                                                           m_pEndEvent;        //Single leaf of the graph
+            std::map<CausalObject::Ptr, std::vector<CausalEvent::Ptr> >                             m_ObjectEvents;     //Map of objects an their events
+  
+            std::priority_queue<CausalEvent::Ptr, std::vector<CausalEvent::Ptr>, EventOrder>        m_EventQueue;
         
             //Constructs causal graph from objects to events mapping
             void constructCausalGraph();

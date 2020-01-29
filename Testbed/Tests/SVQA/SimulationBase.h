@@ -43,7 +43,7 @@ namespace svqa {
             Simulation::Step(settings);
             
             if(settings->terminate) {
-                m_pCausalGraph->addEvent(EndEvent::create());
+                m_pCausalGraph->addEvent(EndEvent::create(m_stepCount));
                 m_SceneJSONState.saveToJSONFile(m_world, "scene.json");
                 FINISH_SIMULATION
             }
