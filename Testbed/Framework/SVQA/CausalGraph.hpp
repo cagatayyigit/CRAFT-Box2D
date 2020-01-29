@@ -8,7 +8,8 @@
 #ifndef CausalGraph_hpp
 #define CausalGraph_hpp
 
-#include "CausalEvent.hpp"
+#include "CausalEvents.h"
+#include <map>
 
 namespace svqa
 {
@@ -20,7 +21,20 @@ namespace svqa
             CausalGraph() {};
             virtual ~CausalGraph() {};
         
-            void addEvent(const CausalEvent::Ptr& edge);
+            static Ptr create()
+            {
+                return std::make_shared<CausalGraph>();
+            }
+        
+            void addEvent(const CausalEvent::Ptr& event);
+        
+        private:
+            StartEvent::Ptr                                                 m_pStartEvent;      //Root of the graph
+            EndEvent::Ptr                                                   m_pEndEvent;        //Single leaf of the graph
+            std::map<CausalObject::Ptr, std::vector<CausalEvent::Ptr> >     m_ObjectEvents;     //Map of objects an their events
+        
+            //Constructs causal graph from objects to events mapping
+            void constructCausalGraph();
     };
 }
 

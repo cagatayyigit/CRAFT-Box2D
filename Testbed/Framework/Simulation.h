@@ -143,6 +143,7 @@ struct SettingsBase
 		singleStep = false;
 		bufferWidth = 640;
 		bufferHeight = 320;
+        terminate = false;
 	}
 
 	virtual ~SettingsBase()
@@ -171,6 +172,7 @@ struct SettingsBase
 	bool singleStep;
 	int bufferWidth;
 	int bufferHeight;
+    bool terminate;
 };
 
 struct TestEntry

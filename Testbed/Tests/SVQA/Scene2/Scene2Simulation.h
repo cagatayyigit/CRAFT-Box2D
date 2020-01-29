@@ -157,14 +157,13 @@ namespace svqa {
 
 				m_nNumberOfObjects--;
 			}
+            
+            if (terminateSimulation)
+            {
+                settings->terminate = true;
+            }
 
 			SimulationBase::Step(settings);
-
-			if (terminateSimulation)
-			{
-				state.saveToJSONFile(m_world, "scene.json");
-				FINISH_SIMULATION
-			}
 		}
 
 		virtual SimulationID getIdentifier() override
@@ -182,8 +181,6 @@ namespace svqa {
 		b2Vec2 m_vStagnantObjPosition;
 		b2Vec2 m_vObstaclePosition;
 		b2Vec2 m_vInitialDropVelocity;
-
-		SceneState state;
 
 		// TODO: We can embed these "addObject" methods in SimulationBase.h
 
@@ -215,7 +212,7 @@ namespace svqa {
             auto objectState = ObjectState::create(body, mat.type, color.type, object.type);
             body->SetUserData(objectState.get());
 
-            state.add(objectState);
+            m_SceneJSONState.add(objectState);
 		}
 
 		void addStaticObject(b2Vec2 position, float32 angle, SimulationObject::TYPE objType, SimulationMaterial::TYPE materialType, SimulationColor color)
@@ -242,7 +239,7 @@ namespace svqa {
             auto objectState = ObjectState::create(body, mat.type, color.type, object.type);
             body->SetUserData(objectState.get());
 
-            state.add(objectState);
+            m_SceneJSONState.add(objectState);
 		}
 
 		void addStaticObject(b2Vec2 position, float32 angle, ShapePtr shape,
@@ -262,7 +259,7 @@ namespace svqa {
             auto objectState = ObjectState::create(body, material.type, color.type, object.type);
             body->SetUserData(objectState.get());
 
-			state.add(objectState);
+			m_SceneJSONState.add(objectState);
 		}
 
 	};

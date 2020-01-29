@@ -21,7 +21,20 @@ namespace svqa
             CausalEvent(const int& step) : m_nStepCount(step) {};
             virtual ~CausalEvent() {};
         
+            //Gets event type
             virtual CausalEventType getType() = 0;
+        
+            //Gets event's string type
+            std::string getTypeStr()
+            {
+                return getTypeString(getType());
+            }
+        
+            //Gets effected objects
+            virtual std::vector<CausalObject::Ptr> getObjects() = 0;
+        
+            //Get event's step count
+            int getStepCount() const;
         
         private:
             int m_nStepCount;

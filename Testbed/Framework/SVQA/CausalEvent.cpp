@@ -6,3 +6,11 @@
 //
 
 #include "CausalEvent.hpp"
+
+namespace svqa
+{
+    int CausalEvent::getStepCount() const
+    {
+        return m_nStepCount;
+    }
+}

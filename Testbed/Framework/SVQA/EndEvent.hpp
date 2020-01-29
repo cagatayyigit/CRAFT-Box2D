@@ -1,33 +1,33 @@
 //
-//  StartEvent.hpp
+//  EndEvent.hpp
 //  Testbed
 //
-//  Created by Tayfun Ateş on 28.01.2020.
+//  Created by Tayfun Ateş on 29.01.2020.
 //
 
-#ifndef StartEvent_hpp
-#define StartEvent_hpp
+#ifndef EndEvent_hpp
+#define EndEvent_hpp
 
 #include "CausalEvent.hpp"
 
 namespace svqa
 {
-    class StartEvent : public CausalEvent
+    class EndEvent : public CausalEvent
     {
         public:
-            typedef std::shared_ptr<StartEvent> Ptr;
+            typedef std::shared_ptr<EndEvent> Ptr;
         
-            StartEvent() : CausalEvent(0) {};
-            virtual ~StartEvent() {};
+            EndEvent() : CausalEvent(0) {};
+            virtual ~EndEvent() {};
         
             static Ptr create()
             {
-                return std::make_shared<StartEvent>();
+                return std::make_shared<EndEvent>();
             }
         
             virtual CausalEventType getType() override
             {
-                return Start_Event;
+                return End_Event;
             }
         
             virtual std::vector<CausalObject::Ptr> getObjects() override
@@ -38,4 +38,4 @@ namespace svqa
     };
 }
 
-#endif /* StartEvent_hpp */
+#endif /* EndEvent_hpp */

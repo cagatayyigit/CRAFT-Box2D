@@ -20,9 +20,20 @@ namespace svqa
             EndTouchingEvent(const int& step, const CausalObject::Ptr& firstObject, const CausalObject::Ptr& secondObject) : CausalEvent(step), m_pFirstObject(firstObject), m_pSecondObject(secondObject) {};
             virtual ~EndTouchingEvent() {};
         
-            virtual CausalEventType getType()
+            static Ptr create(const int& step, const CausalObject::Ptr& firstObject, const CausalObject::Ptr& secondObject)
+            {
+                return std::make_shared<EndTouchingEvent>(step, firstObject, secondObject);
+            }
+        
+            virtual CausalEventType getType() override
             {
                 return EndTouching_Event;
+            }
+        
+            virtual std::vector<CausalObject::Ptr> getObjects() override
+            {
+                std::vector<CausalObject::Ptr> ret{ m_pFirstObject, m_pSecondObject };
+                return ret;
             }
         
         private:

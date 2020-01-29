@@ -11,6 +11,7 @@
 #include "Simulation.h"
 #include "Settings.h"
 #include "SimulationID.h"
+#include "CausalGraph.hpp"
 
 #ifdef _MSC_VER
 #define _USE_MATH_DEFINES
@@ -31,12 +32,22 @@ namespace svqa {
 		{
 			m_pSettings = _settings_;
 			m_nDistinctColorUsed = 8;
+            
+            m_pCausalGraph = CausalGraph::create();
+            m_pCausalGraph->addEvent(StartEvent::create());
 		}
 
 		/// Derived simulations must call this in order to construct causal graph
-		virtual void Step(SettingsBase* settings)
+		virtual void Step(SettingsBase* settings) override
         {
             Simulation::Step(settings);
+            
+            if(settings->terminate) {
+                m_pCausalGraph->addEvent(EndEvent::create());
+                m_SceneJSONState.saveToJSONFile(m_world, "scene.json");
+                FINISH_SIMULATION
+            }
+            
             detectStartTouchingEvents();
         }
 
@@ -143,6 +154,8 @@ namespace svqa {
             for (auto it = m_Contacts.begin(); it != m_Contacts.end(); it++) {
                 if (m_stepCount - it->step > COLLISION_DETECTION_STEP_DIFF) {
                     //DETECTED StartTouching_Event
+                    m_pCausalGraph->addEvent(StartTouchingEvent::create(it->step, CausalObject::create(it->contact->GetFixtureA()->GetBody()),
+                        CausalObject::create(it->contact->GetFixtureB()->GetBody())));
                     m_Contacts.erase(it--);
                 }
             }
@@ -161,13 +174,13 @@ namespace svqa {
                 if(it->contact == contact) {
                     if (m_stepCount - it->step > COLLISION_DETECTION_STEP_DIFF) {
                         //DETECTED EndTouching_Event
-                        int a = 2;
-                        int b = a;
+                        m_pCausalGraph->addEvent(EndTouchingEvent::create(it->step, CausalObject::create(it->contact->GetFixtureA()->GetBody()),
+                            CausalObject::create(it->contact->GetFixtureB()->GetBody())));
                         
                     } else {
                         //DETECTED Collision_Event
-                        int a = 2;
-                        int b = a;
+                        m_pCausalGraph->addEvent(CollisionEvent::create(it->step, CausalObject::create(it->contact->GetFixtureA()->GetBody()),
+                            CausalObject::create(it->contact->GetFixtureB()->GetBody())));
                     }
                     m_Contacts.erase(it--);
                 }
@@ -208,14 +221,17 @@ namespace svqa {
 			return ObjectState(body, mat.type, col.type, object.type);
 		}
         
-        private:
-            struct ContactInfo
-            {
-                b2Contact* contact;
-                int step;
-            };
+        struct ContactInfo
+        {
+            b2Contact* contact;
+            int step;
+        };
 
-            std::vector<ContactInfo> m_Contacts;
+        std::vector<ContactInfo>    m_Contacts;
+        
+        CausalGraph::Ptr            m_pCausalGraph;
+        SceneState                  m_SceneJSONState;
+            
 	};
 }
 
