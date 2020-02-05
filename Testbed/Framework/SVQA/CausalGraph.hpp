@@ -46,10 +46,13 @@ namespace svqa
             std::priority_queue<CausalEvent::Ptr, std::vector<CausalEvent::Ptr>, CausalEvent::Order>        m_EventQueue;
         
             //adds new events to the causal graph returning new root of the graph
-            CausalEvent::Ptr addEventsToCausalGraph(CausalEvent::Ptr root, CausalEvent::Ptr newEvent);
+            void addEventsToCausalGraph(CausalEvent::Ptr root, CausalEvent::Ptr newEvent);
+        
+            //get latest event of an object before any specific time step
+            CausalEvent::Ptr getLatestEventBeforeTimeStep(b2Body* object, int step);
         
             //get latest event of an object
-            CausalEvent::Ptr getLatestEventBeforeTimeStep(b2Body* object, int step);
+            CausalEvent::Ptr getLatestEvent(b2Body* object);
         
             //Constructs causal graph from objects to events mapping
             void constructCausalGraph();

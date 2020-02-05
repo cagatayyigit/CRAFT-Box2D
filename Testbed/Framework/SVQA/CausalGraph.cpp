@@ -42,13 +42,15 @@ namespace svqa {
 
     void CausalGraph::constructCausalGraph()
     {
-        CausalEvent::Ptr root = nullptr;
+        //Root is the start event
+        CausalEvent::Ptr root = m_EventQueue.top();
+        m_EventQueue.pop();
+        
         while(!m_EventQueue.empty()) {
             const auto& event = m_EventQueue.top();
-            root = addEventsToCausalGraph(root, event);
+            addEventsToCausalGraph(root, event);
             m_EventQueue.pop();
         }
-        
         
 //        for(auto obj : m_ObjectEvents) {
 //            const auto& events = obj.second;
@@ -58,6 +60,15 @@ namespace svqa {
 //            std::cout << "************************************" << std::endl;
 //        }
         printEventQueue(m_EventQueue);
+    }
+
+    CausalEvent::Ptr CausalGraph::getLatestEvent(b2Body* object)
+    {
+        const auto& events = m_ObjectEvents[object];
+        if(events.size()) {
+            return events[events.size()-1];
+        }
+        return nullptr;
     }
 
     CausalEvent::Ptr CausalGraph::getLatestEventBeforeTimeStep(b2Body* object, int step)
@@ -83,10 +94,18 @@ namespace svqa {
         return nullptr;
     }
 
-    CausalEvent::Ptr CausalGraph::addEventsToCausalGraph(CausalEvent::Ptr root, CausalEvent::Ptr newEvent)
+    void CausalGraph::addEventsToCausalGraph(CausalEvent::Ptr root, CausalEvent::Ptr newEvent)
     {
-        if(!root) {
-            return newEvent;
+        if(newEvent->getType() == Start_Event) {
+            return;
+        }
+        else if(newEvent->getType() == End_Event) {
+            for(auto objEvents : m_ObjectEvents) {
+                const auto& latestEventOfObject = getLatestEvent(objEvents.first);
+                //Must not be null: for each object there should at least one event before end event
+                newEvent->addCauseEvent(latestEventOfObject);
+            }
+            return;
         }
         const auto& newEventObjects = newEvent->getObjects();
         
@@ -102,10 +121,6 @@ namespace svqa {
         if(firstEventOfObject) {
             newEvent->addCauseEvent(root);
         }
-        
-        return root;
     }
-
-    
 }
 
