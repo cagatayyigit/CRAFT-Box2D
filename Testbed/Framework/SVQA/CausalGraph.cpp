@@ -43,13 +43,14 @@ namespace svqa {
     void CausalGraph::constructCausalGraph()
     {
         //Root is the start event
-        CausalEvent::Ptr root = m_EventQueue.top();
-        m_EventQueue.pop();
+        auto eventQueue = m_EventQueue;
+        CausalEvent::Ptr root = eventQueue.top();
+        eventQueue.pop();
         
-        while(!m_EventQueue.empty()) {
-            const auto& event = m_EventQueue.top();
+        while(!eventQueue.empty()) {
+            const auto& event = eventQueue.top();
             addEventsToCausalGraph(root, event);
-            m_EventQueue.pop();
+            eventQueue.pop();
         }
         
 //        for(auto obj : m_ObjectEvents) {
@@ -59,7 +60,8 @@ namespace svqa {
 //            }
 //            std::cout << "************************************" << std::endl;
 //        }
-        printEventQueue(m_EventQueue);
+        
+        std::cout << createGraphString() << std::endl;
     }
 
     CausalEvent::Ptr CausalGraph::getLatestEvent(b2Body* object)
@@ -121,6 +123,48 @@ namespace svqa {
         if(firstEventOfObject) {
             newEvent->addCauseEvent(root);
         }
+    }
+
+    void addNodeToString(CausalEvent::Ptr event, std::string& str)
+    {
+        str += (std::to_string((long long)event.get()) + " [label=\"" + event->getStrRepresentation() + "\"]\n");
+    }
+
+    void addEdgesToString(CausalEvent::Ptr event, std::string& str)
+    {
+        const auto& neighbors = event->getImmediateOutcomes();
+        
+        str += (std::to_string((long long)event.get()) + " -> { ") ;
+        for(auto ne : neighbors) {
+            str += (std::to_string((long long)ne.get()) + " ") ;
+        }
+        str += "}\n";
+        
+        for(auto ne : neighbors) {
+            addEdgesToString(ne, str);
+        }
+    }
+
+    std::string CausalGraph::createGraphString()
+    {
+        std::string ret = "digraph d {\n";
+        
+        auto eventQueue = m_EventQueue;
+        CausalEvent::Ptr root = eventQueue.top();
+        addNodeToString(root,  ret);
+        eventQueue.pop();
+        
+        while(!eventQueue.empty()) {
+
+            const auto& event = eventQueue.top();
+            addNodeToString(event,  ret);
+            eventQueue.pop();
+        }
+
+        addEdgesToString(root, ret);
+        
+        ret += "}\n";
+        return ret;
     }
 }
 

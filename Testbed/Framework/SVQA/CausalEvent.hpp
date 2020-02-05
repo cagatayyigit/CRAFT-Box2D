@@ -43,6 +43,11 @@ namespace svqa
                 return getTypeString(getType());
             }
         
+            virtual std::string getStrRepresentation()
+            {
+                return getTypeStr() + ":" + std::to_string(m_nStepCount);
+            }
+        
             void addCauseEvent(CausalEvent::Ptr causeEvent) {
                 this->m_vCauseEvents.insert(causeEvent);
                 causeEvent->addOutcomeEvent(shared_from_this());
