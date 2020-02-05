@@ -17,10 +17,10 @@ namespace svqa
         public:
             typedef std::shared_ptr<EndTouchingEvent> Ptr;
         
-            EndTouchingEvent(const int& step, const CausalObject::Ptr& firstObject, const CausalObject::Ptr& secondObject) : CausalEvent(step), m_pFirstObject(firstObject), m_pSecondObject(secondObject) {};
+            EndTouchingEvent(const int& step, b2Body* firstObject, b2Body* secondObject) : CausalEvent(step), m_pFirstObject(firstObject), m_pSecondObject(secondObject) {};
             virtual ~EndTouchingEvent() {};
         
-            static Ptr create(const int& step, const CausalObject::Ptr& firstObject, const CausalObject::Ptr& secondObject)
+            static Ptr create(const int& step, b2Body* firstObject, b2Body* secondObject)
             {
                 return std::make_shared<EndTouchingEvent>(step, firstObject, secondObject);
             }
@@ -30,15 +30,15 @@ namespace svqa
                 return EndTouching_Event;
             }
         
-            virtual std::vector<CausalObject::Ptr> getObjects() override
+            virtual std::vector<b2Body*> getObjects() override
             {
-                std::vector<CausalObject::Ptr> ret{ m_pFirstObject, m_pSecondObject };
+                std::vector<b2Body*> ret{ m_pFirstObject, m_pSecondObject };
                 return ret;
             }
         
         private:
-            CausalObject::Ptr   m_pFirstObject;
-            CausalObject::Ptr   m_pSecondObject;
+            b2Body*   m_pFirstObject;
+            b2Body*   m_pSecondObject;
     };
 }
 

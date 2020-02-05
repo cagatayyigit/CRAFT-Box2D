@@ -154,8 +154,8 @@ namespace svqa {
             for (auto it = m_Contacts.begin(); it != m_Contacts.end(); it++) {
                 if (m_stepCount - it->step > COLLISION_DETECTION_STEP_DIFF) {
                     //DETECTED StartTouching_Event
-                    m_pCausalGraph->addEvent(StartTouchingEvent::create(it->step, CausalObject::create(it->contact->GetFixtureA()->GetBody()),
-                        CausalObject::create(it->contact->GetFixtureB()->GetBody())));
+                    m_pCausalGraph->addEvent(StartTouchingEvent::create(it->step, it->contact->GetFixtureA()->GetBody(),
+                        it->contact->GetFixtureB()->GetBody()));
                     m_Contacts.erase(it--);
                 }
             }
@@ -174,13 +174,13 @@ namespace svqa {
                 if(it->contact == contact) {
                     if (m_stepCount - it->step > COLLISION_DETECTION_STEP_DIFF) {
                         //DETECTED EndTouching_Event
-                        m_pCausalGraph->addEvent(EndTouchingEvent::create(it->step, CausalObject::create(it->contact->GetFixtureA()->GetBody()),
-                            CausalObject::create(it->contact->GetFixtureB()->GetBody())));
+                        m_pCausalGraph->addEvent(EndTouchingEvent::create(it->step, it->contact->GetFixtureA()->GetBody(),
+                            it->contact->GetFixtureB()->GetBody()));
                         
                     } else {
                         //DETECTED Collision_Event
-                        m_pCausalGraph->addEvent(CollisionEvent::create(it->step, CausalObject::create(it->contact->GetFixtureA()->GetBody()),
-                            CausalObject::create(it->contact->GetFixtureB()->GetBody())));
+                        m_pCausalGraph->addEvent(CollisionEvent::create(it->step, it->contact->GetFixtureA()->GetBody(),
+                            it->contact->GetFixtureB()->GetBody()));
                     }
                     m_Contacts.erase(it--);
                 }

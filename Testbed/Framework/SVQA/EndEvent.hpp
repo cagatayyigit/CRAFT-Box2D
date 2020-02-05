@@ -30,9 +30,9 @@ namespace svqa
                 return End_Event;
             }
         
-            virtual std::vector<CausalObject::Ptr> getObjects() override
+            virtual std::vector<b2Body*> getObjects() override
             {
-                std::vector<CausalObject::Ptr> ret;
+                std::vector<b2Body*> ret;
                 return ret;
             }
     };

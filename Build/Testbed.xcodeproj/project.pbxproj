@@ -29,7 +29,6 @@
 		7CDCBD8923E0A2E900BC9E50 /* CollisionEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD8223E0A2E900BC9E50 /* CollisionEvent.cpp */; };
 		7CDCBD8A23E0A2E900BC9E50 /* CausalGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD8323E0A2E900BC9E50 /* CausalGraph.cpp */; };
 		7CDCBD8B23E0A2E900BC9E50 /* CausalEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD8523E0A2E900BC9E50 /* CausalEvent.cpp */; };
-		7CDCBD8C23E0A2E900BC9E50 /* CausalObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD8623E0A2E900BC9E50 /* CausalObject.cpp */; };
 		7CDCBD9423E0BB4F00BC9E50 /* StartTouchingEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD9223E0BB4F00BC9E50 /* StartTouchingEvent.cpp */; };
 		7CDCBD9723E0BB9400BC9E50 /* EndTouchingEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD9523E0BB9400BC9E50 /* EndTouchingEvent.cpp */; };
 		7CDCBD9A23E0BC8400BC9E50 /* StartEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD9823E0BC8400BC9E50 /* StartEvent.cpp */; };
@@ -135,12 +134,10 @@
 		7CC77DC623C7A71700BFFAFE /* Scene1Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene1Settings.h; sourceTree = "<group>"; };
 		7CC77DC723C7A71700BFFAFE /* Scene1Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene1Simulation.h; sourceTree = "<group>"; };
 		7CDCBD7F23E0A2E900BC9E50 /* CausalEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CausalEvent.hpp; sourceTree = "<group>"; };
-		7CDCBD8023E0A2E900BC9E50 /* CausalObject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CausalObject.hpp; sourceTree = "<group>"; };
 		7CDCBD8223E0A2E900BC9E50 /* CollisionEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionEvent.cpp; sourceTree = "<group>"; };
 		7CDCBD8323E0A2E900BC9E50 /* CausalGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CausalGraph.cpp; sourceTree = "<group>"; };
 		7CDCBD8423E0A2E900BC9E50 /* CausalGraph.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CausalGraph.hpp; sourceTree = "<group>"; };
 		7CDCBD8523E0A2E900BC9E50 /* CausalEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CausalEvent.cpp; sourceTree = "<group>"; };
-		7CDCBD8623E0A2E900BC9E50 /* CausalObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CausalObject.cpp; sourceTree = "<group>"; };
 		7CDCBD8823E0A2E900BC9E50 /* CollisionEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CollisionEvent.hpp; sourceTree = "<group>"; };
 		7CDCBD9123E0AAEF00BC9E50 /* CausalEventType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CausalEventType.h; sourceTree = "<group>"; };
 		7CDCBD9223E0BB4F00BC9E50 /* StartTouchingEvent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StartTouchingEvent.cpp; sourceTree = "<group>"; };
@@ -388,8 +385,6 @@
 				7CDCBD9923E0BC8400BC9E50 /* StartEvent.hpp */,
 				7C99152E23E1EA2900D5FF39 /* EndEvent.cpp */,
 				7C99152F23E1EA2900D5FF39 /* EndEvent.hpp */,
-				7CDCBD8023E0A2E900BC9E50 /* CausalObject.hpp */,
-				7CDCBD8623E0A2E900BC9E50 /* CausalObject.cpp */,
 				7C99153123E1F2D600D5FF39 /* CausalEvents.h */,
 			);
 			name = SVQA;
@@ -575,7 +570,6 @@
 			files = (
 				7CDCBD9A23E0BC8400BC9E50 /* StartEvent.cpp in Sources */,
 				2F333A69F5C131DB63C358A9 /* DebugDraw.cpp in Sources */,
-				7CDCBD8C23E0A2E900BC9E50 /* CausalObject.cpp in Sources */,
 				7C6D1CDC23813A4E00BB74E0 /* SimulationMain.cpp in Sources */,
 				7CDCBD9723E0BB9400BC9E50 /* EndTouchingEvent.cpp in Sources */,
 				BADF007F2C01A171E1C84EBF /* Simulation.cpp in Sources */,

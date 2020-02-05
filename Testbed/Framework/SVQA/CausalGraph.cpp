@@ -6,6 +6,7 @@
 //
 
 #include "CausalGraph.hpp"
+#include <algorithm>
 
 namespace svqa {
     void CausalGraph::addEvent(const CausalEvent::Ptr& event)
@@ -41,6 +42,14 @@ namespace svqa {
 
     void CausalGraph::constructCausalGraph()
     {
+        CausalEvent::Ptr root = nullptr;
+        while(!m_EventQueue.empty()) {
+            const auto& event = m_EventQueue.top();
+            root = addEventsToCausalGraph(root, event);
+            m_EventQueue.pop();
+        }
+        
+        
 //        for(auto obj : m_ObjectEvents) {
 //            const auto& events = obj.second;
 //            for(auto event : events) {
@@ -50,5 +59,53 @@ namespace svqa {
 //        }
         printEventQueue(m_EventQueue);
     }
+
+    CausalEvent::Ptr CausalGraph::getLatestEventBeforeTimeStep(b2Body* object, int step)
+    {
+        const auto& events = m_ObjectEvents[object];
+        
+        if(events.size()) {
+            auto prevEvent = events[0];
+            if(prevEvent->getStepCount()<step) {
+                //We are sure that there are at least two events here
+                int i=1;
+                auto nextEvent = events[i];
+                
+                while (nextEvent->getStepCount()<step) {
+                    prevEvent = nextEvent;
+                    nextEvent = events[++i];
+                }
+                
+                return prevEvent;
+            }
+        }
+        
+        return nullptr;
+    }
+
+    CausalEvent::Ptr CausalGraph::addEventsToCausalGraph(CausalEvent::Ptr root, CausalEvent::Ptr newEvent)
+    {
+        if(!root) {
+            return newEvent;
+        }
+        const auto& newEventObjects = newEvent->getObjects();
+        
+        bool firstEventOfObject = true;
+        for(auto neObj : newEventObjects) {
+            const auto& latestEventOfObject = getLatestEventBeforeTimeStep(neObj, newEvent->getStepCount());
+            if(latestEventOfObject) {
+                newEvent->addCauseEvent(latestEventOfObject);
+                firstEventOfObject = false;
+            }
+        }
+        
+        if(firstEventOfObject) {
+            newEvent->addCauseEvent(root);
+        }
+        
+        return root;
+    }
+
+    
 }
 
