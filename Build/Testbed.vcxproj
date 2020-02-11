@@ -114,7 +114,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Testbed\Framework;..\Testbed\Tests\SVQA\ObstructionDemo;..\Testbed\Tests\SVQA\RemoveObject;..\Testbed\Tests\SVQA\PendulumObstacles;..\Testbed\Tests\SVQA\Scene2;..\Testbed\Tests\SVQA\Scene1;..\Testbed\Tests\SVQA\FixedPulley;..\Testbed\Tests\SVQA\JumpingBall;..\Testbed\Tests\SVQA\ObstructedPath;..\Testbed\Tests\SVQA;..\Testbed\Tests\SVQA\ConnectedCars;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Testbed\Tests\SVQA\RemoveObject;..\Testbed\Framework\SVQA;..\Testbed\Framework;..\Testbed\Tests\SVQA\ObstructionDemo;..\Testbed\Tests\SVQA\PendulumObstacles;..\Testbed\Tests\SVQA\Scene2;..\Testbed\Tests\SVQA\Scene1;..\Testbed\Tests\SVQA\FixedPulley;..\Testbed\Tests\SVQA\JumpingBall;..\Testbed\Tests\SVQA\ObstructedPath;..\Testbed\Tests\SVQA;..\Testbed\Tests\SVQA\ConnectedCars;..\Testbed\Tests\SVQA\MultiplePendulums;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
@@ -152,7 +152,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Testbed\Framework;..\Testbed\Tests\SVQA\ObstructionDemo;..\Testbed\Tests\SVQA\RemoveObject;..\Testbed\Tests\SVQA\PendulumObstacles;..\Testbed\Tests\SVQA\Scene2;..\Testbed\Tests\SVQA\Scene1;..\Testbed\Tests\SVQA\FixedPulley;..\Testbed\Tests\SVQA\JumpingBall;..\Testbed\Tests\SVQA\ObstructedPath;..\Testbed\Tests\SVQA;..\Testbed\Tests\SVQA\ConnectedCars;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Testbed\Tests\SVQA\RemoveObject;..\Testbed\Framework\SVQA;..\Testbed\Framework;..\Testbed\Tests\SVQA\ObstructionDemo;..\Testbed\Tests\SVQA\PendulumObstacles;..\Testbed\Tests\SVQA\Scene2;..\Testbed\Tests\SVQA\Scene1;..\Testbed\Tests\SVQA\FixedPulley;..\Testbed\Tests\SVQA\JumpingBall;..\Testbed\Tests\SVQA\ObstructedPath;..\Testbed\Tests\SVQA;..\Testbed\Tests\SVQA\ConnectedCars;..\Testbed\Tests\SVQA\MultiplePendulums;..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -177,12 +177,23 @@
     <ClInclude Include="..\Testbed\Framework\Simulation.h" />
     <ClInclude Include="..\Testbed\Framework\SimulationDefines.h" />
     <ClInclude Include="..\Testbed\Framework\SimulationRenderer.hpp" />
+    <ClInclude Include="..\Testbed\Framework\SVQA\CausalEvent.hpp" />
+    <ClInclude Include="..\Testbed\Framework\SVQA\CausalEvents.h" />
+    <ClInclude Include="..\Testbed\Framework\SVQA\CausalEventType.h" />
+    <ClInclude Include="..\Testbed\Framework\SVQA\CausalGraph.hpp" />
+    <ClInclude Include="..\Testbed\Framework\SVQA\CollisionEvent.hpp" />
+    <ClInclude Include="..\Testbed\Framework\SVQA\EndEvent.hpp" />
+    <ClInclude Include="..\Testbed\Framework\SVQA\EndTouchingEvent.hpp" />
+    <ClInclude Include="..\Testbed\Framework\SVQA\StartEvent.hpp" />
+    <ClInclude Include="..\Testbed\Framework\SVQA\StartTouchingEvent.hpp" />
     <ClInclude Include="..\Testbed\Framework\VideoWriter.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\FixedPulley\FixedPulleySettings.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\FixedPulley\FixedPulleySimulation.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\JSONHelper.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\JumpingBall\JumpingBallSettings.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\JumpingBall\JumpingBallSimulation.h" />
+    <ClInclude Include="..\Testbed\Tests\SVQA\MultiplePendulums\MultiplePendulumsSettings.h" />
+    <ClInclude Include="..\Testbed\Tests\SVQA\MultiplePendulums\MultiplePendulumsSimulation.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\ObjectState.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\ObstructedPath\ObstructedPathSettings.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\ObstructedPath\ObstructedPathSimulation.h" />
@@ -228,6 +239,13 @@
     <ClCompile Include="..\Testbed\Framework\Simulation.cpp" />
     <ClCompile Include="..\Testbed\Framework\SimulationMain.cpp" />
     <ClCompile Include="..\Testbed\Framework\SimulationRenderer.cpp" />
+    <ClCompile Include="..\Testbed\Framework\SVQA\CausalEvent.cpp" />
+    <ClCompile Include="..\Testbed\Framework\SVQA\CausalGraph.cpp" />
+    <ClCompile Include="..\Testbed\Framework\SVQA\CollisionEvent.cpp" />
+    <ClCompile Include="..\Testbed\Framework\SVQA\EndEvent.cpp" />
+    <ClCompile Include="..\Testbed\Framework\SVQA\EndTouchingEvent.cpp" />
+    <ClCompile Include="..\Testbed\Framework\SVQA\StartEvent.cpp" />
+    <ClCompile Include="..\Testbed\Framework\SVQA\StartTouchingEvent.cpp" />
     <ClCompile Include="..\Testbed\Tests\SVQA\SimulationMaterial.cpp" />
     <ClCompile Include="..\Testbed\glad\glad.c" />
     <ClCompile Include="..\Testbed\glfw\context.c" />

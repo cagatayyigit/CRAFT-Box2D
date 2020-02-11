@@ -46,6 +46,12 @@
     <Filter Include="Tests\SVQA\Scene2">
       <UniqueIdentifier>{12c67529-6b36-46f0-b91f-6920ac1be608}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Framework\SVQA">
+      <UniqueIdentifier>{27bc4afe-101c-4f2f-bceb-f9ed375d2980}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\SVQA\MultiplePendulums">
+      <UniqueIdentifier>{a62a7a7a-93b6-4e1f-a1c1-03921b4a510a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Testbed\Framework\Camera.hpp">
@@ -196,6 +202,39 @@
     <ClInclude Include="..\Testbed\Tests\SVQA\Scene2\Scene2Simulation.h">
       <Filter>Tests\SVQA\Scene2</Filter>
     </ClInclude>
+    <ClInclude Include="..\Testbed\Framework\SVQA\CausalEvent.hpp">
+      <Filter>Framework\SVQA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Framework\SVQA\CausalEvents.h">
+      <Filter>Framework\SVQA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Framework\SVQA\CausalEventType.h">
+      <Filter>Framework\SVQA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Framework\SVQA\CausalGraph.hpp">
+      <Filter>Framework\SVQA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Framework\SVQA\CollisionEvent.hpp">
+      <Filter>Framework\SVQA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Framework\SVQA\EndEvent.hpp">
+      <Filter>Framework\SVQA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Framework\SVQA\EndTouchingEvent.hpp">
+      <Filter>Framework\SVQA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Framework\SVQA\StartEvent.hpp">
+      <Filter>Framework\SVQA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Framework\SVQA\StartTouchingEvent.hpp">
+      <Filter>Framework\SVQA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\MultiplePendulums\MultiplePendulumsSettings.h">
+      <Filter>Tests\SVQA\MultiplePendulums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\MultiplePendulums\MultiplePendulumsSimulation.h">
+      <Filter>Tests\SVQA\MultiplePendulums</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Testbed\Framework\Camera.cpp">
@@ -272,6 +311,27 @@
     </ClCompile>
     <ClCompile Include="..\Testbed\imgui\imgui_impl_glfw_gl3.cpp">
       <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\Framework\SVQA\CausalEvent.cpp">
+      <Filter>Framework\SVQA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\Framework\SVQA\CausalGraph.cpp">
+      <Filter>Framework\SVQA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\Framework\SVQA\CollisionEvent.cpp">
+      <Filter>Framework\SVQA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\Framework\SVQA\EndEvent.cpp">
+      <Filter>Framework\SVQA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\Framework\SVQA\EndTouchingEvent.cpp">
+      <Filter>Framework\SVQA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\Framework\SVQA\StartEvent.cpp">
+      <Filter>Framework\SVQA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\Framework\SVQA\StartTouchingEvent.cpp">
+      <Filter>Framework\SVQA</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
