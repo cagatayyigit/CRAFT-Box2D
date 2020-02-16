@@ -84,52 +84,20 @@ namespace svqa {
 
 		virtual void createBoundaries()
 		{
-			std::vector<std::pair<b2Vec2, b2Vec2>> boundaries;
-			boundaries.push_back(std::make_pair(b2Vec2(-40.0f, 0.0f), b2Vec2(40.0f, 0.0f)));
-			boundaries.push_back(std::make_pair(b2Vec2(-30.0f, 0.0f), b2Vec2(-30.0f, 50.0f)));
-			boundaries.push_back(std::make_pair(b2Vec2(30.0f, 0.0f), b2Vec2(30.0f, 50.0f)));
+            const float friction = 10.0f;
+			std::vector<ShapePtr> boundaries;
+			boundaries.push_back(SimulationObject(SimulationObject::LEFT_BOUNDARY).getShape());
+			boundaries.push_back(SimulationObject(SimulationObject::RIGHT_BOUNDARY).getShape());
+			boundaries.push_back(SimulationObject(SimulationObject::BOTTOM_BOUNDARY).getShape());
 
 			for (auto&& bound : boundaries) {
 				b2BodyDef bd;
 				BODY* boundBody = (BODY*)m_world->CreateBody(&bd);
-				b2EdgeShape shape;
-				shape.Set(bound.first, bound.second);
-				boundBody->CreateFixture(&shape, 0.0f);
-			}
-		}
 
-		virtual void createBoundaries(float32 x, float32 y)
-		{
-			std::vector<std::pair<b2Vec2, b2Vec2>> boundaries;
-			boundaries.push_back(std::make_pair(b2Vec2(-x, -5.0f), b2Vec2(x, -5.0f)));
-			boundaries.push_back(std::make_pair(b2Vec2(-x, -5.0f), b2Vec2(-x, y)));
-			boundaries.push_back(std::make_pair(b2Vec2(x, -5.0f), b2Vec2(x, y)));
-
-			for (auto&& bound : boundaries) {
-				b2BodyDef bd;
-				BODY* boundBody = (BODY*)m_world->CreateBody(&bd);
-				b2EdgeShape shape;
-				shape.Set(bound.first, bound.second);
-				boundBody->CreateFixture(&shape, 0.0f);
-			}
-		}
-
-		virtual void createBoundaries(float32 x, float32 y, float32 friction)
-		{
-			std::vector<std::pair<b2Vec2, b2Vec2>> boundaries;
-			boundaries.push_back(std::make_pair(b2Vec2(-x, -5.0f), b2Vec2(x, -5.0f)));
-			boundaries.push_back(std::make_pair(b2Vec2(-x, -5.0f), b2Vec2(-x, y)));
-			boundaries.push_back(std::make_pair(b2Vec2(x, -5.0f), b2Vec2(x, y)));
-
-			for (auto&& bound : boundaries) {
-				b2BodyDef bd;
-				BODY* boundBody = (BODY*)m_world->CreateBody(&bd);
-				b2EdgeShape shape;
-				shape.Set(bound.first, bound.second);
 				b2FixtureDef fd = b2FixtureDef();
 				fd.friction = friction;
 				fd.density = 0.0f;
-				fd.shape = &shape;
+				fd.shape = bound.get();
 				boundBody->CreateFixture(&fd);
 			}
 		}

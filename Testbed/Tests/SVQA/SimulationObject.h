@@ -41,8 +41,10 @@ public:
 		CAR_BODY = 13,
 		CAR_WHEEL = 14,
 		ROD_RECTANGLE = 15,
-		SQUARE = 16
-
+		SQUARE = 16,
+        LEFT_BOUNDARY = 17,
+        RIGHT_BOUNDARY = 18,
+        BOTTOM_BOUNDARY = 19
 	};
 
 	SimulationObject(TYPE t)
@@ -85,6 +87,12 @@ public:
 			return std::make_shared<b2PolygonShape>(getRectangle(10.0f, 1.0f));
 		case SQUARE:
 			return std::make_shared<b2PolygonShape>(getRectangle(1.0f, 1.0f));
+        case LEFT_BOUNDARY:
+            return std::make_shared<b2EdgeShape>(getBoundaryEdgeShape(b2Vec2(-40.0f, -5.0f), b2Vec2(-40.0f, 50.0f)));
+        case RIGHT_BOUNDARY:
+            return std::make_shared<b2EdgeShape>(getBoundaryEdgeShape(b2Vec2(40.0f, -5.0f), b2Vec2(40.0f, 50.0f)));
+        case BOTTOM_BOUNDARY:
+            return std::make_shared<b2EdgeShape>(getBoundaryEdgeShape(b2Vec2(-40.0f, -5.0f), b2Vec2(40.0f, -5.0f)));
 		default:
 			break;
 		}
@@ -183,7 +191,7 @@ public:
 		return shape;
 	}
 
-	b2VisPolygonShape getCarBodyIrregularPolygon()
+	static b2VisPolygonShape getCarBodyIrregularPolygon()
 	{
 		b2VisPolygonShape chassis;
 		b2Vec2 vertices[8];
@@ -197,6 +205,13 @@ public:
 		chassis.Set(vertices, 6);
 		return chassis;
 	}
+    
+    static b2EdgeShape getBoundaryEdgeShape(b2Vec2 xs, b2Vec2 ys)
+    {
+        b2EdgeShape shape;
+        shape.Set(xs, ys);
+        return shape;
+    }
 };
 
 NLOHMANN_JSON_SERIALIZE_ENUM(SimulationObject::TYPE, {
