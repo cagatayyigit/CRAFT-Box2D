@@ -62,13 +62,12 @@ namespace svqa {
             const bool stable = isSceneStable();
             const bool terminateSimulation = (m_bInitialSceneCreated && m_bCreatedPendulums && stable);
 
-            Simulation::Step(settings);
-
-            if(terminateSimulation)
+            if (terminateSimulation)
             {
-                state.saveToJSONFile(m_world, "scene.json");
-                FINISH_SIMULATION
+                settings->terminate = true;
             }
+
+            SimulationBase::Step(settings);
         }
         
         virtual SimulationID getIdentifier() override

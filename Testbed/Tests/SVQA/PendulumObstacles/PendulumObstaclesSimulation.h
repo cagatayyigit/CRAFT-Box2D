@@ -61,13 +61,12 @@ namespace svqa {
             
             s++;
 
-            Simulation::Step(settings);
-
-            if(terminateSimulation)
+            if (terminateSimulation)
             {
-             state.saveToJSONFile(m_world, "scene.json");
-             FINISH_SIMULATION
+                settings->terminate = true;
             }
+
+            SimulationBase::Step(settings);
         }
         
 //        virtual bool isSceneStable() override

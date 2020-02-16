@@ -69,13 +69,12 @@ namespace svqa
                 m_nNumberOfObjects--;
             }
             
-            Simulation::Step(settings);
-            
-            if(terminateSimulation)
+            if (terminateSimulation)
             {
-                //state.saveToJSONFile(m_world, "scene.json");
-                FINISH_SIMULATION
+                settings->terminate = true;
             }
+
+            SimulationBase::Step(settings);
         }
         
         virtual SimulationID getIdentifier() override

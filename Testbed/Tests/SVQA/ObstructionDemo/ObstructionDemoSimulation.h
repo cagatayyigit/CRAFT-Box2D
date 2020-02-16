@@ -50,14 +50,13 @@ namespace svqa {
 				addSimulationObject(m_vStagnantObjPosition, b2Vec2_zero, SimulationObject::SMALL_CIRCLE, SimulationColor::TYPE::BLUE);
 				m_nNumberOfObjects = 0;
 			}
+            
+            if (terminateSimulation)
+            {
+                settings->terminate = true;
+            }
 
-			Simulation::Step(settings);
-
-			if (terminateSimulation)
-			{
-				state.saveToJSONFile(m_world, "scene.json");
-				FINISH_SIMULATION
-			}
+			SimulationBase::Step(settings);
 		}
 
 		virtual SimulationID getIdentifier() override
