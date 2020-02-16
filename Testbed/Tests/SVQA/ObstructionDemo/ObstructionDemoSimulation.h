@@ -78,8 +78,6 @@ namespace svqa {
 			SimulationObject::BIG_CUBE, SimulationObject::SMALL_HEXAGON, SimulationObject::BIG_HEXAGON,
 			SimulationObject::SMALL_TRIANGLE, SimulationObject::BIG_TRIANGLE };
 
-		SceneState state;
-
 		void addSimulationObject(b2Vec2 position, b2Vec2 velocity, SimulationObject::TYPE objType, SimulationColor color)
 		{
 			SimulationObject object = SimulationObject(objType);
@@ -102,7 +100,7 @@ namespace svqa {
             auto objectState = ObjectState::create(body, mat.type, color.type, object.type);
             body->SetUserData(objectState.get());
 
-            state.add(objectState);
+            m_SceneJSONState.add(objectState);
 		}
 
 		b2Vec2 getRandomDropVector(float32 movingObjX, float32 dropObjX, float32 stagnantObjX, float32 movingObjVelX, float32 dropObjVelY)

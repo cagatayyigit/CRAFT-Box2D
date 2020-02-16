@@ -17,6 +17,7 @@ class SimulationMaterial
 public:
 	enum TYPE
 	{
+        UNKNOWN = -1,
 		METAL = 0,
 		RUBBER = 1,
 	};

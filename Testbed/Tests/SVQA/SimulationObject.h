@@ -78,6 +78,8 @@ public:
             return "b_circle";
         case BIG_RAMP:
             return "b_ramp";
+        case CUSTOM_RECTANGLE:
+            return "cus_rectange";
         case CAR_BODY:
             return "car_bd";
         case CAR_WHEEL:
@@ -94,6 +96,11 @@ public:
             break;
         }
         return nullptr;
+    }
+    
+    static ShapePtr getShape(TYPE t)
+    {
+        return SimulationObject(t).getShape();
     }
 
 	ShapePtr getShape()

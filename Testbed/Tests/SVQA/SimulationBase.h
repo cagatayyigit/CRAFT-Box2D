@@ -87,10 +87,10 @@ namespace svqa {
 		virtual void createBoundaries()
 		{
             const float friction = 0.5;
-			std::vector<ShapePtr> boundaries;
-			boundaries.push_back(SimulationObject(SimulationObject::LEFT_BOUNDARY).getShape());
-			boundaries.push_back(SimulationObject(SimulationObject::RIGHT_BOUNDARY).getShape());
-			boundaries.push_back(SimulationObject(SimulationObject::BOTTOM_BOUNDARY).getShape());
+			std::vector<SimulationObject::TYPE> boundaries;
+			boundaries.push_back(SimulationObject::LEFT_BOUNDARY);
+			boundaries.push_back(SimulationObject::RIGHT_BOUNDARY);
+			boundaries.push_back(SimulationObject::BOTTOM_BOUNDARY);
 
 			for (auto&& bound : boundaries) {
 				b2BodyDef bd;
@@ -99,8 +99,13 @@ namespace svqa {
 				b2FixtureDef fd = b2FixtureDef();
 				fd.friction = friction;
 				fd.density = 0.0f;
-				fd.shape = bound.get();
+				fd.shape = SimulationObject::getShape(bound).get();
 				boundBody->CreateFixture(&fd);
+                
+                auto objectState = ObjectState::create(boundBody, SimulationMaterial::UNKNOWN , SimulationColor::BLACK, bound);
+                boundBody->SetUserData(objectState.get());
+
+                m_SceneJSONState.add(objectState);
 			}
 		}
 

@@ -22,6 +22,8 @@ struct ObjectState
 {
 public:
     
+    typedef std::shared_ptr<ObjectState> Ptr;
+    
     ObjectState(b2VisBody* body,
                 const SimulationMaterial::TYPE& materialType,
                 const SimulationColor::TYPE& colorType,
@@ -37,8 +39,6 @@ public:
     ObjectState() {
         body = nullptr;
     }
-    
-    typedef std::shared_ptr<ObjectState> Ptr;
     
     static Ptr create(b2VisBody* body,
                       const SimulationMaterial::TYPE& materialType,
