@@ -33,6 +33,8 @@ namespace svqa {
 			m_pSettings = _settings_;
 			m_nDistinctColorUsed = 8;
             
+            createBoundaries();
+            
             m_pCausalGraph = CausalGraph::create();
             m_pCausalGraph->addEvent(StartEvent::create());
 		}

@@ -30,8 +30,6 @@ namespace svqa {
             m_vThrowMin = b2Vec2(0.0f, 50.0f);
             m_vThrowMax = b2Vec2(0.0f, 50.0f);
             
-            createBoundaries();
-            
             SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
         }
 

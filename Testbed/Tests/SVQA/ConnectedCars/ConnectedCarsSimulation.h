@@ -33,7 +33,6 @@ namespace svqa {
             
             m_nNumberOfCars = _settings_->numberOfCars;
             
-            createBoundaries();
             SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
         }
         

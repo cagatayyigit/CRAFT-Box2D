@@ -16,8 +16,6 @@ namespace svqa {
 		{
 			m_nNumberOfObjects = 1;
 			SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
-
-            createBoundaries();
 		}
 
 		// Our "game loop".

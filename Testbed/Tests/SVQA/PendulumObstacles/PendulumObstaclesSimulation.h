@@ -37,7 +37,6 @@ namespace svqa {
             m_vObstacleMax = b2Vec2(30.0f, 40.0f);
             
             m_bObstaclesCreated = false;
-            createBoundaries();
             
             SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
         }
