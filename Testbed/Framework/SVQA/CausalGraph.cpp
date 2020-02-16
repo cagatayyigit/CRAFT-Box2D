@@ -64,7 +64,7 @@ namespace svqa {
         std::cout << createGraphString() << std::endl;
     }
 
-    CausalEvent::Ptr CausalGraph::getLatestEvent(b2Body* object)
+    CausalEvent::Ptr CausalGraph::getLatestEvent(BODY* object)
     {
         const auto& events = m_ObjectEvents[object];
         if(events.size()) {
@@ -73,7 +73,7 @@ namespace svqa {
         return nullptr;
     }
 
-    CausalEvent::Ptr CausalGraph::getLatestEventBeforeTimeStep(b2Body* object, int step)
+    CausalEvent::Ptr CausalGraph::getLatestEventBeforeTimeStep(BODY* object, int step)
     {
         const auto& events = m_ObjectEvents[object];
         

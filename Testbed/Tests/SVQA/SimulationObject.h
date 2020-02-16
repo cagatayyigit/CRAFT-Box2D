@@ -41,16 +41,60 @@ public:
 		CAR_BODY = 13,
 		CAR_WHEEL = 14,
 		ROD_RECTANGLE = 15,
-		SQUARE = 16,
-        LEFT_BOUNDARY = 17,
-        RIGHT_BOUNDARY = 18,
-        BOTTOM_BOUNDARY = 19
+        LEFT_BOUNDARY = 16,
+        RIGHT_BOUNDARY = 17,
+        BOTTOM_BOUNDARY = 18
 	};
 
 	SimulationObject(TYPE t)
 	{
 		type = t;
 	}
+    
+    static std::string getRepresentation(TYPE t)
+    {
+        switch (t) {
+        case SMALL_CUBE:
+            return "s_cube";
+        case BIG_CUBE:
+            return "b_cube";
+        case STANDARD_RECTANGLE:
+            return "std_rect";
+        case SMALL_HEXAGON:
+            return "s_hex";
+        case BIG_HEXAGON:
+            return "b_hex";
+        case SMALL_TRIANGLE:
+            return "s_tri";
+        case BIG_TRIANGLE:
+            return "b_tri";
+        case WALL_PIN:
+            return "pin";
+        case ROPE_UNIT:
+            return "rp_unit";
+        case SMALL_CIRCLE:
+            return "s_circle";
+        case BIG_CIRCLE:
+            return "b_circle";
+        case BIG_RAMP:
+            return "b_ramp";
+        case CAR_BODY:
+            return "car_bd";
+        case CAR_WHEEL:
+            return "car_wh";
+        case ROD_RECTANGLE:
+            return "rod";
+        case LEFT_BOUNDARY:
+            return "l_bound";
+        case RIGHT_BOUNDARY:
+            return "r_bound";
+        case BOTTOM_BOUNDARY:
+            return "b_bound";
+        default:
+            break;
+        }
+        return nullptr;
+    }
 
 	ShapePtr getShape()
 	{
@@ -85,8 +129,6 @@ public:
 			return std::make_shared<b2CircleShape>(getCircle(1.0f));
 		case ROD_RECTANGLE:
 			return std::make_shared<b2PolygonShape>(getRectangle(10.0f, 1.0f));
-		case SQUARE:
-			return std::make_shared<b2PolygonShape>(getRectangle(1.0f, 1.0f));
         case LEFT_BOUNDARY:
             return std::make_shared<b2EdgeShape>(getBoundaryEdgeShape(b2Vec2(-40.0f, -5.0f), b2Vec2(-40.0f, 50.0f)));
         case RIGHT_BOUNDARY:
@@ -215,9 +257,23 @@ public:
 };
 
 NLOHMANN_JSON_SERIALIZE_ENUM(SimulationObject::TYPE, {
-	{SimulationObject::SMALL_CUBE, "small_cube"},
-	{SimulationObject::BIG_CUBE, "big_cube"},
-	{SimulationObject::CUSTOM_RECTANGLE, "custom_rectangle"}
+	{SimulationObject::SMALL_CUBE, SimulationObject::getRepresentation(SimulationObject::SMALL_CUBE)},
+	{SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::BIG_CUBE)},
+    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::STANDARD_RECTANGLE)},
+    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::SMALL_TRIANGLE)},
+    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::BIG_TRIANGLE)},
+    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::SMALL_HEXAGON)},
+    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::BIG_HEXAGON)},
+    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::SMALL_CIRCLE)},
+    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::BIG_CIRCLE)},
+    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::BIG_RAMP)},
+    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::CUSTOM_RECTANGLE)},
+    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::CAR_BODY)},
+    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::CAR_WHEEL)},
+    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::ROD_RECTANGLE)},
+    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::LEFT_BOUNDARY)},
+    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::RIGHT_BOUNDARY)},
+    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::BOTTOM_BOUNDARY)}
 	})
 
 #endif /* SimulationObject_h */

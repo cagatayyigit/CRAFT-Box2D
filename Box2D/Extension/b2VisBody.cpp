@@ -43,4 +43,17 @@ bool b2VisBody::hasAttachedTexture() const
     return m_pTexture.get() != nullptr && m_pTexture->getTextureId()>0;
 }
 
+int b2VisBody::getUniqueId() const
+{
+    int index = 0;
+    b2VisBody* list = (b2VisBody*) m_world->GetBodyList();
+    for (b2VisBody* b = (b2VisBody*) list; b; b = (b2VisBody*) b->GetNext()) {
+        if(b == this) {
+            return index;
+        }
+        index++;
+    }
+    return -1;
+}
+
 

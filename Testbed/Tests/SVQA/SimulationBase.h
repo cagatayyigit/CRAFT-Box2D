@@ -86,7 +86,7 @@ namespace svqa {
 
 		virtual void createBoundaries()
 		{
-            const float friction = 10.0f;
+            const float friction = 0.5;
 			std::vector<ShapePtr> boundaries;
 			boundaries.push_back(SimulationObject(SimulationObject::LEFT_BOUNDARY).getShape());
 			boundaries.push_back(SimulationObject(SimulationObject::RIGHT_BOUNDARY).getShape());
@@ -202,8 +202,8 @@ namespace svqa {
             for (auto it = m_Contacts.begin(); it != m_Contacts.end(); it++) {
                 if (m_stepCount - it->step > COLLISION_DETECTION_STEP_DIFF) {
                     //DETECTED StartTouching_Event
-                    m_pCausalGraph->addEvent(StartTouchingEvent::create(it->step, it->contact->GetFixtureA()->GetBody(),
-                        it->contact->GetFixtureB()->GetBody()));
+                    m_pCausalGraph->addEvent(StartTouchingEvent::create(it->step, (BODY*)it->contact->GetFixtureA()->GetBody(),
+                        (BODY*)it->contact->GetFixtureB()->GetBody()));
                     m_Contacts.erase(it--);
                 }
             }
@@ -222,13 +222,13 @@ namespace svqa {
                 if(it->contact == contact) {
                     if (m_stepCount - it->step > COLLISION_DETECTION_STEP_DIFF) {
                         //DETECTED EndTouching_Event
-                        m_pCausalGraph->addEvent(EndTouchingEvent::create(it->step, it->contact->GetFixtureA()->GetBody(),
-                            it->contact->GetFixtureB()->GetBody()));
+                        m_pCausalGraph->addEvent(EndTouchingEvent::create(it->step, (BODY*)it->contact->GetFixtureA()->GetBody(),
+                            (BODY*)it->contact->GetFixtureB()->GetBody()));
                         
                     } else {
                         //DETECTED Collision_Event
-                        m_pCausalGraph->addEvent(CollisionEvent::create(it->step, it->contact->GetFixtureA()->GetBody(),
-                            it->contact->GetFixtureB()->GetBody()));
+                        m_pCausalGraph->addEvent(CollisionEvent::create(it->step, (BODY*)it->contact->GetFixtureA()->GetBody(),
+                            (BODY*)it->contact->GetFixtureB()->GetBody()));
                     }
                     m_Contacts.erase(it--);
                 }

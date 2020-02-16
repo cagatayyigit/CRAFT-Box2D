@@ -48,6 +48,12 @@ public:
         return std::make_shared<ObjectState>(body, materialType, colorType, objectType);
     }
     
+    std::string getShortRepresentation()
+    {
+        std::string ret = "id: " + std::to_string(body->getUniqueId()) + " sh: " + SimulationObject::getRepresentation(objectType) + " col: " + SimulationColor::getRepresentation(colorType);
+        return ret;
+    }
+    
     void to_json(json& j) const {
         if(body) {
             j.emplace("active", body->IsActive());
@@ -60,6 +66,7 @@ public:
             j.emplace("linearDamping", body->GetLinearDamping());
             j.emplace("angularDamping", body->GetAngularDamping());
             j.emplace("bodyType", body->GetType());
+            j.emplace("uniqueID", body->getUniqueId());
         }
         
         j.emplace("materialType", materialType);

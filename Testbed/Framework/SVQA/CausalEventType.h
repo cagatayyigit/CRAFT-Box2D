@@ -21,15 +21,15 @@ enum CausalEventType {
 static std::string getTypeString(CausalEventType type) {
     switch (type) {
         case Start_Event:
-            return "StartEvent";
+            return "Start";
         case End_Event:
-            return "EndEvent";
+            return "End";
         case Collision_Event:
-            return "CollisionEvent";
+            return "Collision";
         case StartTouching_Event:
-            return "StartTouchingEvent";
+            return "StartTouching";
         case EndTouching_Event:
-            return "EndTouchingEvent";
+            return "EndTouching";
     }
     return "";
 }

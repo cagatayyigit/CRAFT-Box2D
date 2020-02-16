@@ -82,17 +82,17 @@ namespace svqa {
 
 
 				// stack
-				addDynamicObject(b2Vec2(5.0f, -4.0f), b2Vec2(0.0f, 0.0f), SimulationObject::SQUARE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(4.8f, -2.0f), b2Vec2(0.0f, 0.0f), SimulationObject::SQUARE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(5.2f, 0.0f), b2Vec2(0.0f, 0.0f), SimulationObject::SQUARE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(4.8f, 2.0f), b2Vec2(0.0f, 0.0f), SimulationObject::SQUARE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(5.2f, 4.0f), b2Vec2(0.0f, 0.0f), SimulationObject::SQUARE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(4.8f, 6.0f), b2Vec2(0.0f, 0.0f), SimulationObject::SQUARE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(5.2f, 8.0f), b2Vec2(0.0f, 0.0f), SimulationObject::SQUARE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(4.8f, 10.0f), b2Vec2(0.0f, 0.0f), SimulationObject::SQUARE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(5.2f, 12.0f), b2Vec2(0.0f, 0.0f), SimulationObject::SQUARE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(4.8f, 14.0f), b2Vec2(0.0f, 0.0f), SimulationObject::SQUARE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(5.2f, 16.0f), b2Vec2(0.0f, 0.0f), SimulationObject::SQUARE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				addDynamicObject(b2Vec2(5.0f, -4.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				addDynamicObject(b2Vec2(4.8f, -2.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				addDynamicObject(b2Vec2(5.2f, 0.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				addDynamicObject(b2Vec2(4.8f, 2.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				addDynamicObject(b2Vec2(5.2f, 4.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				addDynamicObject(b2Vec2(4.8f, 6.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				addDynamicObject(b2Vec2(5.2f, 8.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				addDynamicObject(b2Vec2(4.8f, 10.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				addDynamicObject(b2Vec2(5.2f, 12.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				addDynamicObject(b2Vec2(4.8f, 14.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				addDynamicObject(b2Vec2(5.2f, 16.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
 				m_nNumberOfObjects--;
 			}
 

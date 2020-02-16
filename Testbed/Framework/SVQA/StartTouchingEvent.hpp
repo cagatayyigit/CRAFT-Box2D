@@ -17,10 +17,10 @@ namespace svqa
         public:
             typedef std::shared_ptr<StartTouchingEvent> Ptr;
         
-            StartTouchingEvent(const int& step, b2Body* firstObject, b2Body* secondObject) : CausalEvent(step), m_pFirstObject(firstObject), m_pSecondObject(secondObject) {};
+            StartTouchingEvent(const int& step, BODY* firstObject, BODY* secondObject) : CausalEvent(step), m_pFirstObject(firstObject), m_pSecondObject(secondObject) {};
             virtual ~StartTouchingEvent() {};
         
-            static Ptr create(const int& step, b2Body* firstObject, b2Body* secondObject)
+            static Ptr create(const int& step, BODY* firstObject, BODY* secondObject)
             {
                 return std::make_shared<StartTouchingEvent>(step, firstObject, secondObject);
             }
@@ -30,15 +30,15 @@ namespace svqa
                 return StartTouching_Event;
             }
         
-            virtual std::vector<b2Body*> getObjects() override
+            virtual std::vector<BODY*> getObjects() override
             {
-                std::vector<b2Body*> ret{ m_pFirstObject, m_pSecondObject };
+                std::vector<BODY*> ret{ m_pFirstObject, m_pSecondObject };
                 return ret;
             }
         
         private:
-            b2Body*   m_pFirstObject;
-            b2Body*   m_pSecondObject;
+            BODY*   m_pFirstObject;
+            BODY*   m_pSecondObject;
     };
 }
 

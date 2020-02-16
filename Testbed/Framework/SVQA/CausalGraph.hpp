@@ -44,7 +44,7 @@ namespace svqa
         private:
             StartEvent::Ptr                                                                                 m_pStartEvent;      //Root of the graph
             EndEvent::Ptr                                                                                   m_pEndEvent;        //Single leaf of the graph
-            std::map<b2Body*, std::vector<CausalEvent::Ptr> >                                               m_ObjectEvents;     //Map of objects an their events
+            std::map<BODY*, std::vector<CausalEvent::Ptr> >                                                 m_ObjectEvents;     //Map of objects an their events
   
             std::priority_queue<CausalEvent::Ptr, std::vector<CausalEvent::Ptr>, CausalEvent::Order>        m_EventQueue;
         
@@ -52,10 +52,10 @@ namespace svqa
             void addEventsToCausalGraph(CausalEvent::Ptr root, CausalEvent::Ptr newEvent);
         
             //get latest event of an object before any specific time step
-            CausalEvent::Ptr getLatestEventBeforeTimeStep(b2Body* object, int step);
+            CausalEvent::Ptr getLatestEventBeforeTimeStep(BODY* object, int step);
         
             //get latest event of an object
-            CausalEvent::Ptr getLatestEvent(b2Body* object);
+            CausalEvent::Ptr getLatestEvent(BODY* object);
         
             //Constructs causal graph from objects to events mapping
             void constructCausalGraph();

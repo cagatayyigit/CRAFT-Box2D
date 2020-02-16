@@ -13,4 +13,14 @@ namespace svqa
     {
         return m_nStepCount;
     }
+
+    std::string CausalEvent::getStrRepresentation()
+    {
+        std::string ret = getTypeStr() + ":" + std::to_string(m_nStepCount);
+        auto objects = getObjects();
+        for(auto& obj : objects) {
+            ret += "-";
+        }
+        return ret;
+    }
 }

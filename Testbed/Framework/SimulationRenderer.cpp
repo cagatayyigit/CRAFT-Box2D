@@ -904,7 +904,7 @@ void SimulationRenderer::DrawSolidCircle(const b2Vec2& center, float32 radius, c
     b2Vec2 v0 = center;
     b2Vec2 r1(cosInc, sinInc);
     b2Vec2 v1 = center + radius * r1;
-    b2Color fillColor(0.5f * color.r, 0.5f * color.g, 0.5f * color.b, 0.5f);
+    b2Color fillColor(color.r, color.g, color.b, 1.0);
     for (int32 i = 0; i < k_segments; ++i)
     {
         // Perform rotation to avoid additional trigonometry.

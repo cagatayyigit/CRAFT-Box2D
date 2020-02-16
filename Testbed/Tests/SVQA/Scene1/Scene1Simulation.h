@@ -122,7 +122,7 @@ namespace svqa {
 					b2Vec2(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
-					SimulationColor::TYPE::GREEN2
+					SimulationColor::TYPE::GREEN
 				);
 
 				// Stationary Bottom-Right
@@ -131,7 +131,7 @@ namespace svqa {
 					b2Vec2(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
-					SimulationColor::TYPE::RED2
+					SimulationColor::TYPE::RED
 				);
 
 				// Moving on the Right Floor
@@ -140,7 +140,7 @@ namespace svqa {
 					b2Vec2(circleV, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
-					SimulationColor::TYPE::BLUE2
+					SimulationColor::TYPE::BLUE
 				);
 
 				addDynamicObject(
@@ -148,7 +148,7 @@ namespace svqa {
 					b2Vec2(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
-					SimulationColor::TYPE::YELLOW2
+					SimulationColor::TYPE::YELLOW
 				);
 
 

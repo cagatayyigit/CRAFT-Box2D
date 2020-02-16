@@ -63,7 +63,7 @@ namespace svqa {
 					b2Vec2(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
-					SimulationColor::TYPE::BLUE2
+					SimulationColor::TYPE::BLUE
 				);
 
 				// Second Rec
@@ -81,7 +81,7 @@ namespace svqa {
 					b2Vec2(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
-					SimulationColor::TYPE::GREEN2
+					SimulationColor::TYPE::GREEN
 				);
 
 				// Third Rec
@@ -99,7 +99,7 @@ namespace svqa {
 					b2Vec2(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
-					SimulationColor::TYPE::RED2
+					SimulationColor::TYPE::RED
 				);
 
 
@@ -133,7 +133,7 @@ namespace svqa {
 					b2Vec2(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
-					SimulationColor::TYPE::RED2
+					SimulationColor::TYPE::RED
 				);
 
 				addDynamicObject(
@@ -141,7 +141,7 @@ namespace svqa {
 					b2Vec2(0.0f, 0.0f),
 					SimulationObject::SMALL_CIRCLE,
 					SimulationMaterial::RUBBER,
-					SimulationColor::TYPE::BLUE2
+					SimulationColor::TYPE::BLUE
 				);
 
 				addDynamicObject(

@@ -43,10 +43,8 @@ namespace svqa
                 return getTypeString(getType());
             }
         
-            virtual std::string getStrRepresentation()
-            {
-                return getTypeStr() + ":" + std::to_string(m_nStepCount);
-            }
+            //Get String Representation of the event as node in the causal graph
+            virtual std::string getStrRepresentation();
         
             void addCauseEvent(CausalEvent::Ptr causeEvent) {
                 this->m_vCauseEvents.insert(causeEvent);
@@ -59,7 +57,7 @@ namespace svqa
             }
         
             //Gets effected objects
-            virtual std::vector<b2Body*> getObjects() = 0;
+            virtual std::vector<BODY*> getObjects() = 0;
         
             //Get event's step count
             int getStepCount() const;
