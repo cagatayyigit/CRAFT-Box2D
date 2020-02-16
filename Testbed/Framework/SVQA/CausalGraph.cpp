@@ -130,7 +130,7 @@ namespace svqa {
         str += (std::to_string((long long)event.get()) + " [label=\"" + event->getStrRepresentation() + "\"]\n");
     }
 
-    void addEdgesToString(CausalEvent::Ptr event, std::string& str)
+    void addEdgesToString(CausalEvent::Ptr event, std::string& str, std::set<CausalEvent::Ptr>& visited)
     {
         const auto& neighbors = event->getImmediateOutcomes();
         
@@ -140,8 +140,11 @@ namespace svqa {
         }
         str += "}\n";
         
+        visited.insert(event);
         for(auto ne : neighbors) {
-            addEdgesToString(ne, str);
+            if(visited.find(ne) == visited.end()) {
+                addEdgesToString(ne, str, visited);
+            }
         }
     }
 
@@ -161,7 +164,8 @@ namespace svqa {
             eventQueue.pop();
         }
 
-        addEdgesToString(root, ret);
+        std::set<CausalEvent::Ptr> visited;
+        addEdgesToString(root, ret, visited);
         
         ret += "}\n";
         return ret;
