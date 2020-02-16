@@ -191,8 +191,6 @@ namespace svqa {
         b2Vec2 m_vXPosBoundaries;
         
         const std::vector<SimulationObject::TYPE> m_vSimulationObjectTypes = {SimulationObject::SMALL_CUBE, SimulationObject::BIG_CUBE, SimulationObject::SMALL_HEXAGON, SimulationObject::BIG_HEXAGON};
-        
-        SceneState state;
     };
 }
 

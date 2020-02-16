@@ -122,7 +122,7 @@ namespace svqa {
                 auto objectState = ObjectState::create(staticObstacle, mat.type, col.type, object.type);
                 staticObstacle->SetUserData(objectState.get());
 
-                state.add(objectState);
+                m_SceneJSONState.add(objectState);
             }
             return true;
         }
@@ -138,8 +138,6 @@ namespace svqa {
         
         const std::vector<SimulationObject::TYPE> m_vSimulationObjectTypes = {SimulationObject::SMALL_CUBE, SimulationObject::BIG_CUBE, SimulationObject::SMALL_HEXAGON, SimulationObject::BIG_HEXAGON,
             SimulationObject::SMALL_TRIANGLE, SimulationObject::BIG_TRIANGLE };
-        
-        SceneState state;
 
         void addSimulationObject()
         {
@@ -168,7 +166,7 @@ namespace svqa {
             auto objectState = ObjectState::create(body, mat.type, col.type, object.type);
             body->SetUserData(objectState.get());
 
-            state.add(objectState);
+            m_SceneJSONState.add(objectState);
         }
     };
 }

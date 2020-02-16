@@ -177,9 +177,7 @@ namespace svqa {
 		b2Vec2 m_vMovingObjPosition;
 		b2Vec2 m_vStagnantObjPosition;
 		b2Vec2 m_vObstaclePosition;
-		b2Vec2 m_vInitialDropVelocity;
-
-		SceneState state;
+        b2Vec2 m_vInitialDropVelocity;
 
 		void addDynamicObject(b2Vec2 position, b2Vec2 velocity, SimulationObject::TYPE objType, SimulationMaterial::TYPE materialType, SimulationColor color)
 		{

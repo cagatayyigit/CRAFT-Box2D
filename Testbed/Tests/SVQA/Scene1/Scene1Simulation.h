@@ -178,10 +178,5 @@ namespace svqa {
 		b2Vec2 m_vStagnantObjPosition;
 		b2Vec2 m_vObstaclePosition;
 		b2Vec2 m_vInitialDropVelocity;
-
-		SceneState state;
-
-		
-
 	};
 }

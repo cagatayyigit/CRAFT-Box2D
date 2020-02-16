@@ -90,7 +90,6 @@ namespace svqa
         b2Vec2 m_vInitialDropVelocity;
         unsigned short m_nDistinctMaterialsUsed;
         unsigned short m_nDistinctObjectsUsed;
-        SceneState state;
 
         void addSimulationObject()
         {
@@ -121,7 +120,7 @@ namespace svqa
             auto objectState = ObjectState::create(body, mat.type, col.type, object.type);
             body->SetUserData(objectState.get());
 
-            state.add(objectState);
+            m_SceneJSONState.add(objectState);
     #endif
         }
     };

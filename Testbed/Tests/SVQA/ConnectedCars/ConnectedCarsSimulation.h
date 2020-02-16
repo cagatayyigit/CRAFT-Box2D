@@ -196,8 +196,6 @@ namespace svqa {
         b2Vec2 m_vXPosBoundaries;
         
         int m_nNumberOfCars;
-        
-        SceneState state;
     };
 }
 
