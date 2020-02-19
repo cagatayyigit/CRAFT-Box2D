@@ -18,12 +18,7 @@ namespace svqa {
 			m_nNumberOfObjects = _settings_->numberOfObjects;
 			m_nNumberOfObstacles = _settings_->numberOfObstacles;
 
-			m_fSpeed = RandomFloat(15.0f, 30.0f);
-
-			/*m_vDropDirection = RandomUnitVector();
-			m_vDropDirection.y = -abs(m_vDropDirection.y);
-			m_vDropDirection.x = RandomFloat(-0.05f, 0.75f);
-			m_vDropDirection.operator*=(dropSpeedFactor);*/
+			m_fSpeed = RandomFloat(15.0f, 30.0f); 
 
 			m_vObstaclePosition = b2Vec2(RandomFloat(-10.0f, 10.0f), RandomFloat(15.0f, 40.0f));
 			m_vMovingObjPosition = b2Vec2(RandomFloat(-25.0f, -10.0), 2.5f); 
@@ -37,7 +32,7 @@ namespace svqa {
 		virtual void Step(SettingsBase* settings) override
 		{
 			const bool stable = isSceneStable();
-			const bool addObject = stable && m_nNumberOfObjects > 0;
+			const bool addObject = stable && m_nNumberOfObjects > 0 && !m_GeneratingFromJSON;
 			const bool terminateSimulation = m_nNumberOfObjects <= 0 && stable;
 
 			if (addObject) {
@@ -49,6 +44,10 @@ namespace svqa {
 				m_nNumberOfObjects = 0;
 			}
             
+			if (!addObject && !m_SceneSnapshotTaken) {
+				m_TakeSceneSnapshot = true;
+			}
+
             if (terminateSimulation)
             {
                 settings->terminate = true;
@@ -76,9 +75,7 @@ namespace svqa {
 
 		const std::vector<SimulationObject::TYPE> m_vSimulationObjectTypes = { SimulationObject::SMALL_CUBE,
 			SimulationObject::BIG_CUBE, SimulationObject::SMALL_HEXAGON, SimulationObject::BIG_HEXAGON,
-			SimulationObject::SMALL_TRIANGLE, SimulationObject::BIG_TRIANGLE };
-
-		SceneState state;
+			SimulationObject::SMALL_TRIANGLE, SimulationObject::BIG_TRIANGLE }; 
 
 		void addSimulationObject(b2Vec2 position, b2Vec2 velocity, SimulationObject::TYPE objType, SimulationColor color)
 		{
@@ -102,13 +99,7 @@ namespace svqa {
             auto objectState = ObjectState::create(body, mat.type, color.type, object.type);
             body->SetUserData(objectState.get());
 
-            state.add(objectState);
-		}
-
-		b2Vec2 getRandomDropVector(float32 movingObjX, float32 dropObjX, float32 stagnantObjX, float32 movingObjVelX, float32 dropObjVelY)
-		{
-
-			return b2Vec2();
-		}
+            m_SceneJSONState.add(objectState);
+		} 
 	};
 }
