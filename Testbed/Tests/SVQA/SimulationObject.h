@@ -97,11 +97,6 @@ public:
         }
         return nullptr;
     }
-    
-    static ShapePtr getShape(TYPE t)
-    {
-        return SimulationObject(t).getShape();
-    }
 
 	ShapePtr getShape()
 	{

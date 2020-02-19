@@ -44,6 +44,8 @@ public:
 			return 0.02f;
 		case RUBBER:
 			return 0.35f;
+        case UNKNOWN:
+            return 0.0f;
 		}
 		return 0.0f;
 	}

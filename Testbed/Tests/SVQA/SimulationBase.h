@@ -95,11 +95,14 @@ namespace svqa {
 			for (auto&& bound : boundaries) {
 				b2BodyDef bd;
 				BODY* boundBody = (BODY*)m_world->CreateBody(&bd);
+                
+                SimulationObject boundaryObject = SimulationObject(bound);
+                ShapePtr shape = boundaryObject.getShape();
 
 				b2FixtureDef fd = b2FixtureDef();
 				fd.friction = friction;
 				fd.density = 0.0f;
-				fd.shape = SimulationObject::getShape(bound).get();
+				fd.shape = shape.get();
 				boundBody->CreateFixture(&fd);
                 
                 auto objectState = ObjectState::create(boundBody, SimulationMaterial::UNKNOWN , SimulationColor::BLACK, bound);
