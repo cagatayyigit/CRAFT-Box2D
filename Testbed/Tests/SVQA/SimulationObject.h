@@ -95,7 +95,7 @@ public:
         default:
             break;
         }
-        return nullptr;
+        return "null";
     }
     
     static ShapePtr getShape(TYPE t)
@@ -266,21 +266,21 @@ public:
 NLOHMANN_JSON_SERIALIZE_ENUM(SimulationObject::TYPE, {
 	{SimulationObject::SMALL_CUBE, SimulationObject::getRepresentation(SimulationObject::SMALL_CUBE)},
 	{SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::BIG_CUBE)},
-    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::STANDARD_RECTANGLE)},
-    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::SMALL_TRIANGLE)},
-    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::BIG_TRIANGLE)},
-    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::SMALL_HEXAGON)},
-    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::BIG_HEXAGON)},
-    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::SMALL_CIRCLE)},
-    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::BIG_CIRCLE)},
-    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::BIG_RAMP)},
-    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::CUSTOM_RECTANGLE)},
-    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::CAR_BODY)},
-    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::CAR_WHEEL)},
-    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::ROD_RECTANGLE)},
-    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::LEFT_BOUNDARY)},
-    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::RIGHT_BOUNDARY)},
-    {SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::BOTTOM_BOUNDARY)}
+    {SimulationObject::STANDARD_RECTANGLE, SimulationObject::getRepresentation(SimulationObject::STANDARD_RECTANGLE)},
+    {SimulationObject::SMALL_TRIANGLE, SimulationObject::getRepresentation(SimulationObject::SMALL_TRIANGLE)},
+    {SimulationObject::BIG_TRIANGLE, SimulationObject::getRepresentation(SimulationObject::BIG_TRIANGLE)},
+    {SimulationObject::SMALL_HEXAGON, SimulationObject::getRepresentation(SimulationObject::SMALL_HEXAGON)},
+    {SimulationObject::BIG_HEXAGON, SimulationObject::getRepresentation(SimulationObject::BIG_HEXAGON)},
+    {SimulationObject::SMALL_CIRCLE, SimulationObject::getRepresentation(SimulationObject::SMALL_CIRCLE)},
+    {SimulationObject::BIG_CIRCLE, SimulationObject::getRepresentation(SimulationObject::BIG_CIRCLE)},
+    {SimulationObject::BIG_RAMP, SimulationObject::getRepresentation(SimulationObject::BIG_RAMP)},
+    {SimulationObject::CUSTOM_RECTANGLE, SimulationObject::getRepresentation(SimulationObject::CUSTOM_RECTANGLE)},
+    {SimulationObject::CAR_BODY, SimulationObject::getRepresentation(SimulationObject::CAR_BODY)},
+    {SimulationObject::CAR_WHEEL, SimulationObject::getRepresentation(SimulationObject::CAR_WHEEL)},
+    {SimulationObject::ROD_RECTANGLE, SimulationObject::getRepresentation(SimulationObject::ROD_RECTANGLE)},
+    {SimulationObject::LEFT_BOUNDARY, SimulationObject::getRepresentation(SimulationObject::LEFT_BOUNDARY)},
+    {SimulationObject::RIGHT_BOUNDARY, SimulationObject::getRepresentation(SimulationObject::RIGHT_BOUNDARY)},
+    {SimulationObject::BOTTOM_BOUNDARY, SimulationObject::getRepresentation(SimulationObject::BOTTOM_BOUNDARY)}
 	})
 
 #endif /* SimulationObject_h */

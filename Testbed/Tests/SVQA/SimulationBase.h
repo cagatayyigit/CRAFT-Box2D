@@ -92,14 +92,15 @@ namespace svqa {
 			boundaries.push_back(SimulationObject::RIGHT_BOUNDARY);
 			boundaries.push_back(SimulationObject::BOTTOM_BOUNDARY);
 
-			for (auto&& bound : boundaries) {
+			for (auto bound : boundaries) {
 				b2BodyDef bd;
 				BODY* boundBody = (BODY*)m_world->CreateBody(&bd);
 
 				b2FixtureDef fd = b2FixtureDef();
 				fd.friction = friction;
 				fd.density = 0.0f;
-				fd.shape = SimulationObject::getShape(bound).get();
+				auto hede = SimulationObject::getShape(bound);
+				fd.shape = hede.get();
 				boundBody->CreateFixture(&fd);
                 
                 auto objectState = ObjectState::create(boundBody, SimulationMaterial::UNKNOWN , SimulationColor::BLACK, bound);

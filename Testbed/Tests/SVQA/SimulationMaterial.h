@@ -62,7 +62,8 @@ private:
 
 NLOHMANN_JSON_SERIALIZE_ENUM(SimulationMaterial::TYPE, {
 	{SimulationMaterial::METAL, "metal"},
-	{SimulationMaterial::RUBBER, "rubber"}
+	{SimulationMaterial::RUBBER, "rubber"},
+	{SimulationMaterial::UNKNOWN, "unknown"}
 	})
 
 #endif /* SimulationMaterial_h */

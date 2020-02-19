@@ -20,7 +20,8 @@ namespace svqa
         public:
             typedef std::shared_ptr<CausalGraph> Ptr;
         
-            CausalGraph() {};
+            CausalGraph() {
+            };
             virtual ~CausalGraph() {};
         
             static Ptr create()
