@@ -270,9 +270,10 @@
     <ClCompile Include="..\Testbed\imgui\imgui_impl_glfw_gl3.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\intuitive-physics\simulation\2d\Box2D\Testbed\controller.json" />
+    <None Include="..\Testbed\controller.json" />
     <None Include="..\Testbed\Data\DroidSans.ttf" />
     <None Include="..\Testbed\imgui\imgui.ini" />
+    <None Include="..\Testbed\scene.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Box2D.vcxproj">

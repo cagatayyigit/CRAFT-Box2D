@@ -37,17 +37,32 @@ namespace svqa {
             
             m_pCausalGraph = CausalGraph::create();
             m_pCausalGraph->addEvent(StartEvent::create());
+			m_GeneratingFromJSON = m_pSettings->inputScenePath.compare("") != 0;
 		}
 
 		/// Derived simulations must call this in order to construct causal graph
 		virtual void Step(SettingsBase* settings) override
         {
+			if (m_GeneratingFromJSON && !m_SceneRegenerated) {
+				m_SceneJSONState.loadFromJSONFile(m_pSettings->inputScenePath, m_world);
+				m_SceneRegenerated = true;
+			}
+
             Simulation::Step(settings);
-            
+           
+			if (m_TakeSceneSnapshot && !m_SceneSnapshotTaken) {
+				m_SceneJSONState.saveToJSONFile(m_world, "scene.json");
+				m_TakeSceneSnapshot = false;
+				m_SceneSnapshotTaken = true;
+			}
+
             if(settings->terminate) {
                 m_pCausalGraph->addEvent(EndEvent::create(m_stepCount));
-                m_SceneJSONState.saveToJSONFile(m_world, "scene.json");
-                FINISH_SIMULATION
+                
+				// Takes snapshot of the last frame. We need the first frame.
+				// m_SceneJSONState.saveToJSONFile(m_world, "scene.json");
+				
+				FINISH_SIMULATION
             }
             
             detectStartTouchingEvents();
@@ -66,6 +81,10 @@ namespace svqa {
 	protected:
 		Settings::Ptr m_pSettings;
 		unsigned short m_nDistinctColorUsed;
+		bool m_SceneRegenerated;
+		bool m_GeneratingFromJSON;
+		bool m_TakeSceneSnapshot;
+		bool m_SceneSnapshotTaken;
 
 		int randWithBound(const int& bound)
 		{

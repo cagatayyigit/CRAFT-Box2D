@@ -341,7 +341,8 @@
     <None Include="..\Testbed\imgui\imgui.ini">
       <Filter>imgui</Filter>
     </None>
-    <None Include="..\..\intuitive-physics\simulation\2d\Box2D\Testbed\controller.json" />
+    <None Include="..\Testbed\controller.json" />
+    <None Include="..\Testbed\scene.json" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Testbed.rc" />
