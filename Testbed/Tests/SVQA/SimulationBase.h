@@ -92,7 +92,7 @@ namespace svqa {
 			boundaries.push_back(SimulationObject::RIGHT_BOUNDARY);
 			boundaries.push_back(SimulationObject::BOTTOM_BOUNDARY);
 
-			for (auto&& bound : boundaries) {
+			for (auto bound : boundaries) {
 				b2BodyDef bd;
 				BODY* boundBody = (BODY*)m_world->CreateBody(&bd);
                 
