@@ -152,7 +152,7 @@ namespace svqa {
 				);
 
 
-				m_nNumberOfObjects--;
+				m_nNumberOfObjects = 0;
 			}
 
             if (terminateSimulation)

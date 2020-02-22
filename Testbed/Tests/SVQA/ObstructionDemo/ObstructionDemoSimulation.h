@@ -18,10 +18,10 @@ namespace svqa {
 			m_nNumberOfObjects = _settings_->numberOfObjects;
 			m_nNumberOfObstacles = _settings_->numberOfObstacles;
 
-			m_fSpeed = RandomFloat(15.0f, 30.0f); 
+			m_fSpeed = RandomFloat(15.0f, 30.0f);
 
 			m_vObstaclePosition = b2Vec2(RandomFloat(-10.0f, 10.0f), RandomFloat(15.0f, 40.0f));
-			m_vMovingObjPosition = b2Vec2(RandomFloat(-25.0f, -10.0), 2.5f); 
+			m_vMovingObjPosition = b2Vec2(RandomFloat(-25.0f, -10.0), 2.5f);
 			m_vStagnantObjPosition = b2Vec2(RandomFloat(10.0f, 30.0f), 2.5f);
 
 			m_vInitialDropVelocity = b2Vec2(0.0f, RandomFloat(-20.0f, -40.0f));
@@ -32,26 +32,27 @@ namespace svqa {
 		virtual void Step(SettingsBase* settings) override
 		{
 			const bool stable = isSceneStable();
-			const bool addObject = stable && m_nNumberOfObjects > 0 && !m_GeneratingFromJSON;
-			const bool terminateSimulation = m_nNumberOfObjects <= 0 && stable;
+			setSceneInitialized(!isGeneratingFromJSON());
+			const bool terminateSimulation = isSceneInitialized() && stable;
 
-			if (addObject) {
+			if (!isSceneInitialized()) {
 				addSimulationObject(m_vMovingObjPosition, b2Vec2(m_fSpeed, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationColor::TYPE::BROWN);
 
 				addSimulationObject(m_vObstaclePosition, m_vInitialDropVelocity, SimulationObject::BIG_CUBE, SimulationColor::TYPE::RED);
 
 				addSimulationObject(m_vStagnantObjPosition, b2Vec2_zero, SimulationObject::SMALL_CIRCLE, SimulationColor::TYPE::BLUE);
-				m_nNumberOfObjects = 0;
+
+				setSceneInitialized(true);
 			}
-            
-			if (!addObject && !m_SceneSnapshotTaken) {
+
+			if (isSceneInitialized() && !m_SceneSnapshotTaken) {
 				m_TakeSceneSnapshot = true;
 			}
 
-            if (terminateSimulation)
-            {
-                settings->terminate = true;
-            }
+			if (terminateSimulation)
+			{
+				settings->terminate = true;
+			}
 
 			SimulationBase::Step(settings);
 		}
@@ -96,10 +97,10 @@ namespace svqa {
 			body->setTexture(mat.getTexture());
 			body->setColor(color.GetColor());
 
-            auto objectState = ObjectState::create(body, mat.type, color.type, object.type);
-            body->SetUserData(objectState.get());
+			auto objectState = ObjectState::create(body, mat.type, color.type, object.type);
+			body->SetUserData(objectState.get());
 
-            m_SceneJSONState.add(objectState);
+			m_SceneJSONState.add(objectState);
 		}
 	};
 }
