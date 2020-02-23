@@ -19,6 +19,8 @@
 
 typedef std::shared_ptr<b2Shape> ShapePtr;
 
+#define M_PI 3.14159265f
+
 class SimulationObject
 {
 public:
@@ -44,8 +46,8 @@ public:
         LEFT_BOUNDARY = 16,
         RIGHT_BOUNDARY = 17,
         BOTTOM_BOUNDARY = 18
-	};
-
+    };
+    
 	SimulationObject(TYPE t)
 	{
 		type = t;
@@ -132,11 +134,11 @@ public:
 		case ROD_RECTANGLE:
 			return std::make_shared<b2PolygonShape>(getRectangle(10.0f, 1.0f));
         case LEFT_BOUNDARY:
-            return std::make_shared<b2EdgeShape>(getBoundaryEdgeShape(b2Vec2(-40.0f, -5.0f), b2Vec2(-40.0f, 50.0f)));
+            return std::make_shared<b2PolygonShape>(getRectangle(0.5, 55, b2Vec2(-40.0f, 20.0f), 0.0f));
         case RIGHT_BOUNDARY:
-            return std::make_shared<b2EdgeShape>(getBoundaryEdgeShape(b2Vec2(40.0f, -5.0f), b2Vec2(40.0f, 50.0f)));
+            return std::make_shared<b2PolygonShape>(getRectangle(0.5, 55, b2Vec2(40.0f, 20.0f), 0.0f));
         case BOTTOM_BOUNDARY:
-            return std::make_shared<b2EdgeShape>(getBoundaryEdgeShape(b2Vec2(-40.0f, -5.0f), b2Vec2(40.0f, -5.0f)));
+            return std::make_shared<b2PolygonShape>(getRectangle(0.5, 55, b2Vec2(0.0f, -5.0f), M_PI / 2));
 		default:
 			break;
 		}
@@ -181,7 +183,7 @@ public:
 
 	static b2VisPolygonShape getPolygon(const float& edgeLength, const int& nPoints)
 	{
-		const float twoPi = 2.0f * 3.14159265f;
+		const float twoPi = 2.0f * M_PI;
 		std::vector<b2Vec2> points(nPoints);
 		points[0] = b2Vec2(0.0f, -edgeLength);
 		b2Vec2 currentPoint = points[0];
