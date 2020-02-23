@@ -1,10 +1,12 @@
 {
-  "simulationID": 8,
+  "simulationID": 9,
   "offline": true,
   "outputFilePath": "output.mpg",
   "width": 1024,
   "height": 640,
   "inputScenePath": "",
   "numberOfObjects": 2,
-  "numberOfObstacles": 1
+  "numberOfObstacles": 1,
+  "numberOfPendulums": 1,
+  "stepCount": 600
 }

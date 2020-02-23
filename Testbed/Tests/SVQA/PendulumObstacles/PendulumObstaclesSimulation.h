@@ -36,21 +36,17 @@ namespace svqa {
 			m_vObstacleMin = b2Vec2(-30.0f, 0.0f);
 			m_vObstacleMax = b2Vec2(30.0f, 40.0f);
 
-			m_bObstaclesCreated = false;
-
 			SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
-		} 
+		}
 
 		void InitializeScene() override {
-			if (!m_bObstaclesCreated) {
-				// Obstacles are created in step since it requires GL context to be initialized
-				createObstacles();
-			}
+			// Obstacles are created in step since it requires GL context to be initialized
+			createObstacles();
 
 			for (int i = 0; i < m_nNumberOfObjects; i++) {
 				addSimulationObject();
 			}
-		} 
+		}
 
 		virtual SimulationID getIdentifier() override
 		{
@@ -66,7 +62,6 @@ namespace svqa {
 
 				}
 			}
-			m_bObstaclesCreated = true;
 		}
 
 		BODY* createRopeUnit(const b2Vec2& pos)
@@ -211,9 +206,8 @@ namespace svqa {
 			return true;
 		}
 
-		bool m_bObstaclesCreated;
 		int m_nNumberOfObjects;
-		int m_nNumberOfObstacles; 
+		int m_nNumberOfObstacles;
 		float m_fMaxRopeLength;
 		b2Vec2 m_vThrowMin;
 		b2Vec2 m_vThrowMax;
