@@ -949,6 +949,23 @@ void SimulationRenderer::DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b
     m_lines->Vertex(p2, color);
 }
 
+void SimulationRenderer::DrawRectangleChain(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color, float width)
+{
+    float dx = p2.x - p1.x; //delta x
+    float dy = p2.y - p1.y; //delta y
+    float linelength = sqrtf(dx * dx + dy * dy);
+    dx /= linelength;
+    dy /= linelength;
+    //Ok, (dx, dy) is now a unit vector pointing in the direction of the line
+    //A perpendicular vector is given by (-dy, dx)
+    const float thickness = width; //Some number
+    const float px = 0.5f * thickness * (-dy); //perpendicular vector with lenght thickness * 0.5
+    const float py = 0.5f * thickness * dx;
+    
+    std::vector<b2Vec2> vertices = {b2Vec2(p1.x + px, p1.y + py), b2Vec2(p2.x + px, p2.y + py), b2Vec2(p2.x - px, p2.y - py), b2Vec2(p1.x - px, p1.y - py)};
+    DrawSolidPolygon(vertices.data(), vertices.size(), color);
+}
+
 //
 void SimulationRenderer::DrawTransform(const b2Transform& xf)
 {

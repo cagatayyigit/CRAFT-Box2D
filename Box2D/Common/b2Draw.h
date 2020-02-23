@@ -88,6 +88,8 @@ public:
 	
 	/// Draw a line segment.
 	virtual void DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color) = 0;
+    
+    virtual void DrawRectangleChain(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color, float width) = 0;
 
 	/// Draw a transform. Choose your own length scale.
 	/// @param xf a transform.

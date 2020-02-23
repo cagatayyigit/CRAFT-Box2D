@@ -14,18 +14,20 @@ b2VisTexture::Ptr SimulationMaterial::rubberTexture;
 
 b2VisTexture::Ptr SimulationMaterial::getTexture()
 {
-    if(!SimulationMaterial::metalTexture) {
-        SimulationMaterial::metalTexture = b2VisTexture::Ptr(new b2VisTexture(SimulationMaterial::metalFilePath, SimulationMaterial::METAL));
+    if(type != BOUNDARY) {
+        if(!SimulationMaterial::metalTexture) {
+            SimulationMaterial::metalTexture = b2VisTexture::Ptr(new b2VisTexture(SimulationMaterial::metalFilePath, SimulationMaterial::METAL));
+        }
+        
+        if(!SimulationMaterial::rubberTexture) {
+            SimulationMaterial::rubberTexture = b2VisTexture::Ptr(new b2VisTexture(SimulationMaterial::rubberFilePath, SimulationMaterial::RUBBER));
+        }
+        
+        if(type == METAL) {
+            return SimulationMaterial::metalTexture;
+        }
+        return SimulationMaterial::rubberTexture;
     }
-    
-    if(!SimulationMaterial::rubberTexture) {
-        SimulationMaterial::rubberTexture = b2VisTexture::Ptr(new b2VisTexture(SimulationMaterial::rubberFilePath, SimulationMaterial::RUBBER));
-    }
-    
-    if(type == METAL) {
-        return SimulationMaterial::metalTexture;
-    }
-    
-    return SimulationMaterial::rubberTexture;
+    return nullptr;
 }
 

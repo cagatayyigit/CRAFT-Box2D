@@ -141,6 +141,83 @@ void b2VisWorld::DestroyBody(b2Body* b)
     m_blockAllocator.Free(b, sizeof(b2VisBody));
 }
 
+void b2VisWorld::DrawShape(b2Fixture* fixture, const b2Transform& xf, const b2Color& color)
+{
+    switch (fixture->GetType())
+    {
+    case b2Shape::e_circle:
+        {
+            b2CircleShape* circle = (b2CircleShape*)fixture->GetShape();
+
+            b2Vec2 center = b2Mul(xf, circle->m_p);
+            float32 radius = circle->m_radius;
+            b2Vec2 axis = b2Mul(xf.q, b2Vec2(1.0f, 0.0f));
+
+            m_debugDraw->DrawSolidCircle(center, radius, axis, color);
+        }
+        break;
+
+    case b2Shape::e_edge:
+        {
+            b2EdgeShape* edge = (b2EdgeShape*)fixture->GetShape();
+            b2Vec2 v1 = b2Mul(xf, edge->m_vertex1);
+            b2Vec2 v2 = b2Mul(xf, edge->m_vertex2);
+            m_debugDraw->DrawSegment(v1, v2, color);
+        }
+        break;
+
+    case b2Shape::e_chain:
+        {
+            float width = 0.1f;
+            
+            b2ChainShape* chain = (b2ChainShape*)fixture->GetShape();
+            int32 count = chain->m_count;
+            const b2Vec2* vertices = chain->m_vertices;
+
+            b2Vec2 v1 = b2Mul(xf, vertices[0]);
+            if (chain->m_hasPrevVertex)
+            {
+                b2Vec2 vp = b2Mul(xf, chain->m_prevVertex);
+                m_debugDraw->DrawSegment(vp, v1, color);
+            }
+
+            for (int32 i = 1; i < count; ++i)
+            {
+                b2Vec2 v2 = b2Mul(xf, vertices[i]);
+                //m_debugDraw->DrawSegment(v1, v2, color);
+                m_debugDraw->DrawRectangleChain(v1, v2, color, width);
+                v1 = v2;
+            }
+
+            if (chain->m_hasNextVertex)
+            {
+                b2Vec2 vn = b2Mul(xf, chain->m_nextVertex);
+                m_debugDraw->DrawSegment(v1, vn, color);
+            }
+        }
+        break;
+
+    case b2Shape::e_polygon:
+        {
+            b2PolygonShape* poly = (b2PolygonShape*)fixture->GetShape();
+            int32 vertexCount = poly->m_count;
+            b2Assert(vertexCount <= b2_maxPolygonVertices);
+            b2Vec2 vertices[b2_maxPolygonVertices];
+
+            for (int32 i = 0; i < vertexCount; ++i)
+            {
+                vertices[i] = b2Mul(xf, poly->m_vertices[i]);
+            }
+
+            m_debugDraw->DrawSolidPolygon(vertices, vertexCount, color);
+        }
+        break;
+            
+    default:
+        break;
+    }
+}
+
 void b2VisWorld::DrawTexturedShape(b2Fixture* fixture, const b2Transform& xf, const b2Color& color, const uint32& glTextureId, const int& textureMaterialId)
 {
     switch (fixture->GetType())
@@ -173,6 +250,41 @@ void b2VisWorld::DrawTexturedShape(b2Fixture* fixture, const b2Transform& xf, co
             b2Vec2 axis = b2Mul(xf.q, b2Vec2(1.0f, 0.0f));
 
             m_debugDraw->DrawTexturedCircle(center, radius, axis, color, glTextureId, textureMaterialId);
+        }
+        break;
+            
+    case b2Shape::e_chain:
+        {
+            b2ChainShape* chain = (b2ChainShape*)fixture->GetShape();
+            int32 count = chain->m_count;
+            const b2Vec2* vertices = chain->m_vertices;
+
+            b2Color ghostColor(0.75f * color.r, 0.75f * color.g, 0.75f * color.b, color.a);
+
+            b2Vec2 v1 = b2Mul(xf, vertices[0]);
+            m_debugDraw->DrawPoint(v1, 4.0f, color);
+
+            if (chain->m_hasPrevVertex)
+            {
+                b2Vec2 vp = b2Mul(xf, chain->m_prevVertex);
+                m_debugDraw->DrawSegment(vp, v1, ghostColor);
+                m_debugDraw->DrawCircle(vp, 0.1f, ghostColor);
+            }
+
+            for (int32 i = 1; i < count; ++i)
+            {
+                b2Vec2 v2 = b2Mul(xf, vertices[i]);
+                m_debugDraw->DrawSegment(v1, v2, color);
+                m_debugDraw->DrawPoint(v2, 4.0f, color);
+                v1 = v2;
+            }
+
+            if (chain->m_hasNextVertex)
+            {
+                b2Vec2 vn = b2Mul(xf, chain->m_nextVertex);
+                m_debugDraw->DrawSegment(v1, vn, ghostColor);
+                m_debugDraw->DrawCircle(vn, 0.1f, ghostColor);
+            }
         }
         break;
             
@@ -212,7 +324,7 @@ void b2VisWorld::DrawDebugData()
                     if(texture) {
                         DrawTexturedShape(f, xf, b->getColor(), texture->getTextureId(), texture->getMaterialIndex());
                     } else {
-                        DrawShape(f, xf, b2Color(0.5f, 0.9f, 0.5f));
+                        DrawShape(f, xf, b->getColor());
                     }
                 }
                 else if (b->GetType() == b2_kinematicBody)

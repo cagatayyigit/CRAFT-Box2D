@@ -43,9 +43,10 @@ public:
 		CAR_BODY = 13,
 		CAR_WHEEL = 14,
 		ROD_RECTANGLE = 15,
-        LEFT_BOUNDARY = 16,
-        RIGHT_BOUNDARY = 17,
-        BOTTOM_BOUNDARY = 18
+        BASKET = 16,
+        LEFT_BOUNDARY = 17,
+        RIGHT_BOUNDARY = 18,
+        BOTTOM_BOUNDARY = 19
     };
     
 	SimulationObject(TYPE t)
@@ -88,6 +89,8 @@ public:
             return "car_wh";
         case ROD_RECTANGLE:
             return "rod";
+        case BASKET:
+            return "basket";
         case LEFT_BOUNDARY:
             return "l_bound";
         case RIGHT_BOUNDARY:
@@ -133,6 +136,8 @@ public:
 			return std::make_shared<b2CircleShape>(getCircle(1.0f));
 		case ROD_RECTANGLE:
 			return std::make_shared<b2PolygonShape>(getRectangle(10.0f, 1.0f));
+        case BASKET:
+            return std::shared_ptr<b2ChainShape>(getBasketShape());
         case LEFT_BOUNDARY:
             return std::make_shared<b2PolygonShape>(getRectangle(0.5, 55, b2Vec2(-40.0f, 20.0f), 0.0f));
         case RIGHT_BOUNDARY:
@@ -252,6 +257,14 @@ public:
 		return chassis;
 	}
     
+    static b2ChainShape* getBasketShape()
+    {
+        b2ChainShape* shape = new b2ChainShape;
+        std::vector<b2Vec2> vertices = {b2Vec2(-5, 5), b2Vec2(-5, -5), b2Vec2(5, -5), b2Vec2(5, 5)};
+        shape->CreateChain(vertices.data(), vertices.size());
+        return shape;
+    }
+    
     static b2EdgeShape getBoundaryEdgeShape(b2Vec2 xs, b2Vec2 ys)
     {
         b2EdgeShape shape;
@@ -275,6 +288,7 @@ NLOHMANN_JSON_SERIALIZE_ENUM(SimulationObject::TYPE, {
     {SimulationObject::CAR_BODY, SimulationObject::getRepresentation(SimulationObject::CAR_BODY)},
     {SimulationObject::CAR_WHEEL, SimulationObject::getRepresentation(SimulationObject::CAR_WHEEL)},
     {SimulationObject::ROD_RECTANGLE, SimulationObject::getRepresentation(SimulationObject::ROD_RECTANGLE)},
+    {SimulationObject::BASKET, SimulationObject::getRepresentation(SimulationObject::BASKET)},
     {SimulationObject::LEFT_BOUNDARY, SimulationObject::getRepresentation(SimulationObject::LEFT_BOUNDARY)},
     {SimulationObject::RIGHT_BOUNDARY, SimulationObject::getRepresentation(SimulationObject::RIGHT_BOUNDARY)},
     {SimulationObject::BOTTOM_BOUNDARY, SimulationObject::getRepresentation(SimulationObject::BOTTOM_BOUNDARY)}

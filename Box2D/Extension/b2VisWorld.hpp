@@ -32,6 +32,8 @@ public:
     
     virtual void DrawTexturedShape(b2Fixture* fixture, const b2Transform& xf, const b2Color& color, const uint32& glTextureId, const int& textureMaterialId);
     
+    virtual void DrawShape(b2Fixture* shape, const b2Transform& xf, const b2Color& color) override;
+    
     //Gets the renderer to outside world
     virtual b2Draw* getRenderer();
 

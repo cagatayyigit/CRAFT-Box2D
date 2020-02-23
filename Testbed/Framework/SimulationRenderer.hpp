@@ -43,6 +43,8 @@ public:
     void DrawTexturedCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color, uint32 glTexId, int matTexId) override;
 
     void DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color) override;
+    
+    void DrawRectangleChain(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color, float width) override;
 
     void DrawTransform(const b2Transform& xf) override;
 

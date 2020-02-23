@@ -108,6 +108,7 @@ namespace svqa {
 		virtual void createBoundaries()
 		{
             SimulationMaterial mat = SimulationMaterial(SimulationMaterial::BOUNDARY);
+            SimulationColor col = SimulationColor(SimulationColor::BLACK);
             
             const float friction = mat.getFriction();
             const float density = mat.getDensity();
@@ -121,6 +122,11 @@ namespace svqa {
 				b2BodyDef bd;
 				BODY* boundBody = (BODY*)m_world->CreateBody(&bd);
                 
+        #if !USE_DEBUG_DRAW
+                boundBody->setTexture(mat.getTexture());
+                boundBody->setColor(col.GetColor());
+        #endif
+                
                 SimulationObject boundaryObject = SimulationObject(bound);
                 ShapePtr shape = boundaryObject.getShape();
 
@@ -130,7 +136,7 @@ namespace svqa {
 				fd.shape = shape.get();
 				boundBody->CreateFixture(&fd);
                 
-                auto objectState = ObjectState::create(boundBody, SimulationMaterial::BOUNDARY , SimulationColor::BLACK, bound);
+                auto objectState = ObjectState::create(boundBody, mat.type , col.type, bound);
                 boundBody->SetUserData(objectState.get());
 
                 m_SceneJSONState.add(objectState);
