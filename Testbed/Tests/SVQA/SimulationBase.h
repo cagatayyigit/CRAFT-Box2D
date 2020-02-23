@@ -34,7 +34,6 @@ namespace svqa {
 			m_pSettings = _settings_;
 			m_nDistinctColorUsed = 8;
 
-
 			m_pCausalGraph = CausalGraph::create();
 			m_pCausalGraph->addEvent(StartEvent::create());
 			m_bGeneratingFromJSON = m_pSettings->inputScenePath.compare("") != 0;
@@ -66,12 +65,8 @@ namespace svqa {
 				TakeSceneSnapshot("scene.json");
 			}
 
-			if (settings->terminate) {
+			if (shouldTerminateSimulation()) {
 				m_pCausalGraph->addEvent(EndEvent::create(m_stepCount));
-
-				// Takes snapshot of the last frame. We need the first frame.
-				// m_SceneJSONState.saveToJSONFile(m_world, "scene.json");
-
 				FINISH_SIMULATION
 			}
 
@@ -141,49 +136,49 @@ namespace svqa {
 			}
 			return true;
 		}
-        
-        virtual void addTargetBasket(b2Vec2 pos, float angleInRadians)
-        {
-            SimulationMaterial mat = SimulationMaterial(SimulationMaterial::BOUNDARY);
-            SimulationColor col = SimulationColor(SimulationColor::DARK_GRAY);
-            
-            const float friction = mat.getFriction();
-            const float density = mat.getDensity();
 
-            b2BodyDef bd;
-            bd.position = pos;
-            bd.angle = angleInRadians;
-            BODY* basketBody = (BODY*)m_world->CreateBody(&bd);
-            
-    #if !USE_DEBUG_DRAW
-            basketBody->setTexture(mat.getTexture());
-            basketBody->setColor(col.GetColor());
-    #endif
-            
-            SimulationObject basketObject = SimulationObject(SimulationObject::BASKET);
-            ShapePtr shape = basketObject.getShape();
-
-            b2FixtureDef fd = b2FixtureDef();
-            fd.friction = friction;
-            fd.density = density;
-            fd.shape = shape.get();
-            basketBody->CreateFixture(&fd);
-            
-            
-            auto objectState = ObjectState::create(basketBody, mat.type , col.type, basketObject.type);
-            basketBody->SetUserData(objectState.get());
-
-            m_SceneJSONState.add(objectState);
-        }
-
-		virtual void createBoundaries()
+		virtual void addTargetBasket(b2Vec2 pos, float angleInRadians)
 		{
-            SimulationMaterial mat = SimulationMaterial(SimulationMaterial::BOUNDARY);
-            SimulationColor col = SimulationColor(SimulationColor::BLACK);
-            
-            const float friction = mat.getFriction();
-            const float density = mat.getDensity();
-            
+			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::BOUNDARY);
+			SimulationColor col = SimulationColor(SimulationColor::DARK_GRAY);
+
+			const float friction = mat.getFriction();
+			const float density = mat.getDensity();
+
+			b2BodyDef bd;
+			bd.position = pos;
+			bd.angle = angleInRadians;
+			BODY* basketBody = (BODY*)m_world->CreateBody(&bd);
+
+#if !USE_DEBUG_DRAW
+			basketBody->setTexture(mat.getTexture());
+			basketBody->setColor(col.GetColor());
+#endif
+
+			SimulationObject basketObject = SimulationObject(SimulationObject::BASKET);
+			ShapePtr shape = basketObject.getShape();
+
+			b2FixtureDef fd = b2FixtureDef();
+			fd.friction = friction;
+			fd.density = density;
+			fd.shape = shape.get();
+			basketBody->CreateFixture(&fd);
+
+
+			auto objectState = ObjectState::create(basketBody, mat.type, col.type, basketObject.type);
+			basketBody->SetUserData(objectState.get());
+
+			m_SceneJSONState.add(objectState);
+		}
+
+		virtual void CreateBoundaries()
+		{
+			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::BOUNDARY);
+			SimulationColor col = SimulationColor(SimulationColor::BLACK);
+
+			const float friction = mat.getFriction();
+			const float density = mat.getDensity();
+
 			std::vector<SimulationObject::TYPE> boundaries;
 			boundaries.push_back(SimulationObject::LEFT_BOUNDARY);
 			boundaries.push_back(SimulationObject::RIGHT_BOUNDARY);
@@ -192,23 +187,23 @@ namespace svqa {
 			for (auto bound : boundaries) {
 				b2BodyDef bd;
 				BODY* boundBody = (BODY*)m_world->CreateBody(&bd);
-                
-        #if !USE_DEBUG_DRAW
-                boundBody->setTexture(mat.getTexture());
-                boundBody->setColor(col.GetColor());
-        #endif
-                
-                SimulationObject boundaryObject = SimulationObject(bound);
-                ShapePtr shape = boundaryObject.getShape();
+
+#if !USE_DEBUG_DRAW
+				boundBody->setTexture(mat.getTexture());
+				boundBody->setColor(col.GetColor());
+#endif
+
+				SimulationObject boundaryObject = SimulationObject(bound);
+				ShapePtr shape = boundaryObject.getShape();
 
 				b2FixtureDef fd = b2FixtureDef();
 				fd.friction = friction;
 				fd.density = density;
 				fd.shape = shape.get();
 				boundBody->CreateFixture(&fd);
-                
-                auto objectState = ObjectState::create(boundBody, mat.type , col.type, boundaryObject.type);
-                boundBody->SetUserData(objectState.get());
+
+				auto objectState = ObjectState::create(boundBody, mat.type, col.type, boundaryObject.type);
+				boundBody->SetUserData(objectState.get());
 
 				m_SceneJSONState.add(objectState);
 			}
