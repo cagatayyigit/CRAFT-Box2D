@@ -33,7 +33,6 @@ namespace svqa {
 		{
 			const bool stable = isSceneStable();
 			const bool addObject = stable && m_nNumberOfObjects > 0 && !m_GeneratingFromJSON;
-			const bool terminateSimulation = m_nNumberOfObjects <= 0 && stable;
 
 			if (addObject) {
 				addSimulationObject(m_vMovingObjPosition, b2Vec2(m_fSpeed, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationColor::TYPE::BROWN);
@@ -47,11 +46,6 @@ namespace svqa {
 			if (!addObject && !m_SceneSnapshotTaken) {
 				m_TakeSceneSnapshot = true;
 			}
-
-            if (terminateSimulation)
-            {
-                settings->terminate = true;
-            }
 
 			SimulationBase::Step(settings);
 		}

@@ -24,7 +24,6 @@ namespace svqa {
 		{
 			const bool stable = isSceneStable();
 			const bool addObject = stable && m_nNumberOfObjects > 0;
-			const bool terminateSimulation = m_nNumberOfObjects == 0 && stable;
 
 			if (addObject) {
 
@@ -95,11 +94,6 @@ namespace svqa {
 				addDynamicObject(b2Vec2(5.2f, 16.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
 				m_nNumberOfObjects--;
 			}
-
-            if (terminateSimulation)
-            {
-                settings->terminate = true;
-            }
 
             SimulationBase::Step(settings);
 		}

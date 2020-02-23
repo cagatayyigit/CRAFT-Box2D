@@ -33,11 +33,13 @@ namespace svqa {
 			m_pSettings = _settings_;
 			m_nDistinctColorUsed = 8;
             
-            createBoundaries();
-            
             m_pCausalGraph = CausalGraph::create();
             m_pCausalGraph->addEvent(StartEvent::create());
 			m_GeneratingFromJSON = m_pSettings->inputScenePath.compare("") != 0;
+            
+            if(!m_GeneratingFromJSON) {
+                createBoundaries();
+            }
 		}
 
 		/// Derived simulations must call this in order to construct causal graph
@@ -56,7 +58,7 @@ namespace svqa {
 				m_SceneSnapshotTaken = true;
 			}
 
-            if(settings->terminate) {
+            if(this->m_stepCount>settings->stepCount) {
                 m_pCausalGraph->addEvent(EndEvent::create(m_stepCount));
                 
 				// Takes snapshot of the last frame. We need the first frame.
@@ -105,7 +107,11 @@ namespace svqa {
 
 		virtual void createBoundaries()
 		{
-            const float friction = 0.5;
+            SimulationMaterial mat = SimulationMaterial(SimulationMaterial::BOUNDARY);
+            
+            const float friction = mat.getFriction();
+            const float density = mat.getDensity();
+            
 			std::vector<SimulationObject::TYPE> boundaries;
 			boundaries.push_back(SimulationObject::LEFT_BOUNDARY);
 			boundaries.push_back(SimulationObject::RIGHT_BOUNDARY);
@@ -120,11 +126,11 @@ namespace svqa {
 
 				b2FixtureDef fd = b2FixtureDef();
 				fd.friction = friction;
-				fd.density = 0.0f;
+				fd.density = density;
 				fd.shape = shape.get();
 				boundBody->CreateFixture(&fd);
                 
-                auto objectState = ObjectState::create(boundBody, SimulationMaterial::UNKNOWN , SimulationColor::BLACK, bound);
+                auto objectState = ObjectState::create(boundBody, SimulationMaterial::BOUNDARY , SimulationColor::BLACK, bound);
                 boundBody->SetUserData(objectState.get());
 
                 m_SceneJSONState.add(objectState);

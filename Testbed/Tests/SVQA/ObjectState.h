@@ -12,6 +12,7 @@
 #include "SimulationColor.h"
 #include "SimulationObject.h"
 #include "Box2D/Common/b2Math.h"
+#include "Box2D/Dynamics/b2Fixture.h"
 #include "Box2D/Extension/b2VisBody.hpp"
 #include "Box2D/Extension/b2VisWorld.hpp"
 #include "SimulationDefines.h"
@@ -76,7 +77,7 @@ public:
     
     void from_json(const json& j, WORLD* toWorld) {
         bool active;
-        float x, y, angle, velx, vely, angVel, linearDamp, angDamp;
+        float x, y, angle, velx, vely, angVel, linearDamp, angDamp, friction;
         int bodyType;
         
         j.at("active").get_to(active);
@@ -107,7 +108,13 @@ public:
         bd.angularDamping = angDamp;
         
         body = (BODY*) toWorld->CreateBody(&bd);
-        body->CreateFixture(shape.get(), mat.getDensity());
+        
+        b2FixtureDef fd = b2FixtureDef();
+        fd.friction = mat.getFriction();
+        fd.density = mat.getDensity();
+        fd.shape = shape.get();
+        
+        body->CreateFixture(&fd);
         body->SetActive(active);
         
 #if !USE_DEBUG_DRAW

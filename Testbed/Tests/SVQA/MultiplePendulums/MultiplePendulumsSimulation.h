@@ -56,14 +56,6 @@ namespace svqa {
                 createPendulums();
                 m_bCreatedPendulums=true;
             }
-            
-            const bool stable = isSceneStable();
-            const bool terminateSimulation = (m_bInitialSceneCreated && m_bCreatedPendulums && stable);
-
-            if (terminateSimulation)
-            {
-                settings->terminate = true;
-            }
 
             SimulationBase::Step(settings);
         }

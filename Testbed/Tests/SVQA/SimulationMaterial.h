@@ -17,7 +17,7 @@ class SimulationMaterial
 public:
 	enum TYPE
 	{
-        UNKNOWN = -1,
+        BOUNDARY = -1,
 		METAL = 0,
 		RUBBER = 1,
 	};
@@ -29,12 +29,19 @@ public:
 
 	float getDensity()
 	{
-		if (type == METAL)
-		{
-			return 10.0F;
+		if (type == METAL) {
+			return 10.0f;
 		}
-		return 5.0F;
+        if(type == RUBBER) {
+            return 5.0f;
+        }
+		return 0.0f;
 	}
+    
+    float getFriction()
+    {
+        return 0.5f;
+    }
 
 	float getRestitution()
 	{
@@ -44,7 +51,7 @@ public:
 			return 0.02f;
 		case RUBBER:
 			return 0.35f;
-        case UNKNOWN:
+        case BOUNDARY:
             return 0.0f;
 		}
 		return 0.0f;
@@ -65,7 +72,7 @@ private:
 NLOHMANN_JSON_SERIALIZE_ENUM(SimulationMaterial::TYPE, {
 	{SimulationMaterial::METAL, "metal"},
 	{SimulationMaterial::RUBBER, "rubber"},
-	{SimulationMaterial::UNKNOWN, "unknown"}
+	{SimulationMaterial::BOUNDARY, "boundary"}
 	})
 
 #endif /* SimulationMaterial_h */

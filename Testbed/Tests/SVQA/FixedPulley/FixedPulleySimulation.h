@@ -44,14 +44,6 @@ namespace svqa {
                 createPulley();
                 m_bCreatedPulley=true;
             }
-            
-            const bool stable = isSceneStable();
-            const bool terminateSimulation = (m_bInitialSceneCreated && m_bCreatedPulley && stable);
-
-            if (terminateSimulation)
-            {
-                settings->terminate = true;
-            }
 
             SimulationBase::Step(settings);
         }

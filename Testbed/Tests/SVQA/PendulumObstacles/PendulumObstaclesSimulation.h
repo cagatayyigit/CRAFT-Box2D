@@ -48,37 +48,15 @@ namespace svqa {
                 //Obstacles are created in step since it requires GL context to be initialized
                 createObstacles();
             }
-            
-            const bool stable = isSceneStable();
             const bool addObject = m_nNumberOfObjects>0;
-            const bool terminateSimulation = (m_nNumberOfObjects<=0 && stable) || (s==600) ;
 
             if(addObject) {
                 addSimulationObject();
                 m_nNumberOfObjects--;
             }
-            
-            s++;
-
-            if (terminateSimulation)
-            {
-                settings->terminate = true;
-            }
 
             SimulationBase::Step(settings);
         }
-        
-//        virtual bool isSceneStable() override
-//        {
-//            b2Body* bodies = m_world->GetBodyList();
-//            for (b2Body* b = bodies; b; b = b->GetNext())
-//            {
-//                if(b->IsAwake() && !(b->GetType() == b2_staticBody)) {
-//                    return false;
-//                }
-//            }
-//            return true;
-//        }
         
         virtual SimulationID getIdentifier() override
         {

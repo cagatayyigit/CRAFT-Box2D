@@ -169,16 +169,9 @@ namespace svqa {
 
         virtual void Step(SettingsBase* settings) override
         {
-            const bool terminateSimulation = false;
-            
             if(!m_bSceneWithCarsCreated) {
                 createInitialScene(m_nNumberOfCars);
                 m_bSceneWithCarsCreated=true;
-            }
-
-            if (terminateSimulation)
-            {
-                settings->terminate = true;
             }
 
             SimulationBase::Step(settings);

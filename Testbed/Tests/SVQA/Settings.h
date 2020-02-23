@@ -37,6 +37,7 @@ namespace svqa
             j.emplace("height", this->bufferHeight);
             j.emplace("inputScenePath", this->inputScenePath);
             j.emplace("outputFilePath", this->outputFilePath);
+            j.emplace("stepCount", this->stepCount);
         }
 
         void from_json(const json& j) {
@@ -46,6 +47,7 @@ namespace svqa
             j.at("height").get_to(this->bufferHeight);
             j.at("inputScenePath").get_to(this->inputScenePath);
             j.at("outputFilePath").get_to(this->outputFilePath);
+            j.at("stepCount").get_to(this->stepCount);
         }
     };
 }

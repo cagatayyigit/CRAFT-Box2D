@@ -48,16 +48,10 @@ namespace svqa {
             
             const bool stable = isSceneStable();
             const bool addObject = stable && m_nNumberOfObjects>0;
-            const bool terminateSimulation = m_nNumberOfObjects<=0 && stable;
             
             if(addObject) {
                 addSimulationObject();
                 m_nNumberOfObjects--;
-            }
-            
-            if (terminateSimulation)
-            {
-                settings->terminate = true;
             }
 
             SimulationBase::Step(settings);
