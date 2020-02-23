@@ -20,104 +20,97 @@
 
 namespace svqa
 {
-    class RemoveObjectSimulation : public SimulationBase
-    {
-    public:
-        typedef std::shared_ptr<RemoveObjectSimulation> Ptr;
-        
-        enum SimulationState
-        {
-            SS_CREATE_SCENE = 0,
-            SS_CREATE_FINAL_UNSTABLE = 1,
-            SS_CREATE_FINAL_STABLE = 2,
-            SS_SEGMENTATION_SCREENSHOT = 3
-        };
-        
-        RemoveObjectSimulation(RemoveObjectSimulationSettings::Ptr _settings_) : SimulationBase(_settings_)
-        {
-            m_nNumberOfObjects = _settings_->numberOfObjects;
-            m_nSimulationState = SS_CREATE_SCENE;
-            m_nDistinctMaterialsUsed = 2;
-            m_nDistinctObjectsUsed = 2;
-            m_vInitialDropVelocity = b2Vec2(0.0f, -20.0f);
-            
-            SimulationObject largestObject(SimulationObject::BIG_CUBE);
-            
-            m_vThrowMin = b2Vec2(-10.0f, 20.0f);
-            m_vThrowMax = b2Vec2(-5.0f, 40.0f);
-            
-            {
-                b2BodyDef bd;
-                b2Body* ground = m_world->CreateBody(&bd);
+	class RemoveObjectSimulation : public SimulationBase
+	{
+	public:
+		typedef std::shared_ptr<RemoveObjectSimulation> Ptr;
 
-                b2EdgeShape shape;
-                shape.Set(b2Vec2(-40.0f, 0.0f), b2Vec2(40.0f, 0.0f));
-                ground->CreateFixture(&shape, 0.0f);
-            }
-            
-            SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
-        }
+		enum SimulationState
+		{
+			SS_CREATE_SCENE = 0,
+			SS_CREATE_FINAL_UNSTABLE = 1,
+			SS_CREATE_FINAL_STABLE = 2,
+			SS_SEGMENTATION_SCREENSHOT = 3
+		};
 
-        virtual void Step(SettingsBase* settings) override
-        {
-            const bool stable = isSceneStable();
-            const bool addObject = stable && m_nNumberOfObjects>0;
-            
-            if(addObject) {
-                addSimulationObject();
-                m_nNumberOfObjects--;
-            }
+		RemoveObjectSimulation(RemoveObjectSimulationSettings::Ptr _settings_) : SimulationBase(_settings_)
+		{
+			m_nNumberOfObjects = _settings_->numberOfObjects;
+			m_nSimulationState = SS_CREATE_SCENE;
+			m_nDistinctMaterialsUsed = 2;
+			m_nDistinctObjectsUsed = 2;
+			m_vInitialDropVelocity = b2Vec2(0.0f, -20.0f);
 
-            SimulationBase::Step(settings);
-        }
-        
-        virtual SimulationID getIdentifier() override
-        {
-            return SimulationID::ID_RemoveObject;
-        }
-        
-    private:
-        int m_nNumberOfObjects;
-        SimulationState m_nSimulationState;
-        b2Vec2 m_vThrowMin;
-        b2Vec2 m_vThrowMax;
-        b2Vec2 m_vInitialDropVelocity;
-        unsigned short m_nDistinctMaterialsUsed;
-        unsigned short m_nDistinctObjectsUsed;
+			SimulationObject largestObject(SimulationObject::BIG_CUBE);
 
-        void addSimulationObject()
-        {
-            float posX = RandomFloat(m_vThrowMin.x, m_vThrowMax.x);
-            float posY = RandomFloat(m_vThrowMin.y, m_vThrowMax.y);
-            
-            int objectIndex = randWithBound(m_nDistinctObjectsUsed);
-            SimulationObject object = SimulationObject((SimulationObject::TYPE) objectIndex);
-        
-            ShapePtr shape = object.getShape();
-            
-            int materialIndex = randWithBound(m_nDistinctMaterialsUsed);
-            SimulationMaterial mat = SimulationMaterial((SimulationMaterial::TYPE) materialIndex);
-            
-            b2BodyDef bd;
-            bd.type = b2_dynamicBody;
-            bd.position = b2Vec2(posX, posY);
-            bd.linearVelocity = m_vInitialDropVelocity;
-            BODY* body = (BODY*) m_world->CreateBody(&bd);
-            body->CreateFixture(shape.get(), mat.getDensity());
-            
-    #if !USE_DEBUG_DRAW
-            int colorIndex = randWithBound(m_nDistinctColorUsed);
-            SimulationColor col = SimulationColor((SimulationColor::TYPE) colorIndex);
-            body->setTexture(mat.getTexture());
-            body->setColor(col.GetColor());
-            
-            auto objectState = ObjectState::create(body, mat.type, col.type, object.type);
-            body->SetUserData(objectState.get());
+			m_vThrowMin = b2Vec2(-10.0f, 20.0f);
+			m_vThrowMax = b2Vec2(-5.0f, 40.0f);
 
-            m_SceneJSONState.add(objectState);
-    #endif
-        }
-    };
+			{
+				b2BodyDef bd;
+				b2Body* ground = m_world->CreateBody(&bd);
+
+				b2EdgeShape shape;
+				shape.Set(b2Vec2(-40.0f, 0.0f), b2Vec2(40.0f, 0.0f));
+				ground->CreateFixture(&shape, 0.0f);
+			}
+
+			SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
+		}
+
+		void InitializeScene() override {
+			for (int i = 0; i < m_nNumberOfObjects; i++) {
+				addSimulationObject();
+			}
+		}
+
+		virtual SimulationID getIdentifier() override
+		{
+			return SimulationID::ID_RemoveObject;
+		}
+
+	private:
+		int m_nNumberOfObjects;
+		SimulationState m_nSimulationState;
+		b2Vec2 m_vThrowMin;
+		b2Vec2 m_vThrowMax;
+		b2Vec2 m_vInitialDropVelocity;
+		unsigned short m_nDistinctMaterialsUsed;
+		unsigned short m_nDistinctObjectsUsed;
+
+		void addSimulationObject()
+		{
+			float posX = RandomFloat(m_vThrowMin.x, m_vThrowMax.x);
+			float posY = RandomFloat(m_vThrowMin.y, m_vThrowMax.y);
+
+			int objectIndex = randWithBound(m_nDistinctObjectsUsed);
+			SimulationObject object = SimulationObject((SimulationObject::TYPE) objectIndex);
+
+			ShapePtr shape = object.getShape();
+
+			int materialIndex = randWithBound(m_nDistinctMaterialsUsed);
+			SimulationMaterial mat = SimulationMaterial((SimulationMaterial::TYPE) materialIndex);
+
+			b2BodyDef bd;
+			bd.type = b2_dynamicBody;
+			bd.position = b2Vec2(posX, posY);
+			bd.linearVelocity = m_vInitialDropVelocity;
+			BODY* body = (BODY*)m_world->CreateBody(&bd);
+			body->CreateFixture(shape.get(), mat.getDensity());
+
+#if !USE_DEBUG_DRAW
+			int colorIndex = randWithBound(m_nDistinctColorUsed);
+			SimulationColor col = SimulationColor((SimulationColor::TYPE) colorIndex);
+			body->setTexture(mat.getTexture());
+			body->setColor(col.GetColor());
+
+			auto objectState = ObjectState::create(body, mat.type, col.type, object.type);
+			body->SetUserData(objectState.get());
+
+			m_SceneJSONState.add(objectState);
+#endif
+		}
+	};
 }
 
 #endif /* RemoveObjectSimulation_h */
