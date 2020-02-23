@@ -26,6 +26,7 @@ public:
         RED = 6,
         YELLOW = 7,
         BLACK = 8,
+        DARK_GRAY = 9
     };
 
     SimulationColor(TYPE t)
@@ -48,6 +49,7 @@ public:
             case RED: return "red";
             case YELLOW: return "yellow";
             case BLACK: return "black";
+            case DARK_GRAY: return "dark_gray";
         }
     }
 
@@ -64,6 +66,7 @@ public:
             case RED: return b2Color(1, 0, 0);
             case YELLOW: return b2Color(1, 1, 0);
             case BLACK: return b2Color(0, 0, 0);
+            case DARK_GRAY: return b2Color(40.0F / 255.0F, 40.0f / 255.0F, 40.0f / 255.0F);
         }
     }
 
@@ -79,6 +82,7 @@ NLOHMANN_JSON_SERIALIZE_ENUM( SimulationColor::TYPE, {
     {SimulationColor::RED, SimulationColor::getRepresentation(SimulationColor::RED)},
     {SimulationColor::YELLOW, SimulationColor::getRepresentation(SimulationColor::YELLOW)},
     {SimulationColor::BLACK, SimulationColor::getRepresentation(SimulationColor::BLACK)},
+    {SimulationColor::DARK_GRAY, SimulationColor::getRepresentation(SimulationColor::DARK_GRAY)},
 })
 
 #endif /* SimulationColor_h */
