@@ -18,9 +18,7 @@ namespace svqa {
 			SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath);
 		}
 
-		void InitializeScene() override {
-			debug::log("Initializing Scene2Simulation...");
-
+		void InitializeScene() override {  
 			// Up  Floor
 			AddStaticObject(
 				b2Vec2(5.0f, 20.0f),

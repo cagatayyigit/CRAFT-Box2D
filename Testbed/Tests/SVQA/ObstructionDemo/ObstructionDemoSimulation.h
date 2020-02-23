@@ -35,8 +35,6 @@ namespace svqa {
 		}
 
 		void InitializeScene() override {
-			debug::log("Initializing ObstructionDemoSimulation...");
-
 			AddSimulationObject(m_vMovingObjPosition, b2Vec2(m_fSpeed, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationColor::TYPE::BROWN);
 
 			AddSimulationObject(m_vObstaclePosition, m_vInitialDropVelocity, SimulationObject::BIG_CUBE, SimulationColor::TYPE::RED);

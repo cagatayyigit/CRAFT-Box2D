@@ -49,7 +49,7 @@ namespace svqa {
 			debug::log_progress("Step Count:", std::to_string(m_stepCount) + "/" + std::to_string(m_pSettings->stepCount));
 
 			if (!isSceneInitialized()) {
-				debug::log("Scene is not initalized, initializing...");
+				debug::log("Initializing simulation objects...");
 
 				// Generate scene from JSON file if inputScenePath is not blank and the scene is not already generated.
 				if (isGeneratingFromJSON() && !m_bSceneRegenerated) {
@@ -111,6 +111,7 @@ namespace svqa {
 		}
 
 		void GenerateSceneFromJson(std::string filename) {
+			debug::log("Generating scene from \"" + filename + "\"...");
 			m_SceneJSONState.loadFromJSONFile(filename, m_world);
 			m_bSceneRegenerated = true;
 		}

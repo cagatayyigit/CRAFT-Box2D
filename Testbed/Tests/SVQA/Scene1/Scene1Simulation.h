@@ -23,9 +23,7 @@ namespace svqa {
 			return SimulationID::ID_ObstructedPath;
 		}
 
-		void InitializeScene() override {
-			debug::log("Initializing Scene1Simulation...");
-
+		void InitializeScene() override {  
 			// Setup static objects.
 
 			b2Vec2 rampPosition = b2Vec2(RandomFloatFromHardware(-36.5f, -33.5f), 4.0f);
