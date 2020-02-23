@@ -28,7 +28,7 @@ b2ChainShape::~b2ChainShape()
 
 void b2ChainShape::Clear()
 {
-	//b2Free(m_vertices);
+	b2Free(m_vertices);
 	m_vertices = nullptr;
 	m_count = 0;
 }
