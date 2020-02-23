@@ -28,42 +28,42 @@ namespace svqa {
 
 			if (addObject) {
 
-				addStaticObject(b2Vec2(30, 40), M_PI / 16,
+				AddStaticObject(b2Vec2(30, 40), M_PI / 16,
 					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(35.0f, 0.5f)), SimulationObject::CUSTOM_RECTANGLE,
 					SimulationMaterial::METAL, SimulationColor::RED);
 
-				addStaticObject(b2Vec2(-20.0f, 28.0f), 0,
+				AddStaticObject(b2Vec2(-20.0f, 28.0f), 0,
 					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(4.0f, 1.0f)), SimulationObject::CUSTOM_RECTANGLE,
 					SimulationMaterial::METAL, SimulationColor::GRAY);
 
-				addStaticObject(b2Vec2(0, 22), -1 * M_PI / 16,
+				AddStaticObject(b2Vec2(0, 22), -1 * M_PI / 16,
 					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(16.0f, 0.5f)), SimulationObject::CUSTOM_RECTANGLE,
 					SimulationMaterial::METAL, SimulationColor::RED);
 
-				addStaticObject(b2Vec2(40, 0), M_PI / 4,
+				AddStaticObject(b2Vec2(40, 0), M_PI / 4,
 					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(10.0f, 0.5f)), SimulationObject::CUSTOM_RECTANGLE,
 					SimulationMaterial::METAL, SimulationColor::GRAY);
 
 
-				addStaticObject(b2Vec2(-20.0f, 28.0f), 0,
+				AddStaticObject(b2Vec2(-20.0f, 28.0f), 0,
 					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(4.0f, 1.0f)), SimulationObject::CUSTOM_RECTANGLE,
 					SimulationMaterial::METAL, SimulationColor::GRAY);
 
-				addStaticObject(b2Vec2(28.0f, 8.0f), 0,
+				AddStaticObject(b2Vec2(28.0f, 8.0f), 0,
 					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(4.0f, 1.0f)), SimulationObject::CUSTOM_RECTANGLE,
 					SimulationMaterial::METAL, SimulationColor::GRAY);
 
 
 
 				// statics
-				addStaticObject(b2Vec2(-30, -3), M_PI, SimulationObject::BIG_TRIANGLE, SimulationMaterial::METAL, SimulationColor::PURPLE);
-				addStaticObject(b2Vec2(-19, -5), M_PI, SimulationObject::BIG_TRIANGLE, SimulationMaterial::METAL, SimulationColor::PURPLE);
+				AddStaticObject(b2Vec2(-30, -3), M_PI, SimulationObject::BIG_TRIANGLE, SimulationMaterial::METAL, SimulationColor::PURPLE);
+				AddStaticObject(b2Vec2(-19, -5), M_PI, SimulationObject::BIG_TRIANGLE, SimulationMaterial::METAL, SimulationColor::PURPLE);
 
-				addStaticObject(b2Vec2(-20.0f, 28.0f), 0,
+				AddStaticObject(b2Vec2(-20.0f, 28.0f), 0,
 					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(4.0f, 1.0f)), SimulationObject::CUSTOM_RECTANGLE,
 					SimulationMaterial::METAL, SimulationColor::GRAY);
 
-				addStaticObject(b2Vec2(28.0f, 8.0f), 0,
+				AddStaticObject(b2Vec2(28.0f, 8.0f), 0,
 					std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(4.0f, 1.0f)), SimulationObject::CUSTOM_RECTANGLE,
 					SimulationMaterial::METAL, SimulationColor::GRAY);
 
@@ -72,27 +72,27 @@ namespace svqa {
 
 
 				// rod
-				addDynamicObject(b2Vec2(-32, 0.5f), b2Vec2(0, 0), SimulationObject::ROD_RECTANGLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::CYAN);
+				AddDynamicObject(b2Vec2(-32, 0.5f), b2Vec2(0, 0), SimulationObject::ROD_RECTANGLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::CYAN);
 
 				// circles
-				addDynamicObject(b2Vec2(-25, 4), b2Vec2(0.0f, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::PURPLE);
-				addDynamicObject(b2Vec2(-23.0f, 35.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CIRCLE, SimulationMaterial::METAL, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(30, 45), b2Vec2(-20.0f, -12.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::GREEN);
-				addDynamicObject(b2Vec2(29, 10), b2Vec2(0.0f, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::PURPLE);
+				AddDynamicObject(b2Vec2(-25, 4), b2Vec2(0.0f, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::PURPLE);
+				AddDynamicObject(b2Vec2(-23.0f, 35.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CIRCLE, SimulationMaterial::METAL, SimulationColor::TYPE::BLUE);
+				AddDynamicObject(b2Vec2(30, 45), b2Vec2(-20.0f, -12.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::GREEN);
+				AddDynamicObject(b2Vec2(29, 10), b2Vec2(0.0f, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationMaterial::RUBBER, SimulationColor::TYPE::PURPLE);
 
 
 				// stack
-				addDynamicObject(b2Vec2(5.0f, -4.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(4.8f, -2.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(5.2f, 0.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(4.8f, 2.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(5.2f, 4.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(4.8f, 6.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(5.2f, 8.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(4.8f, 10.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(5.2f, 12.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(4.8f, 14.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
-				addDynamicObject(b2Vec2(5.2f, 16.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				AddDynamicObject(b2Vec2(5.0f, -4.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				AddDynamicObject(b2Vec2(4.8f, -2.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				AddDynamicObject(b2Vec2(5.2f, 0.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				AddDynamicObject(b2Vec2(4.8f, 2.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				AddDynamicObject(b2Vec2(5.2f, 4.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				AddDynamicObject(b2Vec2(4.8f, 6.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				AddDynamicObject(b2Vec2(5.2f, 8.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				AddDynamicObject(b2Vec2(4.8f, 10.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				AddDynamicObject(b2Vec2(5.2f, 12.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				AddDynamicObject(b2Vec2(4.8f, 14.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
+				AddDynamicObject(b2Vec2(5.2f, 16.0f), b2Vec2(0.0f, 0.0f), SimulationObject::BIG_CUBE, SimulationMaterial::RUBBER, SimulationColor::TYPE::BLUE);
 				m_nNumberOfObjects--;
 			}
 

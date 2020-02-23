@@ -48,7 +48,7 @@ namespace svqa {
         virtual void Step(SettingsBase* settings) override
         {
             if(!m_bInitialSceneCreated) {
-                createImmediateInitialScene(m_nNumberOfObjects, m_vSimulationObjectTypes, m_vThrowMin, m_vThrowMax, m_vInitialDropVelocity);
+                CreateImmediateInitialScene(m_nNumberOfObjects, m_vSimulationObjectTypes, m_vThrowMin, m_vThrowMax, m_vInitialDropVelocity);
                 m_bInitialSceneCreated=true;
             }
             

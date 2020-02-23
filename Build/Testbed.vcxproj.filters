@@ -43,14 +43,14 @@
     <Filter Include="Tests\SVQA\JumpingBall">
       <UniqueIdentifier>{793151bc-59f5-40d3-98dc-08324f57c35a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tests\SVQA\Scene2">
-      <UniqueIdentifier>{12c67529-6b36-46f0-b91f-6920ac1be608}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework\SVQA">
       <UniqueIdentifier>{27bc4afe-101c-4f2f-bceb-f9ed375d2980}</UniqueIdentifier>
     </Filter>
     <Filter Include="Tests\SVQA\MultiplePendulums">
       <UniqueIdentifier>{a62a7a7a-93b6-4e1f-a1c1-03921b4a510a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\SVQA\Scene2">
+      <UniqueIdentifier>{12c67529-6b36-46f0-b91f-6920ac1be608}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -234,6 +234,9 @@
     </ClInclude>
     <ClInclude Include="..\Testbed\Tests\SVQA\MultiplePendulums\MultiplePendulumsSimulation.h">
       <Filter>Tests\SVQA\MultiplePendulums</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Framework\util.h">
+      <Filter>Framework</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

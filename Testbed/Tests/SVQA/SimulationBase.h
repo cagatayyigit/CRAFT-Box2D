@@ -17,6 +17,7 @@
 #define _USE_MATH_DEFINES
 #endif
 #include <math.h>
+#include <util.h>
 
 namespace svqa {
 #define SET_FILE_OUTPUT_FALSE ((SimulationRenderer*)((b2VisWorld*)m_world)->getRenderer())->setFileOutput(false);
@@ -33,39 +34,41 @@ namespace svqa {
 			m_pSettings = _settings_;
 			m_nDistinctColorUsed = 8;
 
-			createBoundaries();
+			CreateBoundaries();
 
 			m_pCausalGraph = CausalGraph::create();
 			m_pCausalGraph->addEvent(StartEvent::create());
-			m_GeneratingFromJSON = m_pSettings->inputScenePath.compare("") != 0;
+			m_bGeneratingFromJSON = m_pSettings->inputScenePath.compare("") != 0;
 		}
 
 		/// Derived simulations must call this in order to construct causal graph
 		virtual void Step(SettingsBase* settings) override
 		{
-			if (m_GeneratingFromJSON && !m_SceneRegenerated) {
-				m_SceneJSONState.loadFromJSONFile(m_pSettings->inputScenePath, m_world);
-				m_SceneRegenerated = true;
+			if (!isSceneInitialized()) {
+				debug::log("Scene not initalized, initializing...");
+				 
+				// Generate scene from JSON file if inputScenePath is not blank and the scene is not already generated.
+				if (isGeneratingFromJSON() && !m_bSceneRegenerated) {
+					GenerateSceneFromJson(m_pSettings->inputScenePath);
+				}
+				else InitializeScene();
+
+				setSceneInitialized(true);
 			}
 
 			Simulation::Step(settings);
 
-			if (m_TakeSceneSnapshot && !m_SceneSnapshotTaken) {
-				m_SceneJSONState.saveToJSONFile(m_world, "scene.json");
-				m_TakeSceneSnapshot = false;
-				m_SceneSnapshotTaken = true;
+			// Take snapshot of the scene in the beginning of the simulation.
+			if (isSceneInitialized() && !m_bSceneSnapshotTaken) {
+				TakeSceneSnapshot("scene.json");
 			}
 
-			if (settings->terminate) {
+			if (shouldTerminateSimulation()) {
 				m_pCausalGraph->addEvent(EndEvent::create(m_stepCount));
-
-				// Takes snapshot of the last frame. We need the first frame.
-				// m_SceneJSONState.saveToJSONFile(m_world, "scene.json");
-
 				FINISH_SIMULATION
 			}
 
-			detectStartTouchingEvents();
+			DetectStartTouchingEvents();
 		}
 
 		/// Gets the common settings object
@@ -79,25 +82,41 @@ namespace svqa {
 		virtual SimulationID getIdentifier() = 0;
 
 		bool isSceneInitialized() {
-			return m_SceneInitialized;
+			return m_bSceneInitialized;
 		}
 
 		void setSceneInitialized(bool value) {
-			m_SceneInitialized = value;
+			m_bSceneInitialized = value;
 		}
 
 		bool isGeneratingFromJSON() {
-			return m_GeneratingFromJSON;
-		} 
+			return m_bGeneratingFromJSON;
+		}
+
+		virtual void InitializeScene() {}
+
+		virtual bool shouldTerminateSimulation() {
+			return isSceneInitialized() && isSceneStable();
+		}
+
+		void TakeSceneSnapshot(std::string filename) {
+			debug::log("Taking snapshot of the current world state...");
+			m_SceneJSONState.saveToJSONFile(m_world, filename);
+			m_bSceneSnapshotTaken = true;
+		}
+
+		void GenerateSceneFromJson(std::string filename) {
+			m_SceneJSONState.loadFromJSONFile(filename, m_world);
+			m_bSceneRegenerated = true;
+		}
 
 	protected:
 		Settings::Ptr m_pSettings;
 		unsigned short m_nDistinctColorUsed;
-		bool m_SceneRegenerated;
-		bool m_SceneInitialized;
-		bool m_GeneratingFromJSON;
-		bool m_TakeSceneSnapshot;
-		bool m_SceneSnapshotTaken;
+		bool m_bSceneRegenerated;
+		bool m_bSceneInitialized;
+		bool m_bGeneratingFromJSON;
+		bool m_bSceneSnapshotTaken;
 
 		int randWithBound(const int& bound)
 		{
@@ -116,7 +135,7 @@ namespace svqa {
 			return true;
 		}
 
-		virtual void createBoundaries()
+		virtual void CreateBoundaries()
 		{
 			const float friction = 0.5;
 			std::vector<SimulationObject::TYPE> boundaries;
@@ -144,7 +163,7 @@ namespace svqa {
 			}
 		}
 
-		void addDynamicObject(b2Vec2 position, b2Vec2 velocity, SimulationObject::TYPE objType, SimulationMaterial::TYPE materialType, SimulationColor color)
+		void AddDynamicObject(b2Vec2 position, b2Vec2 velocity, SimulationObject::TYPE objType, SimulationMaterial::TYPE materialType, SimulationColor color)
 		{
 			SimulationObject object = SimulationObject(objType);
 
@@ -175,7 +194,7 @@ namespace svqa {
 			m_SceneJSONState.add(objectState);
 		}
 
-		void addStaticObject(b2Vec2 position, float32 angle, SimulationObject::TYPE objType, SimulationMaterial::TYPE materialType, SimulationColor color)
+		void AddStaticObject(b2Vec2 position, float32 angle, SimulationObject::TYPE objType, SimulationMaterial::TYPE materialType, SimulationColor color)
 		{
 			SimulationObject object = SimulationObject(objType);
 			ShapePtr shape = object.getShape();
@@ -202,7 +221,7 @@ namespace svqa {
 			m_SceneJSONState.add(objectState);
 		}
 
-		void addStaticObject(b2Vec2 position, float32 angle, ShapePtr shape,
+		void AddStaticObject(b2Vec2 position, float32 angle, ShapePtr shape,
 			SimulationObject::TYPE objType, SimulationMaterial::TYPE materialType, SimulationColor color)
 		{
 			SimulationObject object = SimulationObject(objType);
@@ -222,7 +241,7 @@ namespace svqa {
 			m_SceneJSONState.add(objectState);
 		}
 
-		virtual void createImmediateInitialScene(const size_t& numberOfObjects,
+		virtual void CreateImmediateInitialScene(const size_t& numberOfObjects,
 			const std::vector<SimulationObject::TYPE>& objectTypes,
 			const b2Vec2& throwMinPos,
 			const b2Vec2& throwMaxPos,
@@ -230,14 +249,14 @@ namespace svqa {
 		{
 			float32 timeStep = m_pSettings->hz > 0.0f ? 1.0f / m_pSettings->hz : float32(0.0f);
 			for (size_t i = 0; i < numberOfObjects; i++) {
-				addSceneObject(objectTypes, throwMinPos, throwMaxPos, dropVelocity);
+				AddSceneObject(objectTypes, throwMinPos, throwMaxPos, dropVelocity);
 				while (!isSceneStable()) {
 					m_world->Step(timeStep, m_pSettings->velocityIterations, m_pSettings->positionIterations);
 				}
 			}
 		}
 
-		void detectStartTouchingEvents()
+		void DetectStartTouchingEvents()
 		{
 			for (auto it = m_Contacts.begin(); it != m_Contacts.end(); it++) {
 				if (m_stepCount - it->step > COLLISION_DETECTION_STEP_DIFF) {
@@ -278,7 +297,7 @@ namespace svqa {
 			}
 		}
 
-		virtual ObjectState addSceneObject(const std::vector<SimulationObject::TYPE>& objectTypes,
+		virtual ObjectState AddSceneObject(const std::vector<SimulationObject::TYPE>& objectTypes,
 			const b2Vec2& throwMinPos,
 			const b2Vec2& throwMaxPos,
 			const b2Vec2& dropVelocity)
@@ -308,6 +327,31 @@ namespace svqa {
 			body->setColor(col.GetColor());
 
 			return ObjectState(body, mat.type, col.type, object.type);
+		}
+
+		void AddSimulationObject(b2Vec2 position, b2Vec2 velocity, SimulationObject::TYPE objType, SimulationColor color)
+		{
+			SimulationObject object = SimulationObject(objType);
+
+			ShapePtr shape = object.getShape();
+
+			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::RUBBER);
+
+			b2BodyDef bd;
+			bd.type = b2_dynamicBody;
+			bd.position = position;
+			bd.angle = RandomFloat(0.0f, M_PI);
+			bd.linearVelocity = velocity;
+			BODY* body = (BODY*)m_world->CreateBody(&bd);
+			body->CreateFixture(shape.get(), mat.getDensity());
+
+			body->setTexture(mat.getTexture());
+			body->setColor(color.GetColor());
+
+			auto objectState = ObjectState::create(body, mat.type, color.type, object.type);
+			body->SetUserData(objectState.get());
+
+			m_SceneJSONState.add(objectState);
 		}
 
 		struct ContactInfo
