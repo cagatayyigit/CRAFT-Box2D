@@ -39,6 +39,7 @@ namespace svqa {
             
             if(!m_GeneratingFromJSON) {
                 createBoundaries();
+                //addTargetBasket(b2Vec2(0, 10), M_PI/4);
             }
 		}
 
@@ -104,6 +105,40 @@ namespace svqa {
 			}
 			return true;
 		}
+        
+        virtual void addTargetBasket(b2Vec2 pos, float angleInRadians)
+        {
+            SimulationMaterial mat = SimulationMaterial(SimulationMaterial::BOUNDARY);
+            SimulationColor col = SimulationColor(SimulationColor::GREEN);
+            
+            const float friction = mat.getFriction();
+            const float density = mat.getDensity();
+
+            b2BodyDef bd;
+            bd.position = pos;
+            bd.angle = angleInRadians;
+            BODY* basketBody = (BODY*)m_world->CreateBody(&bd);
+            
+    #if !USE_DEBUG_DRAW
+            basketBody->setTexture(mat.getTexture());
+            basketBody->setColor(col.GetColor());
+    #endif
+            
+            SimulationObject basketObject = SimulationObject(SimulationObject::BASKET);
+            ShapePtr shape = basketObject.getShape();
+
+            b2FixtureDef fd = b2FixtureDef();
+            fd.friction = friction;
+            fd.density = density;
+            fd.shape = shape.get();
+            basketBody->CreateFixture(&fd);
+            
+            
+            auto objectState = ObjectState::create(basketBody, mat.type , col.type, basketObject.type);
+            basketBody->SetUserData(objectState.get());
+
+            m_SceneJSONState.add(objectState);
+        }
 
 		virtual void createBoundaries()
 		{
@@ -136,7 +171,7 @@ namespace svqa {
 				fd.shape = shape.get();
 				boundBody->CreateFixture(&fd);
                 
-                auto objectState = ObjectState::create(boundBody, mat.type , col.type, bound);
+                auto objectState = ObjectState::create(boundBody, mat.type , col.type, boundaryObject.type);
                 boundBody->SetUserData(objectState.get());
 
                 m_SceneJSONState.add(objectState);

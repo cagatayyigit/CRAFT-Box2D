@@ -58,8 +58,8 @@ public:
             case BLUE: return b2Color(0, 0, 1);
             case BROWN: return b2Color(134.0F / 255.0F, 69.0f / 255.0F, 20.0f / 255.0F);
             case CYAN: return b2Color(68.0F / 255.0F, 195.0f / 255.0F, 193.0f / 255.0F);
-            case GRAY: return b2Color(0, 1, 0);
-            case GREEN: return b2Color(40.0F / 255.0F, 152.0f / 255.0F, 40.0f / 255.0F);
+            case GRAY: return b2Color(152.0F / 255.0F, 152.0f / 255.0F, 152.0f / 255.0F);
+            case GREEN: return b2Color(0, 1, 0);
             case PURPLE: return b2Color(102.0F / 255.0F, 51.0f / 255.0F, 153.0f / 255.0F);
             case RED: return b2Color(1, 0, 0);
             case YELLOW: return b2Color(1, 1, 0);

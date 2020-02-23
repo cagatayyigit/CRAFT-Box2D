@@ -175,11 +175,6 @@ void b2VisWorld::DrawShape(b2Fixture* fixture, const b2Transform& xf, const b2Co
             const b2Vec2* vertices = chain->m_vertices;
 
             b2Vec2 v1 = b2Mul(xf, vertices[0]);
-            if (chain->m_hasPrevVertex)
-            {
-                b2Vec2 vp = b2Mul(xf, chain->m_prevVertex);
-                m_debugDraw->DrawSegment(vp, v1, color);
-            }
 
             for (int32 i = 1; i < count; ++i)
             {
@@ -187,12 +182,6 @@ void b2VisWorld::DrawShape(b2Fixture* fixture, const b2Transform& xf, const b2Co
                 //m_debugDraw->DrawSegment(v1, v2, color);
                 m_debugDraw->DrawRectangleChain(v1, v2, color, width);
                 v1 = v2;
-            }
-
-            if (chain->m_hasNextVertex)
-            {
-                b2Vec2 vn = b2Mul(xf, chain->m_nextVertex);
-                m_debugDraw->DrawSegment(v1, vn, color);
             }
         }
         break;
