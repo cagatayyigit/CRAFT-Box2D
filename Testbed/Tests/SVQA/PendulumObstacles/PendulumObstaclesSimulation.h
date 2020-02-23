@@ -39,29 +39,18 @@ namespace svqa {
 			m_bObstaclesCreated = false;
 
 			SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
-		}
-
-		virtual void Step(SettingsBase* settings) override
-		{
-			m_nStepCount++;
-
-			SimulationBase::Step(settings);
-		}
+		} 
 
 		void InitializeScene() override {
 			if (!m_bObstaclesCreated) {
-				//Obstacles are created in step since it requires GL context to be initialized
+				// Obstacles are created in step since it requires GL context to be initialized
 				createObstacles();
 			}
 
 			for (int i = 0; i < m_nNumberOfObjects; i++) {
 				addSimulationObject();
 			}
-		}
-
-		bool shouldTerminateSimulation() override {
-			return SimulationBase::shouldTerminateSimulation() || m_nStepCount == 600;
-		}
+		} 
 
 		virtual SimulationID getIdentifier() override
 		{
@@ -224,8 +213,7 @@ namespace svqa {
 
 		bool m_bObstaclesCreated;
 		int m_nNumberOfObjects;
-		int m_nNumberOfObstacles;
-		int m_nStepCount;
+		int m_nNumberOfObstacles; 
 		float m_fMaxRopeLength;
 		b2Vec2 m_vThrowMin;
 		b2Vec2 m_vThrowMax;

@@ -98,7 +98,7 @@ namespace svqa {
 		virtual void InitializeScene() {}
 
 		virtual bool shouldTerminateSimulation() {
-			return isSceneInitialized() && isSceneStable();
+			return m_stepCount == m_pSettings->stepCount;
 		}
 
 		void TakeSceneSnapshot(std::string filename) {
