@@ -46,8 +46,10 @@ namespace svqa {
 		/// Derived simulations must call this in order to construct causal graph
 		virtual void Step(SettingsBase* settings) override
 		{
+			debug::log_progress("Step Count:", std::to_string(m_stepCount) + "/" + std::to_string(m_pSettings->stepCount));
+
 			if (!isSceneInitialized()) {
-				debug::log("Scene not initalized, initializing...");
+				debug::log("Scene is not initalized, initializing...");
 
 				// Generate scene from JSON file if inputScenePath is not blank and the scene is not already generated.
 				if (isGeneratingFromJSON() && !m_bSceneRegenerated) {
@@ -66,6 +68,7 @@ namespace svqa {
 			}
 
 			if (shouldTerminateSimulation()) {
+				debug::log("Terminating simulation...");
 				m_pCausalGraph->addEvent(EndEvent::create(m_stepCount));
 				FINISH_SIMULATION
 			}
