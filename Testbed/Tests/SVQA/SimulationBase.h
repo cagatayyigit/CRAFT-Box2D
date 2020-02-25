@@ -340,22 +340,17 @@ namespace svqa {
 		virtual void EndContact(b2Contact* contact)  override {
 			for (auto it = m_StartedTouchingContacts.begin(); it != m_StartedTouchingContacts.end(); it++) {
 				if (it->contact == contact) {
-					if (m_stepCount - it->step > COLLISION_DETECTION_STEP_DIFF) {
-						//DETECTED EndTouching_Event
-						m_pCausalGraph->addEvent(EndTouchingEvent::create(m_stepCount, (BODY*)it->contact->GetFixtureA()->GetBody(),
-							(BODY*)it->contact->GetFixtureB()->GetBody()));
-
-					}
-					m_StartedTouchingContacts.erase(it--);
+                    //DETECTED EndTouching_Event
+                    m_pCausalGraph->addEvent(EndTouchingEvent::create(m_stepCount, (BODY*)it->contact->GetFixtureA()->GetBody(),
+                        (BODY*)it->contact->GetFixtureB()->GetBody()));
+                    m_StartedTouchingContacts.erase(it--);
 				}
 			}
             for (auto it = m_Contacts.begin(); it != m_Contacts.end(); it++) {
                 if (it->contact == contact) {
-                    if (!(m_stepCount - it->step > COLLISION_DETECTION_STEP_DIFF)) {
-                        //DETECTED Collision_Event
-                        m_pCausalGraph->addEvent(CollisionEvent::create(it->step, (BODY*)it->contact->GetFixtureA()->GetBody(),
-                            (BODY*)it->contact->GetFixtureB()->GetBody()));
-                    }
+                    //DETECTED Collision_Event
+                    m_pCausalGraph->addEvent(CollisionEvent::create(it->step, (BODY*)it->contact->GetFixtureA()->GetBody(),
+                        (BODY*)it->contact->GetFixtureB()->GetBody()));
                     m_Contacts.erase(it--);
                 }
             }
