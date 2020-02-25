@@ -113,10 +113,12 @@ namespace svqa {
         
         bool firstEventOfObject = true;
         for(auto neObj : newEventObjects) {
-            const auto& latestEventOfObject = getLatestEventBeforeTimeStep(neObj, newEvent->getStepCount());
-            if(latestEventOfObject) {
-                newEvent->addCauseEvent(latestEventOfObject);
-                firstEventOfObject = false;
+            if(! (neObj->GetType() == b2_staticBody) ) {
+                const auto& latestEventOfObject = getLatestEventBeforeTimeStep(neObj, newEvent->getStepCount());
+                if(latestEventOfObject) {
+                    newEvent->addCauseEvent(latestEventOfObject);
+                    firstEventOfObject = false;
+                }
             }
         }
         
