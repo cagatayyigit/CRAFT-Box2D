@@ -15,9 +15,9 @@
 
 #ifdef _MSC_VER
 #define _USE_MATH_DEFINES
+#include <util.h>
 #endif
 #include <math.h>
-#include <util.h>
 
 namespace svqa {
 #define SET_FILE_OUTPUT_FALSE ((SimulationRenderer*)((b2VisWorld*)m_world)->getRenderer())->setFileOutput(false);
@@ -46,10 +46,14 @@ namespace svqa {
 		/// Derived simulations must call this in order to construct causal graph
 		virtual void Step(SettingsBase* settings) override
 		{
+#ifdef _MSC_VER
 			debug::log_progress("Step Count:", std::to_string(m_stepCount) + "/" + std::to_string(m_pSettings->stepCount));
+#endif
 
 			if (!isSceneInitialized()) {
+#ifdef _MSC_VER
 				debug::log("Initializing simulation objects...");
+#endif
 
 				// Generate scene from JSON file if inputScenePath is not blank and the scene is not already generated.
 				if (isGeneratingFromJSON() && !m_bSceneRegenerated) {
@@ -68,12 +72,14 @@ namespace svqa {
 			}
 
 			if (shouldTerminateSimulation()) {
+#ifdef _MSC_VER
 				debug::log("Terminating simulation...");
+#endif
 				m_pCausalGraph->addEvent(EndEvent::create(m_stepCount));
 				FINISH_SIMULATION
 			}
-
-			DetectStartTouchingEvents();
+            
+            DetectStartTouchingEvents();
 		}
 
 		/// Gets the common settings object
@@ -105,13 +111,17 @@ namespace svqa {
 		}
 
 		void TakeSceneSnapshot(std::string filename) {
+#ifdef _MSC_VER
 			debug::log("Taking snapshot of the current world state...");
+#endif
 			m_SceneJSONState.saveToJSONFile(m_world, filename);
 			m_bSceneSnapshotTaken = true;
 		}
 
 		void GenerateSceneFromJson(std::string filename) {
+#ifdef _MSC_VER
 			debug::log("Generating scene from \"" + filename + "\"...");
+#endif
 			m_SceneJSONState.loadFromJSONFile(filename, m_world);
 			m_bSceneRegenerated = true;
 		}
@@ -309,12 +319,13 @@ namespace svqa {
 		void DetectStartTouchingEvents()
 		{
 			for (auto it = m_Contacts.begin(); it != m_Contacts.end(); it++) {
-				if (m_stepCount - it->step > COLLISION_DETECTION_STEP_DIFF) {
-					//DETECTED StartTouching_Event
-					m_pCausalGraph->addEvent(StartTouchingEvent::create(it->step, (BODY*)it->contact->GetFixtureA()->GetBody(),
-						(BODY*)it->contact->GetFixtureB()->GetBody()));
-					m_Contacts.erase(it--);
-				}
+                if (m_stepCount - it->step > COLLISION_DETECTION_STEP_DIFF) {
+                    //DETECTED StartTouching_Event
+                    m_pCausalGraph->addEvent(StartTouchingEvent::create(it->step, (BODY*)it->contact->GetFixtureA()->GetBody(),
+                        (BODY*)it->contact->GetFixtureB()->GetBody()));
+                    m_StartedTouchingContacts.push_back(*it);
+                    m_Contacts.erase(it--);
+                }
 			}
 		}
 
@@ -327,24 +338,27 @@ namespace svqa {
 		}
 
 		virtual void EndContact(b2Contact* contact)  override {
-			for (auto it = m_Contacts.begin(); it != m_Contacts.end(); it++) {
+			for (auto it = m_StartedTouchingContacts.begin(); it != m_StartedTouchingContacts.end(); it++) {
 				if (it->contact == contact) {
 					if (m_stepCount - it->step > COLLISION_DETECTION_STEP_DIFF) {
 						//DETECTED EndTouching_Event
-						m_pCausalGraph->addEvent(EndTouchingEvent::create(it->step, (BODY*)it->contact->GetFixtureA()->GetBody(),
+						m_pCausalGraph->addEvent(EndTouchingEvent::create(m_stepCount, (BODY*)it->contact->GetFixtureA()->GetBody(),
 							(BODY*)it->contact->GetFixtureB()->GetBody()));
 
 					}
-					else {
-						//DETECTED Collision_Event
-						m_pCausalGraph->addEvent(CollisionEvent::create(it->step, (BODY*)it->contact->GetFixtureA()->GetBody(),
-							(BODY*)it->contact->GetFixtureB()->GetBody()));
-					}
-					m_Contacts.erase(it--);
+					m_StartedTouchingContacts.erase(it--);
 				}
-
-
 			}
+            for (auto it = m_Contacts.begin(); it != m_Contacts.end(); it++) {
+                if (it->contact == contact) {
+                    if (!(m_stepCount - it->step > COLLISION_DETECTION_STEP_DIFF)) {
+                        //DETECTED Collision_Event
+                        m_pCausalGraph->addEvent(CollisionEvent::create(it->step, (BODY*)it->contact->GetFixtureA()->GetBody(),
+                            (BODY*)it->contact->GetFixtureB()->GetBody()));
+                    }
+                    m_Contacts.erase(it--);
+                }
+            }
 		}
 
 		virtual ObjectState AddSceneObject(const std::vector<SimulationObject::TYPE>& objectTypes,
@@ -411,6 +425,7 @@ namespace svqa {
 		};
 
 		std::vector<ContactInfo>    m_Contacts;
+        std::vector<ContactInfo>    m_StartedTouchingContacts;
 
 		CausalGraph::Ptr            m_pCausalGraph;
 		SceneState                  m_SceneJSONState;

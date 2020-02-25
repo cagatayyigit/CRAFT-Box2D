@@ -18,6 +18,6 @@
 #define WORLD b2VisWorld
 #endif
 
-#define COLLISION_DETECTION_STEP_DIFF 3
+#define COLLISION_DETECTION_STEP_DIFF 15
 
 #endif /* SimulationDefines_h */
