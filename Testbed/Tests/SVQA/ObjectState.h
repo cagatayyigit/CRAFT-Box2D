@@ -51,7 +51,13 @@ public:
     
     std::string getShortRepresentation()
     {
-        std::string ret = "id: " + std::to_string(body->getUniqueId()) + " sh: " + SimulationObject::getRepresentation(objectType) + " col: " + SimulationColor::getRepresentation(colorType);
+        //std::string ret = "id: " + std::to_string(body->getUniqueId()) + " sh: " + SimulationObject::getRepresentation(objectType) + " col: " + SimulationColor::getRepresentation(colorType);
+
+
+        std::string basePath = "\"\\Testbed\\Data\\Images\\";
+        std::string imgPath = basePath + SimulationObject::getRepresentation(objectType) + "_" + SimulationColor::getRepresentation(colorType) + "\"";
+        std::string ret = " image= " + imgPath;
+
         return ret;
     }
     
