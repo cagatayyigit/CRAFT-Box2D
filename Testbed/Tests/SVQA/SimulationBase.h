@@ -67,7 +67,7 @@ namespace svqa {
 			Simulation::Step(settings);
 
 			// Take snapshot of the scene in the beginning of the simulation.
-			if (isSceneInitialized() && !m_bSceneSnapshotTaken) {
+			if (!isGeneratingFromJSON() && isSceneInitialized() && !m_bSceneSnapshotTaken) {
 				TakeSceneSnapshot("scene.json");
 			}
 
@@ -104,7 +104,7 @@ namespace svqa {
 			return m_bGeneratingFromJSON;
 		}
 
-		virtual void InitializeScene() {}
+		virtual void InitializeScene() = 0;
 
 		virtual bool shouldTerminateSimulation() {
 			return m_stepCount == m_pSettings->stepCount;

@@ -52,6 +52,9 @@
     <Filter Include="Tests\SVQA\Scene2">
       <UniqueIdentifier>{12c67529-6b36-46f0-b91f-6920ac1be608}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tests\SVQA\ConnectedCars">
+      <UniqueIdentifier>{f0f52aa2-ecae-4625-9baa-2bf0c2b8c9e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Testbed\Framework\Camera.hpp">
@@ -237,6 +240,12 @@
     </ClInclude>
     <ClInclude Include="..\Testbed\Framework\util.h">
       <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\ConnectedCars\ConnectedCarsSettings.h">
+      <Filter>Tests\SVQA\ConnectedCars</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\ConnectedCars\ConnectedCarsSimulation.h">
+      <Filter>Tests\SVQA\ConnectedCars</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

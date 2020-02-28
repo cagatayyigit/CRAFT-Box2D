@@ -190,6 +190,8 @@
     <ClInclude Include="..\Testbed\Framework\SVQA\StartTouchingEvent.hpp" />
     <ClInclude Include="..\Testbed\Framework\util.h" />
     <ClInclude Include="..\Testbed\Framework\VideoWriter.h" />
+    <ClInclude Include="..\Testbed\Tests\SVQA\ConnectedCars\ConnectedCarsSettings.h" />
+    <ClInclude Include="..\Testbed\Tests\SVQA\ConnectedCars\ConnectedCarsSimulation.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\FixedPulley\FixedPulleySettings.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\FixedPulley\FixedPulleySimulation.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\JSONHelper.h" />
