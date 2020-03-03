@@ -17,6 +17,8 @@
 #include "Box2D/Extension/b2VisWorld.hpp"
 #include "SimulationDefines.h"
 
+
+
 using json = nlohmann::json;
 
 struct ObjectState
@@ -58,7 +60,8 @@ public:
     std::string getImagePath()
     {
 
-        std::string basePath = "\"\\Testbed\\Data\\Images\\";
+
+        std::string basePath = "\"..\\Testbed\\Data\\Images\\";
         std::string id = std::to_string(body->getUniqueId());
         std::string result = basePath +"img"+ id + ".png";
         
