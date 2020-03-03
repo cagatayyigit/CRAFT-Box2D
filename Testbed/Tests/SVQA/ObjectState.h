@@ -51,14 +51,18 @@ public:
     
     std::string getShortRepresentation()
     {
-        //std::string ret = "id: " + std::to_string(body->getUniqueId()) + " sh: " + SimulationObject::getRepresentation(objectType) + " col: " + SimulationColor::getRepresentation(colorType);
+        std::string ret = "id: " + std::to_string(body->getUniqueId()) + " sh: " + SimulationObject::getRepresentation(objectType) + " col: " + SimulationColor::getRepresentation(colorType);
+        return ret;
+    }
 
+    std::string getImagePath()
+    {
 
         std::string basePath = "\"\\Testbed\\Data\\Images\\";
-        std::string imgPath = basePath + SimulationObject::getRepresentation(objectType) + "_" + SimulationColor::getRepresentation(colorType) + "\"";
-        std::string ret = " image= " + imgPath;
-
-        return ret;
+        std::string id = std::to_string(body->getUniqueId());
+        std::string result = basePath +"img"+ id + ".png";
+        
+        return result;
     }
     
     void to_json(json& j) const {
