@@ -238,9 +238,6 @@
     <ClInclude Include="..\Testbed\Tests\SVQA\MultiplePendulums\MultiplePendulumsSimulation.h">
       <Filter>Tests\SVQA\MultiplePendulums</Filter>
     </ClInclude>
-    <ClInclude Include="..\Testbed\Framework\util.h">
-      <Filter>Framework</Filter>
-    </ClInclude>
     <ClInclude Include="..\Testbed\Tests\SVQA\ConnectedCars\ConnectedCarsSettings.h">
       <Filter>Tests\SVQA\ConnectedCars</Filter>
     </ClInclude>

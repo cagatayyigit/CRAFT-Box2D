@@ -188,7 +188,6 @@
     <ClInclude Include="..\Testbed\Framework\SVQA\EndTouchingEvent.hpp" />
     <ClInclude Include="..\Testbed\Framework\SVQA\StartEvent.hpp" />
     <ClInclude Include="..\Testbed\Framework\SVQA\StartTouchingEvent.hpp" />
-    <ClInclude Include="..\Testbed\Framework\util.h" />
     <ClInclude Include="..\Testbed\Framework\VideoWriter.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\ConnectedCars\ConnectedCarsSettings.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\ConnectedCars\ConnectedCarsSimulation.h" />
