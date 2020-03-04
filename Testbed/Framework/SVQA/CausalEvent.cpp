@@ -28,17 +28,16 @@ namespace svqa
             std::string imgPath = objState->getImagePath();
             imgPaths[i++] = imgPath;
         }
-        
         std::string resultStr = "";
 
         if (getTypeStr()._Equal("Start")) {
-             resultStr += "<<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\"><TR><TD>" + eventType + "</TD></TR></TABLE>>";
+             resultStr += "<<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\"><TR><TD ALIGN = \"center\" COLSPAN = \"2\"><FONT POINT-SIZE = \"24.0\" FACE = \"ambrosia\">" + eventType + "</FONT></TD></TR></TABLE>>";
         }
         else if (getTypeStr()._Equal("End")) {
-            resultStr += "<<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\"><TR><TD>" + eventType + "</TD></TR></TABLE>>";
+            resultStr += "<<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\"><TR><TD ALIGN = \"center\" COLSPAN = \"2\"><FONT POINT-SIZE = \"24.0\" FACE = \"ambrosia\">" + eventType + "</FONT></TD></TR></TABLE>>";
         }
         else {
-            resultStr += "<<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\"><TR><TD>" + eventType + "</TD></TR><TR><TD><IMG SRC = " + imgPaths[0] + "\"/></TD><TD><IMG SRC =" + imgPaths[1] + "\"/></TD></TR></TABLE>>";
+            resultStr += "<<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\"><TR><TD ALIGN = \"center\" COLSPAN = \"2\"><FONT POINT-SIZE = \"24.0\" FACE = \"ambrosia\">" + eventType + "</FONT></TD></TR><TR><TD><IMG SRC = " + imgPaths[0] + "\"/></TD><TD><IMG SRC =" + imgPaths[1] + "\"/></TD></TR></TABLE>>";
 
         }
 

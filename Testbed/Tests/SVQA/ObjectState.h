@@ -60,11 +60,14 @@ public:
 	std::string getImagePath()
 	{
 
+		std::string type = SimulationObject::getRepresentation(objectType); 
+		std::string color = SimulationColor::getRepresentation(colorType);
 
 		std::string basePath = "\"..\\Testbed\\Data\\Images\\";
-		std::string id = std::to_string(body->getUniqueId());
-		std::string result = basePath + "img" + id + ".png";
 
+		std::string result = basePath + type + "_" + color  + ".png";
+
+		//return "\"C:\\Users\\Cagatay\\Projects\\SVQA\\SVQA-Box2D\\Testbed\\Data\\Images\\" + type + "_" + color + ".png";
 		return result;
 	}
 
