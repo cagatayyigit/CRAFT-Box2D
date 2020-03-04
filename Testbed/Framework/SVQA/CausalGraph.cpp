@@ -129,7 +129,7 @@ namespace svqa {
 
     void addNodeToString(CausalEvent::Ptr event, std::string& str)
     {
-        str += (std::to_string((long long)event.get()) + " [label=\"" + event->getStrRepresentation() + "\"]\n");
+        str += (std::to_string((long long)event.get()) + " [shape=\"Box\" label=" + event->getStrRepresentation() + "]\n");
     }
 
     void addEdgesToString(CausalEvent::Ptr event, std::string& str, std::set<CausalEvent::Ptr>& visited)
