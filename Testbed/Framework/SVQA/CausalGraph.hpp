@@ -32,7 +32,14 @@ namespace svqa
             //Creates the string representation of the causal graph for debug purposes
             std::string createGraphString();
         
+            //Adds a new event to causal graph
             void addEvent(const CausalEvent::Ptr& event);
+        
+            //Gets json object from causal graph
+            json toJSON() const;
+        
+            //Saves causal graph to a json file
+            bool saveToJSON(const std::string& filename);
         
             template<typename T> void printEventQueue(T& q) {
                 while(!q.empty()) {

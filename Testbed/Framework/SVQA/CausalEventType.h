@@ -9,6 +9,7 @@
 #define CausalEventType_h
 
 #include <string>
+#include <nlohmann/json.hpp>
 
 enum CausalEventType {
     Start_Event = 0,
@@ -33,5 +34,13 @@ static std::string getTypeString(CausalEventType type) {
     }
     return "";
 }
+
+NLOHMANN_JSON_SERIALIZE_ENUM( CausalEventType, {
+    {Start_Event, getTypeString(Start_Event)},
+    {End_Event, getTypeString(End_Event)},
+    {Collision_Event, getTypeString(Collision_Event)},
+    {StartTouching_Event, getTypeString(StartTouching_Event)},
+    {EndTouching_Event, getTypeString(EndTouching_Event)},
+})
 
 #endif /* CausalEventType_h */

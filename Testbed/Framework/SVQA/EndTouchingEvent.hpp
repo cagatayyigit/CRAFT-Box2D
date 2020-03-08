@@ -25,12 +25,12 @@ namespace svqa
                 return std::make_shared<EndTouchingEvent>(step, firstObject, secondObject);
             }
         
-            virtual CausalEventType getType() override
+            virtual CausalEventType getType() const override
             {
                 return EndTouching_Event;
             }
         
-            virtual std::vector<BODY*> getObjects() override
+            virtual std::vector<BODY*> getObjects() const override
             {
                 std::vector<BODY*> ret{ m_pFirstObject, m_pSecondObject };
                 return ret;

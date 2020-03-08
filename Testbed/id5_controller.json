@@ -6,6 +6,7 @@
   "width": 1024,
   "height": 640,
   "inputScenePath": "scene.json",
+  "outputCausalGraphPath": "graph.json",
   "numberOfObjects": 2,
   "numberOfObstacles": 1
 }

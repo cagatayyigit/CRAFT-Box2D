@@ -35,7 +35,7 @@ namespace svqa
             virtual ~CausalEvent() {};
         
             //Gets event type
-            virtual CausalEventType getType() = 0;
+            virtual CausalEventType getType() const = 0;
         
             //Gets event's string type
             std::string getTypeStr()
@@ -57,10 +57,13 @@ namespace svqa
             }
         
             //Gets effected objects
-            virtual std::vector<BODY*> getObjects() = 0;
+            virtual std::vector<BODY*> getObjects() const = 0;
         
             //Get event's step count
             int getStepCount() const;
+        
+            //Get json representation of the event
+            json toJSON() const;
         
         private:
         

@@ -16,10 +16,8 @@ namespace svqa
 
     std::string CausalEvent::getStrRepresentation()
     {
-            
         std::string eventType = getTypeStr() + ":" + std::to_string(m_nStepCount);  
-        std::string imgPaths[2];                                          
-
+        std::string imgPaths[2];
 
         auto objects = getObjects();
         int i = 0;
@@ -42,5 +40,21 @@ namespace svqa
         }
 
         return resultStr;
+    }
+
+    json CausalEvent::toJSON() const
+    {
+        json jEvent;
+        jEvent.emplace("id", (long long) this);
+        jEvent.emplace("step", m_nStepCount);
+        jEvent.emplace("type", getType());
+        
+        std::vector<int> objIds;
+        auto objects = getObjects();
+        for(auto& obj : objects) {
+            objIds.push_back(obj->getUniqueId());
+        }
+        jEvent.emplace("objects", objIds);
+        return jEvent;
     }
 }

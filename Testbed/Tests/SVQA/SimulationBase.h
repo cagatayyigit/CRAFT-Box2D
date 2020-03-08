@@ -73,6 +73,8 @@ namespace svqa {
 				LOG("Terminating simulation...");
 
 				m_pCausalGraph->addEvent(EndEvent::create(m_stepCount));
+                m_pCausalGraph->saveToJSON(m_pSettings->outputCausalGraphPath);
+                
 				FINISH_SIMULATION
 			}
 

@@ -15,7 +15,7 @@ using json = nlohmann::json;
 
 namespace JSONHelper {
 
-bool saveJSON(const json& j, const std::string& filePath)
+static bool saveJSON(const json& j, const std::string& filePath)
 {
     std::ofstream o(filePath);
     if(o.is_open()) {
@@ -26,7 +26,7 @@ bool saveJSON(const json& j, const std::string& filePath)
 }
 
 
-bool loadJSON(json& j, const std::string& filePath)
+static bool loadJSON(json& j, const std::string& filePath)
 {
     std::ifstream i(filePath);
     if(i.is_open()) {

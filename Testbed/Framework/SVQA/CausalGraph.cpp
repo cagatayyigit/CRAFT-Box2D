@@ -6,6 +6,7 @@
 //
 
 #include "CausalGraph.hpp"
+#include "JSONHelper.h"
 #include <algorithm>
 
 namespace svqa {
@@ -171,6 +172,61 @@ namespace svqa {
         
         ret += "}\n";
         return ret;
+    }
+
+    bool CausalGraph::saveToJSON(const std::string& filename)
+    {
+        return JSONHelper::saveJSON(toJSON(), filename);
+    }
+
+    void getEdgeJSONs(CausalEvent::Ptr event, std::vector<json>& edges, std::set<CausalEvent::Ptr>& visited)
+    {
+        const auto& neighbors = event->getImmediateOutcomes();
+        
+        json edge;
+        edge.emplace("from", (long long)event.get());
+        
+        std::vector<long long> toVector;
+        for(auto ne : neighbors) {
+            toVector.push_back((long long)ne.get());
+        }
+        edge.emplace("to", toVector);
+        edges.push_back(edge);
+        
+        visited.insert(event);
+        for(auto ne : neighbors) {
+            if(visited.find(ne) == visited.end()) {
+                getEdgeJSONs(ne, edges, visited);
+            }
+        }
+    }
+
+    json CausalGraph::toJSON() const
+    {
+        json graph;
+        std::vector<json> nodes;
+        
+        auto eventQueue = m_EventQueue;
+        CausalEvent::Ptr root = eventQueue.top();
+        nodes.push_back(root->toJSON());
+        eventQueue.pop();
+        
+        while(!eventQueue.empty()) {
+
+            const auto& event = eventQueue.top();
+            nodes.push_back(event->toJSON());
+            eventQueue.pop();
+        }
+        
+        graph.emplace("nodes", nodes);
+        
+        std::vector<json> edges;
+        std::set<CausalEvent::Ptr> visited;
+        getEdgeJSONs(root, edges, visited);
+        
+        graph.emplace("edges", edges);
+    
+        return graph;
     }
 }
 
