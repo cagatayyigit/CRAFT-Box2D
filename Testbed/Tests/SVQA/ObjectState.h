@@ -63,7 +63,8 @@ public:
 		std::string type = SimulationObject::getRepresentation(objectType); 
 		std::string color = SimulationColor::getRepresentation(colorType);
 
-		std::string basePath = "\"..\\Testbed\\Data\\Images\\";
+		//std::string basePath = "\"..\\Testbed\\Data\\Images\\";
+        std::string basePath = "\"../Testbed/Data/Images/";
 
 		std::string result = basePath + type + "_" + color  + ".png";
 

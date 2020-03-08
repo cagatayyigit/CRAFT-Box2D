@@ -30,10 +30,10 @@ namespace svqa
         }
         std::string resultStr = "";
 
-        if (getTypeStr()._Equal("Start")) {
+        if (getTypeStr() == "Start") {
              resultStr += "<<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\"><TR><TD ALIGN = \"center\" COLSPAN = \"2\"><FONT POINT-SIZE = \"24.0\" FACE = \"ambrosia\">" + eventType + "</FONT></TD></TR></TABLE>>";
         }
-        else if (getTypeStr()._Equal("End")) {
+        else if (getTypeStr() == "End") {
             resultStr += "<<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\"><TR><TD ALIGN = \"center\" COLSPAN = \"2\"><FONT POINT-SIZE = \"24.0\" FACE = \"ambrosia\">" + eventType + "</FONT></TD></TR></TABLE>>";
         }
         else {
