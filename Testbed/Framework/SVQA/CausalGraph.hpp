@@ -29,9 +29,6 @@ namespace svqa
                 return std::make_shared<CausalGraph>();
             }
         
-            //Creates the string representation of the causal graph for debug purposes
-            std::string createGraphString();
-        
             //Adds a new event to causal graph
             void addEvent(const CausalEvent::Ptr& event);
         

@@ -53,16 +53,6 @@ namespace svqa {
             addEventsToCausalGraph(root, event);
             eventQueue.pop();
         }
-        
-//        for(auto obj : m_ObjectEvents) {
-//            const auto& events = obj.second;
-//            for(auto event : events) {
-//                std::cout << event->getStepCount() << " " <<event->getTypeStr() << std::endl;
-//            }
-//            std::cout << "************************************" << std::endl;
-//        }
-        
-        std::cout << createGraphString() << std::endl;
     }
 
     CausalEvent::Ptr CausalGraph::getLatestEvent(BODY* object)
@@ -133,88 +123,54 @@ namespace svqa {
         str += (std::to_string((long long)event.get()) + " [shape=\"Box\" label=" + event->getStrRepresentation() + "]\n");
     }
 
-    void addEdgesToString(CausalEvent::Ptr event, std::string& str, std::set<CausalEvent::Ptr>& visited)
-    {
-        const auto& neighbors = event->getImmediateOutcomes();
-        
-        str += (std::to_string((long long)event.get()) + " -> { ") ;
-        for(auto ne : neighbors) {
-            str += (std::to_string((long long)ne.get()) + " ") ;
-        }
-        str += "}\n";
-        
-        visited.insert(event);
-        for(auto ne : neighbors) {
-            if(visited.find(ne) == visited.end()) {
-                addEdgesToString(ne, str, visited);
-            }
-        }
-    }
-
-    std::string CausalGraph::createGraphString()
-    {
-        std::string ret = "digraph d {\n";
-        
-        auto eventQueue = m_EventQueue;
-        CausalEvent::Ptr root = eventQueue.top();
-        addNodeToString(root,  ret);
-        eventQueue.pop();
-        
-        while(!eventQueue.empty()) {
-
-            const auto& event = eventQueue.top();
-            addNodeToString(event,  ret);
-            eventQueue.pop();
-        }
-
-        std::set<CausalEvent::Ptr> visited;
-        addEdgesToString(root, ret, visited);
-        
-        ret += "}\n";
-        return ret;
-    }
-
     bool CausalGraph::saveToJSON(const std::string& filename)
     {
         return JSONHelper::saveJSON(toJSON(), filename);
     }
 
-    void getEdgeJSONs(CausalEvent::Ptr event, std::vector<json>& edges, std::set<CausalEvent::Ptr>& visited)
+    void getEdgeJSONs(CausalEvent::Ptr event, std::vector<json>& edges, std::string& str, std::set<CausalEvent::Ptr>& visited)
     {
         const auto& neighbors = event->getImmediateOutcomes();
         
+        str += (std::to_string((long long)event.get()) + " -> { ") ;
         json edge;
         edge.emplace("from", (long long)event.get());
         
         std::vector<long long> toVector;
         for(auto ne : neighbors) {
+            str += (std::to_string((long long)ne.get()) + " ") ;
             toVector.push_back((long long)ne.get());
         }
+        str += "}\n";
         edge.emplace("to", toVector);
         edges.push_back(edge);
         
         visited.insert(event);
         for(auto ne : neighbors) {
             if(visited.find(ne) == visited.end()) {
-                getEdgeJSONs(ne, edges, visited);
+                getEdgeJSONs(ne, edges, str, visited);
             }
         }
     }
 
     json CausalGraph::toJSON() const
     {
+        std::string visStr = "digraph d {\n";
+        
         json graph;
         std::vector<json> nodes;
         
         auto eventQueue = m_EventQueue;
         CausalEvent::Ptr root = eventQueue.top();
         nodes.push_back(root->toJSON());
+        addNodeToString(root,  visStr);
         eventQueue.pop();
         
         while(!eventQueue.empty()) {
 
             const auto& event = eventQueue.top();
             nodes.push_back(event->toJSON());
+            addNodeToString(event,  visStr);
             eventQueue.pop();
         }
         
@@ -222,9 +178,14 @@ namespace svqa {
         
         std::vector<json> edges;
         std::set<CausalEvent::Ptr> visited;
-        getEdgeJSONs(root, edges, visited);
-        
+        getEdgeJSONs(root, edges, visStr, visited);
+    
+        visStr += "}\n";
+
         graph.emplace("edges", edges);
+        graph.emplace("vis", visStr);
+        
+        std::cout << visStr << std::endl;
     
         return graph;
     }
