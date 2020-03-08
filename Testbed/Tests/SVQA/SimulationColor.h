@@ -25,8 +25,7 @@ public:
         PURPLE = 5,
         RED = 6,
         YELLOW = 7,
-        BLACK = 8,
-        DARK_GRAY = 9
+        BLACK = 8
     };
 
     SimulationColor(TYPE t)
@@ -49,7 +48,6 @@ public:
             case RED: return "red";
             case YELLOW: return "yellow";
             case BLACK: return "black";
-            case DARK_GRAY: return "dark_gray";
         }
     }
 
@@ -57,19 +55,17 @@ public:
     {
         switch (type)
         {
-            case BLUE: return b2Color(0, 0, 1);
-            case BROWN: return b2Color(134.0F / 255.0F, 69.0f / 255.0F, 20.0f / 255.0F);
-            case CYAN: return b2Color(68.0F / 255.0F, 195.0f / 255.0F, 193.0f / 255.0F);
-            case GRAY: return b2Color(152.0F / 255.0F, 152.0f / 255.0F, 152.0f / 255.0F);
-            case GREEN: return b2Color(0, 1, 0);
-            case PURPLE: return b2Color(102.0F / 255.0F, 51.0f / 255.0F, 153.0f / 255.0F);
-            case RED: return b2Color(1, 0, 0);
-            case YELLOW: return b2Color(1, 1, 0);
+            case BLUE: return b2Color(42.0f / 255.0f, 75.0f / 255.0f, 215.0f / 255.0f);
+            case BROWN: return b2Color(129.0f / 255.0f, 74.0f / 255.0f, 25.0f / 255.0f);
+            case CYAN: return b2Color(41.0f / 255.0f, 208.0f / 255.0f, 208.0f / 255.0f);
+            case GRAY: return b2Color(87.0f / 255.0f, 87.0f / 255.0f, 87.0f / 255.0f);
+            case GREEN: return b2Color(29.0f / 255.0f, 105.0f / 255.0f, 20.0f / 255.0f);
+            case PURPLE: return b2Color(129.0f / 255.0f, 38.0f / 255.0f, 192.0f / 255.0f);
+            case RED: return b2Color(173.0f / 255.0f, 35.0f / 255.0f, 35.0f / 255.0f);
+            case YELLOW: return b2Color(255.0f / 255.0f, 238.0f / 255.0f, 51.0f / 255.0f);
             case BLACK: return b2Color(0, 0, 0);
-            case DARK_GRAY: return b2Color(40.0F / 255.0F, 40.0f / 255.0F, 40.0f / 255.0F);
         }
     }
-
 };
 
 NLOHMANN_JSON_SERIALIZE_ENUM( SimulationColor::TYPE, {
@@ -82,7 +78,6 @@ NLOHMANN_JSON_SERIALIZE_ENUM( SimulationColor::TYPE, {
     {SimulationColor::RED, SimulationColor::getRepresentation(SimulationColor::RED)},
     {SimulationColor::YELLOW, SimulationColor::getRepresentation(SimulationColor::YELLOW)},
     {SimulationColor::BLACK, SimulationColor::getRepresentation(SimulationColor::BLACK)},
-    {SimulationColor::DARK_GRAY, SimulationColor::getRepresentation(SimulationColor::DARK_GRAY)},
 })
 
 #endif /* SimulationColor_h */

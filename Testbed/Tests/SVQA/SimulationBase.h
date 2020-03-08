@@ -147,7 +147,7 @@ namespace svqa {
 		virtual void addTargetBasket(b2Vec2 pos, float angleInRadians)
 		{
 			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::BOUNDARY);
-			SimulationColor col = SimulationColor(SimulationColor::DARK_GRAY);
+			SimulationColor col = SimulationColor(SimulationColor::BLACK);
 
 			const float friction = mat.getFriction();
 			const float density = mat.getDensity();
