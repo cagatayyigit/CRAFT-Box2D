@@ -90,7 +90,6 @@ public:
 			j.emplace("bullet", body->IsBullet());
 			j.emplace("allowSleep", body->IsSleepingAllowed());
 			j.emplace("awake", body->IsAwake());
-			j.emplace("active", body->IsActive());
 			j.emplace("fixedRotation", body->IsFixedRotation());
 
 			b2MassData massData;
