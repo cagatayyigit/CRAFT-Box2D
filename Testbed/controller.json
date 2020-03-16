@@ -1,7 +1,8 @@
 {
-  "simulationID": 8,
+  "simulationID": 5,
   "offline": true,
   "outputFilePath": "output.mpg",
+  "outputCausalGraphPath": "graph.json",
   "width": 1024,
   "height": 640,
   "inputScenePath": "",
