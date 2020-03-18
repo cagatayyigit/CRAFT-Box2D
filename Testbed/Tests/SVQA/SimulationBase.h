@@ -17,6 +17,7 @@
 #define _USE_MATH_DEFINES 
 #endif
 #include <math.h>
+#include <SceneState.h>
 
 #define LOG(str) std::cout << "[LOG] " << str << std::endl
 #define LOG_PROGRESS(str, progress) std::cout << "[LOG] " << str << " " << progress <<  "\r"
