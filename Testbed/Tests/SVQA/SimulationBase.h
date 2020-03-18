@@ -127,6 +127,7 @@ namespace svqa {
 			scene_states_json.push_back(m_EndSceneStateJSON);
 
 			output_json.emplace("scene_states", scene_states_json);
+			output_json.emplace("video_filename", m_pSettings->outputVideoPath);
 
 			JSONHelper::saveJSON(output_json, 2, m_pSettings->outputJSONPath);
 
