@@ -48,7 +48,7 @@ namespace svqa {
 		/// Derived simulations must call this in order to construct causal graph
 		virtual void Step(SettingsBase* settings) override
 		{
-			LOG_PROGRESS("Step Count:", std::to_string(m_stepCount) + "/" + std::to_string(m_pSettings->stepCount));
+			LOG_PROGRESS("Step Count:", std::to_string(m_StepCount) + "/" + std::to_string(m_pSettings->stepCount));
 
 			if (!isSceneInitialized()) {
 				LOG("Initializing simulation objects...");
@@ -65,17 +65,16 @@ namespace svqa {
 			Simulation::Step(settings);
 
 			// Take snapshot of the scene in the beginning of the simulation.
-			if (!isGeneratingFromJSON() && isSceneInitialized() && !m_bSceneSnapshotTaken) {
-				TakeSceneSnapshot("scene.json");
+			if (isSceneInitialized() && !m_bSceneSnapshotTaken) {
+				if (!isGeneratingFromJSON())
+					TakeSceneSnapshot("scene.json");
+				m_StartSceneStateJSON = SimulationBase::GetSceneStateJSONObject(m_SceneJSONState, m_StepCount);
+				m_bSceneSnapshotTaken = true;
 			}
 
 			if (shouldTerminateSimulation()) {
-				LOG("Terminating simulation...");
-
-				m_pCausalGraph->addEvent(EndEvent::create(m_stepCount));
-                m_pCausalGraph->saveToJSON(m_pSettings->outputCausalGraphPath);
-                
-				FINISH_SIMULATION
+				m_EndSceneStateJSON = SimulationBase::GetSceneStateJSONObject(m_SceneJSONState, m_StepCount);
+				TerminateSimulation();
 			}
 
 			DetectStartTouchingEvents();
@@ -106,28 +105,55 @@ namespace svqa {
 		virtual void InitializeScene() = 0;
 
 		virtual bool shouldTerminateSimulation() {
-			return m_stepCount == m_pSettings->stepCount;
+			return m_StepCount == m_pSettings->stepCount;
 		}
 
-		void TakeSceneSnapshot(std::string filename) { 
-			LOG("Taking snapshot of the current world state..."); 
+		void TakeSceneSnapshot(std::string filename) {
+			LOG("Taking snapshot of the current world state...");
 			m_SceneJSONState.saveToJSONFile(m_world, filename);
-			m_bSceneSnapshotTaken = true;
 		}
 
-		void GenerateSceneFromJson(std::string filename) { 
-			LOG("Generating scene from \"" + filename + "\"..."); 
+		void TerminateSimulation() {
+			LOG("Terminating simulation...");
+
+			m_pCausalGraph->addEvent(EndEvent::create(m_StepCount));
+
+			json output_json;
+
+			output_json.emplace("causal_graph", m_pCausalGraph->toJSON());
+
+			auto scene_states_json = json::array();
+			scene_states_json.push_back(m_StartSceneStateJSON);
+			scene_states_json.push_back(m_EndSceneStateJSON);
+
+			output_json.emplace("scene_states", scene_states_json);
+			output_json.emplace("video_filename", m_pSettings->outputVideoPath);
+
+			JSONHelper::saveJSON(output_json, 2, m_pSettings->outputJSONPath);
+
+			FINISH_SIMULATION
+		}
+
+		void GenerateSceneFromJson(std::string filename) {
+			LOG("Generating scene from \"" + filename + "\"...");
 			m_SceneJSONState.loadFromJSONFile(filename, m_world);
 			m_bSceneRegenerated = true;
 		}
 
+		static json GetSceneStateJSONObject(SceneState state, int stepCount) {
+			json obj = json::object();
+			obj.emplace("step", stepCount);
+			obj.emplace("scene", state.toJSON());
+			return obj;
+		}
+
 	protected:
-		Settings::Ptr m_pSettings;
-		unsigned short m_nDistinctColorUsed;
-		bool m_bSceneRegenerated;
-		bool m_bSceneInitialized;
-		bool m_bGeneratingFromJSON;
-		bool m_bSceneSnapshotTaken;
+		Settings::Ptr	m_pSettings;
+		unsigned short	m_nDistinctColorUsed;
+		bool			m_bSceneRegenerated;
+		bool			m_bSceneInitialized;
+		bool			m_bGeneratingFromJSON;
+		bool			m_bSceneSnapshotTaken;
 
 		int randWithBound(const int& bound)
 		{
@@ -314,7 +340,7 @@ namespace svqa {
 		void DetectStartTouchingEvents()
 		{
 			for (auto it = m_Contacts.begin(); it != m_Contacts.end(); it++) {
-				if (m_stepCount - it->step > COLLISION_DETECTION_STEP_DIFF) {
+				if (m_StepCount - it->step > COLLISION_DETECTION_STEP_DIFF) {
 					//DETECTED StartTouching_Event
 					m_pCausalGraph->addEvent(StartTouchingEvent::create(it->step, (BODY*)it->contact->GetFixtureA()->GetBody(),
 						(BODY*)it->contact->GetFixtureB()->GetBody()));
@@ -327,7 +353,7 @@ namespace svqa {
 		virtual void BeginContact(b2Contact* contact)  override {
 			ContactInfo info;
 			info.contact = contact;
-			info.step = m_stepCount;
+			info.step = m_StepCount;
 
 			m_Contacts.push_back(info);
 		}
@@ -336,7 +362,7 @@ namespace svqa {
 			for (auto it = m_StartedTouchingContacts.begin(); it != m_StartedTouchingContacts.end(); it++) {
 				if (it->contact == contact) {
 					//DETECTED EndTouching_Event
-					m_pCausalGraph->addEvent(EndTouchingEvent::create(m_stepCount, (BODY*)it->contact->GetFixtureA()->GetBody(),
+					m_pCausalGraph->addEvent(EndTouchingEvent::create(m_StepCount, (BODY*)it->contact->GetFixtureA()->GetBody(),
 						(BODY*)it->contact->GetFixtureB()->GetBody()));
 					m_StartedTouchingContacts.erase(it--);
 				}
@@ -419,6 +445,9 @@ namespace svqa {
 
 		CausalGraph::Ptr            m_pCausalGraph;
 		SceneState                  m_SceneJSONState;
+
+		json						m_StartSceneStateJSON;
+		json						m_EndSceneStateJSON;
 
 	};
 }

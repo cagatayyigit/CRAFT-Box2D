@@ -1,13 +1,13 @@
 {
-  "simulationID": 0,
+  "simulationID": 5,
   "offline": true,
-  "outputFilePath": "output.mpg",
-  "outputCausalGraphPath": "graph.json",
+  "outputVideoPath": "output.mpg",
+  "outputJSONPath": "output.json",
   "width": 1024,
   "height": 640,
   "inputScenePath": "",
   "numberOfObjects": 2,
   "numberOfObstacles": 1,
   "numberOfPendulums": 1,
-  "stepCount": 1200
+  "stepCount": 600
 }

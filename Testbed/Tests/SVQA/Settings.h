@@ -28,8 +28,8 @@ namespace svqa
         SimulationID simulationID;
         bool offline;
         std::string inputScenePath;
-        std::string outputFilePath;
-        std::string outputCausalGraphPath;
+        std::string outputVideoPath;
+        std::string outputJSONPath;
         
         void to_json(json& j) {
             j.emplace("simulationID", (int)this->simulationID);
@@ -37,8 +37,8 @@ namespace svqa
             j.emplace("width", this->bufferWidth);
             j.emplace("height", this->bufferHeight);
             j.emplace("inputScenePath", this->inputScenePath);
-            j.emplace("outputFilePath", this->outputFilePath);
-            j.emplace("outputCausalGraphPath", this->outputCausalGraphPath);
+            j.emplace("outputVideoPath", this->outputVideoPath);
+            j.emplace("outputJSONPath", this->outputJSONPath);
             j.emplace("stepCount", this->stepCount);
         }
 
@@ -48,8 +48,8 @@ namespace svqa
             j.at("width").get_to(this->bufferWidth);
             j.at("height").get_to(this->bufferHeight);
             j.at("inputScenePath").get_to(this->inputScenePath);
-            j.at("outputFilePath").get_to(this->outputFilePath);
-            j.at("outputCausalGraphPath").get_to(this->outputCausalGraphPath);
+            j.at("outputVideoPath").get_to(this->outputVideoPath);
+            j.at("outputJSONPath").get_to(this->outputJSONPath);
             j.at("stepCount").get_to(this->stepCount);
         }
     };

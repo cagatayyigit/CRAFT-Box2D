@@ -35,9 +35,6 @@ namespace svqa
             //Gets json object from causal graph
             json toJSON() const;
         
-            //Saves causal graph to a json file
-            bool saveToJSON(const std::string& filename);
-        
             template<typename T> void printEventQueue(T& q) {
                 while(!q.empty()) {
                     std::cout << q.top()->getStepCount() << " " << q.top()->getTypeStr() << std::endl;;

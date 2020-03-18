@@ -15,7 +15,7 @@ namespace svqa {
 		Scene1Simulation(Scene1Settings::Ptr settings) : SimulationBase(settings)
 		{
 			m_nNumberOfObjects = 1;
-			SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
+			SET_FILE_OUTPUT_TRUE(m_pSettings->outputVideoPath)
 		}
 
 		virtual SimulationID getIdentifier() override
