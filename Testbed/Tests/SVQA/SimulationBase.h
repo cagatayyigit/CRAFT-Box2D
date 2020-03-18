@@ -17,7 +17,7 @@
 #define _USE_MATH_DEFINES 
 #endif
 #include <math.h>
-#include <SceneState.h>
+#include "SceneState.h"
 
 #define LOG(str) std::cout << "[LOG] " << str << std::endl
 #define LOG_PROGRESS(str, progress) std::cout << "[LOG] " << str << " " << progress <<  "\r"
@@ -175,11 +175,7 @@ namespace svqa {
 
 		virtual void addTargetBasket(b2Vec2 pos, float angleInRadians)
 		{
-			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::BOUNDARY);
-			SimulationColor col = SimulationColor(SimulationColor::BLACK);
-
-			const float friction = mat.getFriction();
-			const float density = mat.getDensity();
+			SimulationObject basketObject = SimulationObject(SimulationObject::STATIC_BASKET, SimulationObject::BLACK, SimulationObject::LARGE);
 
 			b2BodyDef bd;
 			bd.position = pos;
@@ -187,21 +183,20 @@ namespace svqa {
 			BODY* basketBody = (BODY*)m_world->CreateBody(&bd);
 
 #if !USE_DEBUG_DRAW
-			basketBody->setTexture(mat.getTexture());
-			basketBody->setColor(col.GetColor());
+			basketBody->setColor(basketObject.getColor());
 #endif
 
-			SimulationObject basketObject = SimulationObject(SimulationObject::BASKET);
 			ShapePtr shape = basketObject.getShape();
 
 			b2FixtureDef fd = b2FixtureDef();
-			fd.friction = friction;
-			fd.density = density;
+			fd.friction = basketObject.getFriction();
+			fd.density = basketObject.getDensity();
+            fd.restitution = basketObject.getRestitution();
 			fd.shape = shape.get();
 			basketBody->CreateFixture(&fd);
 
 
-			auto objectState = ObjectState::create(basketBody, mat.type, col.type, basketObject.type);
+			auto objectState = ObjectState::create(basketBody, basketObject.mShape, basketObject.mColor, basketObject.mSize);
 			basketBody->SetUserData(objectState.get());
 
 			m_SceneJSONState.add(objectState);
@@ -209,49 +204,41 @@ namespace svqa {
 
 		virtual void CreateBoundaries()
 		{
-			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::BOUNDARY);
-			SimulationColor col = SimulationColor(SimulationColor::BLACK);
-
-			const float friction = mat.getFriction();
-			const float density = mat.getDensity();
-
-			std::vector<SimulationObject::TYPE> boundaries;
-			boundaries.push_back(SimulationObject::LEFT_BOUNDARY);
-			boundaries.push_back(SimulationObject::RIGHT_BOUNDARY);
-			boundaries.push_back(SimulationObject::BOTTOM_BOUNDARY);
+			std::vector<SimulationObject::Shape> boundaries;
+			boundaries.push_back(SimulationObject::STATIC_LEFT_BOUNDARY);
+			boundaries.push_back(SimulationObject::STATIC_RIGHT_BOUNDARY);
+			boundaries.push_back(SimulationObject::STATIC_BOTTOM_BOUNDARY);
 
 			for (auto bound : boundaries) {
 				b2BodyDef bd;
 				BODY* boundBody = (BODY*)m_world->CreateBody(&bd);
-
+                
+                SimulationObject boundaryObject = SimulationObject(bound, SimulationObject::BLACK, SimulationObject::LARGE);
 #if !USE_DEBUG_DRAW
-				boundBody->setTexture(mat.getTexture());
-				boundBody->setColor(col.GetColor());
+				boundBody->setColor(boundaryObject.getColor());
 #endif
 
-				SimulationObject boundaryObject = SimulationObject(bound);
 				ShapePtr shape = boundaryObject.getShape();
 
 				b2FixtureDef fd = b2FixtureDef();
-				fd.friction = friction;
-				fd.density = density;
+				fd.friction = boundaryObject.getFriction();
+				fd.density = boundaryObject.getDensity();
+                fd.restitution = boundaryObject.getRestitution();
 				fd.shape = shape.get();
 				boundBody->CreateFixture(&fd);
 
-				auto objectState = ObjectState::create(boundBody, mat.type, col.type, boundaryObject.type);
+				auto objectState = ObjectState::create(boundBody, boundaryObject.mShape, boundaryObject.mColor, boundaryObject.mSize);
 				boundBody->SetUserData(objectState.get());
 
 				m_SceneJSONState.add(objectState);
 			}
 		}
 
-		void AddDynamicObject(b2Vec2 position, b2Vec2 velocity, SimulationObject::TYPE objType, SimulationMaterial::TYPE materialType, SimulationColor color)
+		void AddDynamicObject(b2Vec2 position, b2Vec2 velocity, SimulationObject::Shape shapeType, SimulationObject::Color colorType, SimulationObject::Size sizeType)
 		{
-			SimulationObject object = SimulationObject(objType);
+			SimulationObject object = SimulationObject(shapeType, colorType, sizeType);
 
-			ShapePtr shape = object.getShape();
-
-			SimulationMaterial mat = SimulationMaterial(materialType);
+            ShapePtr shape = object.getShape();
 
 			b2BodyDef bd;
 			bd.type = b2_dynamicBody;
@@ -261,26 +248,26 @@ namespace svqa {
 			BODY* body = (BODY*)m_world->CreateBody(&bd);
 
 			b2FixtureDef fd = b2FixtureDef();
-			fd.density = mat.getDensity();
+			fd.density = object.getDensity();
+            fd.restitution = object.getRestitution();
+            fd.friction = object.getFriction();
 			fd.shape = shape.get();
-			fd.restitution = mat.getRestitution();
-			fd.friction = 100.0f;
+			
+			//fd.friction = 100.0f; --> TODO: WHAT IS THAT FRICTION
 			body->CreateFixture(&fd);
 
-			body->setTexture(mat.getTexture());
-			body->setColor(color.GetColor());
+			body->setColor(object.getColor());
 
-			auto objectState = ObjectState::create(body, mat.type, color.type, object.type);
+			auto objectState = ObjectState::create(body, object.mShape, object.mColor, object.mSize);
 			body->SetUserData(objectState.get());
 
 			m_SceneJSONState.add(objectState);
 		}
 
-		void AddStaticObject(b2Vec2 position, float32 angle, SimulationObject::TYPE objType, SimulationMaterial::TYPE materialType, SimulationColor color)
+		void AddStaticObject(b2Vec2 position, float32 angle, SimulationObject::Shape shapeType)
 		{
-			SimulationObject object = SimulationObject(objType);
+			SimulationObject object = SimulationObject(shapeType, SimulationObject::BLACK, SimulationObject::LARGE);
 			ShapePtr shape = object.getShape();
-			SimulationMaterial mat = SimulationMaterial(materialType);
 			b2BodyDef bd;
 			bd.type = b2_staticBody;
 			bd.position = position;
@@ -288,54 +275,18 @@ namespace svqa {
 			BODY* body = (BODY*)m_world->CreateBody(&bd);
 
 			b2FixtureDef fd = b2FixtureDef();
-			fd.density = mat.getDensity();
+			fd.density = object.getDensity();
+            fd.restitution = object.getRestitution();
+            fd.friction = object.getFriction();
 			fd.shape = shape.get();
-			fd.restitution = mat.getRestitution();
-
 			body->CreateFixture(&fd);
+            
+			body->setColor(object.getColor());
 
-			body->setTexture(mat.getTexture());
-			body->setColor(color.GetColor());
-
-			auto objectState = ObjectState::create(body, mat.type, color.type, object.type);
+			auto objectState = ObjectState::create(body, object.mShape, object.mColor, object.mSize);
 			body->SetUserData(objectState.get());
 
 			m_SceneJSONState.add(objectState);
-		}
-
-		void AddStaticObject(b2Vec2 position, float32 angle, ShapePtr shape,
-			SimulationObject::TYPE objType, SimulationMaterial::TYPE materialType, SimulationColor color)
-		{
-			SimulationObject object = SimulationObject(objType);
-			SimulationMaterial material = SimulationMaterial(materialType);
-			b2BodyDef bd;
-			bd.type = b2_staticBody;
-			bd.position = position;
-			bd.angle = angle;
-			BODY* body = (BODY*)m_world->CreateBody(&bd);
-			body->CreateFixture(shape.get(), material.getDensity());
-			body->setTexture(material.getTexture());
-			body->setColor(color.GetColor());
-
-			auto objectState = ObjectState::create(body, material.type, color.type, object.type);
-			body->SetUserData(objectState.get());
-
-			m_SceneJSONState.add(objectState);
-		}
-
-		virtual void CreateImmediateInitialScene(const size_t& numberOfObjects,
-			const std::vector<SimulationObject::TYPE>& objectTypes,
-			const b2Vec2& throwMinPos,
-			const b2Vec2& throwMaxPos,
-			const b2Vec2& dropVelocity)
-		{
-			float32 timeStep = m_pSettings->hz > 0.0f ? 1.0f / m_pSettings->hz : float32(0.0f);
-			for (size_t i = 0; i < numberOfObjects; i++) {
-				AddSceneObject(objectTypes, throwMinPos, throwMaxPos, dropVelocity);
-				while (!isSceneStable()) {
-					m_world->Step(timeStep, m_pSettings->velocityIterations, m_pSettings->positionIterations);
-				}
-			}
 		}
 
 		void DetectStartTouchingEvents()
@@ -378,45 +329,11 @@ namespace svqa {
 			}
 		}
 
-		virtual ObjectState AddSceneObject(const std::vector<SimulationObject::TYPE>& objectTypes,
-			const b2Vec2& throwMinPos,
-			const b2Vec2& throwMaxPos,
-			const b2Vec2& dropVelocity)
+		void AddSimulationObject(b2Vec2 position, b2Vec2 velocity, SimulationObject::Shape shapeType, SimulationObject::Color colorType, SimulationObject::Size sizeType)
 		{
-			float posX = RandomFloat(throwMinPos.x, throwMaxPos.x);
-			float posY = RandomFloat(throwMinPos.y, throwMaxPos.y);
-
-			int objectIndex = randWithBound(objectTypes.size());
-			SimulationObject object = SimulationObject(objectTypes[objectIndex]);
+			SimulationObject object = SimulationObject(shapeType, colorType, sizeType);
 
 			ShapePtr shape = object.getShape();
-
-			int materialIndex = randWithBound(2);
-			SimulationMaterial mat = SimulationMaterial((SimulationMaterial::TYPE) materialIndex);
-
-			b2BodyDef bd;
-			bd.angle = M_PI / 4;
-			bd.type = b2_dynamicBody;
-			bd.position = b2Vec2(posX, posY);
-			bd.linearVelocity = dropVelocity;
-			BODY* body = (BODY*)m_world->CreateBody(&bd);
-			body->CreateFixture(shape.get(), mat.getDensity());
-
-			int colorIndex = randWithBound(m_nDistinctColorUsed);
-			SimulationColor col = SimulationColor((SimulationColor::TYPE) colorIndex);
-			body->setTexture(mat.getTexture());
-			body->setColor(col.GetColor());
-
-			return ObjectState(body, mat.type, col.type, object.type);
-		}
-
-		void AddSimulationObject(b2Vec2 position, b2Vec2 velocity, SimulationObject::TYPE objType, SimulationColor color)
-		{
-			SimulationObject object = SimulationObject(objType);
-
-			ShapePtr shape = object.getShape();
-
-			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::RUBBER);
 
 			b2BodyDef bd;
 			bd.type = b2_dynamicBody;
@@ -424,12 +341,17 @@ namespace svqa {
 			bd.angle = RandomFloat(0.0f, M_PI);
 			bd.linearVelocity = velocity;
 			BODY* body = (BODY*)m_world->CreateBody(&bd);
-			body->CreateFixture(shape.get(), mat.getDensity());
+            
+            b2FixtureDef fd = b2FixtureDef();
+            fd.density = object.getDensity();
+            fd.restitution = object.getRestitution();
+            fd.friction = object.getFriction();
+            fd.shape = shape.get();
+			body->CreateFixture(&fd);
 
-			body->setTexture(mat.getTexture());
-			body->setColor(color.GetColor());
+			body->setColor(object.getColor());
 
-			auto objectState = ObjectState::create(body, mat.type, color.type, object.type);
+			auto objectState = ObjectState::create(body, object.mShape, object.mColor, object.mSize);
 			body->SetUserData(objectState.get());
 
 			m_SceneJSONState.add(objectState);

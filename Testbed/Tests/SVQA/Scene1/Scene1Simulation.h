@@ -1,6 +1,5 @@
 #pragma once
 
-#include "SimulationColor.h"
 #include "Scene1Settings.h"
 #include "SimulationBase.h"
 #include "Box2D/Extension/b2VisBody.hpp"
@@ -50,103 +49,60 @@ namespace svqa {
 			float32 inclinedFloorLen = (RandomFloatFromHardware(9.0, 12.0));
 			float32 circleV = (RandomFloatFromHardware(-5.0, -15.0));
 
-
-			// Left  Floor
-			AddStaticObject(
-				b2Vec2(-16.0f, 3.0f),
-				0,
-				std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(leftFloorLen, 1.0f)),
-				SimulationObject::CUSTOM_RECTANGLE,
-				SimulationMaterial::METAL,
-				SimulationColor::GRAY
-			);
-
-			// Right Floor
-			AddStaticObject(
-				b2Vec2(rightFloorCoorX, 3.0f),
-				0,
-				std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(35.0f, 1.0f)),
-				SimulationObject::CUSTOM_RECTANGLE,
-				SimulationMaterial::METAL,
-				SimulationColor::GRAY
-			);
-
+            //TODO: Şamil or Çağatay ---> Bunlar daha önce shape ptr'yi direkt aliyorlardi
+            // Left  Floor
+            AddStaticObject(b2Vec2(-16.0f, 3.0f), 0, SimulationObject::STATIC_PLATFORM);
+            
+            // Right Floor
+            AddStaticObject(b2Vec2(rightFloorCoorX, 3.0f), 0, SimulationObject::STATIC_PLATFORM);
+            
+            // Inclined Floor
+            AddStaticObject(b2Vec2(-28.0f, 35.0f), angle, SimulationObject::STATIC_PLATFORM);
 
 			// Inclined Floor
-			AddStaticObject(
-				b2Vec2(-28.0f, 35.0f),
-				angle,
-				std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(6.0f, 0.5f)),
-				SimulationObject::CUSTOM_RECTANGLE,
-				SimulationMaterial::METAL,
-				SimulationColor::GRAY
-			);
+            AddStaticObject(b2Vec2(-10.0f, 25.0f), M_PI / 4, SimulationObject::STATIC_PLATFORM);
 
-			// Inclined Floor
-			AddStaticObject(
-				b2Vec2(-10.0f, 25.0f),
-				M_PI / 4,
-				std::make_shared<b2PolygonShape>(SimulationObject::getRectangle(inclinedFloorLen, 1.0f)),
-				SimulationObject::CUSTOM_RECTANGLE,
-				SimulationMaterial::METAL,
-				SimulationColor::GRAY
-			);
-
+            //TODO: NO SMALL AND BIG RAMP FOR NOW
 			// Big Ramp
-			AddStaticObject(
-				rampPosition,
-				0,
-				std::make_shared<b2PolygonShape>(SimulationObject::getRightTriangle(25, 20)),
-				SimulationObject::BIG_TRIANGLE,
-				SimulationMaterial::METAL,
-				SimulationColor::PURPLE
-			);
-
+            AddStaticObject(rampPosition, 0.0f, SimulationObject::STATIC_RAMP);
+ 
 			// Small Ramp
-			AddStaticObject(
-				b2Vec2(-40.0f, -6.0f),
-				0,
-				std::make_shared<b2PolygonShape>(SimulationObject::getRightTriangle(3, 3)),
-				SimulationObject::BIG_TRIANGLE,
-				SimulationMaterial::METAL,
-				SimulationColor::PURPLE
-			);
-
+            AddStaticObject(b2Vec2(-40.0f, -6.0f), 0.0f, SimulationObject::STATIC_RAMP);
 
 			// Circles
 			// Stationary Bottom-Left
 			AddDynamicObject(
 				b2Vec2(leftBottomCircleCoorX, -3.0f),
 				b2Vec2(0.0f, 0.0f),
-				SimulationObject::SMALL_CIRCLE,
-				SimulationMaterial::RUBBER,
-				SimulationColor::TYPE::GREEN
+				SimulationObject::CIRCLE,
+				SimulationObject::GREEN,
+                SimulationObject::SMALL
 			);
 
 			// Stationary Bottom-Right
 			AddDynamicObject(
 				b2Vec2(rightBottomCircleCoorX, -3.0f),
 				b2Vec2(0.0f, 0.0f),
-				SimulationObject::SMALL_CIRCLE,
-				SimulationMaterial::RUBBER,
-				SimulationColor::TYPE::RED
+                SimulationObject::CIRCLE,
+                SimulationObject::RED,
+                SimulationObject::SMALL
 			);
 
 			// Moving on the Right Floor
 			AddDynamicObject(
 				b2Vec2(30.0f, 6.0f),
 				b2Vec2(circleV, 0.0f),
-				SimulationObject::SMALL_CIRCLE,
-				SimulationMaterial::RUBBER,
-				SimulationColor::TYPE::BLUE
+                SimulationObject::CIRCLE,
+                SimulationObject::BLUE,
+                SimulationObject::SMALL
 			);
 
 			AddDynamicObject(
 				b2Vec2(-30.0f, 42.0f),
 				b2Vec2(0.0f, 0.0f),
-				SimulationObject::SMALL_CIRCLE,
-				SimulationMaterial::RUBBER,
-				SimulationColor::TYPE::YELLOW
+                SimulationObject::CIRCLE,
+                SimulationObject::YELLOW,
+                SimulationObject::SMALL
 			);
 		}
 

@@ -8,16 +8,12 @@
 #ifndef ObjectState_h
 #define ObjectState_h
 
-#include "SimulationMaterial.h"
-#include "SimulationColor.h"
 #include "SimulationObject.h"
 #include "Box2D/Common/b2Math.h"
 #include "Box2D/Dynamics/b2Fixture.h"
 #include "Box2D/Extension/b2VisBody.hpp"
 #include "Box2D/Extension/b2VisWorld.hpp"
 #include "SimulationDefines.h"
-
-
 
 using json = nlohmann::json;
 
@@ -28,14 +24,14 @@ public:
 	typedef std::shared_ptr<ObjectState> Ptr;
 
 	ObjectState(b2VisBody* body,
-		const SimulationMaterial::TYPE& materialType,
-		const SimulationColor::TYPE& colorType,
-		const SimulationObject::TYPE& objectType) :
+        const SimulationObject::Shape& shapeType,
+		const SimulationObject::Color& colorType,
+        const SimulationObject::Size& sizeType) :
 
 		body(body),
-		materialType(materialType),
-		colorType(colorType),
-		objectType(objectType)
+		size(sizeType),
+		color(colorType),
+		shape(shapeType)
 
 	{}
 
@@ -44,29 +40,29 @@ public:
 	}
 
 	static Ptr create(b2VisBody* body,
-		const SimulationMaterial::TYPE& materialType,
-		const SimulationColor::TYPE& colorType,
-		const SimulationObject::TYPE& objectType)
+        const SimulationObject::Shape& shapeType,
+        const SimulationObject::Color& colorType,
+        const SimulationObject::Size& sizeType)
 	{
-		return std::make_shared<ObjectState>(body, materialType, colorType, objectType);
+		return std::make_shared<ObjectState>(body, shapeType, colorType, sizeType);
 	}
 
 	std::string getShortRepresentation()
 	{
-		std::string ret = "id: " + std::to_string(body->getUniqueId()) + " sh: " + SimulationObject::getRepresentation(objectType) + " col: " + SimulationColor::getRepresentation(colorType);
+		std::string ret = "id: " + std::to_string(body->getUniqueId()) + " sh: " + SimulationObject::getRepresentation(shape) + " sz: " + SimulationObject::getRepresentation(size) + " col: " + SimulationObject::getRepresentation(color);
 		return ret;
 	}
 
 	std::string getImagePath()
 	{
-
-		std::string type = SimulationObject::getRepresentation(objectType); 
-		std::string color = SimulationColor::getRepresentation(colorType);
+		std::string shStr = SimulationObject::getRepresentation(shape);
+		std::string colStr = SimulationObject::getRepresentation(color);
+        std::string szStr = SimulationObject::getRepresentation(size);
 
 		//std::string basePath = "\"..\\Testbed\\Data\\Images\\";
         std::string basePath = "\"../Testbed/Data/Images/";
 
-		std::string result = basePath + type + "_" + color  + ".png";
+		std::string result = basePath + shStr + "_" + szStr + "_" + colStr  + ".png";
 
 		//return "\"C:\\Users\\Cagatay\\Projects\\SVQA\\SVQA-Box2D\\Testbed\\Data\\Images\\" + type + "_" + color + ".png";
 		return result;
@@ -100,16 +96,20 @@ public:
 			j.emplace("massData-centerY", massData.center.y);
 			j.emplace("massData-I", massData.I);
 		}
-
-		j.emplace("materialType", materialType);
-		j.emplace("colorType", colorType);
-		j.emplace("objectType", objectType);
+        
+        j.emplace("friction", body->GetFixtureList()->GetFriction());
+        j.emplace("restitution", body->GetFixtureList()->GetRestitution());
+        j.emplace("density", body->GetFixtureList()->GetDensity());
+        
+		j.emplace("color", color);
+		j.emplace("shape", shape);
+        j.emplace("size", size);
 	}
 
 	void from_json(const json& j, WORLD* toWorld) {
 		bool active, bullet, allowSleep, awake, fixedRotation;
-		float x, y, angle, velx, vely, angVel, linearDamp, angDamp, friction;
-		float gravityScale, mass, massCenterX, massCenterY, massInertia;
+		float x, y, angle, velx, vely, angVel, linearDamp, angDamp;
+		float gravityScale, friction, restitution, density;
 		int bodyType;
 
 		j.at("active").get_to(active);
@@ -122,9 +122,12 @@ public:
 		j.at("linearDamping").get_to(linearDamp);
 		j.at("angularDamping").get_to(angDamp);
 		j.at("bodyType").get_to(bodyType);
-		j.at("materialType").get_to(materialType);
-		j.at("colorType").get_to(colorType);
-		j.at("objectType").get_to(objectType);
+		j.at("friction").get_to(friction);
+        j.at("restitution").get_to(restitution);
+        j.at("density").get_to(density);
+		j.at("color").get_to(color);
+		j.at("shape").get_to(shape);
+        j.at("size").get_to(size);
 
 		j.at("gravityScale").get_to(gravityScale);
 		j.at("bullet").get_to(bullet);
@@ -137,10 +140,9 @@ public:
 		j.at("massData-centerX").get_to(massData.center.x);
 		j.at("massData-centerY").get_to(massData.center.y);
 		j.at("massData-I").get_to(massData.I);
-
-		ShapePtr shape = SimulationObject(objectType).getShape();
-
-		SimulationMaterial mat = SimulationMaterial(materialType);
+        
+        auto simObject = SimulationObject(shape, color, size);
+		ShapePtr shapePtr = simObject.getShape();
 
 		b2BodyDef bd;
 		bd.type = (b2BodyType)bodyType;
@@ -159,9 +161,10 @@ public:
 		body = (BODY*)toWorld->CreateBody(&bd);
 
 		b2FixtureDef fd = b2FixtureDef();
-		fd.friction = mat.getFriction();
-		fd.density = mat.getDensity();
-		fd.shape = shape.get();
+		fd.friction = friction;
+        fd.restitution = restitution;
+        fd.density = density;
+		fd.shape = shapePtr.get();
 
 		body->CreateFixture(&fd);
 		body->SetActive(active);
@@ -169,18 +172,16 @@ public:
 		body->SetGravityScale(gravityScale);
 
 #if !USE_DEBUG_DRAW
-		SimulationColor col = SimulationColor(colorType);
-		body->setTexture(mat.getTexture());
-		body->setColor(col.GetColor());
+		body->setColor(simObject.getColor());
 #endif
 
 		body->SetUserData(this);
 	}
 
 	BODY* body;
-	SimulationMaterial::TYPE materialType;
-	SimulationColor::TYPE colorType;
-	SimulationObject::TYPE objectType;
+	SimulationObject::Color color;
+	SimulationObject::Shape shape;
+    SimulationObject::Size size;
 };
 
 

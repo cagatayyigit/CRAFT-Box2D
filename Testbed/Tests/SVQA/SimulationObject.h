@@ -9,6 +9,7 @@
 #define SimulationObject_h
 
 #include <nlohmann/json.hpp>
+#include "Box2D/Common/b2Draw.h"
 #include "Box2D/Extension/b2VisPolygonShape.hpp"
 #include "Box2D/Collision/Shapes/b2CircleShape.h"
 #include "Box2D/Collision/Shapes/b2EdgeShape.h"
@@ -24,133 +25,179 @@ typedef std::shared_ptr<b2Shape> ShapePtr;
 class SimulationObject
 {
 public:
-
-	enum TYPE
+	enum Shape
 	{
-		SMALL_CUBE = 0,
-		BIG_CUBE = 1,
-		STANDARD_RECTANGLE = 2,
-		SMALL_TRIANGLE = 3,
-		BIG_TRIANGLE = 4,
-		SMALL_HEXAGON = 5,
-		BIG_HEXAGON = 6,
-		WALL_PIN = 7,
-		ROPE_UNIT = 8,
-		SMALL_CIRCLE = 9,
-		BIG_CIRCLE = 10,
-		BIG_RAMP = 11,
-		CUSTOM_RECTANGLE = 12,
-		CAR_BODY = 13,
-		CAR_WHEEL = 14,
-		ROD_RECTANGLE = 15,
-        BASKET = 16,
-        LEFT_BOUNDARY = 17,
-        RIGHT_BOUNDARY = 18,
-        BOTTOM_BOUNDARY = 19
+		CUBE = 0,
+		TRIANGLE = 1,
+		HEXAGON = 2,
+        CIRCLE = 3,
+		STATIC_RAMP = 4,
+		STATIC_PLATFORM = 5,
+        STATIC_BASKET = 6,
+        STATIC_LEFT_BOUNDARY = 7,
+        STATIC_RIGHT_BOUNDARY = 8,
+        STATIC_BOTTOM_BOUNDARY = 9
     };
     
-	SimulationObject(TYPE t)
+    enum Color
+    {
+        GRAY = 0,
+        RED = 1,
+        BLUE = 2,
+        GREEN = 3,
+        BROWN = 4,
+        PURPLE = 5,
+        CYAN = 6,
+        YELLOW = 7,
+        BLACK = 8
+    };
+    
+    enum Size
+    {
+        SMALL = 0,
+        LARGE = 1
+    };
+    
+	SimulationObject(Shape sh, Color c, Size sz)
 	{
-		type = t;
+		mShape = sh;
+        mColor = c;
+        mSize = sz;
 	}
     
-    static std::string getRepresentation(TYPE t)
+    static std::string getRepresentation(Shape sh)
     {
-        switch (t) {
-        case SMALL_CUBE:
-            return "s_cube";
-        case BIG_CUBE:
-            return "b_cube";
-        case STANDARD_RECTANGLE:
-            return "std_rect";
-        case SMALL_HEXAGON:
-            return "s_hex";
-        case BIG_HEXAGON:
-            return "b_hex";
-        case SMALL_TRIANGLE:
-            return "s_tri";
-        case BIG_TRIANGLE:
-            return "b_tri";
-        case WALL_PIN:
-            return "pin";
-        case ROPE_UNIT:
-            return "rp_unit";
-        case SMALL_CIRCLE:
-            return "s_circle";
-        case BIG_CIRCLE:
-            return "b_circle";
-        case BIG_RAMP:
-            return "b_ramp";
-        case CUSTOM_RECTANGLE:
-            return "cus_rectange";
-        case CAR_BODY:
-            return "car_bd";
-        case CAR_WHEEL:
-            return "car_wh";
-        case ROD_RECTANGLE:
-            return "rod";
-        case BASKET:
-            return "basket";
-        case LEFT_BOUNDARY:
-            return "l_bound";
-        case RIGHT_BOUNDARY:
-            return "r_bound";
-        case BOTTOM_BOUNDARY:
-            return "b_bound";
-        default:
-            break;
+        switch (sh)
+        {
+            case CUBE: return "cube";
+            case TRIANGLE: return "triangle";
+            case HEXAGON: return "hexagon";
+            case CIRCLE: return "circle";
+            case STATIC_RAMP: return "ramp";
+            case STATIC_PLATFORM: return "platform";
+            case STATIC_BASKET: return "basket";
+            case STATIC_LEFT_BOUNDARY: return "left boundary";
+            case STATIC_RIGHT_BOUNDARY: return "right boundary";
+            case STATIC_BOTTOM_BOUNDARY: return "bottom boundary";
+            default: break;
         }
-        return "null";
+        return "";
     }
+        
+    static std::string getRepresentation(Color c)
+    {
+        switch (c)
+        {
+            case GRAY: return "gray";
+            case RED: return "red";
+            case BLUE: return "blue";
+            case GREEN: return "green";
+            case BROWN: return "brown";
+            case PURPLE: return "purple";
+            case CYAN: return "cyan";
+            case YELLOW: return "yellow";
+            case BLACK: return "black";
+            default: break;
+        }
+        return "";
+    }
+    
+    static std::string getRepresentation(Size sz)
+    {
+        switch (sz)
+        {
+            case SMALL: return "small";
+            case LARGE: return "large";
+            default: break;
+        }
+        return "";
+    }
+    
+    b2Color getColor()
+    {
+        switch (mColor)
+        {
+            case GRAY: return b2Color(87.0f / 255.0f, 87.0f / 255.0f, 87.0f / 255.0f);
+            case RED: return b2Color(173.0f / 255.0f, 35.0f / 255.0f, 35.0f / 255.0f);
+            case BLUE: return b2Color(42.0f / 255.0f, 75.0f / 255.0f, 215.0f / 255.0f);
+            case GREEN: return b2Color(29.0f / 255.0f, 105.0f / 255.0f, 20.0f / 255.0f);
+            case PURPLE: return b2Color(129.0f / 255.0f, 38.0f / 255.0f, 192.0f / 255.0f);
+            case BROWN: return b2Color(129.0f / 255.0f, 74.0f / 255.0f, 25.0f / 255.0f);
+            case CYAN: return b2Color(41.0f / 255.0f, 208.0f / 255.0f, 208.0f / 255.0f);
+            case YELLOW: return b2Color(255.0f / 255.0f, 238.0f / 255.0f, 51.0f / 255.0f);
+            case BLACK: return b2Color(0, 0, 0);
+            default: break;
+        }
+        return b2Color(0, 0, 0);
+    }
+    
+    bool isStatic() const
+    {
+        switch (mShape)
+        {
+            case STATIC_RAMP:
+            case STATIC_PLATFORM:
+            case STATIC_BASKET:
+            case STATIC_LEFT_BOUNDARY:
+            case STATIC_RIGHT_BOUNDARY:
+            case STATIC_BOTTOM_BOUNDARY:
+                return true;
+            default: break;
+        }
+        return false;
+    }
+
 
 	ShapePtr getShape()
 	{
-		switch (type) {
-		case SMALL_CUBE:
-			return std::make_shared<b2PolygonShape>(getPolygon(2.0f, 4));
-		case BIG_CUBE:
-			return std::make_shared<b2PolygonShape>(getPolygon(3.0f, 4));
-		case STANDARD_RECTANGLE:
-			return std::make_shared<b2PolygonShape>(getRectangle(8.0f, 2.0f));
-		case SMALL_HEXAGON:
-			return std::make_shared<b2PolygonShape>(getPolygon(2.0f, 6));
-		case BIG_HEXAGON:
-			return std::make_shared<b2PolygonShape>(getPolygon(3.0f, 6));
-		case SMALL_TRIANGLE:
-			return std::make_shared<b2PolygonShape>(getPolygon(2.0f, 3));
-		case BIG_TRIANGLE:
-			return std::make_shared<b2PolygonShape>(getPolygon(3.0f, 3));
-		case WALL_PIN:
-			return std::make_shared<b2PolygonShape>(getPolygon(0.5f, 4));
-		case ROPE_UNIT:
-			return std::make_shared<b2PolygonShape>(getPolygon(0.1f, 4));
-		case SMALL_CIRCLE:
-			return std::make_shared<b2CircleShape>(getCircle(2.0f));
-		case BIG_CIRCLE:
-			return std::make_shared<b2CircleShape>(getCircle(3.0f));
-		case BIG_RAMP:
-			return std::make_shared<b2PolygonShape>(getPolygon(3.0f, 3));
-		case CAR_BODY:
-			return std::make_shared<b2PolygonShape>(getCarBodyIrregularPolygon());
-		case CAR_WHEEL:
-			return std::make_shared<b2CircleShape>(getCircle(1.0f));
-		case ROD_RECTANGLE:
-			return std::make_shared<b2PolygonShape>(getRectangle(10.0f, 1.0f));
-        case BASKET:
+        float length = (mSize == Size::SMALL ? 2.0f : 3.0f);
+        
+		switch (mShape) {
+		case CUBE:
+			return std::make_shared<b2PolygonShape>(getPolygon(length, 4));
+        case TRIANGLE:
+            return std::make_shared<b2PolygonShape>(getPolygon(length, 3));
+        case HEXAGON:
+            return std::make_shared<b2PolygonShape>(getPolygon(length, 6));
+        case CIRCLE:
+            return std::make_shared<b2CircleShape>(getCircle(length));
+        case STATIC_RAMP:
+            return std::make_shared<b2PolygonShape>(getPolygon(3.0f, 3));
+        case STATIC_PLATFORM:
+            return std::make_shared<b2PolygonShape>(getRectangle(8.0f, 2.0f));
+        case STATIC_BASKET:
             return std::shared_ptr<b2ChainShape>(getBasketShape());
-        case LEFT_BOUNDARY:
+        case STATIC_LEFT_BOUNDARY:
             return std::make_shared<b2PolygonShape>(getRectangle(0.5, 55, b2Vec2(-40.0f, 20.0f), 0.0f));
-        case RIGHT_BOUNDARY:
+        case STATIC_RIGHT_BOUNDARY:
             return std::make_shared<b2PolygonShape>(getRectangle(0.5, 55, b2Vec2(40.0f, 20.0f), 0.0f));
-        case BOTTOM_BOUNDARY:
+        case STATIC_BOTTOM_BOUNDARY:
             return std::make_shared<b2PolygonShape>(getRectangle(0.5, 55, b2Vec2(0.0f, -5.0f), M_PI / 2));
-		default:
-			break;
 		}
 		return nullptr;
 	}
 
-	TYPE type;
+	Shape mShape;
+    Color mColor;
+    Size mSize;
+    
+    float getFriction() const
+    {
+        return 0.5f;
+    }
+    
+    float getDensity() const
+    {
+        return 5.0f;
+    }
+    
+    float getRestitution() const
+    {
+        if(isStatic()) {
+            return 0.0f;
+        }
+        return 0.35;
+    }
 
 	static b2VisPolygonShape getCube(const float& edgeLength)
 	{
@@ -273,25 +320,34 @@ public:
     }
 };
 
-NLOHMANN_JSON_SERIALIZE_ENUM(SimulationObject::TYPE, {
-	{SimulationObject::SMALL_CUBE, SimulationObject::getRepresentation(SimulationObject::SMALL_CUBE)},
-	{SimulationObject::BIG_CUBE, SimulationObject::getRepresentation(SimulationObject::BIG_CUBE)},
-    {SimulationObject::STANDARD_RECTANGLE, SimulationObject::getRepresentation(SimulationObject::STANDARD_RECTANGLE)},
-    {SimulationObject::SMALL_TRIANGLE, SimulationObject::getRepresentation(SimulationObject::SMALL_TRIANGLE)},
-    {SimulationObject::BIG_TRIANGLE, SimulationObject::getRepresentation(SimulationObject::BIG_TRIANGLE)},
-    {SimulationObject::SMALL_HEXAGON, SimulationObject::getRepresentation(SimulationObject::SMALL_HEXAGON)},
-    {SimulationObject::BIG_HEXAGON, SimulationObject::getRepresentation(SimulationObject::BIG_HEXAGON)},
-    {SimulationObject::SMALL_CIRCLE, SimulationObject::getRepresentation(SimulationObject::SMALL_CIRCLE)},
-    {SimulationObject::BIG_CIRCLE, SimulationObject::getRepresentation(SimulationObject::BIG_CIRCLE)},
-    {SimulationObject::BIG_RAMP, SimulationObject::getRepresentation(SimulationObject::BIG_RAMP)},
-    {SimulationObject::CUSTOM_RECTANGLE, SimulationObject::getRepresentation(SimulationObject::CUSTOM_RECTANGLE)},
-    {SimulationObject::CAR_BODY, SimulationObject::getRepresentation(SimulationObject::CAR_BODY)},
-    {SimulationObject::CAR_WHEEL, SimulationObject::getRepresentation(SimulationObject::CAR_WHEEL)},
-    {SimulationObject::ROD_RECTANGLE, SimulationObject::getRepresentation(SimulationObject::ROD_RECTANGLE)},
-    {SimulationObject::BASKET, SimulationObject::getRepresentation(SimulationObject::BASKET)},
-    {SimulationObject::LEFT_BOUNDARY, SimulationObject::getRepresentation(SimulationObject::LEFT_BOUNDARY)},
-    {SimulationObject::RIGHT_BOUNDARY, SimulationObject::getRepresentation(SimulationObject::RIGHT_BOUNDARY)},
-    {SimulationObject::BOTTOM_BOUNDARY, SimulationObject::getRepresentation(SimulationObject::BOTTOM_BOUNDARY)}
+NLOHMANN_JSON_SERIALIZE_ENUM(SimulationObject::Shape, {
+	{SimulationObject::CUBE, SimulationObject::getRepresentation(SimulationObject::CUBE)},
+	{SimulationObject::TRIANGLE, SimulationObject::getRepresentation(SimulationObject::TRIANGLE)},
+    {SimulationObject::HEXAGON, SimulationObject::getRepresentation(SimulationObject::HEXAGON)},
+    {SimulationObject::CIRCLE, SimulationObject::getRepresentation(SimulationObject::CIRCLE)},
+    {SimulationObject::STATIC_RAMP, SimulationObject::getRepresentation(SimulationObject::STATIC_RAMP)},
+    {SimulationObject::STATIC_PLATFORM, SimulationObject::getRepresentation(SimulationObject::STATIC_PLATFORM)},
+    {SimulationObject::STATIC_BASKET, SimulationObject::getRepresentation(SimulationObject::STATIC_BASKET)},
+    {SimulationObject::STATIC_LEFT_BOUNDARY, SimulationObject::getRepresentation(SimulationObject::STATIC_LEFT_BOUNDARY)},
+    {SimulationObject::STATIC_RIGHT_BOUNDARY, SimulationObject::getRepresentation(SimulationObject::STATIC_RIGHT_BOUNDARY)},
+    {SimulationObject::STATIC_BOTTOM_BOUNDARY, SimulationObject::getRepresentation(SimulationObject::STATIC_BOTTOM_BOUNDARY)},
 	})
+
+NLOHMANN_JSON_SERIALIZE_ENUM( SimulationObject::Color, {
+    {SimulationObject::GRAY, SimulationObject::getRepresentation(SimulationObject::GRAY)},
+    {SimulationObject::RED, SimulationObject::getRepresentation(SimulationObject::RED)},
+    {SimulationObject::BLUE, SimulationObject::getRepresentation(SimulationObject::BLUE)},
+    {SimulationObject::GREEN, SimulationObject::getRepresentation(SimulationObject::GREEN)},
+    {SimulationObject::BROWN, SimulationObject::getRepresentation(SimulationObject::BROWN)},
+    {SimulationObject::PURPLE, SimulationObject::getRepresentation(SimulationObject::PURPLE)},
+    {SimulationObject::CYAN, SimulationObject::getRepresentation(SimulationObject::CYAN)},
+    {SimulationObject::YELLOW, SimulationObject::getRepresentation(SimulationObject::YELLOW)},
+    {SimulationObject::BLACK, SimulationObject::getRepresentation(SimulationObject::BLACK)}
+})
+
+NLOHMANN_JSON_SERIALIZE_ENUM( SimulationObject::Size, {
+    {SimulationObject::SMALL, SimulationObject::getRepresentation(SimulationObject::SMALL)},
+    {SimulationObject::LARGE, SimulationObject::getRepresentation(SimulationObject::LARGE)}
+})
 
 #endif /* SimulationObject_h */

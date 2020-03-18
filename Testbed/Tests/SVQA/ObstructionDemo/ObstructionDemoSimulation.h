@@ -1,6 +1,5 @@
 #pragma once
 
-#include "SimulationColor.h"
 #include "ObstructionDemoSettings.h"
 #include "SimulationBase.h"
 #include "Box2D/Extension/b2VisBody.hpp"
@@ -35,11 +34,11 @@ namespace svqa {
 		}
 
 		void InitializeScene() override {
-			AddSimulationObject(m_vMovingObjPosition, b2Vec2(m_fSpeed, 0.0f), SimulationObject::SMALL_CIRCLE, SimulationColor::TYPE::BROWN);
+			AddSimulationObject(m_vMovingObjPosition, b2Vec2(m_fSpeed, 0.0f), SimulationObject::CIRCLE, SimulationObject::BROWN, SimulationObject::SMALL);
 
-			AddSimulationObject(m_vObstaclePosition, m_vInitialDropVelocity, SimulationObject::BIG_CUBE, SimulationColor::TYPE::RED);
+			AddSimulationObject(m_vObstaclePosition, m_vInitialDropVelocity, SimulationObject::CUBE, SimulationObject::RED, SimulationObject::LARGE);
 
-			AddSimulationObject(m_vStagnantObjPosition, b2Vec2_zero, SimulationObject::SMALL_CIRCLE, SimulationColor::TYPE::BLUE);
+			AddSimulationObject(m_vStagnantObjPosition, b2Vec2_zero, SimulationObject::CIRCLE, SimulationObject::BLUE, SimulationObject::SMALL);
 		}
 
 	private:

@@ -25,7 +25,6 @@
 		7C92AD30234E40A30074BFB6 /* rubber.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C92AD2F234E40A20074BFB6 /* rubber.png */; };
 		7C92AD32234E40D10074BFB6 /* metal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C92AD31234E40D00074BFB6 /* metal.png */; };
 		7C99153023E1EA2900D5FF39 /* EndEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C99152E23E1EA2900D5FF39 /* EndEvent.cpp */; };
-		7CC417F2234A0AB200CD88E7 /* SimulationMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CC417F1234A0AB200CD88E7 /* SimulationMaterial.cpp */; };
 		7CDCBD8923E0A2E900BC9E50 /* CollisionEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD8223E0A2E900BC9E50 /* CollisionEvent.cpp */; };
 		7CDCBD8A23E0A2E900BC9E50 /* CausalGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD8323E0A2E900BC9E50 /* CausalGraph.cpp */; };
 		7CDCBD8B23E0A2E900BC9E50 /* CausalEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD8523E0A2E900BC9E50 /* CausalEvent.cpp */; };
@@ -96,8 +95,6 @@
 		7C4127F62348BC5B002E75BA /* SimulationRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimulationRenderer.cpp; path = ../Testbed/Framework/SimulationRenderer.cpp; sourceTree = "<group>"; };
 		7C4127F72348BC5B002E75BA /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = ../Testbed/Framework/Camera.cpp; sourceTree = "<group>"; };
 		7C4127F82348BC5B002E75BA /* SimulationRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SimulationRenderer.hpp; path = ../Testbed/Framework/SimulationRenderer.hpp; sourceTree = "<group>"; };
-		7C4128042348D5F0002E75BA /* SimulationColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationColor.h; sourceTree = "<group>"; };
-		7C4128052348D638002E75BA /* SimulationMaterial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationMaterial.h; sourceTree = "<group>"; };
 		7C48C726235C5A8B00FFB396 /* Settings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		7C48C727235C5C7300FFB396 /* RemoveObjectSimulationSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemoveObjectSimulationSettings.h; sourceTree = "<group>"; };
 		7C48C728235C675B00FFB396 /* JSONHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONHelper.h; sourceTree = "<group>"; };
@@ -128,7 +125,6 @@
 		7C99152E23E1EA2900D5FF39 /* EndEvent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EndEvent.cpp; sourceTree = "<group>"; };
 		7C99152F23E1EA2900D5FF39 /* EndEvent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EndEvent.hpp; sourceTree = "<group>"; };
 		7C99153123E1F2D600D5FF39 /* CausalEvents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CausalEvents.h; sourceTree = "<group>"; };
-		7CC417F1234A0AB200CD88E7 /* SimulationMaterial.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SimulationMaterial.cpp; sourceTree = "<group>"; };
 		7CC77DC323C7A70200BFFAFE /* ObstructionDemoSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObstructionDemoSettings.h; sourceTree = "<group>"; };
 		7CC77DC423C7A70200BFFAFE /* ObstructionDemoSimulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObstructionDemoSimulation.h; sourceTree = "<group>"; };
 		7CC77DC623C7A71700BFFAFE /* Scene1Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene1Settings.h; sourceTree = "<group>"; };
@@ -242,9 +238,6 @@
 			isa = PBXGroup;
 			children = (
 				7C92AD25234E37500074BFB6 /* SimulationObject.h */,
-				7C4128042348D5F0002E75BA /* SimulationColor.h */,
-				7C4128052348D638002E75BA /* SimulationMaterial.h */,
-				7CC417F1234A0AB200CD88E7 /* SimulationMaterial.cpp */,
 				7C48C726235C5A8B00FFB396 /* Settings.h */,
 				7C48C728235C675B00FFB396 /* JSONHelper.h */,
 				7C48C729235C6F5B00FFB396 /* ObjectState.h */,
@@ -579,7 +572,6 @@
 				E868A985B68BFD373D9A4FC5 /* cocoa_init.m in Sources */,
 				DCB2417D74FF272FA34627BD /* cocoa_joystick.m in Sources */,
 				5D5F2D2DA172FE5F9544836D /* cocoa_monitor.m in Sources */,
-				7CC417F2234A0AB200CD88E7 /* SimulationMaterial.cpp in Sources */,
 				056A8267D38DD6195A9C28A7 /* cocoa_time.c in Sources */,
 				CB6C91CDDD966E7F1187580D /* cocoa_window.m in Sources */,
 				679FAE2BB502A45D2B21A46B /* context.c in Sources */,
