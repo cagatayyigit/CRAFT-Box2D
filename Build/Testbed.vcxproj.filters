@@ -13,18 +13,6 @@
     <Filter Include="Tests\SVQA">
       <UniqueIdentifier>{02F8F690-EEAF-38DE-57B7-113A438ED3CE}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tests\SVQA\FixedPulley">
-      <UniqueIdentifier>{DCED7223-C8E7-9B75-B154-32869DED01E2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tests\SVQA\ObstructedPath">
-      <UniqueIdentifier>{1D2F3DD7-89F1-7061-D2A1-FFED3EA3493F}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tests\SVQA\PendulumObstacles">
-      <UniqueIdentifier>{7B21C726-67DC-B6D2-1094-2F1DFC2D0163}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tests\SVQA\RemoveObject">
-      <UniqueIdentifier>{163EFCBB-8275-4453-8B7F-A876F7356B4C}</UniqueIdentifier>
-    </Filter>
     <Filter Include="glad">
       <UniqueIdentifier>{DD62977C-C999-980D-7286-7E105E9C140F}</UniqueIdentifier>
     </Filter>
@@ -40,20 +28,8 @@
     <Filter Include="Tests\SVQA\Scene1">
       <UniqueIdentifier>{ec80df51-b55a-45d4-a651-2d39fe4d2b51}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tests\SVQA\JumpingBall">
-      <UniqueIdentifier>{793151bc-59f5-40d3-98dc-08324f57c35a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework\SVQA">
       <UniqueIdentifier>{27bc4afe-101c-4f2f-bceb-f9ed375d2980}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tests\SVQA\MultiplePendulums">
-      <UniqueIdentifier>{a62a7a7a-93b6-4e1f-a1c1-03921b4a510a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tests\SVQA\Scene2">
-      <UniqueIdentifier>{12c67529-6b36-46f0-b91f-6920ac1be608}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tests\SVQA\ConnectedCars">
-      <UniqueIdentifier>{f0f52aa2-ecae-4625-9baa-2bf0c2b8c9e3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -78,35 +54,11 @@
     <ClInclude Include="..\Testbed\Framework\VideoWriter.h">
       <Filter>Framework</Filter>
     </ClInclude>
-    <ClInclude Include="..\Testbed\Tests\SVQA\FixedPulley\FixedPulleySettings.h">
-      <Filter>Tests\SVQA\FixedPulley</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Testbed\Tests\SVQA\FixedPulley\FixedPulleySimulation.h">
-      <Filter>Tests\SVQA\FixedPulley</Filter>
-    </ClInclude>
     <ClInclude Include="..\Testbed\Tests\SVQA\JSONHelper.h">
       <Filter>Tests\SVQA</Filter>
     </ClInclude>
     <ClInclude Include="..\Testbed\Tests\SVQA\ObjectState.h">
       <Filter>Tests\SVQA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Testbed\Tests\SVQA\ObstructedPath\ObstructedPathSettings.h">
-      <Filter>Tests\SVQA\ObstructedPath</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Testbed\Tests\SVQA\ObstructedPath\ObstructedPathSimulation.h">
-      <Filter>Tests\SVQA\ObstructedPath</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Testbed\Tests\SVQA\PendulumObstacles\PendulumObstaclesSettings.h">
-      <Filter>Tests\SVQA\PendulumObstacles</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Testbed\Tests\SVQA\PendulumObstacles\PendulumObstaclesSimulation.h">
-      <Filter>Tests\SVQA\PendulumObstacles</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Testbed\Tests\SVQA\RemoveObject\RemoveObjectSimulation.h">
-      <Filter>Tests\SVQA\RemoveObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Testbed\Tests\SVQA\RemoveObject\RemoveObjectSimulationSettings.h">
-      <Filter>Tests\SVQA\RemoveObject</Filter>
     </ClInclude>
     <ClInclude Include="..\Testbed\Tests\SVQA\SceneState.h">
       <Filter>Tests\SVQA</Filter>
@@ -193,18 +145,6 @@
     <ClInclude Include="..\Testbed\Tests\SVQA\Scene1\Scene1Simulation.h">
       <Filter>Tests\SVQA\Scene1</Filter>
     </ClInclude>
-    <ClInclude Include="..\Testbed\Tests\SVQA\JumpingBall\JumpingBallSettings.h">
-      <Filter>Tests\SVQA\JumpingBall</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Testbed\Tests\SVQA\JumpingBall\JumpingBallSimulation.h">
-      <Filter>Tests\SVQA\JumpingBall</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Testbed\Tests\SVQA\Scene2\Scene2Settings.h">
-      <Filter>Tests\SVQA\Scene2</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Testbed\Tests\SVQA\Scene2\Scene2Simulation.h">
-      <Filter>Tests\SVQA\Scene2</Filter>
-    </ClInclude>
     <ClInclude Include="..\Testbed\Framework\SVQA\CausalEvent.hpp">
       <Filter>Framework\SVQA</Filter>
     </ClInclude>
@@ -231,18 +171,6 @@
     </ClInclude>
     <ClInclude Include="..\Testbed\Framework\SVQA\StartTouchingEvent.hpp">
       <Filter>Framework\SVQA</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Testbed\Tests\SVQA\MultiplePendulums\MultiplePendulumsSettings.h">
-      <Filter>Tests\SVQA\MultiplePendulums</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Testbed\Tests\SVQA\MultiplePendulums\MultiplePendulumsSimulation.h">
-      <Filter>Tests\SVQA\MultiplePendulums</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Testbed\Tests\SVQA\ConnectedCars\ConnectedCarsSettings.h">
-      <Filter>Tests\SVQA\ConnectedCars</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Testbed\Tests\SVQA\ConnectedCars\ConnectedCarsSimulation.h">
-      <Filter>Tests\SVQA\ConnectedCars</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

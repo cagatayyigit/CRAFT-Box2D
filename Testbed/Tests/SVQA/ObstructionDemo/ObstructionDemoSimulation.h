@@ -31,7 +31,7 @@ namespace svqa {
 
 		virtual SimulationID getIdentifier() override
 		{
-			return SimulationID::ID_ObstructedPath;
+			return SimulationID::ID_ObstructionDemo;
 		}
 
 		void InitializeScene() override {
