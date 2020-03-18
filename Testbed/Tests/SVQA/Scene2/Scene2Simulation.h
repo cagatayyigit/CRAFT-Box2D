@@ -98,12 +98,12 @@ namespace svqa {
 			//
 			ShapePtr chainShape = std::make_shared<b2ChainShape>(SimulationObject::getCurve(
 				[](float x) {
-					return std::pow(x, 2);
-				}, -2, 0.5, 0.05f
+					return 0.15f * std::pow(x, 2);
+				}, -8, 4, 0.05f
 			));
 
 			AddStaticObject(
-				b2Vec2(-35.0f, 14.0f),
+				b2Vec2(-25.0f, 15.0f),
 				0,
 				chainShape,
 				SimulationObject::BIG_TRIANGLE,
