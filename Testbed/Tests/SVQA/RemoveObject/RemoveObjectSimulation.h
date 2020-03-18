@@ -55,7 +55,7 @@ namespace svqa
 				ground->CreateFixture(&shape, 0.0f);
 			}
 
-			SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
+			SET_FILE_OUTPUT_TRUE(m_pSettings->outputVideoPath)
 		}
 
 		void InitializeScene() override {

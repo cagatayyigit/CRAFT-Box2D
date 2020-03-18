@@ -16,7 +16,7 @@ namespace svqa {
 		JumpingBallSimulation(JumpingBallSettings::Ptr settings) : SimulationBase(settings)
 		{
 			m_nNumberOfObjects = 1;
-			SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
+			SET_FILE_OUTPUT_TRUE(m_pSettings->outputVideoPath)
 		}
 
 		void InitializeScene() override

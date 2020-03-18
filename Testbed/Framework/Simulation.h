@@ -262,7 +262,7 @@ protected:
 	b2Vec2 m_bombSpawnPoint;
 	bool m_bombSpawning;
 	b2Vec2 m_mouseWorld;
-	int32 m_stepCount;
+	int32 m_StepCount;
 
 	b2Profile m_maxProfile;
 	b2Profile m_totalProfile;

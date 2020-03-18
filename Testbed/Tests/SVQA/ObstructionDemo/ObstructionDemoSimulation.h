@@ -26,7 +26,7 @@ namespace svqa {
 
 			m_vInitialDropVelocity = b2Vec2(0.0f, RandomFloat(-20.0f, -40.0f));
 
-			SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
+			SET_FILE_OUTPUT_TRUE(m_pSettings->outputVideoPath)
 		}
 
 		virtual SimulationID getIdentifier() override

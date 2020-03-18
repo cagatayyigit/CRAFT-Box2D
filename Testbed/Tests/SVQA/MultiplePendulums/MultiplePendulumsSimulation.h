@@ -39,7 +39,7 @@ namespace svqa {
 			m_vPendulumRelativeRange = b2Vec2(-10.0f, 10.0f);
 			m_vXPosBoundaries = b2Vec2(-25.0f, 25.0f);
 
-			SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
+			SET_FILE_OUTPUT_TRUE(m_pSettings->outputVideoPath)
 		}
 
 		void InitializeScene() override

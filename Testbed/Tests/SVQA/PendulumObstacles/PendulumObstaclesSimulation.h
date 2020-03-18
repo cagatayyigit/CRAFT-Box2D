@@ -36,7 +36,7 @@ namespace svqa {
 			m_vObstacleMin = b2Vec2(-30.0f, 0.0f);
 			m_vObstacleMax = b2Vec2(30.0f, 40.0f);
 
-			SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
+			SET_FILE_OUTPUT_TRUE(m_pSettings->outputVideoPath)
 		}
 
 		void InitializeScene() override {

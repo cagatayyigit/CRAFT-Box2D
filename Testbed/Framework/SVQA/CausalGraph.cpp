@@ -121,12 +121,7 @@ namespace svqa {
     void addNodeToString(CausalEvent::Ptr event, std::string& str)
     {
         str += (std::to_string((long long)event.get()) + " [shape=\"Box\" label=" + event->getStrRepresentation() + "]\n");
-    }
-
-    bool CausalGraph::saveToJSON(const std::string& filename)
-    {
-        return JSONHelper::saveJSON(toJSON(), filename);
-    }
+    } 
 
     void getEdgeJSONs(CausalEvent::Ptr event, std::vector<json>& edges, std::string& str, std::set<CausalEvent::Ptr>& visited)
     {
@@ -156,8 +151,8 @@ namespace svqa {
     json CausalGraph::toJSON() const
     {
         std::string visStr = "digraph d {\n";
-        
-        json graph;
+         
+        json graph_json;
         std::vector<json> nodes;
         
         auto eventQueue = m_EventQueue;
@@ -174,7 +169,7 @@ namespace svqa {
             eventQueue.pop();
         }
         
-        graph.emplace("nodes", nodes);
+        graph_json.emplace("nodes", nodes);
         
         std::vector<json> edges;
         std::set<CausalEvent::Ptr> visited;
@@ -182,12 +177,12 @@ namespace svqa {
     
         visStr += "}\n";
 
-        graph.emplace("edges", edges);
-        graph.emplace("vis", visStr);
+        graph_json.emplace("edges", edges);
+        graph_json.emplace("vis", visStr);
         
         std::cout << visStr << std::endl;
     
-        return graph;
+        return graph_json;
     }
 }
 

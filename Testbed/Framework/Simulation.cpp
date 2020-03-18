@@ -51,7 +51,7 @@ Simulation::Simulation()
 	
 	m_bombSpawning = false;
 
-	m_stepCount = 0;
+	m_StepCount = 0;
 
 	b2BodyDef bodyDef;
 	m_groundBody = m_world->CreateBody(&bodyDef);
@@ -307,7 +307,7 @@ void Simulation::Step(SettingsBase* settings)
 
 	if (timeStep > 0.0f)
 	{
-		++m_stepCount;
+		++m_StepCount;
 	}
 
 	if (settings->drawStats)
@@ -354,9 +354,9 @@ void Simulation::Step(SettingsBase* settings)
 
 		b2Profile aveProfile;
 		memset(&aveProfile, 0, sizeof(b2Profile));
-		if (m_stepCount > 0)
+		if (m_StepCount > 0)
 		{
-			float32 scale = 1.0f / m_stepCount;
+			float32 scale = 1.0f / m_StepCount;
 			aveProfile.step = scale * m_totalProfile.step;
 			aveProfile.collide = scale * m_totalProfile.collide;
 			aveProfile.solve = scale * m_totalProfile.solve;

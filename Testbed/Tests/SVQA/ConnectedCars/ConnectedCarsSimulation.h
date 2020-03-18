@@ -32,7 +32,7 @@ namespace svqa {
 
 			m_nNumberOfCars = _settings_->numberOfCars;
 
-			SET_FILE_OUTPUT_TRUE(m_pSettings->outputFilePath)
+			SET_FILE_OUTPUT_TRUE(m_pSettings->outputVideoPath)
 		}
 
 		virtual CarInfo createCar(const float& speed, const float& xPos)
