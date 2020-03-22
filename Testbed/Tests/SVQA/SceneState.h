@@ -37,13 +37,17 @@ struct SceneState {
             if(fileLoadRes) {
                 clear();
                 
-                for (auto& [key, value] : j.items()) {
-                    ObjectState::Ptr oState = std::make_shared<ObjectState>();
-                    oState->from_json(value, toWorld);
-                    add(oState);
+                auto objectsJsonItr = j.find(objectsKey);
+                if(objectsJsonItr != j.end())
+                {
+                    auto objectsJson = *objectsJsonItr;
+                    for (auto& [key, value] : objectsJson.items()) {
+                        ObjectState::Ptr oState = std::make_shared<ObjectState>();
+                        oState->from_json(value, toWorld);
+                        add(oState);
+                    }
+                    return true;
                 }
-                
-                return true;
             }
         }
         return false;
@@ -58,7 +62,9 @@ struct SceneState {
             object->to_json(jObject);
             jScene.push_back(jObject);
         }
-        return jScene;
+        json objectsKeyWrapper;
+        objectsKeyWrapper.emplace(objectsKey, jScene);
+        return objectsKeyWrapper;
     }
     
     bool saveToJSONFile(WORLD* fromWorld, std::string toFile) const {
@@ -75,6 +81,7 @@ struct SceneState {
     }
     
 private:
+    const std::string objectsKey = "objects";
     std::vector<ObjectState::Ptr> objects;
 };
 
