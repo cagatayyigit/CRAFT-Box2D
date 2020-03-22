@@ -63,20 +63,18 @@ namespace svqa {
 				setSceneInitialized(true);
 			}
 
+            // Take snapshot of the scene in the beginning of the simulation.
+            if (isSceneInitialized() && !m_bSceneSnapshotTaken) {
+                m_StartSceneStateJSON = SimulationBase::GetSceneStateJSONObject(m_SceneJSONState, m_StepCount);
+                m_bSceneSnapshotTaken = true;
+            }
+            
 			Simulation::Step(settings);
-
-			// Take snapshot of the scene in the beginning of the simulation.
-			if (isSceneInitialized() && !m_bSceneSnapshotTaken) {
-				if (!isGeneratingFromJSON())
-					TakeSceneSnapshot("scene.json");
-				m_StartSceneStateJSON = SimulationBase::GetSceneStateJSONObject(m_SceneJSONState, m_StepCount);
-				m_bSceneSnapshotTaken = true;
-			}
-
-			if (shouldTerminateSimulation()) {
-				m_EndSceneStateJSON = SimulationBase::GetSceneStateJSONObject(m_SceneJSONState, m_StepCount);
-				TerminateSimulation();
-			}
+            
+            if (shouldTerminateSimulation()) {
+                m_EndSceneStateJSON = SimulationBase::GetSceneStateJSONObject(m_SceneJSONState, m_StepCount);
+                TerminateSimulation();
+            }
 
 			DetectStartTouchingEvents();
 		}
@@ -137,8 +135,23 @@ namespace svqa {
 
 		void GenerateSceneFromJson(std::string filename) {
 			LOG("Generating scene from \"" + filename + "\"...");
-			m_SceneJSONState.loadFromJSONFile(filename, m_world);
-			m_bSceneRegenerated = true;
+            
+            json j;
+            bool fileLoadRes = JSONHelper::loadJSON(j, filename);
+            if(fileLoadRes) {
+                auto sceneStatesItr = j.find("scene_states");
+                if(sceneStatesItr != j.end()) {
+                    for (const auto& sceneJson : *sceneStatesItr) {
+                        int step;
+                        sceneJson.at("step").get_to(step);
+                        if(step==0) {
+                            m_SceneJSONState.loadFromJSON(*sceneJson.find("scene"), m_world);
+                            m_bSceneRegenerated = true;
+                            break;
+                        }
+                    }
+                }
+            }
 		}
 
 		static json GetSceneStateJSONObject(SceneState state, int stepCount) {
