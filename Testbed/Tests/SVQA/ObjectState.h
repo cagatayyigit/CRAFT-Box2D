@@ -70,12 +70,13 @@ public:
 
 	void to_json(json& j) const {
 		if (body) {
+            
+            auto pos = body->GetPosition();
 			j.emplace("active", body->IsActive());
-			j.emplace("posX", body->GetPosition().x);
-			j.emplace("posY", body->GetPosition().y);
+            j.emplace("2dCoords", std::vector<float>({pos.x, pos.y}));
 			j.emplace("angle", body->GetAngle());
-			j.emplace("linearVelocityX", body->GetLinearVelocity().x);
-			j.emplace("linearVelocityY", body->GetLinearVelocity().y);
+            auto linearVelocity = body->GetLinearVelocity();
+			j.emplace("2dLinearVelocity", std::vector<float>({linearVelocity.x, linearVelocity.y}));
 			j.emplace("angularVelocity", body->GetAngularVelocity());
 			j.emplace("linearDamping", body->GetLinearDamping());
 			j.emplace("angularDamping", body->GetAngularDamping());
@@ -108,16 +109,17 @@ public:
 
 	void from_json(const json& j, WORLD* toWorld) {
 		bool active, bullet, allowSleep, awake, fixedRotation;
-		float x, y, angle, velx, vely, angVel, linearDamp, angDamp;
+		float angle, angVel, linearDamp, angDamp;
 		float gravityScale, friction, restitution, density;
 		int bodyType;
 
 		j.at("active").get_to(active);
-		j.at("posX").get_to(x);
-		j.at("posY").get_to(y);
+        
+        std::vector<float> pos;
+		j.at("2dCoords").get_to(pos);
 		j.at("angle").get_to(angle);
-		j.at("linearVelocityX").get_to(velx);
-		j.at("linearVelocityY").get_to(vely);
+        std::vector<float> linearVelocity;
+		j.at("2dLinearVelocity").get_to(linearVelocity);
 		j.at("angularVelocity").get_to(angVel);
 		j.at("linearDamping").get_to(linearDamp);
 		j.at("angularDamping").get_to(angDamp);
@@ -146,9 +148,9 @@ public:
 
 		b2BodyDef bd;
 		bd.type = (b2BodyType)bodyType;
-		bd.position = b2Vec2(x, y);
+		bd.position = b2Vec2(pos[0], pos[1]);
 		bd.angle = angle;
-		bd.linearVelocity = b2Vec2(velx, vely);
+		bd.linearVelocity = b2Vec2(linearVelocity[0], linearVelocity[1]);
 		bd.angularVelocity = angVel;
 		bd.linearDamping = linearDamp;
 		bd.angularDamping = angDamp;

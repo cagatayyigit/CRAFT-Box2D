@@ -34,6 +34,8 @@ struct SceneState {
             json j;
             bool fileLoadRes = JSONHelper::loadJSON(j, fromFile);
             
+            //FIXME: Read directions and apply transformation if they can be updated
+            
             if(fileLoadRes) {
                 clear();
                 
@@ -62,9 +64,25 @@ struct SceneState {
             object->to_json(jObject);
             jScene.push_back(jObject);
         }
-        json objectsKeyWrapper;
-        objectsKeyWrapper.emplace(objectsKey, jScene);
-        return objectsKeyWrapper;
+        json retWrapper;
+        retWrapper.emplace(objectsKey, jScene);
+        
+        std::vector<float> leftDirecions = {-1.0f, 0.0f};
+        std::vector<float> rightDirecions = {1.0f, 0.0f};
+        std::vector<float> aboveDirecions = {0.0f, 1.0f};
+        std::vector<float> belowDirecions = {0.0f, -1.0f};
+        
+        json leftJson, rightJson, aboveJson, belowJson;
+        leftJson.emplace("left", leftDirecions);
+        rightJson.emplace("right", rightDirecions);
+        aboveJson.emplace("above", aboveDirecions);
+        belowJson.emplace("below", belowDirecions);
+        std::vector<json> directionJsons = {leftJson, rightJson, aboveJson, belowJson};
+        for(auto dir: directionJsons) {
+            retWrapper.emplace(directionsKey, dir);
+        }
+        
+        return retWrapper;
     }
     
     bool saveToJSONFile(WORLD* fromWorld, std::string toFile) const {
@@ -82,6 +100,7 @@ struct SceneState {
     
 private:
     const std::string objectsKey = "objects";
+    const std::string directionsKey = "directions";
     std::vector<ObjectState::Ptr> objects;
 };
 
