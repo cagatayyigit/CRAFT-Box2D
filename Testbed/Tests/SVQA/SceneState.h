@@ -76,15 +76,12 @@ struct SceneState {
         std::vector<float> aboveDirecions = {0.0f, 1.0f};
         std::vector<float> belowDirecions = {0.0f, -1.0f};
         
-        json leftJson, rightJson, aboveJson, belowJson;
-        leftJson.emplace("left", leftDirecions);
-        rightJson.emplace("right", rightDirecions);
-        aboveJson.emplace("above", aboveDirecions);
-        belowJson.emplace("below", belowDirecions);
-        std::vector<json> directionJsons = {leftJson, rightJson, aboveJson, belowJson};
-        for(auto dir: directionJsons) {
-            retWrapper.emplace(directionsKey, dir);
-        }
+        json dirJson;
+        dirJson.emplace("left", leftDirecions);
+        dirJson.emplace("right", rightDirecions);
+        dirJson.emplace("above", aboveDirecions);
+        dirJson.emplace("below", belowDirecions);
+        retWrapper.emplace(directionsKey, dirJson);
         
         return retWrapper;
     }
