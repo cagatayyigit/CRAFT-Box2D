@@ -168,11 +168,11 @@ public:
         case STATIC_BASKET:
             return std::shared_ptr<b2ChainShape>(getBasketShape());
         case STATIC_LEFT_BOUNDARY:
-            return std::make_shared<b2PolygonShape>(getRectangle(0.5, 55, b2Vec2(-40.0f, 20.0f), 0.0f));
+            return std::make_shared<b2PolygonShape>(getRectangle(0.25, 55, b2Vec2(-40.0f, 20.0f), 0.0f));
         case STATIC_RIGHT_BOUNDARY:
-            return std::make_shared<b2PolygonShape>(getRectangle(0.5, 55, b2Vec2(40.0f, 20.0f), 0.0f));
+            return std::make_shared<b2PolygonShape>(getRectangle(0.25, 55, b2Vec2(40.0f, 20.0f), 0.0f));
         case STATIC_BOTTOM_BOUNDARY:
-            return std::make_shared<b2PolygonShape>(getRectangle(0.5, 55, b2Vec2(0.0f, -5.0f), M_PI / 2));
+            return std::make_shared<b2PolygonShape>(getRectangle(0.25, 55, b2Vec2(0.0f, -5.0f), M_PI / 2));
 		}
 		return nullptr;
 	}

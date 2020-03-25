@@ -75,9 +75,6 @@
     <ClInclude Include="..\Testbed\Tests\SVQA\SimulationID.h">
       <Filter>Tests\SVQA</Filter>
     </ClInclude>
-    <ClInclude Include="..\Testbed\Tests\SVQA\SimulationMaterial.h">
-      <Filter>Tests\SVQA</Filter>
-    </ClInclude>
     <ClInclude Include="..\Testbed\Tests\SVQA\SimulationObject.h">
       <Filter>Tests\SVQA</Filter>
     </ClInclude>
@@ -188,9 +185,6 @@
     </ClCompile>
     <ClCompile Include="..\Testbed\Framework\SimulationRenderer.cpp">
       <Filter>Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Testbed\Tests\SVQA\SimulationMaterial.cpp">
-      <Filter>Tests\SVQA</Filter>
     </ClCompile>
     <ClCompile Include="..\Testbed\glad\glad.c">
       <Filter>glad</Filter>

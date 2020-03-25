@@ -200,7 +200,6 @@
     <ClInclude Include="..\Testbed\Tests\SVQA\SimulationBase.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\SimulationColor.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\SimulationID.h" />
-    <ClInclude Include="..\Testbed\Tests\SVQA\SimulationMaterial.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\SimulationObject.h" />
     <ClInclude Include="..\Testbed\glad\glad.h" />
     <ClInclude Include="..\Testbed\glad\khrplatform.h" />
@@ -234,7 +233,6 @@
     <ClCompile Include="..\Testbed\Framework\SVQA\EndTouchingEvent.cpp" />
     <ClCompile Include="..\Testbed\Framework\SVQA\StartEvent.cpp" />
     <ClCompile Include="..\Testbed\Framework\SVQA\StartTouchingEvent.cpp" />
-    <ClCompile Include="..\Testbed\Tests\SVQA\SimulationMaterial.cpp" />
     <ClCompile Include="..\Testbed\glad\glad.c" />
     <ClCompile Include="..\Testbed\glfw\context.c" />
     <ClCompile Include="..\Testbed\glfw\egl_context.c" />
