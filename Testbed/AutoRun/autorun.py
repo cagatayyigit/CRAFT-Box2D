@@ -1,6 +1,7 @@
 import sys
 import argparse
 import json
+import subprocess
 
 
 parser = argparse.ArgumentParser()
@@ -30,7 +31,8 @@ args = parser.parse_args()
 
 
 sim_id_to_step_count = {
-    0: 600
+    0: 600,
+    1: 1200
 }
 
 
@@ -70,6 +72,18 @@ def construct_jsons(run_count: int, simulation_id: int):
         controller_json_path = f"controller_train_{i:06d}.json"
         with open(controller_json_path, 'w') as the_file:
             json.dump(get_json("train",simulation_id,f"{i:06d}"), the_file, indent=4)
+
+
+def get_controller_json_path(data_type: str, controller_id: int):
+    return f"controller_{data_type}_{controller_id:06d}"
+
+
+def run_simulation(controller_json_path: str):
+    subprocess.call([args.exec_path, controller_json_path])
+
+
+def run_all_simulations():
+    pass
 
 
 
