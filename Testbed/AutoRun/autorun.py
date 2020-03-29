@@ -90,13 +90,12 @@ def run_simulation(controller_json_path: str):
 
    
 def run_all_simulations():
-    base_full_path = os.getcwd()
-    print(base_full_path)
+    base_full_path = os.getcwd() 
     controller_filenames = [c for c in glob.glob("./controllers/*.json")]
     
     for name in controller_filenames:
-        print(f"{base_full_path}{name}")
-        run_simulation(f"{base_full_path}{name}")
+        print(f"Running: {base_full_path}/{name}")
+        run_simulation(f"{base_full_path}/{name}")
 
 
 def main():
