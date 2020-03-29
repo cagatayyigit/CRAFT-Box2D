@@ -2,6 +2,8 @@ import sys
 import argparse
 import json
 import subprocess
+import os
+import glob
 
 
 parser = argparse.ArgumentParser()
@@ -41,11 +43,11 @@ def get_json(data_type: str, simulation_id: int, controller_id: int):
         f"""{{
                 "simulationID": {simulation_id},
                 "offline": true,
-                "outputVideoPath": "SVQA_{data_type}_{controller_id}.mpg",
-                "outputJSONPath":  "SVQA_{data_type}_{controller_id}.json",
+                "outputVideoPath": "outputs/SVQA_{data_type}_{controller_id}.mpg",
+                "outputJSONPath":  "outputs/SVQA_{data_type}_{controller_id}.json",
                 "width": 1024,
                 "height": 640,
-                "inputScenePath":  "SVQA_{data_type}_{controller_id}.json",
+                "inputScenePath":  "",
                 "numberOfObjects": 2,
                 "numberOfObstacles": 1,
                 "numberOfPendulums": 1,
@@ -58,38 +60,56 @@ def construct_jsons(run_count: int, simulation_id: int):
     val = float(args.validation_set_ratio) * int(run_count)
     train = float(args.train_set_ratio) * int(run_count)
 
+    if not os.path.exists("controllers"):
+        os.makedirs("controllers")
+
+    if not os.path.exists("outputs"):
+        os.makedirs("outputs")
+
     for i in range(int(test)): 
-        controller_json_path = f"controller_test_{i:06d}.json"
+        controller_json_path = f"controllers/controller_test_{i:06d}.json"
         with open(controller_json_path, 'w') as the_file:
             json.dump(get_json("test",simulation_id,f"{i:06d}"), the_file, indent=4)
             
     for i in range(int(val)):
-        controller_json_path = f"controller_val_{i:06d}.json"
+        controller_json_path = f"controllers/controller_val_{i:06d}.json"
         with open(controller_json_path, 'w') as the_file:
             json.dump(get_json("val",simulation_id,f"{i:06d}"), the_file, indent=4)
 
     for i in range(int(train)):
-        controller_json_path = f"controller_train_{i:06d}.json"
+        controller_json_path = f"controllers/controller_train_{i:06d}.json"
         with open(controller_json_path, 'w') as the_file:
             json.dump(get_json("train",simulation_id,f"{i:06d}"), the_file, indent=4)
 
 
 def get_controller_json_path(data_type: str, controller_id: int):
-    return f"controller_{data_type}_{controller_id:06d}"
-
+    return f"controllers/controller_{data_type}_{controller_id:06d}"
 
 def run_simulation(controller_json_path: str):
-    subprocess.call([args.exec_path, controller_json_path])
+    subprocess.call(f"{args.exec_path} {controller_json_path}", shell=True, universal_newlines=True)
 
-
+   
 def run_all_simulations():
-    pass
-
+    base_full_path = os.getcwd()
+    print(base_full_path)
+    controller_filenames = [c for c in glob.glob("./controllers/*.json")]
+    
+    for name in controller_filenames:
+        print(f"{base_full_path}{name}")
+        run_simulation(f"{base_full_path}{name}")
 
 
 def main():
     construct_jsons(int(args.number_of_runs), int(args.simulation_id))
+    run_all_simulations()
 
 
 if __name__ == "__main__":
+    print("Running simulations...")
     main()
+
+
+
+
+
+ 
