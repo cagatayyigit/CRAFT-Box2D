@@ -35,6 +35,8 @@
 #include "ControllerParser.h"
 #include <time.h>
 
+
+
 //
 namespace
 {
@@ -108,17 +110,22 @@ void renderLoop(Simulation* simulation, SettingsBase* settings)
 	}
 }
 
-//
-int main(int, char**)
+
+
+
+
+
+
+int main(int, char** args)
 {
 	// To produce random numbers rather than getting same numbers on every run.
-	srand(time(NULL) + 42); 
+	srand(time(NULL) + 42);
 
-	std::string controllerJSONPath = "controller.json";
+	std::string controllerJSONPath = args[1];
 	const svqa::SimulationBase::Ptr& simulation = svqa::parse(controllerJSONPath);
 	const auto& settings = simulation->getSettings();
 
-	glfwSetErrorCallback(glfwErrorCallback);	
+	glfwSetErrorCallback(glfwErrorCallback);
 
 	g_camera.m_width = settings->bufferWidth;
 	g_camera.m_height = settings->bufferHeight;
@@ -137,7 +144,7 @@ int main(int, char**)
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	//if(settings->offline)
+//		if(settings->offline)
 //    {
 //        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 //    }
@@ -183,6 +190,5 @@ int main(int, char**)
 	g_debugDraw.Destroy();
 	ImGui_ImplGlfwGL3_Shutdown();
 	glfwTerminate();
-
 	return 0;
 }
