@@ -76,8 +76,8 @@ public:
             case STATIC_RAMP: return "ramp";
             case STATIC_PLATFORM: return "platform";
             case STATIC_BASKET: return "basket";
-            case STATIC_LEFT_BOUNDARY: return "wall";
-            case STATIC_RIGHT_BOUNDARY: return "wall"; //Check if using same value is ok!
+            case STATIC_LEFT_BOUNDARY: return "wall_l";
+            case STATIC_RIGHT_BOUNDARY: return "wall_r"; //Check if using same value is ok!
             case STATIC_BOTTOM_BOUNDARY: return "ground";
             default: break;
         }
