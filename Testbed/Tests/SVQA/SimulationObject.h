@@ -183,20 +183,20 @@ public:
     
     float getFriction() const
     {
-        return 0.30f;
+        return 0.10f;
     }
     
     float getDensity() const
     {
-        return 5.0f;
+        return 50.0f;
     }
     
     float getRestitution() const
     {
         if(isStatic()) {
-            return 0.0f;
+            return 0.2f;
         }
-        return 0.10f;
+        return 0.2f;
     }
 
 	static b2VisPolygonShape getCube(const float& edgeLength)
