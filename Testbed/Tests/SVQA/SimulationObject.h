@@ -76,8 +76,8 @@ public:
             case STATIC_RAMP: return "ramp";
             case STATIC_PLATFORM: return "platform";
             case STATIC_BASKET: return "basket";
-            case STATIC_LEFT_BOUNDARY: return "wall";
-            case STATIC_RIGHT_BOUNDARY: return "wall"; //Check if using same value is ok!
+            case STATIC_LEFT_BOUNDARY: return "wall_l";
+            case STATIC_RIGHT_BOUNDARY: return "wall_r"; //Check if using same value is ok!
             case STATIC_BOTTOM_BOUNDARY: return "ground";
             default: break;
         }
@@ -183,20 +183,20 @@ public:
     
     float getFriction() const
     {
-        return 0.30f;
+        return 0.10f;
     }
     
     float getDensity() const
     {
-        return 5.0f;
+        return 50.0f;
     }
     
     float getRestitution() const
     {
         if(isStatic()) {
-            return 0.0f;
+            return 0.2f;
         }
-        return 0.10f;
+        return 0.2f;
     }
 
 	static b2VisPolygonShape getCube(const float& edgeLength)

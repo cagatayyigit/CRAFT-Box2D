@@ -35,7 +35,7 @@ void DestructionListener::SayGoodbye(b2Joint* joint)
 Simulation::Simulation()
 {
 	b2Vec2 gravity;
-	gravity.Set(0.0f, -10.0f);
+	gravity.Set(0.0f, -15.0f);
     
 	m_world = new WORLD(gravity);
 

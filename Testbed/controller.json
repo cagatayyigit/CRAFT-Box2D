@@ -5,9 +5,9 @@
   "outputJSONPath": "SVQA_val_000000.json",
   "width": 1024,
   "height": 640,
-  "inputScenePath": "SVQA_val_000000.json",
+  "inputScenePath": "",
   "numberOfObjects": 2,
   "numberOfObstacles": 1,
   "numberOfPendulums": 1,
-  "stepCount": 600
+  "stepCount": 400
 }
