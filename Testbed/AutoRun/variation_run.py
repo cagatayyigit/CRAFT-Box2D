@@ -31,15 +31,15 @@ def new_output_json(output: json, i: int):
 def create_variations(controller: json, output: json) -> list:
     start_scene_state = output["scene_states"][0]
     objects = start_scene_state["scene"]["objects"]
-    variations = [new_output_json(output, i) for i in range(len(objects)) if objects[i]["shape"] not in ["wall", "ground"]]
+    variations = [new_output_json(output, i) for i in range(len(objects)) if objects[i]["shape"] not in ["wall","wall_r", "wall_l", "ground"]]
     controller_paths = []
     for i in range(len(variations)):
         output = variations[i]
         name = f"{os.path.splitext(args.path)[0]}_var_{i}"
         json.dump(output, open(f"{name}.json", "w"))
         controller_paths.append(create_controller_variations(controller, name))
-    
-    return controller_paths
+        
+        return controller_paths
 
 
 
