@@ -14,6 +14,7 @@ namespace svqa {
 
 		ObstructionDemoSimulation(ObstructionDemoSettings::Ptr _settings_) : SimulationBase(_settings_)
 		{
+			
 			m_nNumberOfObjects = _settings_->numberOfObjects;
 			m_nNumberOfObstacles = _settings_->numberOfObstacles;
 

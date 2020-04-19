@@ -13,7 +13,9 @@ namespace svqa {
 		typedef std::shared_ptr<Scene1Simulation> Ptr;
 		Scene1Simulation(Scene1Settings::Ptr settings) : SimulationBase(settings)
 		{
-			m_nNumberOfObjects = 1;
+			m_nNumberOfObjects = settings->numberOfObjects;
+			m_nNumberOfObstacles = settings->numberOfObstacles;
+
 			SET_FILE_OUTPUT_TRUE(m_pSettings->outputVideoPath)
 		}
 
@@ -43,67 +45,100 @@ namespace svqa {
 			float32 leftFloorLen = (RandomFloatFromHardware(15.0, 18.0));
 			float32 rightFloorCoorX = (RandomFloatFromHardware(40.0, 46.0));
 
-			float32 leftBottomCircleCoorX = (RandomFloatFromHardware(-30.0, 10.0));
-			float32 rightBottomCircleCoorX = (RandomFloatFromHardware(12.0, 30.0));
+			
 
 			float32 inclinedFloorLen = (RandomFloatFromHardware(9.0, 12.0));
 			float32 circleV = (RandomFloatFromHardware(-5.0, -15.0));
 
-            //TODO: Şamil or Çağatay ---> Bunlar daha önce shape ptr'yi direkt aliyorlardi
-            // Left  Floor
-            AddStaticObject(b2Vec2(-16.0f, 3.0f), 0, SimulationObject::STATIC_PLATFORM);
             
-            // Right Floor
-            AddStaticObject(b2Vec2(rightFloorCoorX, 3.0f), 0, SimulationObject::STATIC_PLATFORM);
+            // Bottom Left  Floor
+            AddStaticObject(b2Vec2(-16.0f, 6.0f), 0, SimulationObject::STATIC_PLATFORM);
+			// Basket
+			addTargetBasket(b2Vec2(0.0f, 0.0f), 0.0f);
+            // Bottom Right Floor
+            AddStaticObject(b2Vec2(16.0f, 6.0f), 0, SimulationObject::STATIC_PLATFORM);
             
+
+			// Bottom Left  Vertical Floor
+			AddStaticObject(b2Vec2(-25.0f, 16.0f), 4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
+
+
+			// Middle Left  Floor
+			AddStaticObject(b2Vec2(-5.0f, 18.0f), 51 * M_PI / 55, SimulationObject::STATIC_PLATFORM);
+			// Middle Right Floor
+			AddStaticObject(b2Vec2(16.0f, 23.0f), 0, SimulationObject::STATIC_PLATFORM);
+
+
+
+			// Ramp
+			//AddStaticObject(b2Vec2(25.0f, 10.0f), 0, SimulationObject::STATIC_RAMP);
+
+
             // Inclined Floor
-            AddStaticObject(b2Vec2(-28.0f, 35.0f), angle, SimulationObject::STATIC_PLATFORM);
+            //AddStaticObject(b2Vec2(-28.0f, 35.0f), angle, SimulationObject::STATIC_PLATFORM);
 
 			// Inclined Floor
-            AddStaticObject(b2Vec2(-10.0f, 25.0f), M_PI / 4, SimulationObject::STATIC_PLATFORM);
+            //AddStaticObject(b2Vec2(-10.0f, 25.0f), angle, SimulationObject::STATIC_PLATFORM);
 
-            //TODO: NO SMALL AND BIG RAMP FOR NOW
-			// Big Ramp
-            AddStaticObject(rampPosition, 0.0f, SimulationObject::STATIC_RAMP);
+            
+			
+            //AddStaticObject(rampPosition, 0.0f, SimulationObject::STATIC_RAMP);
  
-			// Small Ramp
-            AddStaticObject(b2Vec2(-40.0f, -6.0f), 0.0f, SimulationObject::STATIC_RAMP);
-
 			// Circles
+
 			// Stationary Bottom-Left
+			float32 leftBottomCircleCoorX = (RandomFloatFromHardware(-15.0, -10.0));
 			AddDynamicObject(
-				b2Vec2(leftBottomCircleCoorX, -3.0f),
+				b2Vec2(-10.0f, 8.0f),
 				b2Vec2(0.0f, 0.0f),
 				SimulationObject::CIRCLE,
-				SimulationObject::GREEN,
+				SimulationObject::GRAY,
                 SimulationObject::SMALL
 			);
 
 			// Stationary Bottom-Right
+			float32 rightBottomCircleCoorX = (RandomFloatFromHardware(10.0, 15.0));
 			AddDynamicObject(
-				b2Vec2(rightBottomCircleCoorX, -3.0f),
+				b2Vec2(rightBottomCircleCoorX, 8.0f),
 				b2Vec2(0.0f, 0.0f),
                 SimulationObject::CIRCLE,
                 SimulationObject::RED,
                 SimulationObject::SMALL
 			);
 
+
+			
+
+
+
 			// Moving on the Right Floor
 			AddDynamicObject(
-				b2Vec2(30.0f, 6.0f),
-				b2Vec2(circleV, 0.0f),
+				b2Vec2(32.0f, 17.0f),
+				b2Vec2(-10.0f, -4.0f),
                 SimulationObject::CIRCLE,
                 SimulationObject::BLUE,
                 SimulationObject::SMALL
 			);
 
+			// Falling Circle from mid
 			AddDynamicObject(
-				b2Vec2(-30.0f, 42.0f),
-				b2Vec2(0.0f, 0.0f),
+				b2Vec2(-10.0f, 42.0f),
+				b2Vec2(3.0f, -8.0f),
                 SimulationObject::CIRCLE,
-                SimulationObject::YELLOW,
+                SimulationObject::CYAN,
                 SimulationObject::SMALL
 			);
+
+			// Falling Circle from right
+			AddDynamicObject(
+				b2Vec2(16.0f, 30.0f),
+				b2Vec2(-21.0f, -5.0f),
+				SimulationObject::CIRCLE,
+				SimulationObject::BROWN,
+				SimulationObject::SMALL
+			);
+
+			
 		}
 
 	private:
