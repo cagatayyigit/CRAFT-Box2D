@@ -110,13 +110,7 @@ void renderLoop(Simulation* simulation, SettingsBase* settings)
 	}
 }
 
-
-
-
-
-
-
-int main(int, char** args)
+int main(int c, char** args)
 {
 	// To produce random numbers rather than getting same numbers on every run.
 	srand(time(NULL) + 42);
@@ -144,10 +138,10 @@ int main(int, char** args)
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-//		if(settings->offline)
-//    {
-//        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-//    }
+	//		if(settings->offline)
+	//    {
+	//        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+	//    }
 
 #ifdef _MSC_VER
 	mainWindow = glfwCreateWindow(g_camera.m_width, g_camera.m_height, title, NULL, NULL);
