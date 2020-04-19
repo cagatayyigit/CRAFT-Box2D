@@ -5,11 +5,9 @@ import subprocess
 import os
 import glob
 
-
 parser = argparse.ArgumentParser()
 
 args = None
-
 
 sim_id_to_step_count = {
     0: 600,
@@ -84,8 +82,8 @@ def main():
 
 
 def init_args():
-
-    parser.add_argument('--executable-path', action='store', dest='exec_path', required=True,
+    parser.add_argument('--executable-path', action='store', dest='exec_path', required=False, nargs='?', type=str,
+                        default="\"../../Build/bin/x86_64/Release/Testbed\"",
                         help='Testbed executable path.')
 
     parser.add_argument('--simulation-id', action='store', dest='simulation_id', required=True,
@@ -100,7 +98,7 @@ def init_args():
     parser.add_argument('--validation-set-ratio', action='store', dest='validation_set_ratio', required=True,
                         help='Validation dataset ratio.')
 
-    parser.add_argument('--train-set-ratio', action='store', dest='train_set_ratio',  required=True,
+    parser.add_argument('--train-set-ratio', action='store', dest='train_set_ratio', required=True,
                         help='Train dataset ratio.')
 
     parser.add_argument('--version', action='version', version='%(prog)s 1.0')

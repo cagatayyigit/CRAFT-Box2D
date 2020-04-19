@@ -31,7 +31,7 @@ def create_variations(controller: json, output: json) -> list:
         json.dump(output, open(f"{name}.json", "w"))
         controller_paths.append(create_controller_variations(controller, name))
 
-        return controller_paths
+    return controller_paths
 
 
 def create_controller_variations(controller: json, name: str) -> str:
@@ -53,13 +53,14 @@ def init_args():
                         help='Simulation\'s output JSON path.')
     parser.add_argument('--controller-path', action='store', dest='controller_path', required=True,
                         help='Simulation\'s controller JSON path.')
-    parser.add_argument('--executable-path', action='store', dest='exec_path', required=True,
+    parser.add_argument('--executable-path', action='store', dest='exec_path', required=False, nargs='?', type=str,
+                        default="\"../../Build/bin/x86_64/Release/Testbed\"",
                         help='Testbed executable path.')
 
     args = parser.parse_args()
 
 
-def run_variations(): 
+def run_variations():
     controller_paths = create_variations(json.load(open(args.controller_path, "r")), json.load(open(args.path, "r")))
     for c in controller_paths:
         run_simulation(args.exec_path, c)
@@ -67,4 +68,5 @@ def run_variations():
 
 if __name__ == '__main__':
     init_args()
+    print(f"Executable path: '{args.exec_path}'\nController path: '{args.controller_path}'\nSimulation\'s output JSON path: '{args.path}'")
     run_variations()
