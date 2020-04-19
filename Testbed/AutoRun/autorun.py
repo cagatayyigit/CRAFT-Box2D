@@ -85,26 +85,24 @@ def main():
 
 def init_args():
 
-
     parser.add_argument('--executable-path', action='store', dest='exec_path', required=True,
                         help='Testbed executable path.')
-    
+
     parser.add_argument('--simulation-id', action='store', dest='simulation_id', required=True,
                         help='Simulation id.')
-    
+
     parser.add_argument('--number-of-runs', action='store', dest='number_of_runs', required=True,
                         help='Number of simulation runs.')
-    
+
     parser.add_argument('--test-set-ratio', action='store', dest='test_set_ratio', required=True,
                         help='Test dataset ratio.')
-    
+
     parser.add_argument('--validation-set-ratio', action='store', dest='validation_set_ratio', required=True,
                         help='Validation dataset ratio.')
-    
+
     parser.add_argument('--train-set-ratio', action='store', dest='train_set_ratio',  required=True,
                         help='Train dataset ratio.')
-    
-    
+
     parser.add_argument('--version', action='version', version='%(prog)s 1.0')
 
     global args
