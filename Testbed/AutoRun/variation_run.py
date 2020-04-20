@@ -56,15 +56,33 @@ def init_args():
     parser.add_argument('--executable-path', action='store', dest='exec_path', required=False, nargs='?', type=str,
                         default="\"../../Build/bin/x86_64/Release/Testbed\"",
                         help='Testbed executable path.')
-    parser.add_argument('--variations-output-path', action='store', dest='variations-output-path', required=True,
+    parser.add_argument('--variations-output-path', action='store', dest='variations_output_path', required=True,
                         help='Simulation\'s output JSON path.')
 
     args = parser.parse_args()
 
+def get_variation_output(controller: str):
+    with open(controller) as controller_json_file:
+        controller_data = json.load(controller_json_file)
+        with open(controller_data["outputJSONPath"]) as output_json_file:
+            output_data = json.load(output_json_file)
+
+    return output_data
+
+
 def run_variations():
-    controller_paths = create_variations(json.load(open(args.controller_path, "r")), json.load(open(args.path, "r")))
+    final_output_json = {}
+    original_output_path = json.load(open(args.path, "r"))
+    final_output_json["original_video_output"] = original_output_path
+    variation_outputs = {}
+
+    controller_paths = create_variations(json.load(open(args.controller_path, "r")), original_output_path)
     for c in controller_paths:
         run_simulation(args.exec_path, c[1])
+        variation_outputs[str(c[0])] = get_variation_output(c[1])
+    final_output_json["variations_outputs"] = variation_outputs
+
+    json.dump(final_output_json, open(args.variations_output_path, "w"))
 
 
 if __name__ == '__main__':
