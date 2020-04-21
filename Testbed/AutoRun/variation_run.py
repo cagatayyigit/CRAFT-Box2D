@@ -23,13 +23,13 @@ def new_output_json(output: json, i: int):
 def create_variations(controller: json, output: json) -> list:
     start_scene_state = output["scene_states"][0]
     objects = start_scene_state["scene"]["objects"]
-    variations = [new_output_json(output, i) for i in range(len(objects)) if objects[i]["shape"] not in ["wall", "wall_r", "wall_l", "ground"]]
+    variations = [(objects[i]["uniqueID"], new_output_json(output, i)) for i in range(len(objects)) if objects[i]["bodyType"] != 0] #0 for static objects
     controller_paths = []
     for i in range(len(variations)):
         output = variations[i]
-        name = f"{os.path.splitext(args.path)[0]}_var_{i}"
-        json.dump(output, open(f"{name}.json", "w"))
-        controller_paths.append(create_controller_variations(controller, name))
+        name = f"{os.path.splitext(args.path)[0]}_var_{output[0]}"
+        json.dump(output[1], open(f"{name}.json", "w"))
+        controller_paths.append((output[0], create_controller_variations(controller, name)))
 
     return controller_paths
 
@@ -56,14 +56,33 @@ def init_args():
     parser.add_argument('--executable-path', action='store', dest='exec_path', required=False, nargs='?', type=str,
                         default="\"../../Build/bin/x86_64/Release/Testbed\"",
                         help='Testbed executable path.')
+    parser.add_argument('--variations-output-path', action='store', dest='variations_output_path', required=True,
+                        help='Simulation\'s output JSON path.')
 
     args = parser.parse_args()
 
+def get_variation_output(controller: str):
+    with open(controller) as controller_json_file:
+        controller_data = json.load(controller_json_file)
+        with open(controller_data["outputJSONPath"]) as output_json_file:
+            output_data = json.load(output_json_file)
+
+    return output_data
+
 
 def run_variations():
-    controller_paths = create_variations(json.load(open(args.controller_path, "r")), json.load(open(args.path, "r")))
+    final_output_json = {}
+    original_output_path = json.load(open(args.path, "r"))
+    final_output_json["original_video_output"] = original_output_path
+    variation_outputs = {}
+
+    controller_paths = create_variations(json.load(open(args.controller_path, "r")), original_output_path)
     for c in controller_paths:
-        run_simulation(args.exec_path, c)
+        run_simulation(args.exec_path, c[1])
+        variation_outputs[str(c[0])] = get_variation_output(c[1])
+    final_output_json["variations_outputs"] = variation_outputs
+
+    json.dump(final_output_json, open(args.variations_output_path, "w"))
 
 
 if __name__ == '__main__':
