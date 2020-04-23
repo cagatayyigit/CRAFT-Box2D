@@ -277,6 +277,13 @@ namespace svqa {
 			m_SceneJSONState.add(objectState);
 		}
 
+		void AddRandomDynamicObject(b2Vec2 position, b2Vec2 velocity) {
+			SimulationObject::Shape shapeType = SimulationObject::getRandomShape();
+			SimulationObject::Color colorType = SimulationObject::getRandomColor();
+			SimulationObject::Size sizeType = SimulationObject::getRandomSize();
+			AddDynamicObject(position, velocity,shapeType,colorType,sizeType);
+		}
+
 		void AddStaticObject(b2Vec2 position, float32 angle, SimulationObject::Shape shapeType)
 		{
 			SimulationObject object = SimulationObject(shapeType, SimulationObject::BLACK, SimulationObject::LARGE);

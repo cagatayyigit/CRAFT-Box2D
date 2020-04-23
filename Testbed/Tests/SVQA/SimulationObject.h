@@ -15,9 +15,8 @@
 #include "Box2D/Collision/Shapes/b2EdgeShape.h"
 #include "Box2D/Collision/Shapes/b2PolygonShape.h"
 #include "Box2D/Collision/Shapes/b2ChainShape.h"
-
 #include "SimulationDefines.h"
-
+#include <ctime>
 typedef std::shared_ptr<b2Shape> ShapePtr;
 
 #define M_PI 3.14159265f
@@ -65,6 +64,26 @@ public:
         mSize = sz;
 	}
     
+
+    static Size getRandomSize() {
+        
+        int i = std::rand() % 2;
+        return Size(i); 
+    }
+
+    static Color getRandomColor() {
+        
+        int i = std::rand() % 9;
+        return Color(i);
+    }
+
+    static Shape getRandomShape() {
+        
+        int i = std::rand() % 4;
+        return Shape(i);
+    }
+
+
     static std::string getRepresentation(Shape sh)
     {
         switch (sh)
@@ -130,6 +149,8 @@ public:
         }
         return b2Color(0, 0, 0);
     }
+
+   
     
     bool isStatic() const
     {
@@ -164,7 +185,7 @@ public:
         case STATIC_RAMP:
             return std::make_shared<b2PolygonShape>(getPolygon(3.0f, 3));
         case STATIC_PLATFORM:
-            return std::make_shared<b2PolygonShape>(getRectangle(8.0f, 2.0f));
+            return std::make_shared<b2PolygonShape>(getRectangle(10.0f, 1.0f));
         case STATIC_BASKET:
             return std::shared_ptr<b2ChainShape>(getBasketShape());
         case STATIC_LEFT_BOUNDARY:
