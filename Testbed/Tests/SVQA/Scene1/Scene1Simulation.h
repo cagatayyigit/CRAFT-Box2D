@@ -89,36 +89,22 @@ namespace svqa {
 
 			// Stationary Bottom-Left
 			float32 leftBottomCircleCoorX = (RandomFloatFromHardware(-15.0, -10.0));
-			AddDynamicObject(
-				b2Vec2(-10.0f, 8.0f),
-				b2Vec2(0.0f, 0.0f),
-				SimulationObject::CIRCLE,
-				SimulationObject::GRAY,
-                SimulationObject::SMALL
+			AddRandomDynamicObject(
+				b2Vec2(-10.0f, 11.0f),
+				b2Vec2(0.0f, 0.0f)
 			);
 
 			// Stationary Bottom-Right
 			float32 rightBottomCircleCoorX = (RandomFloatFromHardware(10.0, 15.0));
-			AddDynamicObject(
-				b2Vec2(rightBottomCircleCoorX, 8.0f),
-				b2Vec2(0.0f, 0.0f),
-                SimulationObject::CIRCLE,
-                SimulationObject::RED,
-                SimulationObject::SMALL
+			AddRandomDynamicObject(
+				b2Vec2(rightBottomCircleCoorX, 11.0f),
+				b2Vec2(0.0f, 0.0f)
 			);
 
-
-			
-
-
-
 			// Moving on the Right Floor
-			AddDynamicObject(
+			AddRandomDynamicObject(
 				b2Vec2(32.0f, 17.0f),
-				b2Vec2(-10.0f, -4.0f),
-                SimulationObject::CIRCLE,
-                SimulationObject::BLUE,
-                SimulationObject::SMALL
+				b2Vec2(-10.0f, -4.0f)
 			);
 
 			// Falling Circle from mid
