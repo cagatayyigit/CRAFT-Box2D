@@ -29,9 +29,13 @@ public:
     bool hasAttachedTexture() const;
     
     //Gets unique id associated with the body
-    int getUniqueId() const;
+    int getUniqueId();
+    
+    //Sets unique id associated with the body
+    void setUniqueId(const int& id);
     
 private:
+    int m_nUniqueId;
     b2Color m_Color;
     b2VisTexture::Ptr m_pTexture;
 };
