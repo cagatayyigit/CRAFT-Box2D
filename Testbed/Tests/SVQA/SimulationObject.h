@@ -28,14 +28,13 @@ public:
 	{
 		CUBE = 0,
 		TRIANGLE = 1,
-		HEXAGON = 2,
-        CIRCLE = 3,
-		STATIC_RAMP = 4,
-		STATIC_PLATFORM = 5,
-        STATIC_BASKET = 6,
-        STATIC_LEFT_BOUNDARY = 7,
-        STATIC_RIGHT_BOUNDARY = 8,
-        STATIC_BOTTOM_BOUNDARY = 9
+        CIRCLE = 2,
+		STATIC_RAMP = 3,
+		STATIC_PLATFORM = 4,
+        STATIC_BASKET = 5,
+        STATIC_LEFT_BOUNDARY = 6,
+        STATIC_RIGHT_BOUNDARY = 7,
+        STATIC_BOTTOM_BOUNDARY = 8
     };
     
     enum Color
@@ -73,13 +72,13 @@ public:
 
     static Color getRandomColor() {
         
-        int i = std::rand() % 9;
+        int i = std::rand() % 8;
         return Color(i);
     }
 
     static Shape getRandomShape() {
         
-        int i = std::rand() % 4;
+        int i = std::rand() % 3;
         return Shape(i);
     }
 
@@ -90,7 +89,6 @@ public:
         {
             case CUBE: return "cube";
             case TRIANGLE: return "triangle";
-            case HEXAGON: return "hexagon";
             case CIRCLE: return "circle";
             case STATIC_RAMP: return "ramp";
             case STATIC_PLATFORM: return "platform";
@@ -178,8 +176,6 @@ public:
 			return std::make_shared<b2PolygonShape>(getPolygon(length, 4));
         case TRIANGLE:
             return std::make_shared<b2PolygonShape>(getPolygon(length, 3));
-        case HEXAGON:
-            return std::make_shared<b2PolygonShape>(getPolygon(length, 6));
         case CIRCLE:
             return std::make_shared<b2CircleShape>(getCircle(length));
         case STATIC_RAMP:
@@ -344,7 +340,6 @@ public:
 NLOHMANN_JSON_SERIALIZE_ENUM(SimulationObject::Shape, {
 	{SimulationObject::CUBE, SimulationObject::getRepresentation(SimulationObject::CUBE)},
 	{SimulationObject::TRIANGLE, SimulationObject::getRepresentation(SimulationObject::TRIANGLE)},
-    {SimulationObject::HEXAGON, SimulationObject::getRepresentation(SimulationObject::HEXAGON)},
     {SimulationObject::CIRCLE, SimulationObject::getRepresentation(SimulationObject::CIRCLE)},
     {SimulationObject::STATIC_RAMP, SimulationObject::getRepresentation(SimulationObject::STATIC_RAMP)},
     {SimulationObject::STATIC_PLATFORM, SimulationObject::getRepresentation(SimulationObject::STATIC_PLATFORM)},

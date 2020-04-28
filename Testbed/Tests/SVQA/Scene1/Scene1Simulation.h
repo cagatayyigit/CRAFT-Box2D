@@ -69,8 +69,7 @@ namespace svqa {
 			AddStaticObject(b2Vec2(16.0f, 23.0f), 0, SimulationObject::STATIC_PLATFORM);
 
 
-			// Top Left  Floor
-			AddStaticObject(b2Vec2(-10.0f, 35.0f), 51 * M_PI / 55, SimulationObject::STATIC_PLATFORM);
+
 
 			// Ramp
 			//AddStaticObject(b2Vec2(25.0f, 10.0f), 0, SimulationObject::STATIC_RAMP);
@@ -135,16 +134,7 @@ namespace svqa {
 			);
 			
 
-			// Falling Circle from left
-			AddRandomDynamicObject(
-				b2Vec2(-25.0f, 42.0f),
-				b2Vec2(0.0f, -10.0f)
-			);
-
-			AddRandomDynamicObject(
-				b2Vec2(-30.0f, 22.0f),
-				b2Vec2(0.0f, -10.0f)
-			);
+			
 		}
 
 	private:
