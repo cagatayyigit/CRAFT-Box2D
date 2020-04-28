@@ -10,6 +10,7 @@
 
 b2VisBody::b2VisBody(const b2BodyDef* bd, b2World* world) : b2Body(bd, world)
 {
+    m_nUniqueId = -1;
     setColor(b2Color(1.0f, 1.0f, 1.0f, 1.0f));
 }
 
@@ -43,12 +44,21 @@ bool b2VisBody::hasAttachedTexture() const
     return m_pTexture.get() != nullptr && m_pTexture->getTextureId()>0;
 }
 
-int b2VisBody::getUniqueId() const
+void b2VisBody::setUniqueId(const int& id)
 {
+    m_nUniqueId = id;
+}
+
+int b2VisBody::getUniqueId()
+{
+    if(m_nUniqueId>=0) {
+        return m_nUniqueId;
+    }
     int index = 0;
     b2VisBody* list = (b2VisBody*) m_world->GetBodyList();
     for (b2VisBody* b = (b2VisBody*) list; b; b = (b2VisBody*) b->GetNext()) {
         if(b == this) {
+            setUniqueId(index);
             return index;
         }
         index++;

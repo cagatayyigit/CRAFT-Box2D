@@ -111,7 +111,7 @@ public:
 		bool active, bullet, allowSleep, awake, fixedRotation;
 		float angle, angVel, linearDamp, angDamp;
 		float gravityScale, friction, restitution, density;
-		int bodyType;
+		int bodyType, uniqueID;
 
 		j.at("active").get_to(active);
         
@@ -124,6 +124,7 @@ public:
 		j.at("linearDamping").get_to(linearDamp);
 		j.at("angularDamping").get_to(angDamp);
 		j.at("bodyType").get_to(bodyType);
+        j.at("uniqueID").get_to(uniqueID),
 		j.at("friction").get_to(friction);
         j.at("restitution").get_to(restitution);
         j.at("density").get_to(density);
@@ -172,6 +173,7 @@ public:
 		body->SetActive(active);
 		body->SetMassData(&massData);
 		body->SetGravityScale(gravityScale);
+        body->setUniqueId(uniqueID);
 
 #if !USE_DEBUG_DRAW
 		body->setColor(simObject.getColor());

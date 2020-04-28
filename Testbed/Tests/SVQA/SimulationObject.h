@@ -24,16 +24,16 @@ typedef std::shared_ptr<b2Shape> ShapePtr;
 class SimulationObject
 {
 public:
-	enum Shape
-	{
-		CUBE = 0,
-		TRIANGLE = 1,
-		HEXAGON = 2,
-        CIRCLE = 3,
-		STATIC_RAMP = 4,
-		STATIC_PLATFORM = 5,
-        STATIC_BASKET = 6,
-        STATIC_LEFT_BOUNDARY = 7,
+    enum Shape
+    {
+        CUBE = 0,
+        TRIANGLE = 1,
+        CIRCLE = 2,
+        STATIC_RAMP = 3,
+        STATIC_PLATFORM = 4,
+        STATIC_BASKET = 5,
+        STATIC_TABLE = 6,
+        STATIC_LEFT_BOUNDARY =7,
         STATIC_RIGHT_BOUNDARY = 8,
         STATIC_BOTTOM_BOUNDARY = 9
     };
@@ -73,13 +73,13 @@ public:
 
     static Color getRandomColor() {
         
-        int i = std::rand() % 9;
+        int i = std::rand() % 8;
         return Color(i);
     }
 
     static Shape getRandomShape() {
         
-        int i = std::rand() % 4;
+        int i = std::rand() % 3;
         return Shape(i);
     }
 
@@ -90,9 +90,9 @@ public:
         {
             case CUBE: return "cube";
             case TRIANGLE: return "triangle";
-            case HEXAGON: return "hexagon";
             case CIRCLE: return "circle";
             case STATIC_RAMP: return "ramp";
+            case STATIC_TABLE: return "table";
             case STATIC_PLATFORM: return "platform";
             case STATIC_BASKET: return "basket";
             case STATIC_LEFT_BOUNDARY: return "wall_l";
@@ -159,6 +159,7 @@ public:
             case STATIC_RAMP:
             case STATIC_PLATFORM:
             case STATIC_BASKET:
+            case STATIC_TABLE:
             case STATIC_LEFT_BOUNDARY:
             case STATIC_RIGHT_BOUNDARY:
             case STATIC_BOTTOM_BOUNDARY:
@@ -178,12 +179,12 @@ public:
 			return std::make_shared<b2PolygonShape>(getPolygon(length, 4));
         case TRIANGLE:
             return std::make_shared<b2PolygonShape>(getPolygon(length, 3));
-        case HEXAGON:
-            return std::make_shared<b2PolygonShape>(getPolygon(length, 6));
         case CIRCLE:
-            return std::make_shared<b2CircleShape>(getCircle(length));
+            return std::make_shared<b2CircleShape>(getCircle(length)); 
         case STATIC_RAMP:
             return std::make_shared<b2PolygonShape>(getPolygon(3.0f, 3));
+        case STATIC_TABLE:
+            return std::make_shared<b2PolygonShape>(getRectangle(14.0f, 10.0f));
         case STATIC_PLATFORM:
             return std::make_shared<b2PolygonShape>(getRectangle(10.0f, 1.0f));
         case STATIC_BASKET:
@@ -344,8 +345,8 @@ public:
 NLOHMANN_JSON_SERIALIZE_ENUM(SimulationObject::Shape, {
 	{SimulationObject::CUBE, SimulationObject::getRepresentation(SimulationObject::CUBE)},
 	{SimulationObject::TRIANGLE, SimulationObject::getRepresentation(SimulationObject::TRIANGLE)},
-    {SimulationObject::HEXAGON, SimulationObject::getRepresentation(SimulationObject::HEXAGON)},
     {SimulationObject::CIRCLE, SimulationObject::getRepresentation(SimulationObject::CIRCLE)},
+    {SimulationObject::STATIC_TABLE, SimulationObject::getRepresentation(SimulationObject::STATIC_TABLE)},
     {SimulationObject::STATIC_RAMP, SimulationObject::getRepresentation(SimulationObject::STATIC_RAMP)},
     {SimulationObject::STATIC_PLATFORM, SimulationObject::getRepresentation(SimulationObject::STATIC_PLATFORM)},
     {SimulationObject::STATIC_BASKET, SimulationObject::getRepresentation(SimulationObject::STATIC_BASKET)},

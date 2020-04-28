@@ -29,6 +29,8 @@ namespace svqa {
 
 	class SimulationBase : public Simulation
 	{
+	private:
+		 std::vector<std::vector<int>> scs; // scs: size color shape
 	public:
 		typedef std::shared_ptr<SimulationBase> Ptr;
 
@@ -36,11 +38,11 @@ namespace svqa {
 		{
 			m_pSettings = _settings_;
 			m_nDistinctColorUsed = 8;
-
+			
 			m_pCausalGraph = CausalGraph::create();
 			m_pCausalGraph->addEvent(StartEvent::create());
 			m_bGeneratingFromJSON = m_pSettings->inputScenePath.compare("") != 0;
-
+			
 			if (!isGeneratingFromJSON()) {
 				CreateBoundaries();
 			}
@@ -278,10 +280,32 @@ namespace svqa {
 		}
 
 		void AddRandomDynamicObject(b2Vec2 position, b2Vec2 velocity) {
+
+			
 			SimulationObject::Shape shapeType = SimulationObject::getRandomShape();
 			SimulationObject::Color colorType = SimulationObject::getRandomColor();
 			SimulationObject::Size sizeType = SimulationObject::getRandomSize();
-			AddDynamicObject(position, velocity,shapeType,colorType,sizeType);
+			
+			if (CheckIfObjectIsUnique(shapeType, colorType, sizeType)) {
+				AddDynamicObject(position, velocity, shapeType, colorType, sizeType);
+			}
+			else {
+				AddRandomDynamicObject(position, velocity);
+			}
+			
+		}
+
+		bool CheckIfObjectIsUnique(SimulationObject::Shape shapeType, SimulationObject::Color colorType, SimulationObject::Size sizeType) {
+			std::vector<int> temp;
+			temp.push_back(shapeType);
+			temp.push_back(colorType);
+			temp.push_back(sizeType);
+
+			if (std::find(scs.begin(), scs.end(), temp) == scs.end()) {
+				scs.push_back(temp);
+				return true;
+			}
+			return false;
 		}
 
 		void AddStaticObject(b2Vec2 position, float32 angle, SimulationObject::Shape shapeType)
