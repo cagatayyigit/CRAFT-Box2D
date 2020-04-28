@@ -68,7 +68,7 @@ namespace svqa {
 			// Middle Right Floor
 			AddStaticObject(b2Vec2(16.0f, 23.0f), 0, SimulationObject::STATIC_PLATFORM);
 
-
+			
 
 
 			// Ramp
