@@ -27,7 +27,7 @@ struct SceneState {
 	void clear()
 	{
 		objects.clear();
-	} 
+	}
 
 	bool loadFromJSON(const json& j, WORLD* toWorld)
 	{

@@ -32,7 +32,7 @@ namespace svqa {
 	{
 	private:
 		static const int BASKET_SENSOR = 0x042;
-
+		BODY* basketBody;
 		std::vector<std::vector<int>> scs; // scs: size color shape 
 
 	public:
@@ -199,7 +199,8 @@ namespace svqa {
 			b2BodyDef bd;
 			bd.position = pos;
 			bd.angle = angleInRadians;
-			BODY* basketBody = (BODY*)m_world->CreateBody(&bd);
+			// TODO: Maybe do not make this  basket body a member of this class.
+			basketBody = (BODY*)m_world->CreateBody(&bd);
 
 #if !USE_DEBUG_DRAW
 			basketBody->setColor(basketObject.getColor());
@@ -385,6 +386,7 @@ namespace svqa {
 			bool sensorA = fixtureA->IsSensor();
 			bool sensorB = fixtureB->IsSensor();
 			b2Fixture* sensorFixture = sensorA ? fixtureA : (sensorB) ? fixtureB : nullptr;
+			b2Fixture* otherFixture = sensorA ? fixtureB : (sensorB) ? fixtureA : nullptr;
 			if (!sensorFixture) // If no sensor involved in this contact.
 			{
 				ContactInfo info;
@@ -395,9 +397,10 @@ namespace svqa {
 			}
 			else if (sensorFixture->GetFilterData().categoryBits == BASKET_SENSOR) {
 				// DETECTED ContainerEndUp_Event
-				m_pCausalGraph->addEvent(ContainerEndUpEvent::create(m_StepCount, 
-					(BODY*)fixtureA->GetBody(),
-					(BODY*)fixtureB->GetBody()));
+				std::cout << "BASKET!" << std::endl;
+				m_pCausalGraph->addEvent(ContainerEndUpEvent::create(m_StepCount,
+					basketBody,
+					(BODY*)otherFixture->GetBody()));
 			}
 		}
 
