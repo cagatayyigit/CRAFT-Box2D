@@ -1,4 +1,3 @@
-
 #ifndef ContainerEndUpEvent_hpp
 #define ContainerEndUpEvent_hpp
 
@@ -21,7 +20,7 @@ namespace svqa
 
         virtual CausalEventType getType() const override
         {
-            return Collision_Event;
+            return ContainerEndUp_Event;
         }
 
         virtual std::vector<BODY*> getObjects() const override

@@ -16,7 +16,8 @@ enum CausalEventType {
     End_Event = 1,
     Collision_Event = 2,
     StartTouching_Event = 3,
-    EndTouching_Event = 4
+    EndTouching_Event = 4,
+    ContainerEndUp_Event = 5
 };
 
 static std::string getTypeString(CausalEventType type) {
@@ -31,6 +32,8 @@ static std::string getTypeString(CausalEventType type) {
             return "StartTouching";
         case EndTouching_Event:
             return "EndTouching";
+        case ContainerEndUp_Event:
+            return "ContainerEndUp";
     }
     return "";
 }

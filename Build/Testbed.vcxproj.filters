@@ -169,6 +169,12 @@
     <ClInclude Include="..\Testbed\Framework\SVQA\StartTouchingEvent.hpp">
       <Filter>Framework\SVQA</Filter>
     </ClInclude>
+    <ClInclude Include="..\Testbed\Framework\SVQA\ContainerEndUpEvent.hpp">
+      <Filter>Framework\SVQA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Framework\SVQA\EventDetector.hpp">
+      <Filter>Framework\SVQA</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Testbed\Framework\Camera.cpp">
@@ -262,6 +268,9 @@
       <Filter>Framework\SVQA</Filter>
     </ClCompile>
     <ClCompile Include="..\Testbed\Framework\SVQA\StartTouchingEvent.cpp">
+      <Filter>Framework\SVQA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Testbed\Framework\SVQA\ContainerEndUpEvent.cpp">
       <Filter>Framework\SVQA</Filter>
     </ClCompile>
   </ItemGroup>

@@ -6,3 +6,5 @@ Build/obj/x86_64/Debug/Testbed/Testbed.build
 Build/obj
 Build/opencv
 Testbed/output.mpg
+/.vs/VSWorkspaceState.json
+/.idea/
