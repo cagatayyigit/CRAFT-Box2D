@@ -27,6 +27,7 @@ namespace svqa {
 #define SET_FILE_OUTPUT_TRUE(X) ((SimulationRenderer*)((b2VisWorld*)m_world)->getRenderer())->setFileOutput((X), m_pSettings->bufferWidth, m_pSettings->bufferHeight);
 #define FINISH_SIMULATION {((SimulationRenderer*)((b2VisWorld*)m_world)->getRenderer())->Finish(); exit(0);};
 
+	// TODO: This class has started to become a God-object, maybe break it apart?
 	class SimulationBase : public Simulation
 	{
 	private:
