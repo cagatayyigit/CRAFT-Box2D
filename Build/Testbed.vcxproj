@@ -204,7 +204,6 @@
     <ClInclude Include="..\Testbed\Tests\SVQA\SceneState.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\Settings.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\SimulationBase.h" />
-    <ClInclude Include="..\Testbed\Tests\SVQA\SimulationColor.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\SimulationID.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\SimulationObject.h" />
     <ClInclude Include="..\Testbed\glad\glad.h" />

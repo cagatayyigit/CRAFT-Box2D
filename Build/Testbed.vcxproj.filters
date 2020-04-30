@@ -69,9 +69,6 @@
     <ClInclude Include="..\Testbed\Tests\SVQA\SimulationBase.h">
       <Filter>Tests\SVQA</Filter>
     </ClInclude>
-    <ClInclude Include="..\Testbed\Tests\SVQA\SimulationColor.h">
-      <Filter>Tests\SVQA</Filter>
-    </ClInclude>
     <ClInclude Include="..\Testbed\Tests\SVQA\SimulationID.h">
       <Filter>Tests\SVQA</Filter>
     </ClInclude>
