@@ -54,7 +54,7 @@ namespace svqa {
             // Bottom Left  Floor
             AddStaticObject(b2Vec2(-16.0f, 6.0f), 0, SimulationObject::STATIC_PLATFORM);
 			// Basket
-			addTargetBasket(b2Vec2(0.0f, 0.0f), 0.0f);
+			AddTargetBasket(b2Vec2(0.0f, 0.30f), 0.0f);
             // Bottom Right Floor
             AddStaticObject(b2Vec2(16.0f, 6.0f), 0, SimulationObject::STATIC_PLATFORM);
             

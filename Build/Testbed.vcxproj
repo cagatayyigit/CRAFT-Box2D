@@ -188,8 +188,10 @@
     <ClInclude Include="..\Testbed\Framework\SVQA\CausalEventType.h" />
     <ClInclude Include="..\Testbed\Framework\SVQA\CausalGraph.hpp" />
     <ClInclude Include="..\Testbed\Framework\SVQA\CollisionEvent.hpp" />
+    <ClInclude Include="..\Testbed\Framework\SVQA\ContainerEndUpEvent.hpp" />
     <ClInclude Include="..\Testbed\Framework\SVQA\EndEvent.hpp" />
     <ClInclude Include="..\Testbed\Framework\SVQA\EndTouchingEvent.hpp" />
+    <ClInclude Include="..\Testbed\Framework\SVQA\EventDetector.hpp" />
     <ClInclude Include="..\Testbed\Framework\SVQA\StartEvent.hpp" />
     <ClInclude Include="..\Testbed\Framework\SVQA\StartTouchingEvent.hpp" />
     <ClInclude Include="..\Testbed\Framework\VideoWriter.h" />
@@ -202,7 +204,6 @@
     <ClInclude Include="..\Testbed\Tests\SVQA\SceneState.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\Settings.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\SimulationBase.h" />
-    <ClInclude Include="..\Testbed\Tests\SVQA\SimulationColor.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\SimulationID.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\SimulationObject.h" />
     <ClInclude Include="..\Testbed\glad\glad.h" />
@@ -233,6 +234,7 @@
     <ClCompile Include="..\Testbed\Framework\SVQA\CausalEvent.cpp" />
     <ClCompile Include="..\Testbed\Framework\SVQA\CausalGraph.cpp" />
     <ClCompile Include="..\Testbed\Framework\SVQA\CollisionEvent.cpp" />
+    <ClCompile Include="..\Testbed\Framework\SVQA\ContainerEndUpEvent.cpp" />
     <ClCompile Include="..\Testbed\Framework\SVQA\EndEvent.cpp" />
     <ClCompile Include="..\Testbed\Framework\SVQA\EndTouchingEvent.cpp" />
     <ClCompile Include="..\Testbed\Framework\SVQA\StartEvent.cpp" />

@@ -13,5 +13,6 @@
 #include "CollisionEvent.hpp"
 #include "StartTouchingEvent.hpp"
 #include "EndTouchingEvent.hpp"
+#include "ContainerEndUpEvent.hpp"
 
 #endif /* CausalEvents_h */

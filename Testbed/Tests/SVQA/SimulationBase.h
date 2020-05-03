@@ -27,10 +27,14 @@ namespace svqa {
 #define SET_FILE_OUTPUT_TRUE(X) ((SimulationRenderer*)((b2VisWorld*)m_world)->getRenderer())->setFileOutput((X), m_pSettings->bufferWidth, m_pSettings->bufferHeight);
 #define FINISH_SIMULATION {((SimulationRenderer*)((b2VisWorld*)m_world)->getRenderer())->Finish(); exit(0);};
 
+	// TODO: This class has started to become a God-object, maybe break it apart?
 	class SimulationBase : public Simulation
 	{
 	private:
-		 std::vector<std::vector<int>> scs; // scs: size color shape
+		static const int BASKET_SENSOR = 0x042;
+		BODY* basketBody;
+		std::vector<std::vector<int>> scs; // scs: size color shape 
+
 	public:
 		typedef std::shared_ptr<SimulationBase> Ptr;
 
@@ -38,11 +42,11 @@ namespace svqa {
 		{
 			m_pSettings = _settings_;
 			m_nDistinctColorUsed = 8;
-			
+
 			m_pCausalGraph = CausalGraph::create();
 			m_pCausalGraph->addEvent(StartEvent::create());
 			m_bGeneratingFromJSON = m_pSettings->inputScenePath.compare("") != 0;
-			
+
 			if (!isGeneratingFromJSON()) {
 				CreateBoundaries();
 			}
@@ -65,18 +69,18 @@ namespace svqa {
 				setSceneInitialized(true);
 			}
 
-            // Take snapshot of the scene in the beginning of the simulation.
-            if (isSceneInitialized() && !m_bSceneSnapshotTaken) {
-                m_StartSceneStateJSON = SimulationBase::GetSceneStateJSONObject(m_SceneJSONState, m_StepCount);
-                m_bSceneSnapshotTaken = true;
-            }
-            
+			// Take snapshot of the scene in the beginning of the simulation.
+			if (isSceneInitialized() && !m_bSceneSnapshotTaken) {
+				m_StartSceneStateJSON = SimulationBase::GetSceneStateJSONObject(m_SceneJSONState, m_StepCount);
+				m_bSceneSnapshotTaken = true;
+			}
+
 			Simulation::Step(settings);
-            
-            if (shouldTerminateSimulation()) {
-                m_EndSceneStateJSON = SimulationBase::GetSceneStateJSONObject(m_SceneJSONState, m_StepCount);
-                TerminateSimulation();
-            }
+
+			if (shouldTerminateSimulation()) {
+				m_EndSceneStateJSON = SimulationBase::GetSceneStateJSONObject(m_SceneJSONState, m_StepCount);
+				TerminateSimulation();
+			}
 
 			DetectStartTouchingEvents();
 		}
@@ -137,23 +141,23 @@ namespace svqa {
 
 		void GenerateSceneFromJson(std::string filename) {
 			LOG("Generating scene from \"" + filename + "\"...");
-            
-            json j;
-            bool fileLoadRes = JSONHelper::loadJSON(j, filename);
-            if(fileLoadRes) {
-                auto sceneStatesItr = j.find("scene_states");
-                if(sceneStatesItr != j.end()) {
-                    for (const auto& sceneJson : *sceneStatesItr) {
-                        int step;
-                        sceneJson.at("step").get_to(step);
-                        if(step==0) {
-                            m_SceneJSONState.loadFromJSON(*sceneJson.find("scene"), m_world);
-                            m_bSceneRegenerated = true;
-                            break;
-                        }
-                    }
-                }
-            }
+
+			json j;
+			bool fileLoadRes = JSONHelper::loadJSON(j, filename);
+			if (fileLoadRes) {
+				auto sceneStatesItr = j.find("scene_states");
+				if (sceneStatesItr != j.end()) {
+					for (const auto& sceneJson : *sceneStatesItr) {
+						int step;
+						sceneJson.at("step").get_to(step);
+						if (step == 0) {
+							m_SceneJSONState.loadFromJSON(*sceneJson.find("scene"), m_world);
+							m_bSceneRegenerated = true;
+							break;
+						}
+					}
+				}
+			}
 		}
 
 		static json GetSceneStateJSONObject(SceneState state, int stepCount) {
@@ -188,14 +192,15 @@ namespace svqa {
 			return true;
 		}
 
-		virtual void addTargetBasket(b2Vec2 pos, float angleInRadians)
+		virtual void AddTargetBasket(b2Vec2 pos, float angleInRadians)
 		{
 			SimulationObject basketObject = SimulationObject(SimulationObject::STATIC_BASKET, SimulationObject::BLACK, SimulationObject::LARGE);
 
 			b2BodyDef bd;
 			bd.position = pos;
 			bd.angle = angleInRadians;
-			BODY* basketBody = (BODY*)m_world->CreateBody(&bd);
+			// TODO: Maybe do not make this  basket body a member of this class.
+			basketBody = (BODY*)m_world->CreateBody(&bd);
 
 #if !USE_DEBUG_DRAW
 			basketBody->setColor(basketObject.getColor());
@@ -206,15 +211,46 @@ namespace svqa {
 			b2FixtureDef fd = b2FixtureDef();
 			fd.friction = basketObject.getFriction();
 			fd.density = basketObject.getDensity();
-            fd.restitution = basketObject.getRestitution();
+			fd.restitution = basketObject.getRestitution();
 			fd.shape = shape.get();
 			basketBody->CreateFixture(&fd);
-
 
 			auto objectState = ObjectState::create(basketBody, basketObject.mShape, basketObject.mColor, basketObject.mSize);
 			basketBody->SetUserData(objectState.get());
 
 			m_SceneJSONState.add(objectState);
+
+			b2Vec2* vertices = ((b2ChainShape*)fd.shape)->m_vertices;
+
+			b2Vec2 sensorVertices[4];
+			std::copy(vertices, vertices + 4, sensorVertices);
+			for (int i = 0; i < 4; i++)
+			{
+				sensorVertices[i] *= 0.99f; // To not detect container event from the outside of the container.
+			}
+
+			AddSensorBody(BASKET_SENSOR, pos, angleInRadians, sensorVertices, 4, b2Color(0.9f, 0.9f, 0.9f));
+		}
+
+		// Creates a sensor body with polygon shape with the given vertices.
+		void AddSensorBody(int category, b2Vec2 pos, float angleInRadians, b2Vec2* vertices, int vertexCount, b2Color color = b2Color(1, 1, 1))
+		{
+			// Sensor fixture for detecting container events in b2ContactListener callbacks.
+			b2BodyDef sensorBd;
+			sensorBd.position = pos;
+			sensorBd.angle = angleInRadians;
+			sensorBd.type = b2_staticBody;
+			BODY* sensorBody = (BODY*)m_world->CreateBody(&sensorBd);
+#if !USE_DEBUG_DRAW
+			sensorBody->setColor(color);
+#endif
+			b2FixtureDef sensorFd = b2FixtureDef();
+			b2PolygonShape sensorShape = b2PolygonShape();
+			sensorShape.Set(vertices, vertexCount);
+			sensorFd.shape = &sensorShape;
+			sensorFd.isSensor = true;
+			sensorFd.filter.categoryBits = category;
+			sensorBody->CreateFixture(&sensorFd);
 		}
 
 		virtual void CreateBoundaries()
@@ -227,8 +263,8 @@ namespace svqa {
 			for (auto bound : boundaries) {
 				b2BodyDef bd;
 				BODY* boundBody = (BODY*)m_world->CreateBody(&bd);
-                
-                SimulationObject boundaryObject = SimulationObject(bound, SimulationObject::BLACK, SimulationObject::LARGE);
+
+				SimulationObject boundaryObject = SimulationObject(bound, SimulationObject::BLACK, SimulationObject::LARGE);
 #if !USE_DEBUG_DRAW
 				boundBody->setColor(boundaryObject.getColor());
 #endif
@@ -238,7 +274,7 @@ namespace svqa {
 				b2FixtureDef fd = b2FixtureDef();
 				fd.friction = boundaryObject.getFriction();
 				fd.density = boundaryObject.getDensity();
-                fd.restitution = boundaryObject.getRestitution();
+				fd.restitution = boundaryObject.getRestitution();
 				fd.shape = shape.get();
 				boundBody->CreateFixture(&fd);
 
@@ -253,7 +289,7 @@ namespace svqa {
 		{
 			SimulationObject object = SimulationObject(shapeType, colorType, sizeType);
 
-            ShapePtr shape = object.getShape();
+			ShapePtr shape = object.getShape();
 
 			b2BodyDef bd;
 			bd.type = b2_dynamicBody;
@@ -264,10 +300,10 @@ namespace svqa {
 
 			b2FixtureDef fd = b2FixtureDef();
 			fd.density = object.getDensity();
-            fd.restitution = object.getRestitution();
-            fd.friction = object.getFriction();
+			fd.restitution = object.getRestitution();
+			fd.friction = object.getFriction();
 			fd.shape = shape.get();
-			
+
 			//fd.friction = 100.0f; --> TODO: WHAT IS THAT FRICTION
 			body->CreateFixture(&fd);
 
@@ -280,19 +316,17 @@ namespace svqa {
 		}
 
 		void AddRandomDynamicObject(b2Vec2 position, b2Vec2 velocity) {
-
-			
 			SimulationObject::Shape shapeType = SimulationObject::getRandomShape();
 			SimulationObject::Color colorType = SimulationObject::getRandomColor();
 			SimulationObject::Size sizeType = SimulationObject::getRandomSize();
-			
+
 			if (CheckIfObjectIsUnique(shapeType, colorType, sizeType)) {
 				AddDynamicObject(position, velocity, shapeType, colorType, sizeType);
 			}
 			else {
 				AddRandomDynamicObject(position, velocity);
 			}
-			
+
 		}
 
 		bool CheckIfObjectIsUnique(SimulationObject::Shape shapeType, SimulationObject::Color colorType, SimulationObject::Size sizeType) {
@@ -320,11 +354,11 @@ namespace svqa {
 
 			b2FixtureDef fd = b2FixtureDef();
 			fd.density = object.getDensity();
-            fd.restitution = object.getRestitution();
-            fd.friction = object.getFriction();
+			fd.restitution = object.getRestitution();
+			fd.friction = object.getFriction();
 			fd.shape = shape.get();
 			body->CreateFixture(&fd);
-            
+
 			body->setColor(object.getColor());
 
 			auto objectState = ObjectState::create(body, object.mShape, object.mColor, object.mSize);
@@ -347,11 +381,27 @@ namespace svqa {
 		}
 
 		virtual void BeginContact(b2Contact* contact)  override {
-			ContactInfo info;
-			info.contact = contact;
-			info.step = m_StepCount;
+			b2Fixture* fixtureA = contact->GetFixtureA();
+			b2Fixture* fixtureB = contact->GetFixtureB();
+			bool sensorA = fixtureA->IsSensor();
+			bool sensorB = fixtureB->IsSensor();
+			b2Fixture* sensorFixture = sensorA ? fixtureA : (sensorB) ? fixtureB : nullptr;
+			b2Fixture* otherFixture = sensorA ? fixtureB : (sensorB) ? fixtureA : nullptr;
+			if (!sensorFixture) // If no sensor involved in this contact.
+			{
+				ContactInfo info;
+				info.contact = contact;
+				info.step = m_StepCount;
 
-			m_Contacts.push_back(info);
+				m_Contacts.push_back(info);
+			}
+			else if (sensorFixture->GetFilterData().categoryBits == BASKET_SENSOR) {
+				// DETECTED ContainerEndUp_Event
+				std::cout << "BASKET!" << std::endl;
+				m_pCausalGraph->addEvent(ContainerEndUpEvent::create(m_StepCount,
+					basketBody,
+					(BODY*)otherFixture->GetBody()));
+			}
 		}
 
 		virtual void EndContact(b2Contact* contact)  override {
@@ -385,12 +435,12 @@ namespace svqa {
 			bd.angle = RandomFloat(0.0f, M_PI);
 			bd.linearVelocity = velocity;
 			BODY* body = (BODY*)m_world->CreateBody(&bd);
-            
-            b2FixtureDef fd = b2FixtureDef();
-            fd.density = object.getDensity();
-            fd.restitution = object.getRestitution();
-            fd.friction = object.getFriction();
-            fd.shape = shape.get();
+
+			b2FixtureDef fd = b2FixtureDef();
+			fd.density = object.getDensity();
+			fd.restitution = object.getRestitution();
+			fd.friction = object.getFriction();
+			fd.shape = shape.get();
 			body->CreateFixture(&fd);
 
 			body->setColor(object.getColor());
