@@ -62,7 +62,13 @@ struct SceneState {
 	json toJSON() const
 	{
 		json jScene;
-		for (int i = objects.size() - 1; i >= 0; i--) {
+		/*for (int i = objects.size() - 1; i >= 0; i--) {
+			const auto& object = objects[i];
+			json jObject;
+			object->to_json(jObject);
+			jScene.push_back(jObject);
+		}*/
+		for (int i = 0; i < objects.size(); i++) {
 			const auto& object = objects[i];
 			json jObject;
 			object->to_json(jObject);

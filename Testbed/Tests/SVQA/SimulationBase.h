@@ -31,8 +31,6 @@ namespace svqa {
 	class SimulationBase : public Simulation
 	{
 	private:
-		static const int BASKET_SENSOR = 0x042;
-		BODY* basketBody;
 		std::vector<std::vector<int>> scs; // scs: size color shape 
 
 	public:
@@ -199,8 +197,8 @@ namespace svqa {
 			b2BodyDef bd;
 			bd.position = pos;
 			bd.angle = angleInRadians;
-			// TODO: Maybe do not make this  basket body a member of this class.
-			basketBody = (BODY*)m_world->CreateBody(&bd);
+
+			BODY *basketBody = (BODY*)m_world->CreateBody(&bd);
 
 #if !USE_DEBUG_DRAW
 			basketBody->setColor(basketObject.getColor());
@@ -220,6 +218,7 @@ namespace svqa {
 
 			m_SceneJSONState.add(objectState);
 
+			// TODO: Code duplication: When we are trying to re-generate a simulation, we are adding sensor body from ObjectState.h.
 			b2Vec2* vertices = ((b2ChainShape*)fd.shape)->m_vertices;
 
 			b2Vec2 sensorVertices[4];
@@ -229,28 +228,7 @@ namespace svqa {
 				sensorVertices[i] *= 0.99f; // To not detect container event from the outside of the container.
 			}
 
-			AddSensorBody(BASKET_SENSOR, pos, angleInRadians, sensorVertices, 4, b2Color(0.9f, 0.9f, 0.9f));
-		}
-
-		// Creates a sensor body with polygon shape with the given vertices.
-		void AddSensorBody(int category, b2Vec2 pos, float angleInRadians, b2Vec2* vertices, int vertexCount, b2Color color = b2Color(1, 1, 1))
-		{
-			// Sensor fixture for detecting container events in b2ContactListener callbacks.
-			b2BodyDef sensorBd;
-			sensorBd.position = pos;
-			sensorBd.angle = angleInRadians;
-			sensorBd.type = b2_staticBody;
-			BODY* sensorBody = (BODY*)m_world->CreateBody(&sensorBd);
-#if !USE_DEBUG_DRAW
-			sensorBody->setColor(color);
-#endif
-			b2FixtureDef sensorFd = b2FixtureDef();
-			b2PolygonShape sensorShape = b2PolygonShape();
-			sensorShape.Set(vertices, vertexCount);
-			sensorFd.shape = &sensorShape;
-			sensorFd.isSensor = true;
-			sensorFd.filter.categoryBits = category;
-			sensorBody->CreateFixture(&sensorFd);
+			ObjectState::AddSensorBody(m_world, SimulationObject::SENSOR_BASKET, pos, angleInRadians, sensorVertices, 4, basketBody, b2Color(0.9f, 0.9f, 0.9f));
 		}
 
 		virtual void CreateBoundaries()
@@ -395,11 +373,12 @@ namespace svqa {
 
 				m_Contacts.push_back(info);
 			}
-			else if (sensorFixture->GetFilterData().categoryBits == BASKET_SENSOR) {
+			else if (sensorFixture->GetFilterData().categoryBits == SimulationObject::SENSOR_BASKET) {
 				// DETECTED ContainerEndUp_Event
 				std::cout << "BASKET!" << std::endl;
+				
 				m_pCausalGraph->addEvent(ContainerEndUpEvent::create(m_StepCount,
-					basketBody,
+					(BODY*)sensorFixture->GetBody()->GetUserData(), // The attached body of this sensor body.
 					(BODY*)otherFixture->GetBody()));
 			}
 		}

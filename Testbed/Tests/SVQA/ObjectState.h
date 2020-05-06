@@ -180,7 +180,57 @@ public:
 #endif
 
 		body->SetUserData(this);
+
+		// If the body needs a companion sensor body, adding it here...
+		if (j["shape"] == "basket") 
+		{
+			// TODO: Fix code duplication: When we are not re-generating a simulation, we are adding sensor body from SimulationBase.h.
+			b2Vec2* vertices = ((b2ChainShape*)fd.shape)->m_vertices;
+
+			b2Vec2 sensorVertices[4];
+			std::copy(vertices, vertices + 4, sensorVertices);
+			for (int i = 0; i < 4; i++)
+			{
+				sensorVertices[i] *= 0.99f; // To not detect container event from the outside of the container.
+			}
+
+		    AddSensorBody(toWorld, SimulationObject::SENSOR_BASKET, bd.position, angle, sensorVertices, 4, body, b2Color(0.9f, 0.9f, 0.9f));
+		}
+
 	}
+
+	// TODO: Move this to some sensible place, I put it temporarily because I couldn't access it from SimulationBase.h, possibly because of
+	// some circular dependency issue.
+	// Creates a sensor body with polygon shape with the given vertices.
+	static void AddSensorBody(WORLD* world,
+		int category,
+		b2Vec2 pos,
+		float angleInRadians,
+		b2Vec2* vertices,
+		int vertexCount,
+		BODY* attachedBody,
+		b2Color color = b2Color(1, 1, 1))
+	{
+		// Sensor fixture for detecting container events in b2ContactListener callbacks.
+		b2BodyDef sensorBd;
+		sensorBd.position = pos;
+		sensorBd.angle = angleInRadians;
+		sensorBd.type = b2_staticBody;
+		BODY* sensorBody = (BODY*)world->CreateBody(&sensorBd);
+#if !USE_DEBUG_DRAW
+		sensorBody->setColor(color);
+#endif
+		b2FixtureDef sensorFd = b2FixtureDef();
+		b2PolygonShape sensorShape = b2PolygonShape();
+		sensorShape.Set(vertices, vertexCount);
+		sensorFd.shape = &sensorShape;
+		sensorFd.isSensor = true;
+		sensorFd.filter.categoryBits = category;
+		sensorBody->CreateFixture(&sensorFd);
+
+		sensorBody->SetUserData(attachedBody);
+	}
+
 
 	BODY* body;
 	SimulationObject::Color color;
