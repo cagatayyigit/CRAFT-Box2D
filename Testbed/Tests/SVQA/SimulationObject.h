@@ -259,7 +259,7 @@ public:
 	{
 		const float twoPi = 2.0f * M_PI;
 		std::vector<b2Vec2> points(nPoints);
-		points[0] = b2Vec2(0.0f, -edgeLength);
+		points[0] = b2Vec2(0.6f, -edgeLength);
 		b2Vec2 currentPoint = points[0];
 		const float rotationAngle = twoPi / nPoints;
 		for (size_t i = 1; i < points.size(); i++)
