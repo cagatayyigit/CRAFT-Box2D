@@ -24,6 +24,9 @@ typedef std::shared_ptr<b2Shape> ShapePtr;
 class SimulationObject
 {
 public:
+    // TODO: Maybe put it inside an enum named SensorBit?
+    static const int SENSOR_BASKET = 0x042;
+
     enum Shape
     {
         CUBE = 0,
