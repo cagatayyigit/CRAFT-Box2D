@@ -335,7 +335,7 @@ public:
     static b2ChainShape* getBasketShape()
     {
         b2ChainShape* shape = new b2ChainShape;
-        std::vector<b2Vec2> vertices = {b2Vec2(-5, 5), b2Vec2(-5, -5), b2Vec2(5, -5), b2Vec2(5, 5)};
+        std::vector<b2Vec2> vertices = {b2Vec2(-3.5f, 3.5), b2Vec2(-3.5, -3.5), b2Vec2(3.5, -3.5), b2Vec2(3.5, 3.5)};
         shape->CreateChain(vertices.data(), vertices.size());
         return shape;
     }
