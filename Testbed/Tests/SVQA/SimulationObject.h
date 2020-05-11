@@ -179,7 +179,7 @@ public:
         
 		switch (mShape) {
 		case CUBE:
-			return std::make_shared<b2PolygonShape>(getPolygon(length, 4));
+			return std::make_shared<b2PolygonShape>(getRectangle(length, length));
         case TRIANGLE:
             return std::make_shared<b2PolygonShape>(getPolygon(length, 3));
         case CIRCLE:
@@ -193,11 +193,11 @@ public:
         case STATIC_BASKET:
             return std::shared_ptr<b2ChainShape>(getBasketShape());
         case STATIC_LEFT_BOUNDARY:
-            return std::make_shared<b2PolygonShape>(getRectangle(0.25, 55, b2Vec2(-40.0f, 20.0f), 0.0f));
+            return std::make_shared<b2PolygonShape>(getRectangle(0.20, 25, b2Vec2(-25.0f, 20.0f), 0.0f));
         case STATIC_RIGHT_BOUNDARY:
-            return std::make_shared<b2PolygonShape>(getRectangle(0.25, 55, b2Vec2(40.0f, 20.0f), 0.0f));
+            return std::make_shared<b2PolygonShape>(getRectangle(0.20, 25, b2Vec2(25.0f, 20.0f), 0.0f));
         case STATIC_BOTTOM_BOUNDARY:
-            return std::make_shared<b2PolygonShape>(getRectangle(0.25, 55, b2Vec2(0.0f, -5.0f), M_PI / 2));
+            return std::make_shared<b2PolygonShape>(getRectangle(0.20, 25, b2Vec2(0.0f, -5.0f), M_PI / 2));
 		}
 		return nullptr;
 	}
