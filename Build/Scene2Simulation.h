@@ -28,9 +28,9 @@ namespace svqa {
 			// Setup static objects.
 
 			// Bottom Left  Floor
-			AddStaticObject(b2Vec2(-16.0f, 6.0f), 0, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-12.0f, 6.0f), 0, SimulationObject::STATIC_PLATFORM);
 			// Basket
-			AddTargetBasket(b2Vec2(0.0f, 0.30f), 0.0f);
+			AddTargetBasket(b2Vec2(0.0f, -1.2f), 0.0f);
 
 
 			// Circles
@@ -38,14 +38,14 @@ namespace svqa {
 			// Stationary Bottom-Left
 			float32 leftBottomCircleCoorX = (RandomFloatFromHardware(-15.0, -10.0));
 			AddRandomDynamicObject(
-				b2Vec2(-10.0f, 11.0f),
+				b2Vec2(leftBottomCircleCoorX, 9.0f),
 				b2Vec2(0.0f, 0.0f)
 			);
 
 
 			// Moving on the Right Floor
 			AddRandomDynamicObject(
-				b2Vec2(32.0f, 17.0f),
+				b2Vec2(22.0f, 17.0f),
 				b2Vec2(-10.0f, -4.0f)
 			);
 
