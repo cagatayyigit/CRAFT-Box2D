@@ -69,7 +69,7 @@ namespace svqa {
 
 			*/
 			
-			AddStaticObject(b2Vec2(0.0f, 45.0f), 0, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(0.0f, -3.0f), 0, SimulationObject::STATIC_PLATFORM);
 
 
 

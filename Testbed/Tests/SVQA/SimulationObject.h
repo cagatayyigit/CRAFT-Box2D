@@ -175,21 +175,21 @@ public:
 
 	ShapePtr getShape()
 	{
-        float length = (mSize == Size::SMALL ? 2.0f : 3.0f);
+        float length = (mSize == Size::SMALL ? 1.0f : 2.0f);
         
 		switch (mShape) {
 		case CUBE:
-			return std::make_shared<b2PolygonShape>(getRectangle(length, length));
+			return std::make_shared<b2PolygonShape>(getRectangle(length , length ));
         case TRIANGLE:
-            return std::make_shared<b2PolygonShape>(getPolygon(length, 3));
+            return std::make_shared<b2PolygonShape>(getPolygon(length + 1.5f, 3));
         case CIRCLE:
-            return std::make_shared<b2CircleShape>(getCircle(length)); 
+            return std::make_shared<b2CircleShape>(getCircle(length));
         case STATIC_RAMP:
             return std::make_shared<b2PolygonShape>(getPolygon(3.0f, 3));
         case STATIC_TABLE:
-            return std::make_shared<b2PolygonShape>(getRectangle(14.0f, 10.0f));
+            return std::make_shared<b2PolygonShape>(getRectangle(13.0f, 10.0f));
         case STATIC_PLATFORM:
-            return std::make_shared<b2PolygonShape>(getRectangle(10.0f, 1.0f));
+            return std::make_shared<b2PolygonShape>(getRectangle(8.0f, 0.5f));
         case STATIC_BASKET:
             return std::shared_ptr<b2ChainShape>(getBasketShape());
         case STATIC_LEFT_BOUNDARY:
