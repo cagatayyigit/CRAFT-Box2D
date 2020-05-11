@@ -50,18 +50,17 @@ namespace svqa {
 			float32 inclinedFloorLen = (RandomFloatFromHardware(9.0, 12.0));
 			float32 circleV = (RandomFloatFromHardware(-5.0, -15.0));
 
-            
+           
             // Bottom Left  Floor
-            AddStaticObject(b2Vec2(-16.0f, 6.0f), 0, SimulationObject::STATIC_PLATFORM);
+            AddStaticObject(b2Vec2(-12.0f, 6.0f), 0, SimulationObject::STATIC_PLATFORM);
 			// Basket
-			AddTargetBasket(b2Vec2(0.0f, 0.30f), 0.0f);
+			AddTargetBasket(b2Vec2(0.0f, -1.2f), 0.0f);
             // Bottom Right Floor
-            AddStaticObject(b2Vec2(16.0f, 6.0f), 0, SimulationObject::STATIC_PLATFORM);
+            AddStaticObject(b2Vec2(12.0f, 6.0f), 0, SimulationObject::STATIC_PLATFORM);
             
 
 			// Bottom Left  Vertical Floor
-			AddStaticObject(b2Vec2(-25.0f, 16.0f), 4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
-
+			AddStaticObject(b2Vec2(-18.0f, 16.0f), 4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
 
 			// Middle Left  Floor
 			AddStaticObject(b2Vec2(-5.0f, 18.0f), 51 * M_PI / 55, SimulationObject::STATIC_PLATFORM);
@@ -69,6 +68,8 @@ namespace svqa {
 			AddStaticObject(b2Vec2(16.0f, 23.0f), 0, SimulationObject::STATIC_PLATFORM);
 
 			
+			
+
 
 
 			// Ramp
@@ -90,20 +91,20 @@ namespace svqa {
 			// Stationary Bottom-Left
 			float32 leftBottomCircleCoorX = (RandomFloatFromHardware(-15.0, -10.0));
 			AddRandomDynamicObject(
-				b2Vec2(-10.0f, 11.0f),
+				b2Vec2(-8.0f, 9.0f),
 				b2Vec2(0.0f, 0.0f)
 			);
 
 			// Stationary Bottom-Right
 			float32 rightBottomCircleCoorX = (RandomFloatFromHardware(10.0, 15.0));
 			AddRandomDynamicObject(
-				b2Vec2(rightBottomCircleCoorX, 11.0f),
+				b2Vec2(rightBottomCircleCoorX, 9.0f),
 				b2Vec2(0.0f, 0.0f)
 			);
 
 			// Moving on the Right Floor
 			AddRandomDynamicObject(
-				b2Vec2(32.0f, 17.0f),
+				b2Vec2(22.0f, 17.0f),
 				b2Vec2(-10.0f, -4.0f)
 			);
 

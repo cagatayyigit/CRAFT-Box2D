@@ -175,29 +175,29 @@ public:
 
 	ShapePtr getShape()
 	{
-        float length = (mSize == Size::SMALL ? 2.0f : 3.0f);
+        float length = (mSize == Size::SMALL ? 1.0f : 2.0f);
         
 		switch (mShape) {
 		case CUBE:
-			return std::make_shared<b2PolygonShape>(getPolygon(length, 4));
+			return std::make_shared<b2PolygonShape>(getRectangle(length , length ));
         case TRIANGLE:
-            return std::make_shared<b2PolygonShape>(getPolygon(length, 3));
+            return std::make_shared<b2PolygonShape>(getPolygon(length + 1.5f, 3));
         case CIRCLE:
-            return std::make_shared<b2CircleShape>(getCircle(length)); 
+            return std::make_shared<b2CircleShape>(getCircle(length));
         case STATIC_RAMP:
             return std::make_shared<b2PolygonShape>(getPolygon(3.0f, 3));
         case STATIC_TABLE:
-            return std::make_shared<b2PolygonShape>(getRectangle(14.0f, 10.0f));
+            return std::make_shared<b2PolygonShape>(getRectangle(13.0f, 10.0f));
         case STATIC_PLATFORM:
-            return std::make_shared<b2PolygonShape>(getRectangle(10.0f, 1.0f));
+            return std::make_shared<b2PolygonShape>(getRectangle(8.0f, 0.5f));
         case STATIC_BASKET:
             return std::shared_ptr<b2ChainShape>(getBasketShape());
         case STATIC_LEFT_BOUNDARY:
-            return std::make_shared<b2PolygonShape>(getRectangle(0.25, 55, b2Vec2(-40.0f, 20.0f), 0.0f));
+            return std::make_shared<b2PolygonShape>(getRectangle(0.20, 25, b2Vec2(-25.0f, 20.0f), 0.0f));
         case STATIC_RIGHT_BOUNDARY:
-            return std::make_shared<b2PolygonShape>(getRectangle(0.25, 55, b2Vec2(40.0f, 20.0f), 0.0f));
+            return std::make_shared<b2PolygonShape>(getRectangle(0.20, 25, b2Vec2(25.0f, 20.0f), 0.0f));
         case STATIC_BOTTOM_BOUNDARY:
-            return std::make_shared<b2PolygonShape>(getRectangle(0.25, 55, b2Vec2(0.0f, -5.0f), M_PI / 2));
+            return std::make_shared<b2PolygonShape>(getRectangle(0.20, 25, b2Vec2(0.0f, -5.0f), M_PI / 2));
 		}
 		return nullptr;
 	}
@@ -335,7 +335,7 @@ public:
     static b2ChainShape* getBasketShape()
     {
         b2ChainShape* shape = new b2ChainShape;
-        std::vector<b2Vec2> vertices = {b2Vec2(-5, 5), b2Vec2(-5, -5), b2Vec2(5, -5), b2Vec2(5, 5)};
+        std::vector<b2Vec2> vertices = {b2Vec2(-3.5f, 3.5), b2Vec2(-3.5, -3.5), b2Vec2(3.5, -3.5), b2Vec2(3.5, 3.5)};
         shape->CreateChain(vertices.data(), vertices.size());
         return shape;
     }

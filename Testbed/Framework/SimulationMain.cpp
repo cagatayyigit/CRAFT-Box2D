@@ -121,8 +121,9 @@ int main(int c, char** args)
 
 	glfwSetErrorCallback(glfwErrorCallback);
 
-	g_camera.m_width = settings->bufferWidth;
-	g_camera.m_height = settings->bufferHeight;
+	g_camera.m_width = settings->bufferWidth ;
+	g_camera.m_height = settings->bufferHeight ;
+	g_camera.m_zoom = 1.0f;
 
 	if (glfwInit() == 0)
 	{
