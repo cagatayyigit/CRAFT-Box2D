@@ -182,7 +182,7 @@ public:
         case CIRCLE:
             return std::make_shared<b2CircleShape>(getCircle(length));
         case STATIC_RAMP:
-            return std::make_shared<b2PolygonShape>(getPolygon(3.0f, 3));
+            return std::make_shared<b2PolygonShape>(getRightTriangle(3.0f, 3));
         case STATIC_TABLE:
             return std::make_shared<b2PolygonShape>(getRectangle(13.0f, 10.0f));
         case STATIC_PLATFORM:

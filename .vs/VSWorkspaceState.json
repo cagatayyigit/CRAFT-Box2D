@@ -1,13 +1,6 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Contributions",
-    "\\Testbed",
-    "\\Testbed\\Framework",
-    "\\Testbed\\Framework\\SVQA",
-    "\\Testbed\\Tests",
-    "\\Testbed\\Tests\\SVQA"
+    ""
   ],
-  "SelectedNode": "\\Testbed\\Framework\\SVQA\\EventDetector.hpp",
   "PreviewInSolutionExplorer": false
 }
