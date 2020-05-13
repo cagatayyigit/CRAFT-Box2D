@@ -375,8 +375,6 @@ namespace svqa {
 			}
 			else if (sensorFixture->GetFilterData().categoryBits == SimulationObject::SENSOR_BASKET) {
 				// DETECTED ContainerEndUp_Event
-				std::cout << "BASKET!" << std::endl;
-				
 				m_pCausalGraph->addEvent(ContainerEndUpEvent::create(m_StepCount,
 					(BODY*)sensorFixture->GetBody()->GetUserData(), // The attached body of this sensor body.
 					(BODY*)otherFixture->GetBody()));
