@@ -26,6 +26,13 @@ namespace svqa {
 
 		void InitializeScene() override {
 
+			std::vector<SimulationObject::Color> distinc_colors;
+			while(distinc_colors.size() < 4) {
+				SimulationObject::Color c = SimulationObject::getRandomColor();
+				if (std::find(distinc_colors.begin(), distinc_colors.end(), c) == distinc_colors.end()) {
+					distinc_colors.push_back(c);
+				}
+			}
 			
 
 
@@ -55,7 +62,7 @@ namespace svqa {
 				b2Vec2(22.0f, 20.0f),
 				b2Vec2(tr_circle_velocities[(int)RandomFloatFromHardware(0.0, 5.0)], 0.0f),
 				SimulationObject::Shape::CIRCLE,
-				SimulationObject::Color::PURPLE,
+				distinc_colors[0],
 				SimulationObject::Size::LARGE
 			);
 
@@ -68,7 +75,7 @@ namespace svqa {
 				b2Vec2(-22.0f, rolling_circle_heights[(int)RandomFloatFromHardware(0.0, 5.0)]),
 				b2Vec2(0.0f, 0.0f),
 				SimulationObject::Shape::CIRCLE,
-				SimulationObject::Color::CYAN,
+				distinc_colors[1],
 				SimulationObject::Size::LARGE
 			);
 
@@ -81,7 +88,7 @@ namespace svqa {
 				b2Vec2(-9.0f, 8.0f),
 				b2Vec2(0.0f, 0.0f),
 				SimulationObject::Shape::CIRCLE,
-				SimulationObject::Color::RED,
+				distinc_colors[2],
 				SimulationObject::Size::LARGE
 			);
 
@@ -104,7 +111,7 @@ namespace svqa {
 				b2Vec2(22.0f, 8.0f),
 				b2Vec2(br_circle_velocities[(int)RandomFloatFromHardware(0.0, 5.0)], 0.0f),
 				SimulationObject::Shape::CIRCLE,
-				SimulationObject::Color::GREEN,
+				distinc_colors[3],
 				SimulationObject::Size::LARGE
 			);
 
