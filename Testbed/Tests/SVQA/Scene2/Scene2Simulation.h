@@ -37,16 +37,23 @@ namespace svqa {
 
 
 			// ------- Stack --------
+			std::vector<SimulationObject::Color> stack_colors;
+			while (stack_colors.size() < 6) {
+				SimulationObject::Color c = SimulationObject::getRandomColor();
+				if (std::find(stack_colors.begin(), stack_colors.end(), c) == stack_colors.end()) {
+					stack_colors.push_back(c);
+				}
+			}
 
 			// bottom left - mid - right
-			AddDynamicObject(b2Vec2(3.0f, 20.0f),b2Vec2(0.0f, 0.0f),SimulationObject::Shape::CUBE,SimulationObject::Color::RED,SimulationObject::Size::SMALL);
-			AddDynamicObject(b2Vec2(5.2f, 20.0f),b2Vec2(0.0f, 0.0f),SimulationObject::Shape::CUBE,SimulationObject::Color::PURPLE,SimulationObject::Size::SMALL);
-			AddDynamicObject(b2Vec2(7.4f, 20.0f),b2Vec2(0.0f, 0.0f),SimulationObject::Shape::CUBE,SimulationObject::Color::BLUE,SimulationObject::Size::SMALL);
+			AddDynamicObject(b2Vec2(3.0f, 20.0f),b2Vec2(0.0f, 0.0f),SimulationObject::Shape::CUBE, stack_colors[0],SimulationObject::Size::SMALL);
+			AddDynamicObject(b2Vec2(5.2f, 20.0f),b2Vec2(0.0f, 0.0f),SimulationObject::Shape::CUBE, stack_colors[1],SimulationObject::Size::SMALL);
+			AddDynamicObject(b2Vec2(7.4f, 20.0f),b2Vec2(0.0f, 0.0f),SimulationObject::Shape::CUBE, stack_colors[2],SimulationObject::Size::SMALL);
 			// middle left - right
-			AddDynamicObject(b2Vec2(4.0f, 22.0f), b2Vec2(0.0f, 0.0f), SimulationObject::Shape::CUBE, SimulationObject::Color::CYAN, SimulationObject::Size::SMALL);
-			AddDynamicObject(b2Vec2(6.2f, 22.0f), b2Vec2(0.0f, 0.0f), SimulationObject::Shape::CUBE, SimulationObject::Color::YELLOW, SimulationObject::Size::SMALL);
+			AddDynamicObject(b2Vec2(4.0f, 22.0f), b2Vec2(0.0f, 0.0f), SimulationObject::Shape::CUBE, stack_colors[3], SimulationObject::Size::SMALL);
+			AddDynamicObject(b2Vec2(6.2f, 22.0f), b2Vec2(0.0f, 0.0f), SimulationObject::Shape::CUBE, stack_colors[4], SimulationObject::Size::SMALL);
 			// top
-			AddDynamicObject(b2Vec2(5.0f, 24.0f), b2Vec2(0.0f, 0.0f), SimulationObject::Shape::CUBE, SimulationObject::Color::GREEN, SimulationObject::Size::SMALL);
+			AddDynamicObject(b2Vec2(5.0f, 24.0f), b2Vec2(0.0f, 0.0f), SimulationObject::Shape::CUBE, stack_colors[5], SimulationObject::Size::SMALL);
 
 
 
@@ -63,20 +70,20 @@ namespace svqa {
 				b2Vec2(tr_circle_velocities[(int)RandomFloatFromHardware(0.0, 5.0)], 0.0f),
 				SimulationObject::Shape::CIRCLE,
 				distinc_colors[0],
-				SimulationObject::Size::LARGE
+				SimulationObject::getRandomSize()
 			);
 
 
 			// ------- Inclined Platform and Rolling Circle -------
 			AddStaticObject(b2Vec2(-26.5f, 12.0f), 6* M_PI / 7, SimulationObject::STATIC_PLATFORM);
-			float32 rolling_circle_heights[] = { 29.0f, 18.0f, 25.0f, 40.0f, 15.0f };
+			float32 rolling_circle_heights[] = { 29.0f, 18.0f, 25.0f, 40.0f, 19.0f };
 
 			AddDynamicObject(
 				b2Vec2(-22.0f, rolling_circle_heights[(int)RandomFloatFromHardware(0.0, 5.0)]),
 				b2Vec2(0.0f, 0.0f),
 				SimulationObject::Shape::CIRCLE,
 				distinc_colors[1],
-				SimulationObject::Size::LARGE
+				SimulationObject::getRandomSize()
 			);
 
 
@@ -89,7 +96,7 @@ namespace svqa {
 				b2Vec2(0.0f, 0.0f),
 				SimulationObject::Shape::CIRCLE,
 				distinc_colors[2],
-				SimulationObject::Size::LARGE
+				SimulationObject::getRandomSize()
 			);
 
 
@@ -112,7 +119,7 @@ namespace svqa {
 				b2Vec2(br_circle_velocities[(int)RandomFloatFromHardware(0.0, 5.0)], 0.0f),
 				SimulationObject::Shape::CIRCLE,
 				distinc_colors[3],
-				SimulationObject::Size::LARGE
+				SimulationObject::getRandomSize()
 			);
 
 
