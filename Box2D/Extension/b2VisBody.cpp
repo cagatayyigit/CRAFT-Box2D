@@ -49,6 +49,15 @@ void b2VisBody::setUniqueId(const int& id)
     m_nUniqueId = id;
 }
 
+bool b2VisBody::hasSensorFixture() const
+{
+    for (const b2Fixture* f = b2Body::GetFixtureList(); f; f = f->GetNext())
+    {
+        if (f->IsSensor()) return true;
+    }
+    return false;
+}
+
 int b2VisBody::getUniqueId()
 {
     if(m_nUniqueId>=0) {
@@ -56,12 +65,15 @@ int b2VisBody::getUniqueId()
     }
     int index = 0;
     b2VisBody* list = (b2VisBody*) m_world->GetBodyList();
-    for (b2VisBody* b = (b2VisBody*) list; b; b = (b2VisBody*) b->GetNext()) {
-        if(b == this) {
+    for (b2VisBody* b = (b2VisBody*)list; b; b = (b2VisBody*)b->GetNext()) {
+        bool isSensor = b->hasSensorFixture();
+        if (b == this && !isSensor) {
             setUniqueId(index);
             return index;
         }
-        index++;
+        else if (!isSensor) {
+            index++;
+        }
     }
     return -1;
 }
