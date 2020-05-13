@@ -25,7 +25,10 @@ namespace svqa {
 		}
 
 		void InitializeScene() override {
+
 			
+
+
 			// ------- Stack --------
 
 			// bottom left - mid - right
@@ -46,9 +49,11 @@ namespace svqa {
 			AddStaticObject(b2Vec2(9.0f, 19.0f), 0, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(11.0f, 19.0f), 0, SimulationObject::STATIC_RAMP);
 
+			float32 tr_circle_velocities[5] = { -34.0f, -28.0f, -20.0f, -17.0f, -14.0f };
+			
 			AddDynamicObject(
 				b2Vec2(22.0f, 20.0f),
-				b2Vec2(-29.0f, 0.0f),
+				b2Vec2(tr_circle_velocities[(int)RandomFloatFromHardware(0.0, 5.0)], 0.0f),
 				SimulationObject::Shape::CIRCLE,
 				SimulationObject::Color::PURPLE,
 				SimulationObject::Size::LARGE
@@ -57,8 +62,10 @@ namespace svqa {
 
 			// ------- Inclined Platform and Rolling Circle -------
 			AddStaticObject(b2Vec2(-26.5f, 12.0f), 6* M_PI / 7, SimulationObject::STATIC_PLATFORM);
+			float32 rolling_circle_heights[] = { 29.0f, 18.0f, 25.0f, 40.0f, 15.0f };
+
 			AddDynamicObject(
-				b2Vec2(-22.0f, 18.0f),
+				b2Vec2(-22.0f, rolling_circle_heights[(int)RandomFloatFromHardware(0.0, 5.0)]),
 				b2Vec2(0.0f, 0.0f),
 				SimulationObject::Shape::CIRCLE,
 				SimulationObject::Color::CYAN,
@@ -91,9 +98,11 @@ namespace svqa {
 			AddStaticObject(b2Vec2(17.0f, 6.0f), 0, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(11.0f, 6.0f), 0, SimulationObject::STATIC_RAMP);
 
+			float32 br_circle_velocities[] = { -29.0f, -28.0f,-25.0f, -20.0f, -15.0f};
+
 			AddDynamicObject(
 				b2Vec2(22.0f, 8.0f),
-				b2Vec2(-25.0f, 0.0f),
+				b2Vec2(br_circle_velocities[(int)RandomFloatFromHardware(0.0, 5.0)], 0.0f),
 				SimulationObject::Shape::CIRCLE,
 				SimulationObject::Color::GREEN,
 				SimulationObject::Size::LARGE
