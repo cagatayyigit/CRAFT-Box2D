@@ -12,6 +12,7 @@ enum SimulationID
 {
 	ID_ObstructionDemo = 0,
 	ID_Scene1 = 1,
+	ID_Scene2 = 2
 };
 
 #endif /* SimulationID_h */

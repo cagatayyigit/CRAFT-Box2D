@@ -304,7 +304,6 @@ namespace svqa {
 			else {
 				AddRandomDynamicObject(position, velocity);
 			}
-
 		}
 
 		bool CheckIfObjectIsUnique(SimulationObject::Shape shapeType, SimulationObject::Color colorType, SimulationObject::Size sizeType) {

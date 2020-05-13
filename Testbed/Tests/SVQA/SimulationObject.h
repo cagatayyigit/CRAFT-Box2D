@@ -179,13 +179,13 @@ public:
         
 		switch (mShape) {
 		case CUBE:
-			return std::make_shared<b2PolygonShape>(getRectangle(length , length ));
+            return std::make_shared<b2PolygonShape>(getRectangle(length, length));
         case TRIANGLE:
             return std::make_shared<b2PolygonShape>(getPolygon(length + 1.5f, 3));
         case CIRCLE:
             return std::make_shared<b2CircleShape>(getCircle(length));
         case STATIC_RAMP:
-            return std::make_shared<b2PolygonShape>(getPolygon(3.0f, 3));
+            return std::make_shared<b2PolygonShape>(getRightTriangle(3.0f, 3));
         case STATIC_TABLE:
             return std::make_shared<b2PolygonShape>(getRectangle(13.0f, 10.0f));
         case STATIC_PLATFORM:
@@ -335,7 +335,7 @@ public:
     static b2ChainShape* getBasketShape()
     {
         b2ChainShape* shape = new b2ChainShape;
-        std::vector<b2Vec2> vertices = {b2Vec2(-3.5f, 3.5), b2Vec2(-3.5, -3.5), b2Vec2(3.5, -3.5), b2Vec2(3.5, 3.5)};
+        std::vector<b2Vec2> vertices = { b2Vec2(-3.5f, 3.5), b2Vec2(-3.5, -3.5), b2Vec2(3.5, -3.5), b2Vec2(3.5, 3.5) };
         shape->CreateChain(vertices.data(), vertices.size());
         return shape;
     }

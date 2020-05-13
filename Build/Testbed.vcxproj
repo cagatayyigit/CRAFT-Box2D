@@ -224,6 +224,8 @@
     <ClInclude Include="..\Testbed\imgui\stb_textedit.h" />
     <ClInclude Include="..\Testbed\imgui\stb_truetype.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Scene2Settings.h" />
+    <ClInclude Include="Scene2Simulation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Testbed\Framework\Camera.cpp" />
