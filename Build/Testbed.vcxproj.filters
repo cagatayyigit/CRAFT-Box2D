@@ -175,10 +175,10 @@
     <ClInclude Include="..\Testbed\Framework\SVQA\EventDetector.hpp">
       <Filter>Framework\SVQA</Filter>
     </ClInclude>
-    <ClInclude Include="Scene2Settings.h">
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scene2\Scene2Settings.h">
       <Filter>Tests\SVQA\Scene2</Filter>
     </ClInclude>
-    <ClInclude Include="Scene2Simulation.h">
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scene2\Scene2Simulation.h">
       <Filter>Tests\SVQA\Scene2</Filter>
     </ClInclude>
   </ItemGroup>
