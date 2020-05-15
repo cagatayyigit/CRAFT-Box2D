@@ -34,6 +34,8 @@ namespace svqa {
 				}
 			}
 			
+			// Basket
+			AddTargetBasket(b2Vec2(4.5f, -0.90f), 0.0f);
 
 
 			// ------- Stack --------
@@ -102,8 +104,7 @@ namespace svqa {
 
 
 
-			// Basket
-			AddTargetBasket(b2Vec2(4.5f, -0.90f), 0.0f);
+			
 
 
 
@@ -123,7 +124,7 @@ namespace svqa {
 			);
 
 
-
+			
 
 
 

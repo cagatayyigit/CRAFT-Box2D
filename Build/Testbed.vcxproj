@@ -201,6 +201,8 @@
     <ClInclude Include="..\Testbed\Tests\SVQA\ObstructionDemo\ObstructionDemoSimulation.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\Scene1\Scene1Settings.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\Scene1\Scene1Simulation.h" />
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scene2\Scene2Settings.h" />
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scene2\Scene2Simulation.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\SceneState.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\Settings.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\SimulationBase.h" />
@@ -224,8 +226,6 @@
     <ClInclude Include="..\Testbed\imgui\stb_textedit.h" />
     <ClInclude Include="..\Testbed\imgui\stb_truetype.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Scene2Settings.h" />
-    <ClInclude Include="Scene2Simulation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Testbed\Framework\Camera.cpp" />
