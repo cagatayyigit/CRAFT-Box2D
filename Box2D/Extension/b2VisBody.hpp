@@ -28,6 +28,9 @@ public:
     void setTexture(b2VisTexture::Ptr tex);
     bool hasAttachedTexture() const;
     
+    // Checks whether the body has a sensor fixture attached to it.
+    bool hasSensorFixture() const;
+
     //Gets unique id associated with the body
     int getUniqueId();
     
