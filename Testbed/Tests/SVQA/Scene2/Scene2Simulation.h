@@ -65,7 +65,7 @@ namespace svqa {
 			AddStaticObject(b2Vec2(9.0f, 19.0f), 0, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(11.0f, 19.0f), 0, SimulationObject::STATIC_RAMP);
 
-			float32 tr_circle_velocities[5] = { -34.0f, -28.0f, -20.0f, -17.0f, -14.0f };
+			float32 tr_circle_velocities[5] = { -24.0f, -28.0f, -25.0f, -18.0f, -19.0f };
 			
 			AddDynamicObject(
 				b2Vec2(22.0f, 20.0f),
