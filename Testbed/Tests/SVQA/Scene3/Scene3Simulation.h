@@ -35,76 +35,66 @@ namespace svqa {
 			}
 			
 			// Basket
-			AddTargetBasket(b2Vec2(4.5f, -0.90f), 0.0f);
+			AddTargetBasket(b2Vec2(21.0f, -1.2f), 0.0f);
+			AddTargetBasket(b2Vec2(-21.0f, -1.2f), 0.0f);
 
 
-			
-
-
-			// ------- Top Right Platform and Circle -------
-			AddStaticObject(b2Vec2(17.0f, 19.0f), 0, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(9.0f, 19.0f), 0, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(11.0f, 19.0f), 0, SimulationObject::STATIC_RAMP);
-
-			float32 tr_circle_velocities[5] = { -24.0f, -28.0f, -25.0f, -18.0f, -19.0f };
-			
+			/*float32 tr_circle_velocities[5] = { -24.0f, -28.0f, -25.0f, -18.0f, -19.0f };
 			AddDynamicObject(
 				b2Vec2(22.0f, 20.0f),
 				b2Vec2(tr_circle_velocities[(int)RandomFloatFromHardware(0.0, 5.0)], 0.0f),
 				SimulationObject::Shape::CIRCLE,
 				distinc_colors[0],
 				SimulationObject::getRandomSize()
-			);
+			);*/
+			
 
-
-			// ------- Inclined Platform and Rolling Circle -------
-			AddStaticObject(b2Vec2(-26.5f, 12.0f), 6* M_PI / 7, SimulationObject::STATIC_PLATFORM);
-			float32 rolling_circle_heights[] = { 29.0f, 18.0f, 25.0f, 40.0f, 19.0f };
 
 			AddDynamicObject(
-				b2Vec2(-22.0f, rolling_circle_heights[(int)RandomFloatFromHardware(0.0, 5.0)]),
+				b2Vec2(-18.0f, 25.2f),
 				b2Vec2(0.0f, 0.0f),
 				SimulationObject::Shape::CIRCLE,
-				distinc_colors[1],
-				SimulationObject::getRandomSize()
-			);
-
-
-
-			// ------- Bottom Left Platform and Circle -------
-			AddStaticObject(b2Vec2(-7.5f, 6.0f), 0, SimulationObject::STATIC_PLATFORM);
-
-			AddDynamicObject(
-				b2Vec2(-9.0f, 8.0f),
-				b2Vec2(0.0f, 0.0f),
-				SimulationObject::Shape::CIRCLE,
-				distinc_colors[2],
-				SimulationObject::getRandomSize()
-			);
-
-
-
+				SimulationObject::getRandomColor(),
+				SimulationObject::LARGE);
+			// ------- Inclined Platform-------
+			AddStaticObject(b2Vec2(-13.0f, 19.2f), 4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(10.0f, 19.2f), -4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
 
 			
 
 
 
-			
-			// ------- Bottom Right Platform and Circle -------
-			AddStaticObject(b2Vec2(17.0f, 6.0f), 0, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(11.0f, 6.0f), 0, SimulationObject::STATIC_RAMP);
+			AddDynamicObject(
+				b2Vec2(-18.0f, 11.2f),
+				b2Vec2(8.0f, 0.0f),
+				SimulationObject::Shape::CIRCLE,
+				SimulationObject::getRandomColor(),
+				SimulationObject::LARGE);
 
-			float32 br_circle_velocities[] = { -29.0f, -28.0f,-25.0f, -20.0f, -15.0f};
+
+			// ------- Top Platform-------
+			//AddStaticObject(b2Vec2(-18.0f, 9.2f), 0, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-12.0f, 9.2f), 0, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(10.5f, 9.2f), 0, SimulationObject::STATIC_PLATFORM);
+		
+
 
 			AddDynamicObject(
-				b2Vec2(22.0f, 8.0f),
-				b2Vec2(br_circle_velocities[(int)RandomFloatFromHardware(0.0, 5.0)], 0.0f),
+				b2Vec2(-18.0f, 5.5f),
+				b2Vec2(7.0f, 0.0f),
 				SimulationObject::Shape::CIRCLE,
-				distinc_colors[3],
-				SimulationObject::getRandomSize()
-			);
+				SimulationObject::getRandomColor(),
+				SimulationObject::LARGE);
 
 
+
+			// ------- Bottom Platform -------
+			AddStaticObject(b2Vec2(-10.0f, 4.0f), 0, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-2.0f, 4.0f), 0, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(9.5f, 4.0f), 0, SimulationObject::STATIC_PLATFORM);
+			//AddStaticObject(b2Vec2(23.0f, 0.0f), 0, SimulationObject::STATIC_PLATFORM);
+
+			
 			
 
 
