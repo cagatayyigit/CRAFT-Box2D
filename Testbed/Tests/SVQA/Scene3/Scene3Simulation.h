@@ -54,7 +54,7 @@ namespace svqa {
 				b2Vec2(0.0f, 0.0f),
 				SimulationObject::Shape::CIRCLE,
 				distinc_colors[0],
-				SimulationObject::LARGE);
+				SimulationObject::getRandomSize());
 			// ------- Inclined Platform-------
 			AddStaticObject(b2Vec2(-13.0f, 19.2f), 4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
 			
@@ -68,7 +68,7 @@ namespace svqa {
 				b2Vec2(RandomFloatFromHardware(5.0f, 15.0f), 0.0f),
 				SimulationObject::Shape::CIRCLE,
 				distinc_colors[1],
-				SimulationObject::LARGE);
+				SimulationObject::getRandomSize());
 
 
 			// ------- Top Platform-------
@@ -83,7 +83,7 @@ namespace svqa {
 				b2Vec2(RandomFloatFromHardware(5.0f, 15.0f), 0.0f),
 				SimulationObject::Shape::CIRCLE,
 				distinc_colors[2],
-				SimulationObject::LARGE);
+				SimulationObject::getRandomSize());
 
 
 
