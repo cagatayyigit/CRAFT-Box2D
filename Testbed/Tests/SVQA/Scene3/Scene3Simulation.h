@@ -48,17 +48,16 @@ namespace svqa {
 				SimulationObject::getRandomSize()
 			);*/
 			
-
-
+			
 			AddDynamicObject(
 				b2Vec2(-18.0f, 25.2f),
 				b2Vec2(0.0f, 0.0f),
 				SimulationObject::Shape::CIRCLE,
-				SimulationObject::getRandomColor(),
+				distinc_colors[0],
 				SimulationObject::LARGE);
 			// ------- Inclined Platform-------
 			AddStaticObject(b2Vec2(-13.0f, 19.2f), 4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(10.0f, 19.2f), -4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
+			
 
 			
 
@@ -66,9 +65,9 @@ namespace svqa {
 
 			AddDynamicObject(
 				b2Vec2(-18.0f, 11.2f),
-				b2Vec2(8.0f, 0.0f),
+				b2Vec2(RandomFloatFromHardware(5.0f, 15.0f), 0.0f),
 				SimulationObject::Shape::CIRCLE,
-				SimulationObject::getRandomColor(),
+				distinc_colors[1],
 				SimulationObject::LARGE);
 
 
@@ -81,9 +80,9 @@ namespace svqa {
 
 			AddDynamicObject(
 				b2Vec2(-18.0f, 5.5f),
-				b2Vec2(7.0f, 0.0f),
+				b2Vec2(RandomFloatFromHardware(5.0f, 15.0f), 0.0f),
 				SimulationObject::Shape::CIRCLE,
-				SimulationObject::getRandomColor(),
+				distinc_colors[2],
 				SimulationObject::LARGE);
 
 
