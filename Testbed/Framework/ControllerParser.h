@@ -11,7 +11,7 @@
 #include "Scene2Simulation.h"
 #include "ObstructionDemoSimulation.h"
 #include "Scene1Simulation.h"
-
+#include "Scene3Simulation.h"
 
 #include "JSONHelper.h"
 
@@ -38,7 +38,11 @@ namespace svqa {
 				setPtr->from_json(j);
 				return std::make_shared<Scene2Simulation>(setPtr);
 			}
-            
+			else if (set.simulationID == SimulationID::ID_Scene3) {
+				Scene3Settings::Ptr setPtr = std::make_shared<Scene3Settings>();
+				setPtr->from_json(j);
+				return std::make_shared<Scene3Simulation>(setPtr);
+			}
         }
         return nullptr;
         
