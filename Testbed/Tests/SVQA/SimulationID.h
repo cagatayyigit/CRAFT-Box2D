@@ -13,7 +13,8 @@ enum SimulationID
 	ID_ObstructionDemo = 0,
 	ID_Scene1 = 1,
 	ID_Scene2 = 2,
-	ID_Scene3 = 3
+	ID_Scene3 = 3,
+	ID_Scene4 = 4
 };
 
 #endif /* SimulationID_h */

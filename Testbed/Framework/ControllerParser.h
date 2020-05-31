@@ -8,10 +8,11 @@
 #ifndef ControllerParser_h
 #define ControllerParser_h
 
-#include "Scene2Simulation.h"
 #include "ObstructionDemoSimulation.h"
 #include "Scene1Simulation.h"
+#include "Scene2Simulation.h"
 #include "Scene3Simulation.h"
+#include "Scene4Simulation.h"
 
 #include "JSONHelper.h"
 
@@ -42,6 +43,11 @@ namespace svqa {
 				Scene3Settings::Ptr setPtr = std::make_shared<Scene3Settings>();
 				setPtr->from_json(j);
 				return std::make_shared<Scene3Simulation>(setPtr);
+			}
+			else if (set.simulationID == SimulationID::ID_Scene4) {
+				Scene4Settings::Ptr setPtr = std::make_shared<Scene4Settings>();
+				setPtr->from_json(j);
+				return std::make_shared<Scene4Simulation>(setPtr);
 			}
         }
         return nullptr;
