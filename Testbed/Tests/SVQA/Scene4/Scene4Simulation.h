@@ -52,7 +52,7 @@ namespace svqa {
 
 
 			AddDynamicObject(
-				b2Vec2(RandomFloatFromHardware(-18.0f, -16.0f), 18.5f),
+				b2Vec2(RandomFloatFromHardware(-18.0f, -16.0f), 17.8f),
 				b2Vec2(RandomFloatFromHardware(5.0f, 15.0f), 0.0f),
 				SimulationObject::Shape::CIRCLE,
 				distinc_colors[1],
