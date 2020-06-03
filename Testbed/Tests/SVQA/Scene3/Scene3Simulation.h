@@ -36,7 +36,7 @@ namespace svqa {
 			
 			// Basket
 			AddTargetBasket(b2Vec2(21.0f, -1.2f), 0.0f);
-			AddTargetBasket(b2Vec2(-21.0f, -1.2f), 0.0f);
+			//AddTargetBasket(b2Vec2(-21.0f, -1.2f), 0.0f);
 
 
 			/*float32 tr_circle_velocities[5] = { -24.0f, -28.0f, -25.0f, -18.0f, -19.0f };
@@ -91,7 +91,7 @@ namespace svqa {
 			AddStaticObject(b2Vec2(-10.0f, 4.0f), 0, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(-2.0f, 4.0f), 0, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(9.5f, 4.0f), 0, SimulationObject::STATIC_PLATFORM);
-			//AddStaticObject(b2Vec2(23.0f, 0.0f), 0, SimulationObject::STATIC_PLATFORM);
+			//AddStaticObject(b2Vec2(-18.0f, 0.0f), 0, SimulationObject::STATIC_PLATFORM);
 
 			
 			

@@ -19,7 +19,7 @@
 #include <ctime>
 typedef std::shared_ptr<b2Shape> ShapePtr;
 
-//#define M_PI 3.14159265f
+#define M_PI 3.14159265f
 
 class SimulationObject
 {
