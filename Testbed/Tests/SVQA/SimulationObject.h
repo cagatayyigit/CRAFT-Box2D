@@ -19,7 +19,11 @@
 #include <ctime>
 typedef std::shared_ptr<b2Shape> ShapePtr;
 
+
+#if defined(__APPLE_CC__)
+#else
 #define M_PI 3.14159265f
+#endif
 
 class SimulationObject
 {
