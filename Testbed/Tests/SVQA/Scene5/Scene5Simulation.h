@@ -42,20 +42,20 @@ namespace svqa {
 
 			AddDynamicObject(
 				b2Vec2(-24.0f, 11.5f),
-				b2Vec2(30.0f, 0.0f),
+				b2Vec2(RandomFloatFromHardware(28.0f, 35.0f), 0.0f),
 				SimulationObject::Shape::CIRCLE,
 				distinc_colors[0],
 				SimulationObject::getRandomSize());
 
 			//AddStaticObject(b2Vec2(-27.0f, 16.0f), 6 * M_PI / 7, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(-8.0f, 11.0f), M_PI_2 , SimulationObject::STATIC_RAMP);
+			AddStaticObject(b2Vec2(-6.0f, 11.0f), M_PI_2 , SimulationObject::STATIC_RAMP);
 			AddStaticObject(b2Vec2(-11.0f, 11.0f), 0, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(-18.0f, 11.0f), 0, SimulationObject::STATIC_PLATFORM);
 
 
 
-			AddRandomDynamicObject(b2Vec2(7.0f, 22.0f), b2Vec2(0.0f, 0.0f));
-			AddStaticObject(b2Vec2(7.0f, 20.0f), 0, SimulationObject::STATIC_PLATFORM);
+			AddRandomDynamicObject(b2Vec2(12.0f, 22.0f), b2Vec2(0.0f, 0.0f));
+			AddStaticObject(b2Vec2(12.0f, 20.0f), 30 * M_PI / 32, SimulationObject::STATIC_PLATFORM);
 
 
 
