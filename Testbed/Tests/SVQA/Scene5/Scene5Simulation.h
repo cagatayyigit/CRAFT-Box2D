@@ -35,21 +35,38 @@ namespace svqa {
 			}
 			
 			// Basket
-			AddTargetBasket(b2Vec2(21.0f, -1.2f), 0.0f);
+			AddTargetBasket(b2Vec2(0.0f, -1.2f), 0.0f);
 
+			
 
 
 			AddDynamicObject(
-				b2Vec2(RandomFloatFromHardware(-17.0f, -15.0f), 24.5f),
-				b2Vec2(RandomFloatFromHardware(5.0f, 15.0f), 0.0f),
+				b2Vec2(-24.0f, 11.5f),
+				b2Vec2(30.0f, 0.0f),
 				SimulationObject::Shape::CIRCLE,
 				distinc_colors[0],
 				SimulationObject::getRandomSize());
-			AddStaticObject(b2Vec2(-18.0f, 23.0f), 0, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(-8.0f, 23.0f), 0, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(-2.0f, 23.0f), 0, SimulationObject::STATIC_PLATFORM);
+
+			//AddStaticObject(b2Vec2(-27.0f, 16.0f), 6 * M_PI / 7, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-8.0f, 11.0f), M_PI_2 , SimulationObject::STATIC_RAMP);
+			AddStaticObject(b2Vec2(-11.0f, 11.0f), 0, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-18.0f, 11.0f), 0, SimulationObject::STATIC_PLATFORM);
 
 
+
+			AddRandomDynamicObject(b2Vec2(7.0f, 22.0f), b2Vec2(0.0f, 0.0f));
+			AddStaticObject(b2Vec2(7.0f, 20.0f), 0, SimulationObject::STATIC_PLATFORM);
+
+
+
+			AddRandomDynamicObject(b2Vec2(12.0f, 16.0f), b2Vec2(0.0f, 0.0f));
+			AddStaticObject(b2Vec2(12.0f, 14.0f), 0, SimulationObject::STATIC_PLATFORM);
+
+
+			
+
+
+			AddStaticObject(b2Vec2(15.0f, 5.0f), - 15 * M_PI / 16, SimulationObject::STATIC_PLATFORM);
 
 			
 
