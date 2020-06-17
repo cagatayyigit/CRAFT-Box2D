@@ -43,6 +43,9 @@
     <Filter Include="Tests\SVQA\Scene5">
       <UniqueIdentifier>{a0d31d8d-9179-4e79-a126-6db2792b3ca1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tests\SVQA\Scene6">
+      <UniqueIdentifier>{958235e9-7248-413e-b8b8-8aa9b1c0343a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Testbed\Framework\Camera.hpp">
@@ -207,6 +210,12 @@
     </ClInclude>
     <ClInclude Include="..\Testbed\Tests\SVQA\Scene5\Scene5Simulation.h">
       <Filter>Tests\SVQA\Scene5</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scene6\Scene6Settings.h">
+      <Filter>Tests\SVQA\Scene6</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scene6\Scene6Simulation.h">
+      <Filter>Tests\SVQA\Scene6</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

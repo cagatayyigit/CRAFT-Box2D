@@ -14,6 +14,7 @@
 #include "Scene3Simulation.h"
 #include "Scene4Simulation.h"
 #include "Scene5Simulation.h"
+#include "Scene6Simulation.h"
 
 #include "JSONHelper.h"
 
@@ -54,6 +55,11 @@ namespace svqa {
 				Scene5Settings::Ptr setPtr = std::make_shared<Scene5Settings>();
 				setPtr->from_json(j);
 				return std::make_shared<Scene5Simulation>(setPtr);
+			}
+			else if (set.simulationID == SimulationID::ID_Scene6) {
+				Scene6Settings::Ptr setPtr = std::make_shared<Scene6Settings>();
+				setPtr->from_json(j);
+				return std::make_shared<Scene6Simulation>(setPtr);
 			}
         }
         return nullptr;
