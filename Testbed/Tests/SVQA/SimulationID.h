@@ -18,7 +18,8 @@ enum SimulationID
 	ID_Scene5 = 5,
 	ID_Scene6 = 6,
 	ID_Scene7 = 7,
-	ID_Scene8 = 8
+	ID_Scene8 = 8,
+	ID_Scene9 = 9
 };
 
 #endif /* SimulationID_h */
