@@ -21,7 +21,7 @@ namespace svqa {
 
 		virtual SimulationID getIdentifier() override
 		{
-			return SimulationID::ID_Scene7;
+			return SimulationID::ID_Scene8;
 		}
 
 		void InitializeScene() override {
@@ -35,44 +35,44 @@ namespace svqa {
 			}
 			
 			// Basket
-			AddTargetBasket(b2Vec2(20.5f, 12.0f), 0.0f);
+			AddTargetBasket(b2Vec2(20.5f, 19.0f), 0.0f);
 
 
-			// mid
-			AddStaticObject(b2Vec2(-17.0f, 15.5f), M_PI, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(-5.0f, 15.5f), M_PI, SimulationObject::STATIC_PLATFORM);
+			// top
+			AddStaticObject(b2Vec2(-17.0f, 22.5f), M_PI, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-7.0f, 22.5f), M_PI, SimulationObject::STATIC_PLATFORM);
 			AddDynamicObject(
-				b2Vec2(-18.0f, 18.0f),
-				b2Vec2(16.3f, 0.0f),
-				SimulationObject::CIRCLE,
-				SimulationObject::GREEN,
-				SimulationObject::LARGE
-			);
-
-			AddDynamicObject(
-				b2Vec2(-5.0f, 18.0f),
-				b2Vec2(4.8f, 0.0f),
-				SimulationObject::CIRCLE,
-				SimulationObject::PURPLE,
-				SimulationObject::LARGE
-			);
-			
-			// bottom
-			AddStaticObject(b2Vec2(-17.0f, 8.5f), M_PI, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(-5.0f, 8.5f), M_PI, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(9.6f, 12.4f), - 5 * M_PI / 6, SimulationObject::STATIC_PLATFORM);
-
-			AddDynamicObject(
-				b2Vec2(-15.0f, 11.0f),
-				b2Vec2(19.0f, 0.0f),
+				b2Vec2(-18.0f, 25.0f),
+				b2Vec2(12.9f, 0.0f),
 				SimulationObject::CIRCLE,
 				SimulationObject::RED,
 				SimulationObject::LARGE
 			);
 
+
+			// mid
+			AddStaticObject(b2Vec2(-17.0f, 15.5f), M_PI, SimulationObject::STATIC_PLATFORM);
 			AddDynamicObject(
-				b2Vec2(-3.0f, 11.0f),
-				b2Vec2(19.0f, 0.0f),
+				b2Vec2(-18.0f, 18.0f),
+				b2Vec2(22.9f, 0.0f),
+				SimulationObject::CIRCLE,
+				SimulationObject::GREEN,
+				SimulationObject::LARGE
+			);
+
+	
+			
+			// bottom
+			AddStaticObject(b2Vec2(-17.0f, 8.5f), M_PI, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-2.8f, 13.0f), - 4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(3.3f, 16.1f), -4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(9.3f, 19.06f), -4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
+
+			
+
+			AddDynamicObject(
+				b2Vec2(-12.0f, 11.0f),
+				b2Vec2(31.0f, 0.0f),
 				SimulationObject::CIRCLE,
 				SimulationObject::CYAN,
 				SimulationObject::LARGE
