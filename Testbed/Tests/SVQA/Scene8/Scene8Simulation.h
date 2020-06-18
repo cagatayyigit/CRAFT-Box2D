@@ -38,27 +38,34 @@ namespace svqa {
 			AddTargetBasket(b2Vec2(20.5f, 19.0f), 0.0f);
 
 
-			// top
-			AddStaticObject(b2Vec2(-17.0f, 22.5f), M_PI, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(-7.0f, 22.5f), M_PI, SimulationObject::STATIC_PLATFORM);
+
+			AddStaticObject(b2Vec2(7.0f, 29.5f), M_PI, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-3.0f, 29.5f), M_PI, SimulationObject::STATIC_PLATFORM);
 			AddDynamicObject(
-				b2Vec2(-18.0f, 25.0f),
-				b2Vec2(12.9f, 0.0f),
+				b2Vec2(12.0f, 32.0f),
+				b2Vec2(-70.9f, 0.0f),
 				SimulationObject::CIRCLE,
 				SimulationObject::RED,
 				SimulationObject::LARGE
 			);
 
 
+
+			// top
+			AddStaticObject(b2Vec2(-17.0f, 22.5f), M_PI, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-7.0f, 22.5f), M_PI, SimulationObject::STATIC_PLATFORM);
+		
+
+
 			// mid
 			AddStaticObject(b2Vec2(-17.0f, 15.5f), M_PI, SimulationObject::STATIC_PLATFORM);
-			AddDynamicObject(
+			/*AddDynamicObject(
 				b2Vec2(-18.0f, 18.0f),
 				b2Vec2(22.9f, 0.0f),
 				SimulationObject::CIRCLE,
 				SimulationObject::GREEN,
 				SimulationObject::LARGE
-			);
+			);*/
 
 	
 			
@@ -72,7 +79,7 @@ namespace svqa {
 
 			AddDynamicObject(
 				b2Vec2(-12.0f, 11.0f),
-				b2Vec2(31.0f, 0.0f),
+				b2Vec2(28.0f, 0.0f),
 				SimulationObject::CIRCLE,
 				SimulationObject::CYAN,
 				SimulationObject::LARGE
