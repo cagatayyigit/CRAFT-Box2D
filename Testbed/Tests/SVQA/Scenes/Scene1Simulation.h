@@ -45,7 +45,6 @@ namespace svqa {
 			float32 leftFloorLen = (RandomFloatFromHardware(15.0, 18.0));
 			float32 rightFloorCoorX = (RandomFloatFromHardware(40.0, 46.0));
 
-			
 
 			float32 inclinedFloorLen = (RandomFloatFromHardware(9.0, 12.0));
 			float32 circleV = (RandomFloatFromHardware(-5.0, -15.0));
@@ -70,23 +69,6 @@ namespace svqa {
 			
 			
 
-
-
-			// Ramp
-			//AddStaticObject(b2Vec2(25.0f, 10.0f), 0, SimulationObject::STATIC_RAMP);
-
-
-            // Inclined Floor
-            //AddStaticObject(b2Vec2(-28.0f, 35.0f), angle, SimulationObject::STATIC_PLATFORM);
-
-			// Inclined Floor
-            //AddStaticObject(b2Vec2(-10.0f, 25.0f), angle, SimulationObject::STATIC_PLATFORM);
-
-            
-			
-            //AddStaticObject(rampPosition, 0.0f, SimulationObject::STATIC_RAMP);
- 
-			// Circles
 
 			// Stationary Bottom-Left
 			float32 leftBottomCircleCoorX = (RandomFloatFromHardware(-15.0, -10.0));

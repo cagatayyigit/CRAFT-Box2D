@@ -26,37 +26,29 @@ namespace svqa {
 
 		void InitializeScene() override {
 
-			std::vector<SimulationObject::Color> distinc_colors;
-			while(distinc_colors.size() < 5) {
-				SimulationObject::Color c = SimulationObject::getRandomColor();
-				if (std::find(distinc_colors.begin(), distinc_colors.end(), c) == distinc_colors.end()) {
-					distinc_colors.push_back(c);
-				}
-			}
+			
 			
 			// Basket
 			AddTargetBasket(b2Vec2(21.0f, -1.2f), 0.0f);
 
 
 
-			AddDynamicObject(
+			AddRandomDynamicObject(
 				b2Vec2(RandomFloatFromHardware(-17.0f, -15.0f), 24.5f),
 				b2Vec2(RandomFloatFromHardware(5.0f, 15.0f), 0.0f),
-				SimulationObject::Shape::CIRCLE,
-				distinc_colors[0],
-				SimulationObject::getRandomSize());
+				SimulationObject::Shape::CIRCLE
+				);
 			AddStaticObject(b2Vec2(-18.0f, 23.0f), 0, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(-8.0f, 23.0f), 0, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(-2.0f, 23.0f), 0, SimulationObject::STATIC_PLATFORM);
 
 
 
-			AddDynamicObject(
+			AddRandomDynamicObject(
 				b2Vec2(RandomFloatFromHardware(-18.0f, -16.0f), 17.8f),
 				b2Vec2(RandomFloatFromHardware(5.0f, 15.0f), 0.0f),
-				SimulationObject::Shape::CIRCLE,
-				distinc_colors[1],
-				SimulationObject::getRandomSize());
+				SimulationObject::Shape::CIRCLE);
+
 			AddStaticObject(b2Vec2(-18.0f, 16.0f), 0, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(-9.0f, 16.0f), 0, SimulationObject::STATIC_PLATFORM);
 
@@ -64,25 +56,20 @@ namespace svqa {
 
 
 
-			AddDynamicObject(
+			AddRandomDynamicObject(
 				b2Vec2(RandomFloatFromHardware(-18.0f, -17.0f), 11.5f),
 				b2Vec2(RandomFloatFromHardware(5.0f, 15.0f), 0.0f),
-				SimulationObject::Shape::CIRCLE,
-				distinc_colors[2],
-				SimulationObject::getRandomSize());
+				SimulationObject::Shape::CIRCLE
+				);
 			AddStaticObject(b2Vec2(-18.0f, 10.0f), 0, SimulationObject::STATIC_PLATFORM);
 
 
 
-
-
-
-			AddDynamicObject(
+			AddRandomDynamicObject(
 				b2Vec2(-18.0f, 5.5f),
 				b2Vec2(RandomFloatFromHardware(5.0f, 15.0f), 0.0f),
-				SimulationObject::Shape::CIRCLE,
-				distinc_colors[3],
-				SimulationObject::getRandomSize());
+				SimulationObject::Shape::CIRCLE
+			);
 			AddStaticObject(b2Vec2(-18.0f, 4.0f), 0, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(-4.0f, 4.0f), 0, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(9.5f, 4.0f), 0, SimulationObject::STATIC_PLATFORM);

@@ -79,7 +79,7 @@ public:
     }
 
     static Color getRandomColor() {
-        
+        //RandomFloatFromHardware(15.0, 18.0)
         int i = std::rand() % 8;
         return Color(i);
     }

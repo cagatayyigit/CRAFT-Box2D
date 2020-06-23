@@ -26,35 +26,15 @@ namespace svqa {
 
 		void InitializeScene() override {
 
-			std::vector<SimulationObject::Color> distinc_colors;
-			while(distinc_colors.size() < 4) {
-				SimulationObject::Color c = SimulationObject::getRandomColor();
-				if (std::find(distinc_colors.begin(), distinc_colors.end(), c) == distinc_colors.end()) {
-					distinc_colors.push_back(c);
-				}
-			}
 			
 			// Basket
 			AddTargetBasket(b2Vec2(21.0f, -1.2f), 0.0f);
-			//AddTargetBasket(b2Vec2(-21.0f, -1.2f), 0.0f);
 
-
-			/*float32 tr_circle_velocities[5] = { -24.0f, -28.0f, -25.0f, -18.0f, -19.0f };
-			AddDynamicObject(
-				b2Vec2(22.0f, 20.0f),
-				b2Vec2(tr_circle_velocities[(int)RandomFloatFromHardware(0.0, 5.0)], 0.0f),
-				SimulationObject::Shape::CIRCLE,
-				distinc_colors[0],
-				SimulationObject::getRandomSize()
-			);*/
 			
-			
-			AddDynamicObject(
+			AddRandomDynamicObject(
 				b2Vec2(-18.0f, 25.2f),
 				b2Vec2(0.0f, 0.0f),
-				SimulationObject::Shape::CIRCLE,
-				distinc_colors[0],
-				SimulationObject::getRandomSize());
+				SimulationObject::Shape::CIRCLE);
 			// ------- Inclined Platform-------
 			AddStaticObject(b2Vec2(-13.0f, 19.2f), 4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
 			
@@ -63,27 +43,22 @@ namespace svqa {
 
 
 
-			AddDynamicObject(
+			AddRandomDynamicObject(
 				b2Vec2(-18.0f, 11.2f),
 				b2Vec2(RandomFloatFromHardware(5.0f, 15.0f), 0.0f),
-				SimulationObject::Shape::CIRCLE,
-				distinc_colors[1],
-				SimulationObject::getRandomSize());
+				SimulationObject::Shape::CIRCLE);
 
 
 			// ------- Top Platform-------
-			//AddStaticObject(b2Vec2(-18.0f, 9.2f), 0, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(-12.0f, 9.2f), 0, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(10.5f, 9.2f), 0, SimulationObject::STATIC_PLATFORM);
 		
 
 
-			AddDynamicObject(
+			AddRandomDynamicObject(
 				b2Vec2(-18.0f, 5.5f),
 				b2Vec2(RandomFloatFromHardware(5.0f, 15.0f), 0.0f),
-				SimulationObject::Shape::CIRCLE,
-				distinc_colors[2],
-				SimulationObject::getRandomSize());
+				SimulationObject::Shape::CIRCLE);
 
 
 
@@ -91,7 +66,6 @@ namespace svqa {
 			AddStaticObject(b2Vec2(-10.0f, 4.0f), 0, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(-2.0f, 4.0f), 0, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(9.5f, 4.0f), 0, SimulationObject::STATIC_PLATFORM);
-			//AddStaticObject(b2Vec2(-18.0f, 0.0f), 0, SimulationObject::STATIC_PLATFORM);
 
 			
 			

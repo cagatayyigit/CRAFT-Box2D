@@ -306,7 +306,7 @@ namespace svqa {
 				AddDynamicObject(position, velocity, shapeType, colorType, sizeType);
 			}
 			else {
-				AddRandomDynamicObject(position, velocity, shapeType, sizeType, colorType);
+				AddRandomDynamicObject(position, velocity);
 			}
 		}
 

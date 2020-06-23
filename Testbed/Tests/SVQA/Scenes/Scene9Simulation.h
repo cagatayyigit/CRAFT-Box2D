@@ -26,13 +26,6 @@ namespace svqa {
 
 		void InitializeScene() override {
 
-			std::vector<SimulationObject::Color> distinc_colors;
-			while(distinc_colors.size() < 5) {
-				SimulationObject::Color c = SimulationObject::getRandomColor();
-				if (std::find(distinc_colors.begin(), distinc_colors.end(), c) == distinc_colors.end()) {
-					distinc_colors.push_back(c);
-				}
-			}
 			
 			// Basket
 			AddTargetBasket(b2Vec2(0.0f, -1.2f), 0.0f);
