@@ -28,49 +28,54 @@ namespace svqa {
 
 			
 			// Basket
-			AddTargetBasket(b2Vec2(8.0f, -1.2f), 0.0f);
-
-
+			// make x coord. random
+			AddTargetBasket(b2Vec2(RandomFloatFromHardware(5.0, 10.0), -1.2f), 0.0f);
 
 
 			//left
-			AddStaticObject(b2Vec2(-12.0f, 28.0f), 5*  M_PI  / 6, SimulationObject::STATIC_PLATFORM);
+			// make angle random
+			AddStaticObject(b2Vec2(-12.0f, 28.0f), 5*  M_PI  / RandomFloatFromHardware(5.5, 7.0), SimulationObject::STATIC_PLATFORM);
 
-			AddDynamicObject(
+
+			// make y-coord random
+			AddRandomDynamicObject(
 				b2Vec2(-12.0f, 31.0f),
-				b2Vec2(0.0f, -15.0f),
-				SimulationObject::CIRCLE,
-				SimulationObject::CYAN,
-				SimulationObject::LARGE
+				b2Vec2(0.0f, -15.0f)
 			);
 
 			
 			//right
-
-			AddStaticObject(b2Vec2(16.0f, 14.0f), - 15 * M_PI / 16, SimulationObject::STATIC_PLATFORM);
+			// make angle random
+			AddStaticObject(b2Vec2(16.0f, 14.0f), - 15 * M_PI / RandomFloatFromHardware(19.0, 16.0), SimulationObject::STATIC_PLATFORM);
 
 			
 			// mid
-			AddStaticObject(b2Vec2(5.0f, 19.0f), M_PI, SimulationObject::STATIC_PLATFORM);
-			AddDynamicObject(
-				b2Vec2(4.0f, 21.0f),
+			// make y-coord random
+			float y = RandomFloatFromHardware(17.0, 20.0);
+			AddStaticObject(b2Vec2(5.0f, y), M_PI, SimulationObject::STATIC_PLATFORM);
+
+
+
+			// make x coord. random
+			// make Velocity random
+			AddRandomDynamicObject(
+				b2Vec2(4.0f, y + 2.0f),
 				b2Vec2(-8.0f, 0.0f),
-				SimulationObject::CIRCLE,
-				SimulationObject::GREEN,
-				SimulationObject::LARGE
+				SimulationObject::CIRCLE
 			);
 
 
 			// bottom
-			AddStaticObject(b2Vec2(-5.0f, 7.0f),  M_PI , SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(-19.0f, 7.0f),  M_PI , SimulationObject::STATIC_PLATFORM);
-			AddDynamicObject(
-				b2Vec2(-17.0f, 9.0f),
-				b2Vec2(3.0f, 0.0f),
-				SimulationObject::CIRCLE,
-				SimulationObject::RED,
-				SimulationObject::LARGE
-				);
+			float32 h = RandomFloatFromHardware(9.0, 3.0); // make y-coords random
+			AddStaticObject(b2Vec2(-5.0f, h),  M_PI , SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-19.0f, h),  M_PI , SimulationObject::STATIC_PLATFORM);
+
+
+			AddRandomDynamicObject(
+				b2Vec2(RandomFloatFromHardware(-20.0, -16.0), h + 2.0f),  // make x coord. random
+				b2Vec2(RandomFloatFromHardware(8.0, 3.0), 0.0f),     // make x-velocity random
+				SimulationObject::CIRCLE
+			);
 
 
 		}
