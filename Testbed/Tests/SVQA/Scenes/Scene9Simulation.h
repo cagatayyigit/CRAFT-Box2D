@@ -26,27 +26,27 @@ namespace svqa {
 
 		void InitializeScene() override {
 			// Basket
-			AddTargetBasket(b2Vec2(0.0f, -1.2f), 0.0f);
+			AddTargetBasket(b2Vec2(RandomFloat(-1, 1), -1.2f), 0.0f);
 
 
 			// Top Platform
 			AddStaticObject(b2Vec2(7.0f, 29.5f), M_PI, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(-7.0f, 29.5f), M_PI, SimulationObject::STATIC_PLATFORM);
-
+			
+			// Objects at top.
 			AddRandomDynamicObject(
 				b2Vec2(RandomFloat(1.5f, 12.5f), RandomFloat(30.5f, 32.0f)),
-				b2Vec2(RandomFloat(30.0f, 5.0f), 0.0f),
+				b2Vec2(RandomFloat(30.0f, 10.0f), 0.0f),
 				SimulationObject::CIRCLE
 			);
-
 			AddRandomDynamicObject(
 				b2Vec2(-RandomFloat(1.5f, 12.5f), RandomFloat(30.5f, 32.0f)),
-				b2Vec2(-RandomFloat(30.0f, 5.0f), 0.0f),
+				b2Vec2(-RandomFloat(30.0f, 10.0f), 0.0f),
 				SimulationObject::CIRCLE
 			);
 		
 
-			AddStaticObject(b2Vec2(-RandomFloat(16,18), RandomFloat(24,25)), RandomFloat(7.5f, 8.5f) * M_PI / 9, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-RandomFloat(16, 18), RandomFloat(24, 25)), RandomFloat(7.5f, 8.5f) * M_PI / 9, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(RandomFloat(16, 18), RandomFloat(24, 25)), -RandomFloat(7.5f, 8.5f) * M_PI / 9, SimulationObject::STATIC_PLATFORM);
 
 
@@ -54,8 +54,9 @@ namespace svqa {
 			AddStaticObject(b2Vec2(5.0f, 15.5f), M_PI, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(-5.0f, 15.5f), M_PI, SimulationObject::STATIC_PLATFORM);
 
+			// Middle objects.
 			AddRandomDynamicObject(
-				b2Vec2(-RandomFloat(8.0f,12.0f), 17.0f),
+				b2Vec2(-RandomFloat(8.0f, 12.0f), 17.0f),
 				b2Vec2(0.0f, 0.0f)
 			);
 			AddRandomDynamicObject(
