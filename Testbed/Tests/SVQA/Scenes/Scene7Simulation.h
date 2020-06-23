@@ -38,12 +38,9 @@ namespace svqa {
 			AddStaticObject(b2Vec2(-13.0f, 17.0f), 7 * M_PI / 8, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(  7.0f, 9.0f), 7 * M_PI / 8, SimulationObject::STATIC_PLATFORM);
 
-			AddDynamicObject(
+			AddRandomDynamicObject(
 				b2Vec2(-12.0f, 25.0f),
-				b2Vec2(0.0f, 0.0f),
-				SimulationObject::CIRCLE,
-				SimulationObject::CYAN,
-				SimulationObject::LARGE
+				b2Vec2(0.0f, 0.0f)
 			);
 
 			
