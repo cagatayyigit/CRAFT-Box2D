@@ -296,21 +296,13 @@ namespace svqa {
 		
 
 
-		void AddRandomDynamicObject(b2Vec2 position, b2Vec2 velocity, SimulationObject::Shape shape = SimulationObject::STATIC_PLATFORM) {
-			SimulationObject::Shape shapeType;
-
-			if (shape == SimulationObject::CUBE) 
-				shapeType = SimulationObject::CUBE;
-			else if (shape == SimulationObject::CIRCLE)
-				shapeType = SimulationObject::CIRCLE;
-			else if (shape == SimulationObject::Shape::TRIANGLE)
-				shapeType = SimulationObject::TRIANGLE;
-			else
-				shapeType = SimulationObject::getRandomShape();
-		
+		void AddRandomDynamicObject(b2Vec2 position, b2Vec2 velocity, SimulationObject::Shape shapeType = SimulationObject::STATIC_PLATFORM) {
 
 			SimulationObject::Color colorType = SimulationObject::getRandomColor();
 			SimulationObject::Size sizeType = SimulationObject::getRandomSize();
+
+			if (shapeType == SimulationObject::STATIC_PLATFORM)
+				shapeType = SimulationObject::getRandomShape();
 
 			if (CheckIfObjectIsUnique(shapeType, colorType, sizeType)) {
 				AddDynamicObject(position, velocity, shapeType, colorType, sizeType);
