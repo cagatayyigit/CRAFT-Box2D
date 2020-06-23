@@ -30,43 +30,45 @@ namespace svqa {
 
 
 			// Top Platform
-			AddStaticObject(b2Vec2(7.0f, 29.5f), M_PI, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(-7.0f, 29.5f), M_PI, SimulationObject::STATIC_PLATFORM);
+			float topPlatformHeight = RandomFloat(28.0f, 31.0f);
+			AddStaticObject(b2Vec2(7.0f, topPlatformHeight), M_PI, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-7.0f, topPlatformHeight), M_PI, SimulationObject::STATIC_PLATFORM);
 			
 			// Objects at top.
 			AddRandomDynamicObject(
-				b2Vec2(RandomFloat(1.5f, 12.5f), RandomFloat(30.5f, 32.0f)),
+				b2Vec2(RandomFloat(1.5f, 12.5f), topPlatformHeight + 1.5f),
 				b2Vec2(RandomFloat(40.0f, 20.0f), 0.0f),
 				SimulationObject::CIRCLE
 			);
 			AddRandomDynamicObject(
-				b2Vec2(-RandomFloat(1.5f, 12.5f), RandomFloat(30.5f, 32.0f)),
+				b2Vec2(-RandomFloat(1.5f, 12.5f), topPlatformHeight + 1.5f),
 				b2Vec2(-RandomFloat(40.0f, 20.0f), 0.0f),
 				SimulationObject::CIRCLE
 			);
 		
 
-			AddStaticObject(b2Vec2(-RandomFloat(16, 18), RandomFloat(24, 25)), RandomFloat(7.5f, 8.5f) * M_PI / 9, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(RandomFloat(16, 18), RandomFloat(24, 25)), -RandomFloat(7.5f, 8.5f) * M_PI / 9, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-RandomFloat(16, 18), RandomFloat(24, 25)), RandomFloat(7.5f, 8.5f) * M_PI / 9.0f, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(RandomFloat(16, 18), RandomFloat(24, 25)), -RandomFloat(7.5f, 8.5f) * M_PI / 9.0f, SimulationObject::STATIC_PLATFORM);
 
 
 			// Middle Platform
-			AddStaticObject(b2Vec2(5.0f, 15.5f), M_PI, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(-5.0f, 15.5f), M_PI, SimulationObject::STATIC_PLATFORM);
+			float middlePlatformHeight = RandomFloat(14, 16);
+			AddStaticObject(b2Vec2(RandomFloat(4.5, 5.5), middlePlatformHeight), M_PI, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-RandomFloat(4.5, 5.5), middlePlatformHeight), M_PI, SimulationObject::STATIC_PLATFORM);
 
 			// Middle objects.
 			AddRandomDynamicObject(
-				b2Vec2(-RandomFloat(8.0f, 12.0f), 17.0f),
+				b2Vec2(-RandomFloat(8.0f, 12.0f), middlePlatformHeight + 1.5f),
 				b2Vec2(0.0f, 0.0f)
 			);
 			AddRandomDynamicObject(
-				b2Vec2(RandomFloat(8.0f, 12.0f), 17.0f),
+				b2Vec2(RandomFloat(8.0f, 12.0f), middlePlatformHeight + 1.5f),
 				b2Vec2(0.0f, 0.0f)
 			);
 
 
-			AddStaticObject(b2Vec2(-RandomFloat(12, 14), RandomFloat(5, 6.5f)), RandomFloat(7.5f, 8.25f) * M_PI / 9, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(RandomFloat(12, 14), RandomFloat(5, 6.5f)), -RandomFloat(7.5f, 8.25f) * M_PI / 9, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-RandomFloat(12, 14), RandomFloat(5, 6.5f)), RandomFloat(7.5f, 8.25f) * M_PI / 9.0f, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(RandomFloat(12, 14), RandomFloat(5, 6.5f)), -RandomFloat(7.5f, 8.25f) * M_PI / 9.0f, SimulationObject::STATIC_PLATFORM);
 		}
 
 	private:
