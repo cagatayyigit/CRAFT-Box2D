@@ -41,21 +41,19 @@ namespace svqa {
 			// top
 			AddStaticObject(b2Vec2(7.0f, 29.5f), M_PI, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(-7.0f, 29.5f), M_PI, SimulationObject::STATIC_PLATFORM);
-			AddDynamicObject(
+
+			AddRandomDynamicObject(
 				b2Vec2(2.5f, 32.0f),
 				b2Vec2(15.0f, 0.0f),
-				SimulationObject::CIRCLE,
-				SimulationObject::RED,
-				SimulationObject::LARGE
-			);
-			AddDynamicObject(
-				b2Vec2(-1.5f, 32.0f),
-				b2Vec2(-30.0f, 0.0f),
-				SimulationObject::CIRCLE,
-				SimulationObject::PURPLE,
-				SimulationObject::LARGE
+				SimulationObject::CIRCLE
 			);
 
+			AddRandomDynamicObject(
+				b2Vec2(-1.5f, 32.0f),
+				b2Vec2(-30.0f, 0.0f),
+				SimulationObject::CIRCLE
+			);
+		
 
 			AddStaticObject(b2Vec2(-17.0f, 24.5f),  8 * M_PI / 9, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(17.0f, 24.5f), - 8 * M_PI / 9, SimulationObject::STATIC_PLATFORM);
@@ -67,19 +65,13 @@ namespace svqa {
 			// mid
 			AddStaticObject(b2Vec2(5.0f, 15.5f), M_PI, SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(-5.0f, 15.5f), M_PI, SimulationObject::STATIC_PLATFORM);
-			AddDynamicObject(
+			AddRandomDynamicObject(
 				b2Vec2(-8.0f, 17.0f),
-				b2Vec2(0.0f, 0.0f),
-				SimulationObject::CIRCLE,
-				SimulationObject::CYAN,
-				SimulationObject::LARGE
+				b2Vec2(0.0f, 0.0f)
 			);
-			AddDynamicObject(
+			AddRandomDynamicObject(
 				b2Vec2(8.0f, 17.0f),
-				b2Vec2(0.0f, 0.0f),
-				SimulationObject::CIRCLE,
-				SimulationObject::YELLOW,
-				SimulationObject::LARGE
+				b2Vec2(0.0f, 0.0f)
 			);
 
 
