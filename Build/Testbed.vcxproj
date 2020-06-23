@@ -200,6 +200,8 @@
     <ClInclude Include="..\Testbed\Tests\SVQA\SceneState.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\ObstructionDemoSettings.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\ObstructionDemoSimulation.h" />
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene10Settings.h" />
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene10Simulation.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene1Settings.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene1Simulation.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene2Settings.h" />
