@@ -293,8 +293,22 @@ namespace svqa {
 			m_SceneJSONState.add(objectState);
 		}
 
-		void AddRandomDynamicObject(b2Vec2 position, b2Vec2 velocity) {
-			SimulationObject::Shape shapeType = SimulationObject::getRandomShape();
+		
+
+
+		void AddRandomDynamicObject(b2Vec2 position, b2Vec2 velocity, SimulationObject::Shape shape = SimulationObject::STATIC_PLATFORM) {
+			SimulationObject::Shape shapeType;
+
+			if (shape == SimulationObject::CUBE) 
+				shapeType = SimulationObject::CUBE;
+			else if (shape == SimulationObject::CIRCLE)
+				shapeType = SimulationObject::CIRCLE;
+			else if (shape == SimulationObject::Shape::TRIANGLE)
+				shapeType = SimulationObject::TRIANGLE;
+			else
+				shapeType = SimulationObject::getRandomShape();
+		
+
 			SimulationObject::Color colorType = SimulationObject::getRandomColor();
 			SimulationObject::Size sizeType = SimulationObject::getRandomSize();
 
@@ -302,9 +316,10 @@ namespace svqa {
 				AddDynamicObject(position, velocity, shapeType, colorType, sizeType);
 			}
 			else {
-				AddRandomDynamicObject(position, velocity);
+				AddRandomDynamicObject(position, velocity, shapeType);
 			}
 		}
+
 
 		bool CheckIfObjectIsUnique(SimulationObject::Shape shapeType, SimulationObject::Color colorType, SimulationObject::Size sizeType) {
 			std::vector<int> temp;
