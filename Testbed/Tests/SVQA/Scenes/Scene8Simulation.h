@@ -25,52 +25,56 @@ namespace svqa {
 		}
 
 		void InitializeScene() override {
+			// TODO: Does not easily produce intended outcomes.
+			//       We may need to change positions and orientations of dynamic objects,
+			//       especially one at the top.
 
-			
-			
 			// Basket
-			AddTargetBasket(b2Vec2(20.5f, 19.0f), 0.0f);
+			AddTargetBasket(b2Vec2(RandomFloat(20, 21), RandomFloat(19, 20)), 0.0f);
 
 
-
-			AddStaticObject(b2Vec2(7.0f, 29.5f), M_PI, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(-3.0f, 29.5f), M_PI, SimulationObject::STATIC_PLATFORM);
-			AddDynamicObject(
-				b2Vec2(12.0f, 32.0f),
-				b2Vec2(-70.9f, 0.0f),
-				SimulationObject::CIRCLE,
-				SimulationObject::RED,
-				SimulationObject::LARGE
+			float topY = RandomFloat(29, 30);
+			AddStaticObject(b2Vec2(RandomFloat(6, 8), topY), M_PI, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-RandomFloat(-4, -2), topY), M_PI, SimulationObject::STATIC_PLATFORM);
+			// TODO: Maybe change the direction of this object?
+			AddRandomDynamicObject(
+				b2Vec2(RandomFloat(10, 14), topY + 2.5f),
+				b2Vec2(-RandomFloat(50, 75), 0.0f),
+				SimulationObject::CIRCLE
 			);
 
 
 
 			// top
-			AddStaticObject(b2Vec2(-17.0f, 22.5f), M_PI, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(-7.0f, 22.5f), M_PI, SimulationObject::STATIC_PLATFORM);
+			topY = RandomFloat(22, 23);
+			AddStaticObject(b2Vec2(-RandomFloat(16, 18), topY), M_PI, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-RandomFloat(6, 8), topY), M_PI, SimulationObject::STATIC_PLATFORM);
 		
 
 
 			// mid
-			AddStaticObject(b2Vec2(-17.0f, 15.5f), M_PI, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-RandomFloat(16, 18), RandomFloat(15, 16)), M_PI, SimulationObject::STATIC_PLATFORM);
 
 
-	
-			
 			// bottom
-			AddStaticObject(b2Vec2(-17.0f, 8.5f), M_PI, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(-2.8f, 13.0f), - 4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(3.3f, 16.1f), -4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(9.3f, 19.06f), -4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
+			float bottomPlatformHeight = RandomFloat(6, 8.5f);
+			float bottomLayeredRampHeight = bottomPlatformHeight + 4.6;
+
+			auto layeredRampHeight = [bottomLayeredRampHeight](int layerCount) {
+				float layerHeight = 3.25f;
+				return bottomLayeredRampHeight + layerHeight * layerCount;
+			};
+			AddStaticObject(b2Vec2(-17.0f, bottomPlatformHeight), M_PI, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-2.8f, layeredRampHeight(0)), -4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(3.3f, layeredRampHeight(1)), -4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(9.3f, layeredRampHeight(2)), -4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
 
 			
 
-			AddDynamicObject(
-				b2Vec2(-12.0f, 11.0f),
-				b2Vec2(28.0f, 0.0f),
-				SimulationObject::CIRCLE,
-				SimulationObject::CYAN,
-				SimulationObject::LARGE
+			AddRandomDynamicObject(
+				b2Vec2(-RandomFloat(15, 17), bottomPlatformHeight + 2),
+				b2Vec2(RandomFloat(20, 40), 0.0f),
+				SimulationObject::CIRCLE
 			);
 
 		}
