@@ -296,17 +296,39 @@ namespace svqa {
 		
 
 
-		void AddRandomDynamicObject(b2Vec2 position, b2Vec2 velocity, 
+		void AddRandomDynamicObject(b2Vec2 position, b2Vec2 velocity, int sh_sz_cl = 0b000, 
 									SimulationObject::Shape shapeType = SimulationObject::getRandomShape(),
 									SimulationObject::Size sizeType = SimulationObject::getRandomSize(),
 									SimulationObject::Color colorType = SimulationObject::getRandomColor()) {
 
+			/*
+				0b(shape)(size)(color)
+				0b000 
+				0b101
+			*/
 
 			if (CheckIfObjectIsUnique(shapeType, colorType, sizeType)) {
 				AddDynamicObject(position, velocity, shapeType, colorType, sizeType);
 			}
 			else {
-				AddRandomDynamicObject(position, velocity);
+
+				switch (sh_sz_cl)
+				{
+				case 0b000:
+					AddRandomDynamicObject(position, velocity);
+					break;
+				case 0b100:
+					AddRandomDynamicObject(position, velocity, 0b100, shapeType);
+					break;
+				case 0b010:
+					AddRandomDynamicObject(position, velocity, 0b010, SimulationObject::getRandomShape(), sizeType);
+					break;
+				case 0b001:
+					AddRandomDynamicObject(position, velocity, 0b001, SimulationObject::getRandomShape(), SimulationObject::getRandomSize(), colorType);
+					break;
+				}
+
+				// TODO: Implement the rest
 			}
 		}
 
