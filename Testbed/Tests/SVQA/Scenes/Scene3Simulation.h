@@ -32,9 +32,9 @@ namespace svqa {
 
 			
 			AddRandomDynamicObject(
-				b2Vec2(-18.0f, 25.2f),
-				b2Vec2(0.0f, 0.0f),
-				SimulationObject::Shape::CIRCLE);
+				b2Vec2(-18.0f, RandomFloatFromHardware(26.0f, 35.0f)),
+				b2Vec2(0.0f, 0.0f)
+			);
 			// ------- Inclined Platform-------
 			AddStaticObject(b2Vec2(-13.0f, 19.2f), 4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
 			
@@ -45,27 +45,28 @@ namespace svqa {
 
 			AddRandomDynamicObject(
 				b2Vec2(-18.0f, 11.2f),
-				b2Vec2(RandomFloatFromHardware(5.0f, 15.0f), 0.0f),
+				b2Vec2(RandomFloatFromHardware(5.0f, 10.0f), 0.0f),
 				SimulationObject::Shape::CIRCLE);
 
 
 			// ------- Top Platform-------
 			AddStaticObject(b2Vec2(-12.0f, 9.2f), 0, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(10.5f, 9.2f), 0, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(RandomFloatFromHardware(8.0f, 13.0f), 9.2f), 0, SimulationObject::STATIC_PLATFORM);
 		
 
 
+			float32 bottomHeight = RandomFloatFromHardware(1.0f, 4.0f);
 			AddRandomDynamicObject(
-				b2Vec2(-18.0f, 5.5f),
-				b2Vec2(RandomFloatFromHardware(5.0f, 15.0f), 0.0f),
+				b2Vec2(-18.0f, bottomHeight + 2.0f),
+				b2Vec2(RandomFloatFromHardware(5.0f, 10.0f), 0.0f),
 				SimulationObject::Shape::CIRCLE);
 
 
 
 			// ------- Bottom Platform -------
-			AddStaticObject(b2Vec2(-10.0f, 4.0f), 0, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(-2.0f, 4.0f), 0, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(9.5f, 4.0f), 0, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-10.0f, bottomHeight), 0, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-2.0f, bottomHeight), 0, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(9.5f, bottomHeight), 0, SimulationObject::STATIC_PLATFORM);
 
 			
 			
