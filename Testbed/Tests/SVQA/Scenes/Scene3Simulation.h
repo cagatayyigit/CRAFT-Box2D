@@ -46,6 +46,7 @@ namespace svqa {
 			AddRandomDynamicObject(
 				b2Vec2(-18.0f, 11.2f),
 				b2Vec2(RandomFloatFromHardware(5.0f, 10.0f), 0.0f),
+				0b100,
 				SimulationObject::Shape::CIRCLE);
 
 
@@ -59,6 +60,7 @@ namespace svqa {
 			AddRandomDynamicObject(
 				b2Vec2(-18.0f, bottomHeight + 2.0f),
 				b2Vec2(RandomFloatFromHardware(5.0f, 10.0f), 0.0f),
+				0b100,
 				SimulationObject::Shape::CIRCLE);
 
 

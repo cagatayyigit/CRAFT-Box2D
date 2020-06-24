@@ -36,6 +36,7 @@ namespace svqa {
 			AddRandomDynamicObject(
 				b2Vec2(RandomFloatFromHardware(-17.0f, -15.0f), 24.5f),
 				b2Vec2(RandomFloatFromHardware(5.0f, 15.0f), 0.0f),
+				0b100,
 				SimulationObject::Shape::CIRCLE
 				);
 			AddStaticObject(b2Vec2(-18.0f, 23.0f), 0, SimulationObject::STATIC_PLATFORM);
@@ -47,6 +48,7 @@ namespace svqa {
 			AddRandomDynamicObject(
 				b2Vec2(RandomFloatFromHardware(-18.0f, -16.0f), 17.8f),
 				b2Vec2(RandomFloatFromHardware(5.0f, 15.0f), 0.0f),
+				0b100,
 				SimulationObject::Shape::CIRCLE);
 
 			AddStaticObject(b2Vec2(-18.0f, 16.0f), 0, SimulationObject::STATIC_PLATFORM);
@@ -59,6 +61,7 @@ namespace svqa {
 			AddRandomDynamicObject(
 				b2Vec2(RandomFloatFromHardware(-18.0f, -17.0f), 11.5f),
 				b2Vec2(RandomFloatFromHardware(5.0f, 15.0f), 0.0f),
+				0b100,
 				SimulationObject::Shape::CIRCLE
 				);
 			AddStaticObject(b2Vec2(-18.0f, 10.0f), 0, SimulationObject::STATIC_PLATFORM);
@@ -68,6 +71,7 @@ namespace svqa {
 			AddRandomDynamicObject(
 				b2Vec2(-18.0f, 5.5f),
 				b2Vec2(RandomFloatFromHardware(5.0f, 15.0f), 0.0f),
+				0b100,
 				SimulationObject::Shape::CIRCLE
 			);
 			AddStaticObject(b2Vec2(-18.0f, 4.0f), 0, SimulationObject::STATIC_PLATFORM);

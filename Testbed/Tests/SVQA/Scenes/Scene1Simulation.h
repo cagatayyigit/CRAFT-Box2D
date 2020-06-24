@@ -79,8 +79,7 @@ namespace svqa {
 			float32 leftBottomCircleCoorX = (RandomFloatFromHardware(-15.0, -10.0));
 			AddRandomDynamicObject(
 				b2Vec2(-8.0f, 9.0f),
-				b2Vec2(0.0f, 0.0f),
-				SimulationObject::TRIANGLE
+				b2Vec2(0.0f, 0.0f)
 			);
 
 			// Stationary Bottom-Right

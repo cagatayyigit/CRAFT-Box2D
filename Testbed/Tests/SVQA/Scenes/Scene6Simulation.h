@@ -60,6 +60,7 @@ namespace svqa {
 			AddRandomDynamicObject(
 				b2Vec2(4.0f, y + 2.0f),
 				b2Vec2(-8.0f, 0.0f),
+				0b100,
 				SimulationObject::CIRCLE
 			);
 
@@ -73,6 +74,7 @@ namespace svqa {
 			AddRandomDynamicObject(
 				b2Vec2(RandomFloatFromHardware(-20.0, -16.0), h + 2.0f),  // make x coord. random
 				b2Vec2(RandomFloatFromHardware(8.0, 3.0), 0.0f),     // make x-velocity random
+				0b100,
 				SimulationObject::CIRCLE
 			);
 
