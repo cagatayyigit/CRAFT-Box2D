@@ -1,6 +1,6 @@
 {
   "simulationID":3,
-  "offline": true,
+  "offline": false,
   "outputVideoPath": "SVQA_val_000000.mpg",
   "outputJSONPath": "SVQA_val_000000.json",
   "width": 640,
