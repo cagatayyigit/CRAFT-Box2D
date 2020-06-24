@@ -50,10 +50,13 @@ namespace svqa {
 			float32 circleV = (RandomFloatFromHardware(-5.0, -15.0));
 
            
+			// Basket
+			AddTargetBasket(b2Vec2(RandomFloatFromHardware(-3.0, 3.0), -1.2f), 0.0f);
+
+
             // Bottom Left  Floor
             AddStaticObject(b2Vec2(-12.0f, 6.0f), 0, SimulationObject::STATIC_PLATFORM);
-			// Basket
-			AddTargetBasket(b2Vec2(0.0f, -1.2f), 0.0f);
+			
             // Bottom Right Floor
             AddStaticObject(b2Vec2(12.0f, 6.0f), 0, SimulationObject::STATIC_PLATFORM);
             
@@ -62,9 +65,11 @@ namespace svqa {
 			AddStaticObject(b2Vec2(-18.0f, 16.0f), 4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
 
 			// Middle Left  Floor
-			AddStaticObject(b2Vec2(-5.0f, 18.0f), 51 * M_PI / 55, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-5.0f, 18.0f), 51 * M_PI / RandomFloatFromHardware(51.2, 57.0), SimulationObject::STATIC_PLATFORM);
+
+
 			// Middle Right Floor
-			AddStaticObject(b2Vec2(16.0f, 23.0f), 0, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(16.0f, RandomFloatFromHardware(22, 26)), 51 * M_PI / RandomFloatFromHardware(51.2, 57.0), SimulationObject::STATIC_PLATFORM);
 
 			
 			
@@ -93,7 +98,7 @@ namespace svqa {
 
 			// Falling Circle from mid
 			AddRandomDynamicObject(
-				b2Vec2(-10.0f, 42.0f),
+				b2Vec2(-10.0f, (RandomFloatFromHardware(35.0f, 45.0f))),
 				b2Vec2(3.0f, -8.0f)
 			);
 
