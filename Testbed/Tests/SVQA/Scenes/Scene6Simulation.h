@@ -55,7 +55,6 @@ namespace svqa {
 			AddStaticObject(b2Vec2(5.0f, y), M_PI, SimulationObject::STATIC_PLATFORM);
 
 
-
 			// make x coord. random
 			// make Velocity random
 			AddRandomDynamicObject(

@@ -35,7 +35,7 @@ namespace svqa {
 			}
 			
 			// Basket
-			AddTargetBasket(b2Vec2(4.5f, -0.90f), 0.0f);
+			AddTargetBasket(b2Vec2(RandomFloatFromHardware(1.0, 7.0), -1.2f), 0.0f);
 
 
 			// ------- Stack --------
@@ -81,8 +81,9 @@ namespace svqa {
 			float32 rolling_circle_heights[] = { 29.0f, 18.0f, 25.0f, 40.0f, 19.0f };
 
 			AddDynamicObject(
-				b2Vec2(-22.0f, rolling_circle_heights[(int)RandomFloatFromHardware(0.0, 5.0)]),
-				b2Vec2(0.0f, 0.0f),
+				//b2Vec2(-22.0f, rolling_circle_heights[(int)RandomFloatFromHardware(0.0, 5.0)]),
+				b2Vec2(-22.0f, RandomFloatFromHardware(19.0, 35.0)),
+				b2Vec2(0.0f, RandomFloatFromHardware(-9.0, 0.0)),
 				SimulationObject::Shape::CIRCLE,
 				distinc_colors[1],
 				SimulationObject::getRandomSize()
@@ -93,18 +94,15 @@ namespace svqa {
 			// ------- Bottom Left Platform and Circle -------
 			AddStaticObject(b2Vec2(-7.5f, 6.0f), 0, SimulationObject::STATIC_PLATFORM);
 
+
+
 			AddDynamicObject(
-				b2Vec2(-9.0f, 8.0f),
+				b2Vec2(RandomFloatFromHardware(-12.0, -4.0), 8.0f),
 				b2Vec2(0.0f, 0.0f),
 				SimulationObject::Shape::CIRCLE,
 				distinc_colors[2],
 				SimulationObject::getRandomSize()
 			);
-
-
-
-
-			
 
 
 
@@ -117,7 +115,8 @@ namespace svqa {
 
 			AddDynamicObject(
 				b2Vec2(22.0f, 8.0f),
-				b2Vec2(br_circle_velocities[(int)RandomFloatFromHardware(0.0, 5.0)], 0.0f),
+				//b2Vec2(br_circle_velocities[(int)RandomFloatFromHardware(0.0, 5.0)], 0.0f),
+				b2Vec2(RandomFloatFromHardware(-29.0, -20.0), 0.0f),
 				SimulationObject::Shape::CIRCLE,
 				distinc_colors[3],
 				SimulationObject::getRandomSize()
