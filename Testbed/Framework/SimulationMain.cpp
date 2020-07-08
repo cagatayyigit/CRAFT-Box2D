@@ -139,6 +139,12 @@ int main(int c, char** args)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+	if (settings->offline) {
+		// Do not show and focus window.
+		glfwWindowHint(GLFW_FOCUSED, GLFW_FALSE);
+		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+	}
 
 	//		if(settings->offline)
 	//    {
