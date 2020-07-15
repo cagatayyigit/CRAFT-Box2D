@@ -30,32 +30,38 @@ namespace svqa {
 			//       especially one at the top.
 
 			// Basket
-			AddTargetBasket(b2Vec2(RandomFloat(20, 21), RandomFloat(19, 20)), 0.0f);
+			AddTargetBasket(b2Vec2(RandomFloat(19, 22), RandomFloat(17, 20)), 0.0f);
 
 
-			float topY = RandomFloat(29, 30);
-			AddStaticObject(b2Vec2(RandomFloat(6, 8), topY), M_PI, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(-RandomFloat(-4, -2), topY), M_PI, SimulationObject::STATIC_PLATFORM);
+			
+			//AddStaticObject(b2Vec2(RandomFloat(6, 8), topY), M_PI, SimulationObject::STATIC_PLATFORM);
+			//AddStaticObject(b2Vec2(-RandomFloat(-4, -2), topY), M_PI, SimulationObject::STATIC_PLATFORM);
 			// TODO: Maybe change the direction of this object?
-			AddRandomDynamicObject(
-				b2Vec2(RandomFloat(10, 14), topY + 2.5f),
-				b2Vec2(-RandomFloat(50, 75), 0.0f),
-				0b100,
-				SimulationObject::CIRCLE
-			);
+            
+			
+			
 
 
 
 			// top
-			topY = RandomFloat(22, 23);
-			AddStaticObject(b2Vec2(-RandomFloat(16, 18), topY), M_PI, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(-RandomFloat(6, 8), topY), M_PI, SimulationObject::STATIC_PLATFORM);
+			float topY = RandomFloat(28, 30);
+            AddStaticObject(b2Vec2(RandomFloat(-9, -11), topY - 2.0f), 4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(RandomFloat(-1, 1), topY),   4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
 		
-
-
-			// mid
-			AddStaticObject(b2Vec2(-RandomFloat(16, 18), RandomFloat(15, 16)), M_PI, SimulationObject::STATIC_PLATFORM);
-
+            AddRandomDynamicObject(
+            b2Vec2(-12, topY + RandomFloat(26, 38)),
+            b2Vec2(0, 0.0f)
+            );
+            
+            AddRandomDynamicObject(
+            b2Vec2(-2 , topY +RandomFloat(26, 38)),
+            b2Vec2(0, 0.0f)
+            );
+            
+            AddRandomDynamicObject(
+            b2Vec2((RandomFloat(-13, -1)) , topY +RandomFloat(43, 52)),
+            b2Vec2(0, 0.0f)
+            );
 
 			// bottom
 			float bottomPlatformHeight = RandomFloat(6, 8.5f);
@@ -74,7 +80,7 @@ namespace svqa {
 
 			AddRandomDynamicObject(
 				b2Vec2(-RandomFloat(15, 17), bottomPlatformHeight + 2),
-				b2Vec2(RandomFloat(20, 40), 0.0f),
+				b2Vec2(RandomFloat(24, 33), 0.0f), // 20 40
 				0b100,
 				SimulationObject::CIRCLE
 			);
