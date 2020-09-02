@@ -72,6 +72,8 @@ public:
         return m_sPath != "";
     }
     
+    void SaveAsImage(std::string path);
+    
 private:
     GLRenderPoints* m_points;
     GLRenderLines* m_lines;
@@ -81,6 +83,8 @@ private:
     std::string m_sPath;
     int m_nWidth;
     int m_nHeight;
+
+    unsigned char* m_RGBArray = NULL;
 };
 
 #if USE_DEBUG_DRAW

@@ -8,6 +8,7 @@
 #ifndef SimulationBase_h
 #define SimulationBase_h
 
+#include "SimulationRenderer.hpp"
 #include "Simulation.h"
 #include "Settings.h"
 #include "SimulationID.h"
@@ -17,15 +18,17 @@
 #define _USE_MATH_DEFINES 
 #endif
 #include <math.h>
-#include "SceneState.h"
+#include "SceneState.h" 
+#include <sstream>
 
 #define LOG(str) std::cout << "[LOG] " << str << std::endl
 #define LOG_PROGRESS(str, progress) std::cout << "[LOG] " << str << " " << progress <<  "\r"
 
 namespace svqa {
-#define SET_FILE_OUTPUT_FALSE ((SimulationRenderer*)((b2VisWorld*)m_world)->getRenderer())->setFileOutput(false);
-#define SET_FILE_OUTPUT_TRUE(X) ((SimulationRenderer*)((b2VisWorld*)m_world)->getRenderer())->setFileOutput((X), m_pSettings->bufferWidth, m_pSettings->bufferHeight);
-#define FINISH_SIMULATION {((SimulationRenderer*)((b2VisWorld*)m_world)->getRenderer())->Finish(); exit(0);};
+#define RENDERER ((SimulationRenderer*)((b2VisWorld*)m_world)->getRenderer())
+#define SET_FILE_OUTPUT_FALSE RENDERER->setFileOutput(false);
+#define SET_FILE_OUTPUT_TRUE(X) RENDERER->setFileOutput((X), m_pSettings->bufferWidth, m_pSettings->bufferHeight);
+#define FINISH_SIMULATION {RENDERER->Finish(); exit(0);};
 
 	// TODO: This class has started to become a God-object, maybe break it apart?
 	class SimulationBase : public Simulation
@@ -65,13 +68,18 @@ namespace svqa {
 				else InitializeScene();
 
 				setSceneInitialized(true);
+
+				std::stringstream str;
+				str << "frame_" << m_StepCount << ".png";
+				RENDERER->SaveAsImage(str.str());
 			}
 
 			// Take snapshot of the scene in the beginning of the simulation.
 			if (isSceneInitialized() && !m_bSceneSnapshotTaken) {
 				m_StartSceneStateJSON = SimulationBase::GetSceneStateJSONObject(m_SceneJSONState, m_StepCount);
 				m_bSceneSnapshotTaken = true;
-			}
+				TakeSceneSnapshot("snapshot.json");
+			} 
 
 			Simulation::Step(settings);
 

@@ -151,14 +151,9 @@ void flipVertically(unsigned char *pixels_buffer, const unsigned int width, cons
     temp_row = NULL;
 }
 
-static void videoFlush(const int& width, const int& height) {
-    unsigned char* rgb = (unsigned char*)malloc(sizeof(unsigned char) * 3 * width * height);
-    glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, rgb);
-    flipVertically(rgb, width, height, 3);
-    
+static void videoFlush(unsigned char* rgb, const int& width, const int& height) {
     frame->pts = pts;
     ffmpeg_encoder_encode_frame(rgb);
-    free(rgb);
     pts++;
 }
 

@@ -717,6 +717,11 @@ SimulationRenderer::SimulationRenderer()
 //
 SimulationRenderer::~SimulationRenderer()
 {
+    if (m_RGBArray != NULL)
+    {
+        free(m_RGBArray);
+        m_RGBArray = NULL;
+    }
 }
 
 //
@@ -1081,16 +1086,15 @@ bool save_png_libpng(const char *filename, unsigned char* pixels, int w, int h)
     return true;
 }
     
-void saveAsImage(std::string path, int width, int height)
+void SimulationRenderer::SaveAsImage(std::string path)
 {
     //glFlush();
-    unsigned char* image = (unsigned char*)malloc(sizeof(unsigned char) * 3 * width * height);
-    glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, image);
+    //unsigned char* image = (unsigned char*)malloc(sizeof(unsigned char) * 3 * width * height);
+    //glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, image);
     
     sCheckGLError();
     
-    save_png_libpng(path.c_str(), image, width, height);
-    free(image);
+    save_png_libpng(path.c_str(), m_RGBArray, m_nWidth, m_nHeight);
 }
 
 //
@@ -1099,11 +1103,15 @@ void SimulationRenderer::Flush()
     m_triangles->Flush();
     m_lines->Flush();
     m_points->Flush();
+
+    unsigned int width = m_nWidth;
+    unsigned int height = m_nHeight;
     
+    glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, m_RGBArray);
+
     if(writingToVideo()) {
-        videoFlush(m_nWidth, m_nHeight);
+        videoFlush(m_RGBArray, width, height);
     }
-    //saveAsImage(m_sPath, m_nWidth, m_nHeight);
 }
 
 void SimulationRenderer::Finish()
@@ -1127,6 +1135,8 @@ void SimulationRenderer::setFileOutput(const std::string& filePath, const int& w
     m_sPath = filePath;
     m_nWidth = width;
     m_nHeight = height;
+
+    m_RGBArray = (unsigned char*)malloc(sizeof(unsigned char) * 3 * width * height);
     
     if(writingToVideo())
     {
