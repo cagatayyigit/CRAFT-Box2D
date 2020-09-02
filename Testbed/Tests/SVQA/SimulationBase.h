@@ -12,6 +12,7 @@
 #include "Settings.h"
 #include "SimulationID.h"
 #include "CausalGraph.hpp"
+#include "SimulationRenderer.hpp"
 
 #ifdef _MSC_VER
 #define _USE_MATH_DEFINES 
@@ -71,6 +72,9 @@ namespace svqa {
 			if (isSceneInitialized() && !m_bSceneSnapshotTaken) {
 				m_StartSceneStateJSON = SimulationBase::GetSceneStateJSONObject(m_SceneJSONState, m_StepCount);
 				m_bSceneSnapshotTaken = true;
+                
+                SimulationRenderer::saveAsImage("/Users/cagatayyigit/Desktop/hellooo.png",640, 640);
+                
 			}
 
 			Simulation::Step(settings);
@@ -81,6 +85,12 @@ namespace svqa {
 			}
 
 			DetectStartTouchingEvents();
+            
+        
+            writeSceneStateJson(5,"/Users/cagatayyigit/Desktop/snapshots/frame");
+                
+            
+            
 		}
 
 		/// Gets the common settings object
@@ -111,6 +121,16 @@ namespace svqa {
 			return m_StepCount == m_pSettings->stepCount;
 		}
 
+        
+        void writeSceneStateJson(int i, std::string filename){
+            std::string f = filename + std::to_string(m_StepCount) + ".json";
+            
+            if (m_StepCount == 1 ||  m_StepCount % i == 0){
+                TakeSceneSnapshot(f);
+            }
+        }
+        
+        
 		void TakeSceneSnapshot(std::string filename) {
 			LOG("Taking snapshot of the current world state...");
 			m_SceneJSONState.saveToJSONFile(m_world, filename);
@@ -334,7 +354,7 @@ namespace svqa {
 
 
 		bool CheckIfObjectIsUnique(SimulationObject::Shape shapeType, SimulationObject::Color colorType, SimulationObject::Size sizeType) {
-			std::vector<int> temp;
+            std::vector<int> temp;
 			temp.push_back(shapeType);
 			temp.push_back(colorType);
 			temp.push_back(sizeType);
