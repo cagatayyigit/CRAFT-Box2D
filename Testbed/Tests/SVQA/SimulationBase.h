@@ -21,6 +21,7 @@
 #include <math.h>
 #include "SceneState.h" 
 #include <sstream>
+#include <string>
 
 #define LOG(str) std::cout << "[LOG] " << str << std::endl
 #define LOG_PROGRESS(str, progress) std::cout << "[LOG] " << str << " " << progress <<  "\r"
@@ -69,10 +70,6 @@ namespace svqa {
 				else InitializeScene();
 
 				setSceneInitialized(true);
-
-				std::stringstream str;
-				str << "frame_" << m_StepCount << ".png";
-				RENDERER->SaveAsImage(str.str());
 			}
 
 			// Take snapshot of the scene in the beginning of the simulation.
@@ -83,19 +80,26 @@ namespace svqa {
 			} 
 
 			Simulation::Step(settings);
+            
+            // Take screenshot at the beginning for object segmentation.
+            if (m_StepCount == 1)
+            {
+                TakeScreenshot();
+            }
+            
+            // Take snapshot of the world every 5 frames for object segmentation.
+            if (m_StepCount == 1 || m_StepCount % 5 == 0)
+            {
+                std::string fn = "./snapshots/" + std::to_string(m_StepCount) + ".json";
+                TakeSceneSnapshot(fn);
+            }
 
 			if (shouldTerminateSimulation()) {
 				m_EndSceneStateJSON = SimulationBase::GetSceneStateJSONObject(m_SceneJSONState, m_StepCount);
 				TerminateSimulation();
 			}
-
+            
 			DetectStartTouchingEvents();
-            
-        
-            writeSceneStateJson(5,"/Users/cagatayyigit/Desktop/snapshots/frame");
-                
-            
-            
 		}
 
 		/// Gets the common settings object
@@ -125,14 +129,11 @@ namespace svqa {
 		virtual bool shouldTerminateSimulation() {
 			return m_StepCount == m_pSettings->stepCount;
 		}
-
         
-        void writeSceneStateJson(int i, std::string filename){
-            std::string f = filename + std::to_string(m_StepCount) + ".json";
-            
-            if (m_StepCount == 1 ||  m_StepCount % i == 0){
-                TakeSceneSnapshot(f);
-            }
+        void TakeScreenshot() {
+            std::stringstream outputFilename;
+            outputFilename << "./snapshots/" << m_pSettings->inputScenePath << "_frame_" << m_StepCount << ".png";
+            RENDERER->SaveAsImage(outputFilename.str());
         }
         
         
@@ -179,7 +180,7 @@ namespace svqa {
 							break;
 						}
 					}
-				}else {
+				} else {
                     // If this JSON object is just a snapshot that doesn't contain causal graph.
                     m_SceneJSONState.loadFromJSON(j, m_world);
                     m_bSceneRegenerated = true;
