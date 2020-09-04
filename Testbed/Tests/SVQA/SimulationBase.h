@@ -179,7 +179,11 @@ namespace svqa {
 							break;
 						}
 					}
-				}
+				}else {
+                    // If this JSON object is just a snapshot that doesn't contain causal graph.
+                    m_SceneJSONState.loadFromJSON(j, m_world);
+                    m_bSceneRegenerated = true;
+                }
 			}
 		}
 
