@@ -32,6 +32,7 @@
 		7CDCBD9723E0BB9400BC9E50 /* EndTouchingEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD9523E0BB9400BC9E50 /* EndTouchingEvent.cpp */; };
 		7CDCBD9A23E0BC8400BC9E50 /* StartEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7CDCBD9823E0BC8400BC9E50 /* StartEvent.cpp */; };
 		840EA602F136B474F2C9A442 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19352E0A6698243CDCB7244A /* OpenGL.framework */; };
+		8CD2FB5D24BB761F00163254 /* controller.json in Resources */ = {isa = PBXBuildFile; fileRef = 8CD2FB5C24BB761F00163254 /* controller.json */; };
 		9223EFD8340D8BCA2B349E18 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 606C44802E8F9832B59DEAC0 /* CoreVideo.framework */; };
 		B7066D864F5353387D9A53C6 /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 40779C0E84C64180C6ED7A4E /* libBox2D.a */; };
 		BADF007F2C01A171E1C84EBF /* Simulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 955B2487BD95DD39A5316AC7 /* Simulation.cpp */; };
@@ -87,52 +88,26 @@
 		6519D6F1D6A4EF6385A61531 /* init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = init.c; path = ../Testbed/glfw/init.c; sourceTree = "<group>"; };
 		68A558A4B1163CD6F5B50EE4 /* imgui.ini */ = {isa = PBXFileReference; lastKnownFileType = text; name = imgui.ini; path = ../Testbed/imgui/imgui.ini; sourceTree = "<group>"; };
 		6D4C538602C312B8715F69C6 /* stb_rect_pack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = stb_rect_pack.h; path = ../Testbed/imgui/stb_rect_pack.h; sourceTree = "<group>"; };
-		7C3A01F62343BD3A00E4E400 /* RemoveObjectSimulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemoveObjectSimulation.h; sourceTree = "<group>"; };
-		7C40378623BCED9800BD8538 /* ConnectedCarsSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConnectedCarsSettings.h; sourceTree = "<group>"; };
-		7C40378723BCEDA500BD8538 /* ConnectedCarsSimulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConnectedCarsSimulation.h; sourceTree = "<group>"; };
 		7C4127F42348BC5B002E75BA /* Camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Camera.hpp; path = ../Testbed/Framework/Camera.hpp; sourceTree = "<group>"; };
 		7C4127F52348BC5B002E75BA /* SimulationDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimulationDefines.h; path = ../Testbed/Framework/SimulationDefines.h; sourceTree = "<group>"; };
 		7C4127F62348BC5B002E75BA /* SimulationRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimulationRenderer.cpp; path = ../Testbed/Framework/SimulationRenderer.cpp; sourceTree = "<group>"; };
 		7C4127F72348BC5B002E75BA /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = ../Testbed/Framework/Camera.cpp; sourceTree = "<group>"; };
 		7C4127F82348BC5B002E75BA /* SimulationRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SimulationRenderer.hpp; path = ../Testbed/Framework/SimulationRenderer.hpp; sourceTree = "<group>"; };
 		7C48C726235C5A8B00FFB396 /* Settings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
-		7C48C727235C5C7300FFB396 /* RemoveObjectSimulationSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemoveObjectSimulationSettings.h; sourceTree = "<group>"; };
 		7C48C728235C675B00FFB396 /* JSONHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONHelper.h; sourceTree = "<group>"; };
 		7C48C729235C6F5B00FFB396 /* ObjectState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectState.h; sourceTree = "<group>"; };
 		7C48C72A235C819300FFB396 /* SceneState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneState.h; sourceTree = "<group>"; };
-		7C5271A0238A803D00816DFC /* ObstructedPathSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObstructedPathSettings.h; sourceTree = "<group>"; };
-		7C5271A1238A815B00816DFC /* ObstructedPathSimulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObstructedPathSimulation.h; sourceTree = "<group>"; };
 		7C5271A2238A828B00816DFC /* SimulationBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationBase.h; sourceTree = "<group>"; };
 		7C5271A3238A88C500816DFC /* SimulationID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationID.h; sourceTree = "<group>"; };
-		7C615583238EFFEE00702158 /* FixedPulleySettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FixedPulleySettings.h; sourceTree = "<group>"; };
-		7C615584238F004C00702158 /* FixedPulleySimulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FixedPulleySimulation.h; sourceTree = "<group>"; };
 		7C6D1CDB23813A4E00BB74E0 /* SimulationMain.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SimulationMain.cpp; path = ../Testbed/Framework/SimulationMain.cpp; sourceTree = "<group>"; };
 		7C6D1CDF2381443D00BB74E0 /* ControllerParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ControllerParser.h; path = ../Testbed/Framework/ControllerParser.h; sourceTree = "<group>"; };
 		7C6D1CE2238156E400BB74E0 /* VideoWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VideoWriter.h; path = ../Testbed/Framework/VideoWriter.h; sourceTree = "<group>"; };
-		7C7E35DB24856871009ED46C /* Scene3Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene3Simulation.h; sourceTree = "<group>"; };
-		7C7E35DC24856871009ED46C /* Scene3Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene3Settings.h; sourceTree = "<group>"; };
-		7C7E35DE24856886009ED46C /* Scene4Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene4Settings.h; sourceTree = "<group>"; };
-		7C7E35DF24856886009ED46C /* Scene4Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene4Simulation.h; sourceTree = "<group>"; };
-		7C80743923DDD11400D6BF1B /* MultiplePendulumsSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplePendulumsSettings.h; sourceTree = "<group>"; };
-		7C80743A23DDD11400D6BF1B /* MultiplePendulumsSimulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplePendulumsSimulation.h; sourceTree = "<group>"; };
-		7C80743C23DDD16E00D6BF1B /* Scene2Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene2Settings.h; sourceTree = "<group>"; };
-		7C80743D23DDD16E00D6BF1B /* Scene2Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene2Simulation.h; sourceTree = "<group>"; };
-		7C80743F23DDD17D00D6BF1B /* JumpingBallSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JumpingBallSettings.h; sourceTree = "<group>"; };
-		7C80744023DDD17D00D6BF1B /* JumpingBallSimulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JumpingBallSimulation.h; sourceTree = "<group>"; };
-		7C80744223DDD18800D6BF1B /* RollingBallsSimulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RollingBallsSimulation.h; sourceTree = "<group>"; };
-		7C80744323DDD18800D6BF1B /* RollingBallsSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RollingBallsSettings.h; sourceTree = "<group>"; };
 		7C92AD25234E37500074BFB6 /* SimulationObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationObject.h; sourceTree = "<group>"; };
 		7C92AD2F234E40A20074BFB6 /* rubber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rubber.png; sourceTree = "<group>"; };
 		7C92AD31234E40D00074BFB6 /* metal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = metal.png; sourceTree = "<group>"; };
-		7C94932E238C56AF00BE6CE3 /* PendulumObstaclesSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PendulumObstaclesSettings.h; sourceTree = "<group>"; };
-		7C94932F238C570E00BE6CE3 /* PendulumObstaclesSimulation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PendulumObstaclesSimulation.h; sourceTree = "<group>"; };
 		7C99152E23E1EA2900D5FF39 /* EndEvent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EndEvent.cpp; sourceTree = "<group>"; };
 		7C99152F23E1EA2900D5FF39 /* EndEvent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EndEvent.hpp; sourceTree = "<group>"; };
 		7C99153123E1F2D600D5FF39 /* CausalEvents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CausalEvents.h; sourceTree = "<group>"; };
-		7CC77DC323C7A70200BFFAFE /* ObstructionDemoSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObstructionDemoSettings.h; sourceTree = "<group>"; };
-		7CC77DC423C7A70200BFFAFE /* ObstructionDemoSimulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObstructionDemoSimulation.h; sourceTree = "<group>"; };
-		7CC77DC623C7A71700BFFAFE /* Scene1Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene1Settings.h; sourceTree = "<group>"; };
-		7CC77DC723C7A71700BFFAFE /* Scene1Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene1Simulation.h; sourceTree = "<group>"; };
 		7CDCBD7F23E0A2E900BC9E50 /* CausalEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CausalEvent.hpp; sourceTree = "<group>"; };
 		7CDCBD8223E0A2E900BC9E50 /* CollisionEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionEvent.cpp; sourceTree = "<group>"; };
 		7CDCBD8323E0A2E900BC9E50 /* CausalGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CausalGraph.cpp; sourceTree = "<group>"; };
@@ -148,6 +123,31 @@
 		7CDCBD9923E0BC8400BC9E50 /* StartEvent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StartEvent.hpp; sourceTree = "<group>"; };
 		85B39C4ACE24807C12C3528A /* imgui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = imgui.cpp; path = ../Testbed/imgui/imgui.cpp; sourceTree = "<group>"; };
 		8799E40B80FFE57D749B424B /* vulkan.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vulkan.c; path = ../Testbed/glfw/vulkan.c; sourceTree = "<group>"; };
+		8CD2FB4424BB73CE00163254 /* Scene3Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene3Simulation.h; sourceTree = "<group>"; };
+		8CD2FB4524BB73CE00163254 /* Scene6Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene6Simulation.h; sourceTree = "<group>"; };
+		8CD2FB4624BB73CE00163254 /* Scene6Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene6Settings.h; sourceTree = "<group>"; };
+		8CD2FB4724BB73CE00163254 /* Scene1Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene1Settings.h; sourceTree = "<group>"; };
+		8CD2FB4824BB73CE00163254 /* ObstructionDemoSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObstructionDemoSettings.h; sourceTree = "<group>"; };
+		8CD2FB4924BB73CE00163254 /* Scene5Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene5Simulation.h; sourceTree = "<group>"; };
+		8CD2FB4A24BB73CE00163254 /* Scene7Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene7Settings.h; sourceTree = "<group>"; };
+		8CD2FB4B24BB73CE00163254 /* Scene10Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene10Simulation.h; sourceTree = "<group>"; };
+		8CD2FB4C24BB73CE00163254 /* Scene9Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene9Simulation.h; sourceTree = "<group>"; };
+		8CD2FB4D24BB73CE00163254 /* Scene2Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene2Settings.h; sourceTree = "<group>"; };
+		8CD2FB4E24BB73CE00163254 /* Scene7Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene7Simulation.h; sourceTree = "<group>"; };
+		8CD2FB4F24BB73CE00163254 /* Scene4Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene4Settings.h; sourceTree = "<group>"; };
+		8CD2FB5024BB73CE00163254 /* Scene10Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene10Settings.h; sourceTree = "<group>"; };
+		8CD2FB5124BB73CE00163254 /* Scene2Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene2Simulation.h; sourceTree = "<group>"; };
+		8CD2FB5224BB73CE00163254 /* Scene9Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene9Settings.h; sourceTree = "<group>"; };
+		8CD2FB5324BB73CE00163254 /* Scene8Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene8Simulation.h; sourceTree = "<group>"; };
+		8CD2FB5424BB73CE00163254 /* Scene3Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene3Settings.h; sourceTree = "<group>"; };
+		8CD2FB5524BB73CE00163254 /* Scene11Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene11Simulation.h; sourceTree = "<group>"; };
+		8CD2FB5624BB73CE00163254 /* ObstructionDemoSimulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObstructionDemoSimulation.h; sourceTree = "<group>"; };
+		8CD2FB5724BB73CE00163254 /* Scene1Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene1Simulation.h; sourceTree = "<group>"; };
+		8CD2FB5824BB73CE00163254 /* Scene5Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene5Settings.h; sourceTree = "<group>"; };
+		8CD2FB5924BB73CE00163254 /* Scene4Simulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene4Simulation.h; sourceTree = "<group>"; };
+		8CD2FB5A24BB73CE00163254 /* Scene11Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene11Settings.h; sourceTree = "<group>"; };
+		8CD2FB5B24BB73CE00163254 /* Scene8Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene8Settings.h; sourceTree = "<group>"; };
+		8CD2FB5C24BB761F00163254 /* controller.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = controller.json; path = ../Testbed/controller.json; sourceTree = "<group>"; };
 		8D6BC6AA50D7885C8F7B2CEA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8E8E800FE9CFD381BD2A1E4F /* cocoa_time.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = cocoa_time.c; path = ../Testbed/glfw/cocoa_time.c; sourceTree = "<group>"; };
 		929C92CD8C5E4F3FC65D510D /* nsgl_context.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = nsgl_context.m; path = ../Testbed/glfw/nsgl_context.m; sourceTree = "<group>"; };
@@ -229,131 +229,20 @@
 			name = Data;
 			sourceTree = "<group>";
 		};
-		7C40378523BCED6D00BD8538 /* ConnectedCars */ = {
-			isa = PBXGroup;
-			children = (
-				7C40378623BCED9800BD8538 /* ConnectedCarsSettings.h */,
-				7C40378723BCEDA500BD8538 /* ConnectedCarsSimulation.h */,
-			);
-			path = ConnectedCars;
-			sourceTree = "<group>";
-		};
 		7C4127F32348BC0B002E75BA /* SVQA */ = {
 			isa = PBXGroup;
 			children = (
+				8CD2FB4324BB73CE00163254 /* Scenes */,
 				7C92AD25234E37500074BFB6 /* SimulationObject.h */,
 				7C48C726235C5A8B00FFB396 /* Settings.h */,
 				7C48C728235C675B00FFB396 /* JSONHelper.h */,
 				7C48C729235C6F5B00FFB396 /* ObjectState.h */,
 				7C48C72A235C819300FFB396 /* SceneState.h */,
 				7C5271A2238A828B00816DFC /* SimulationBase.h */,
-				7C80744123DDD18800D6BF1B /* RollingBalls */,
-				7C80743E23DDD17D00D6BF1B /* JumpingBall */,
-				7CC77DC523C7A71700BFFAFE /* Scene1 */,
-				7C80743B23DDD16E00D6BF1B /* Scene2 */,
-				7C7E35DA24856871009ED46C /* Scene3 */,
-				7C7E35DD24856886009ED46C /* Scene4 */,
-				7C80743823DDD11400D6BF1B /* MultiplePendulums */,
-				7C40378523BCED6D00BD8538 /* ConnectedCars */,
-				7C615582238EFFC100702158 /* FixedPulley */,
-				7CC77DC223C7A70200BFFAFE /* ObstructionDemo */,
-				7C94932D238C566F00BE6CE3 /* PendulumObstacles */,
-				7C52719F238A800800816DFC /* ObstructedPath */,
-				7C92AD26234E37C40074BFB6 /* RemoveObject */,
 				7C5271A3238A88C500816DFC /* SimulationID.h */,
 			);
 			name = SVQA;
 			path = ../Testbed/Tests/SVQA;
-			sourceTree = "<group>";
-		};
-		7C52719F238A800800816DFC /* ObstructedPath */ = {
-			isa = PBXGroup;
-			children = (
-				7C5271A0238A803D00816DFC /* ObstructedPathSettings.h */,
-				7C5271A1238A815B00816DFC /* ObstructedPathSimulation.h */,
-			);
-			path = ObstructedPath;
-			sourceTree = "<group>";
-		};
-		7C615582238EFFC100702158 /* FixedPulley */ = {
-			isa = PBXGroup;
-			children = (
-				7C615583238EFFEE00702158 /* FixedPulleySettings.h */,
-				7C615584238F004C00702158 /* FixedPulleySimulation.h */,
-			);
-			path = FixedPulley;
-			sourceTree = "<group>";
-		};
-		7C7E35DA24856871009ED46C /* Scene3 */ = {
-			isa = PBXGroup;
-			children = (
-				7C7E35DB24856871009ED46C /* Scene3Simulation.h */,
-				7C7E35DC24856871009ED46C /* Scene3Settings.h */,
-			);
-			path = Scene3;
-			sourceTree = "<group>";
-		};
-		7C7E35DD24856886009ED46C /* Scene4 */ = {
-			isa = PBXGroup;
-			children = (
-				7C7E35DE24856886009ED46C /* Scene4Settings.h */,
-				7C7E35DF24856886009ED46C /* Scene4Simulation.h */,
-			);
-			path = Scene4;
-			sourceTree = "<group>";
-		};
-		7C80743823DDD11400D6BF1B /* MultiplePendulums */ = {
-			isa = PBXGroup;
-			children = (
-				7C80743923DDD11400D6BF1B /* MultiplePendulumsSettings.h */,
-				7C80743A23DDD11400D6BF1B /* MultiplePendulumsSimulation.h */,
-			);
-			path = MultiplePendulums;
-			sourceTree = "<group>";
-		};
-		7C80743B23DDD16E00D6BF1B /* Scene2 */ = {
-			isa = PBXGroup;
-			children = (
-				7C80743C23DDD16E00D6BF1B /* Scene2Settings.h */,
-				7C80743D23DDD16E00D6BF1B /* Scene2Simulation.h */,
-			);
-			path = Scene2;
-			sourceTree = "<group>";
-		};
-		7C80743E23DDD17D00D6BF1B /* JumpingBall */ = {
-			isa = PBXGroup;
-			children = (
-				7C80743F23DDD17D00D6BF1B /* JumpingBallSettings.h */,
-				7C80744023DDD17D00D6BF1B /* JumpingBallSimulation.h */,
-			);
-			path = JumpingBall;
-			sourceTree = "<group>";
-		};
-		7C80744123DDD18800D6BF1B /* RollingBalls */ = {
-			isa = PBXGroup;
-			children = (
-				7C80744223DDD18800D6BF1B /* RollingBallsSimulation.h */,
-				7C80744323DDD18800D6BF1B /* RollingBallsSettings.h */,
-			);
-			path = RollingBalls;
-			sourceTree = "<group>";
-		};
-		7C92AD26234E37C40074BFB6 /* RemoveObject */ = {
-			isa = PBXGroup;
-			children = (
-				7C3A01F62343BD3A00E4E400 /* RemoveObjectSimulation.h */,
-				7C48C727235C5C7300FFB396 /* RemoveObjectSimulationSettings.h */,
-			);
-			path = RemoveObject;
-			sourceTree = "<group>";
-		};
-		7C94932D238C566F00BE6CE3 /* PendulumObstacles */ = {
-			isa = PBXGroup;
-			children = (
-				7C94932E238C56AF00BE6CE3 /* PendulumObstaclesSettings.h */,
-				7C94932F238C570E00BE6CE3 /* PendulumObstaclesSimulation.h */,
-			);
-			path = PendulumObstacles;
 			sourceTree = "<group>";
 		};
 		7CC417DC2349F57900CD88E7 /* Textures */ = {
@@ -364,24 +253,6 @@
 			);
 			name = Textures;
 			path = ../Testbed/Data/Textures;
-			sourceTree = "<group>";
-		};
-		7CC77DC223C7A70200BFFAFE /* ObstructionDemo */ = {
-			isa = PBXGroup;
-			children = (
-				7CC77DC323C7A70200BFFAFE /* ObstructionDemoSettings.h */,
-				7CC77DC423C7A70200BFFAFE /* ObstructionDemoSimulation.h */,
-			);
-			path = ObstructionDemo;
-			sourceTree = "<group>";
-		};
-		7CC77DC523C7A71700BFFAFE /* Scene1 */ = {
-			isa = PBXGroup;
-			children = (
-				7CC77DC623C7A71700BFFAFE /* Scene1Settings.h */,
-				7CC77DC723C7A71700BFFAFE /* Scene1Simulation.h */,
-			);
-			path = Scene1;
 			sourceTree = "<group>";
 		};
 		7CDCBD7E23E0A2E900BC9E50 /* SVQA */ = {
@@ -406,6 +277,37 @@
 			);
 			name = SVQA;
 			path = ../Testbed/Framework/SVQA;
+			sourceTree = "<group>";
+		};
+		8CD2FB4324BB73CE00163254 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				8CD2FB4424BB73CE00163254 /* Scene3Simulation.h */,
+				8CD2FB4524BB73CE00163254 /* Scene6Simulation.h */,
+				8CD2FB4624BB73CE00163254 /* Scene6Settings.h */,
+				8CD2FB4724BB73CE00163254 /* Scene1Settings.h */,
+				8CD2FB4824BB73CE00163254 /* ObstructionDemoSettings.h */,
+				8CD2FB4924BB73CE00163254 /* Scene5Simulation.h */,
+				8CD2FB4A24BB73CE00163254 /* Scene7Settings.h */,
+				8CD2FB4B24BB73CE00163254 /* Scene10Simulation.h */,
+				8CD2FB4C24BB73CE00163254 /* Scene9Simulation.h */,
+				8CD2FB4D24BB73CE00163254 /* Scene2Settings.h */,
+				8CD2FB4E24BB73CE00163254 /* Scene7Simulation.h */,
+				8CD2FB4F24BB73CE00163254 /* Scene4Settings.h */,
+				8CD2FB5024BB73CE00163254 /* Scene10Settings.h */,
+				8CD2FB5124BB73CE00163254 /* Scene2Simulation.h */,
+				8CD2FB5224BB73CE00163254 /* Scene9Settings.h */,
+				8CD2FB5324BB73CE00163254 /* Scene8Simulation.h */,
+				8CD2FB5424BB73CE00163254 /* Scene3Settings.h */,
+				8CD2FB5524BB73CE00163254 /* Scene11Simulation.h */,
+				8CD2FB5624BB73CE00163254 /* ObstructionDemoSimulation.h */,
+				8CD2FB5724BB73CE00163254 /* Scene1Simulation.h */,
+				8CD2FB5824BB73CE00163254 /* Scene5Settings.h */,
+				8CD2FB5924BB73CE00163254 /* Scene4Simulation.h */,
+				8CD2FB5A24BB73CE00163254 /* Scene11Settings.h */,
+				8CD2FB5B24BB73CE00163254 /* Scene8Settings.h */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		9D968EAA920D05DCE0E0A4EA /* Projects */ = {
@@ -494,6 +396,7 @@
 		EF9E54EB82A9ADDDCADEA32B /* Testbed */ = {
 			isa = PBXGroup;
 			children = (
+				8CD2FB5C24BB761F00163254 /* controller.json */,
 				5EA5EEFC0B08AF2EC991253C /* Data */,
 				B7384E245A2674D6E94C5464 /* Framework */,
 				B42EC94E04425E0086C08F8E /* Tests */,
@@ -574,6 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C92AD30234E40A30074BFB6 /* rubber.png in Resources */,
+				8CD2FB5D24BB761F00163254 /* controller.json in Resources */,
 				7C92AD32234E40D10074BFB6 /* metal.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -644,7 +548,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OBJROOT = obj/x86_64/Debug/Testbed;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SYMROOT = bin/x86_64/Debug;
 				USER_HEADER_SEARCH_PATHS = ..;
 			};
@@ -660,27 +564,27 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/Cellar/libpng/1.6.37/include/,
-					"/usr/local/Cellar/nlohmann-json/3.7.0/include/",
-					/usr/local/Cellar/ffmpeg/4.2.1/include/,
+					"/usr/local/Cellar/nlohmann-json/3.8.0/include/",
+					/usr/local/Cellar/ffmpeg/4.3.1/include/,
 				);
 				INSTALL_PATH = /usr/local/bin;
-				LD_RUNPATH_SEARCH_PATHS = "/usr/local/Cellar/libpng/1.6.37/lib/ /usr/local/Cellar/ffmpeg/4.2.1/lib/";
+				LD_RUNPATH_SEARCH_PATHS = "/usr/local/Cellar/libpng/1.6.37/lib/ /usr/local/Cellar/ffmpeg/4.3.1/lib/";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				OTHER_LDFLAGS = (
 					/usr/local/Cellar/libpng/1.6.37/lib/libpng16.dylib,
 					/usr/local/Cellar/libpng/1.6.37/lib/libpng16.16.dylib,
 					/usr/local/Cellar/libpng/1.6.37/lib/libpng.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavcodec.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavfilter.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavresample.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavutil.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavutil.56.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavutil.56.31.100.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libpostproc.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libswscale.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavformat.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavdevice.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1/lib/libavcodec.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1/lib/libavfilter.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1/lib/libavresample.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1/lib/libavutil.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1/lib/libavutil.56.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1/lib/libavutil.56.51.100.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1/lib/libpostproc.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1/lib/libswscale.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1/lib/libavformat.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1/lib/libavdevice.dylib,
 				);
 				PRODUCT_NAME = Testbed;
 			};
@@ -696,27 +600,27 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/Cellar/libpng/1.6.37/include/,
-					"/usr/local/Cellar/nlohmann-json/3.7.0/include/",
-					/usr/local/Cellar/ffmpeg/4.2.1/include/,
+					"/usr/local/Cellar/nlohmann-json/3.8.0/include/",
+					/usr/local/Cellar/ffmpeg/4.3.1/include/,
 				);
 				INSTALL_PATH = /usr/local/bin;
-				LD_RUNPATH_SEARCH_PATHS = "/usr/local/Cellar/libpng/1.6.37/lib/ /usr/local/Cellar/ffmpeg/4.2.1/lib/";
+				LD_RUNPATH_SEARCH_PATHS = "/usr/local/Cellar/libpng/1.6.37/lib/ /usr/local/Cellar/ffmpeg/4.3.1/lib/";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				OTHER_LDFLAGS = (
 					/usr/local/Cellar/libpng/1.6.37/lib/libpng16.dylib,
 					/usr/local/Cellar/libpng/1.6.37/lib/libpng16.16.dylib,
 					/usr/local/Cellar/libpng/1.6.37/lib/libpng.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavcodec.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavfilter.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavresample.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavutil.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavutil.56.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavutil.56.31.100.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libpostproc.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libswscale.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavformat.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavdevice.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1/lib/libavcodec.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1/lib/libavfilter.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1/lib/libavresample.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1/lib/libavutil.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1/lib/libavutil.56.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1/lib/libavutil.56.51.100.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1/lib/libpostproc.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1/lib/libswscale.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1/lib/libavformat.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1/lib/libavdevice.dylib,
 				);
 				PRODUCT_NAME = Testbed;
 			};
@@ -736,7 +640,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OBJROOT = obj/x86_64/Release/Testbed;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SYMROOT = bin/x86_64/Release;
 				USER_HEADER_SEARCH_PATHS = ..;
 			};

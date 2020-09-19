@@ -36,13 +36,13 @@ namespace svqa {
 			// make angle random
 			AddStaticObject(b2Vec2(-12.0f, 28.0f), 5*  M_PI  / RandomFloatFromHardware(5.5, 7.0), SimulationObject::STATIC_PLATFORM);
 
-
+            /*
 			// make y-coord random
 			AddRandomDynamicObject(
 				b2Vec2(-12.0f, 31.0f),
 				b2Vec2(0.0f, -15.0f)
 			);
-
+             */
 			
 			//right
 			// make angle random
@@ -54,7 +54,7 @@ namespace svqa {
 			float y = RandomFloatFromHardware(17.0, 20.0);
 			AddStaticObject(b2Vec2(5.0f, y), M_PI, SimulationObject::STATIC_PLATFORM);
 
-
+            /*
 			// make x coord. random
 			// make Velocity random
 			AddRandomDynamicObject(
@@ -63,21 +63,21 @@ namespace svqa {
 				0b100,
 				SimulationObject::CIRCLE
 			);
-
+             */
 
 			// bottom
 			float32 h = RandomFloatFromHardware(9.0, 3.0); // make y-coords random
 			AddStaticObject(b2Vec2(-5.0f, h),  M_PI , SimulationObject::STATIC_PLATFORM);
 			AddStaticObject(b2Vec2(-19.0f, h),  M_PI , SimulationObject::STATIC_PLATFORM);
 
-
+            /*
 			AddRandomDynamicObject(
 				b2Vec2(RandomFloatFromHardware(-20.0, -16.0), h + 2.0f),  // make x coord. random
 				b2Vec2(RandomFloatFromHardware(8.0, 3.0), 0.0f),     // make x-velocity random
 				0b100,
 				SimulationObject::CIRCLE
 			);
-
+             */
 
 		}
 

@@ -66,12 +66,15 @@ namespace svqa {
 				// Generate scene from JSON file if inputScenePath is not blank and the scene is not already generated.
 				if (isGeneratingFromJSON() && !m_bSceneRegenerated) {
 					GenerateSceneFromJson(m_pSettings->inputScenePath);
+                    
 				}
 				else InitializeScene();
 
 				setSceneInitialized(true);
+                
 			}
-
+            
+            
 			// Take snapshot of the scene in the beginning of the simulation.
 			if (isSceneInitialized() && !m_bSceneSnapshotTaken) {
 				m_StartSceneStateJSON = SimulationBase::GetSceneStateJSONObject(m_SceneJSONState, m_StepCount);
@@ -81,25 +84,30 @@ namespace svqa {
 
 			Simulation::Step(settings);
             
-            // Take screenshot at the beginning for object segmentation.
-            if (m_StepCount == 1)
-            {
-                TakeScreenshot();
-            }
-            
-            // Take snapshot of the world every 5 frames for object segmentation.
-            if (m_StepCount == 1 || m_StepCount % 5 == 0)
-            {
-                std::string fn = "./snapshots/" + std::to_string(m_StepCount) + ".json";
-                TakeSceneSnapshot(fn);
-            }
-
 			if (shouldTerminateSimulation()) {
 				m_EndSceneStateJSON = SimulationBase::GetSceneStateJSONObject(m_SceneJSONState, m_StepCount);
 				TerminateSimulation();
 			}
             
 			DetectStartTouchingEvents();
+            
+
+            if (m_bGeneratingFromJSON) {
+                if (m_StepCount == 1) {
+                     // Take screenshot at the beginning for object segmentation.
+                    TakeScreenshot("/Users/cagatayyigit/Desktop/screenshots/");
+                }
+            }
+            else {
+                 TakeSnapshotOfTheWorldEveryXFrame(30, "/Users/cagatayyigit/Desktop/snapshots/");
+            }
+           
+            
+            if (m_StepCount == 2) {
+                 // Take screenshot at the beginning for object segmentation.
+                TakeScreenshotForStatic("/Users/cagatayyigit/Desktop/static_ss/");
+            }
+            
 		}
 
 		/// Gets the common settings object
@@ -130,9 +138,53 @@ namespace svqa {
 			return m_StepCount == m_pSettings->stepCount;
 		}
         
-        void TakeScreenshot() {
+        void TakeSnapshotOfTheWorldEveryXFrame(int x, std::string output_folder_path){
+            
+            std::string current_step  = std::to_string(m_StepCount);
+            std::string simulation_id = std::to_string(m_pSettings->simulationID);
+            
+            // Take snapshot of the world every 5 frames for object segmentation.
+            if (m_StepCount == 1 || m_StepCount % x == 0)
+            {
+                //std::string fn = "./snapshots/frame" + std::to_string(m_StepCount) + ".json";
+                std::string fn = output_folder_path + simulation_id + "_" + current_step + ".json";
+                TakeSceneSnapshot(fn);
+            }
+
+        }
+        
+        //-------------------------------
+        using time_point = std::chrono::system_clock::time_point;
+        std::string serializeTimePoint( const time_point& time, const std::string& format)
+        {
+            
+            std::time_t tt = std::chrono::system_clock::to_time_t(time);
+            std::tm tm = *std::gmtime(&tt); //GMT (UTC)
+            //std::tm tm = *std::localtime(&tt); //Locale time-zone, usually UTC by default.
+            std::stringstream ss;
+            ss << std::put_time( &tm, format.c_str() );
+            return ss.str();
+        }
+        
+        void TakeScreenshotForStatic(std::string output_folder_path) {
             std::stringstream outputFilename;
-            outputFilename << "./snapshots/" << m_pSettings->inputScenePath << "_frame_" << m_StepCount << ".png";
+            
+            time_point input = std::chrono::system_clock::now();
+            std::string s =  serializeTimePoint(input, "UTC: %Y-%m-%d %H:%M:%S");
+            
+            outputFilename << output_folder_path << s << ".png";
+            RENDERER->SaveAsImage(outputFilename.str());
+        }
+        //-------------------------------
+        
+        void TakeScreenshot(std::string output_folder_path) {
+            std::stringstream outputFilename;
+            
+            std::string s = m_pSettings->inputScenePath;
+            std::string png_name = (s.substr(s.find("id") , s.find(".json")));
+            int l = png_name.length();
+            png_name = png_name.substr(0,l -5);
+            outputFilename << output_folder_path << png_name << ".png";
             RENDERER->SaveAsImage(outputFilename.str());
         }
         
