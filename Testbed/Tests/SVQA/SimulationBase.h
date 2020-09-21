@@ -102,11 +102,12 @@ namespace svqa {
                  TakeSnapshotOfTheWorldEveryXFrame(30, "/Users/cagatayyigit/Desktop/snapshots/");
             }
            
-            
+            /*
             if (m_StepCount == 2) {
                  // Take screenshot at the beginning for object segmentation.
                 TakeScreenshotForStatic("/Users/cagatayyigit/Desktop/static_ss/");
             }
+             */
             
 		}
 

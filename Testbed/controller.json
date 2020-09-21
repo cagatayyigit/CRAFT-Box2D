@@ -1,10 +1,10 @@
 {
-    "simulationID": 6,
+    "simulationID": 1,
     "offline": false,
     "outputVideoPath": "output.mpg",
     "outputJSONPath": "output.json",
     "width": 1024,
     "height": 1024,
     "inputScenePath": "",
-    "stepCount": 5
+    "stepCount": 600
 }
