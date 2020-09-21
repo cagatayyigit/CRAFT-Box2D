@@ -1094,7 +1094,9 @@ void SimulationRenderer::SaveAsImage(std::string path)
     
     sCheckGLError();
     
+    flipVertically(m_RGBArray, m_nWidth, m_nHeight, 3);
     save_png_libpng(path.c_str(), m_RGBArray, m_nWidth, m_nHeight);
+    flipVertically(m_RGBArray, m_nWidth, m_nHeight, 3);
 }
 
 //
