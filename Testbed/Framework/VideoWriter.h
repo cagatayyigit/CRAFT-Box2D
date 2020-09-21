@@ -153,6 +153,7 @@ void flipVertically(unsigned char *pixels_buffer, const unsigned int width, cons
 
 static void videoFlush(unsigned char* rgb, const int& width, const int& height) {
     frame->pts = pts;
+    flipVertically(rgb, width, height, 3);
     ffmpeg_encoder_encode_frame(rgb);
     pts++;
 }
