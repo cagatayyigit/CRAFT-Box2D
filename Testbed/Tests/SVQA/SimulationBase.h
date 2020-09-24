@@ -176,6 +176,18 @@ namespace svqa {
             outputFilename << output_folder_path << s << ".png";
             RENDERER->SaveAsImage(outputFilename.str());
         }
+        
+        
+        float getExtremeCases(int x, float min, float max){
+            if (x == 0)
+                    return min;
+            if (x == 1)
+                    return (min + max) / 2.0;
+            if (x == 2)
+                    return max;
+            return RandomFloatFromHardware(min, max);
+        }
+        
         //-------------------------------
         
         void TakeScreenshot(std::string output_folder_path) {

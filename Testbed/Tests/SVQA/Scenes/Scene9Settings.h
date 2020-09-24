@@ -9,16 +9,19 @@ namespace svqa
 		typedef std::shared_ptr<Scene9Settings> Ptr;
 
 		Scene9Settings() {}
+        bool includeDynamicObjects;
+        int  min_mean_max_random;
 
-		int numberOfObjects;
-		int numberOfObstacles;
+        void to_json(json& j) {
+            j.emplace("includeDynamicObjects", this->includeDynamicObjects);
+            j.emplace("min_mean_max_random",   this->min_mean_max_random);
+            Settings::to_json(j);
+        }
 
-		void to_json(json& j) {
-			Settings::to_json(j);
-		}
-
-		void from_json(const json& j) {
-			Settings::from_json(j);
-		}
+        void from_json(const json& j) {
+            Settings::from_json(j);
+            j.at("includeDynamicObjects").get_to(this->includeDynamicObjects);
+            j.at("min_mean_max_random").get_to(this->min_mean_max_random);
+        }
 	};
 }

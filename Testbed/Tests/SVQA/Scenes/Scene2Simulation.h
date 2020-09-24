@@ -13,9 +13,9 @@ namespace svqa {
 		typedef std::shared_ptr<Scene2Simulation> Ptr;
 		Scene2Simulation(Scene2Settings::Ptr settings) : SimulationBase(settings)
 		{
-			m_nNumberOfObjects = settings->numberOfObjects;
-			m_nNumberOfObstacles = settings->numberOfObstacles;
-
+            m_bIncludeDynamicObjects  = settings->includeDynamicObjects;
+            m_nMin_mean_max_random = settings->min_mean_max_random;
+            
 			SET_FILE_OUTPUT_TRUE(m_pSettings->outputVideoPath)
 		}
 
@@ -25,7 +25,10 @@ namespace svqa {
 		}
 
 		void InitializeScene() override {
-
+            
+            int c = m_nMin_mean_max_random;
+            bool includeDynamicObjects = m_bIncludeDynamicObjects;
+            
 			std::vector<SimulationObject::Color> distinc_colors;
 			while(distinc_colors.size() < 4) {
 				SimulationObject::Color c = SimulationObject::getRandomColor();
@@ -78,10 +81,8 @@ namespace svqa {
 
 			// ------- Inclined Platform and Rolling Circle -------
 			AddStaticObject(b2Vec2(-26.5f, 12.0f), 6* M_PI / 7, SimulationObject::STATIC_PLATFORM);
-			float32 rolling_circle_heights[] = { 29.0f, 18.0f, 25.0f, 40.0f, 19.0f };
 
 			AddDynamicObject(
-				//b2Vec2(-22.0f, rolling_circle_heights[(int)RandomFloatFromHardware(0.0, 5.0)]),
 				b2Vec2(-22.0f, RandomFloatFromHardware(19.0, 35.0)),
 				b2Vec2(0.0f, RandomFloatFromHardware(-9.0, 0.0)),
 				SimulationObject::Shape::CIRCLE,
@@ -109,13 +110,9 @@ namespace svqa {
 			
 			// ------- Bottom Right Platform and Circle -------
 			AddStaticObject(b2Vec2(17.0f, 6.0f), 0, SimulationObject::STATIC_PLATFORM);
-			AddStaticObject(b2Vec2(11.0f, 6.0f), 0, SimulationObject::STATIC_RAMP);
-
-			float32 br_circle_velocities[] = { -29.0f, -28.0f,-25.0f, -20.0f, -15.0f};
 
 			AddDynamicObject(
 				b2Vec2(22.0f, 8.0f),
-				//b2Vec2(br_circle_velocities[(int)RandomFloatFromHardware(0.0, 5.0)], 0.0f),
 				b2Vec2(RandomFloatFromHardware(-29.0, -20.0), 0.0f),
 				SimulationObject::Shape::CIRCLE,
 				distinc_colors[3],
@@ -130,7 +127,9 @@ namespace svqa {
 		}
 
 	private:
-
+        bool m_bIncludeDynamicObjects;
+        int  m_nMin_mean_max_random;
+        
 		bool m_bObstaclesCreated;
 		int m_nNumberOfObjects;
 		int m_nNumberOfObstacles;

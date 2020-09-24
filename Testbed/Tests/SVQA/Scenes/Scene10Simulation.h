@@ -13,9 +13,9 @@ namespace svqa {
         typedef std::shared_ptr<Scene10Simulation> Ptr;
         Scene10Simulation(Scene10Settings::Ptr settings) : SimulationBase(settings)
         {
-            m_nNumberOfObjects = settings->numberOfObjects;
-            m_nNumberOfObstacles = settings->numberOfObstacles;
-
+            m_bIncludeDynamicObjects  = settings->includeDynamicObjects;
+            m_nMin_mean_max_random = settings->min_mean_max_random;
+            
             SET_FILE_OUTPUT_TRUE(m_pSettings->outputVideoPath)
         }
 
@@ -26,49 +26,57 @@ namespace svqa {
 
         void InitializeScene() override {
             
+            int c = m_nMin_mean_max_random;
+            bool includeDynamicObjects = m_bIncludeDynamicObjects;
+            
+            
             // Basket
-            AddTargetBasket(b2Vec2(RandomFloatFromHardware(3.0, 5.0), -1.2f), 0.0f);
+            AddTargetBasket(b2Vec2(getExtremeCases(c,3.0, 5.0), -1.2f), 0.0f);
             
             // top
-            float height = RandomFloatFromHardware(26, 30);
-            AddStaticObject(b2Vec2(-8.0f, height),44 * M_PI / RandomFloatFromHardware(51.2, 57.0),  SimulationObject::STATIC_PLATFORM);
-            AddRandomDynamicObject(
-                b2Vec2(-8.0f, height + 4.0f),
-                b2Vec2(0.0f, 0.0f)
-            );
-            
+            float height = getExtremeCases(c,26, 30);
+            AddStaticObject(b2Vec2(-8.0f, height),44 * M_PI / getExtremeCases(c,51.2, 57.0),  SimulationObject::STATIC_PLATFORM);
             
             // Middle Right Floor dynamic basket
             AddStaticObject(b2Vec2(11.0f, 17.0f), 0, SimulationObject::STATIC_PLATFORM);
-            
-            
             // Middle Inclined Left  Floor
-            AddStaticObject(b2Vec2(-17.0f, 17.0f), 43 * M_PI / RandomFloatFromHardware(51.2, 57.0), SimulationObject::STATIC_PLATFORM);
-            AddRandomDynamicObject(
-                    b2Vec2(-19.0f,  22.0f),
-                    b2Vec2(0.0f, 0.0f)
-                );
-            
+            AddStaticObject(b2Vec2(-17.0f, 17.0f), 43 * M_PI / getExtremeCases(c,51.2, 57.0), SimulationObject::STATIC_PLATFORM);
             
             // Bottom Inclıned Right Floor
-            float x = RandomFloatFromHardware(14, 18);
-            AddStaticObject(b2Vec2(x, 10.0f),- 46 * M_PI / RandomFloatFromHardware(51.2, 57.0),SimulationObject::STATIC_PLATFORM);
-            AddRandomDynamicObject(
-                b2Vec2(16.0f, 14.0f),
-                b2Vec2(0.0f, 0.0f)
-            );
-
-            
+            float x = getExtremeCases(c,14, 18);
+            AddStaticObject(b2Vec2(x, 10.0f),- 46 * M_PI / getExtremeCases(c,51.2, 57.0),SimulationObject::STATIC_PLATFORM);
             
             // Bottom Left  Floor
             AddStaticObject(b2Vec2(-8.0f, 8.0f), 0, SimulationObject::STATIC_PLATFORM);
             
-
             
+            if (includeDynamicObjects) {
+            
+                AddRandomDynamicObject(
+                    b2Vec2(-8.0f, height + 4.0f),
+                    b2Vec2(0.0f, 0.0f)
+                );
+                
+                
+                AddRandomDynamicObject(
+                        b2Vec2(-19.0f,  22.0f),
+                        b2Vec2(0.0f, 0.0f)
+                    );
+
+                AddRandomDynamicObject(
+                    b2Vec2(16.0f, 14.0f),
+                    b2Vec2(0.0f, 0.0f)
+                );
+            }
+            
+
         }
 
     private:
-
+        
+        bool m_bIncludeDynamicObjects;
+        int  m_nMin_mean_max_random;
+        
         bool m_bObstaclesCreated;
         int m_nNumberOfObjects;
         int m_nNumberOfObstacles;
