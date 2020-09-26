@@ -29,7 +29,7 @@ namespace svqa {
 			//       We may need to change positions and orientations of dynamic objects,
 			//       especially one at the top.
             
-            int c = m_nMin_mean_max_random;
+            std::string  c = m_nMin_mean_max_random;
             bool includeDynamicObjects = m_bIncludeDynamicObjects;
             
 			// Basket
@@ -87,7 +87,7 @@ namespace svqa {
 
 	private:
         bool m_bIncludeDynamicObjects;
-        int  m_nMin_mean_max_random;
+        std::string  m_nMin_mean_max_random;
         
 		bool m_bObstaclesCreated;
 		int m_nNumberOfObjects;

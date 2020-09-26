@@ -102,12 +102,12 @@ namespace svqa {
                  TakeSnapshotOfTheWorldEveryXFrame(30, "/Users/cagatayyigit/Desktop/snapshots/");
             }
            
-            /*
-            if (m_StepCount == 2) {
+            bool include_dynamic = m_pSettings->includeDynamicObjects;
+            if ( include_dynamic == false && m_StepCount == 2) {
                  // Take screenshot at the beginning for object segmentation.
                 TakeScreenshotForStatic("/Users/cagatayyigit/Desktop/static_ss/");
             }
-             */
+            
             
 		}
 
@@ -164,26 +164,29 @@ namespace svqa {
             //std::tm tm = *std::localtime(&tt); //Locale time-zone, usually UTC by default.
             std::stringstream ss;
             ss << std::put_time( &tm, format.c_str() );
-            return ss.str();
+            return  ss.str();
         }
         
         void TakeScreenshotForStatic(std::string output_folder_path) {
             std::stringstream outputFilename;
+            std::string simulation_id = std::to_string(m_pSettings->simulationID);
+            std::string min_mean_max_random = m_pSettings->min_mean_max_random; 
+           
             
             time_point input = std::chrono::system_clock::now();
-            std::string s =  serializeTimePoint(input, "UTC: %Y-%m-%d %H:%M:%S");
+            std::string s =  "sid"+simulation_id + "_" + min_mean_max_random;//serializeTimePoint(input, "%H:%M:%S");
             
             outputFilename << output_folder_path << s << ".png";
             RENDERER->SaveAsImage(outputFilename.str());
         }
         
         
-        float getExtremeCases(int x, float min, float max){
-            if (x == 0)
+        float getExtremeCases(std::string x, float min, float max){
+            if (x.compare("min") == 0)
                     return min;
-            if (x == 1)
+            if (x.compare("mean") == 0)
                     return (min + max) / 2.0;
-            if (x == 2)
+            if (x.compare("max") == 0)
                     return max;
             return RandomFloatFromHardware(min, max);
         }

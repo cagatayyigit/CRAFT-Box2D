@@ -26,7 +26,7 @@ namespace svqa {
 
 		void InitializeScene() override {
             
-            int c = m_nMin_mean_max_random;
+            std::string  c = m_nMin_mean_max_random;
             bool includeDynamicObjects = m_bIncludeDynamicObjects;
             
             
@@ -63,7 +63,7 @@ namespace svqa {
 	private:
         
         bool m_bIncludeDynamicObjects;
-        int  m_nMin_mean_max_random;
+        std::string  m_nMin_mean_max_random;
         
 		bool m_bObstaclesCreated;
 		int m_nNumberOfObjects;
