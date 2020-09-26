@@ -42,10 +42,10 @@ namespace svqa {
             
             
             // ------- Inclined Platform-------
-            AddStaticObject(b2Vec2(-13.0f, 19.2f), 4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
+            AddStaticObject(b2Vec2(-13.0f, getExtremeCases(c,18.8,19.6)), 4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
             
             // ------- Top Platform-------
-            AddStaticObject(b2Vec2(-12.0f, 9.2f), 0, SimulationObject::STATIC_PLATFORM);
+            AddStaticObject(b2Vec2(getExtremeCases(c,-13, -11.0f), 9.2f), 0, SimulationObject::STATIC_PLATFORM);
             AddStaticObject(b2Vec2(getExtremeCases(c,8.0f, 13.0f), 9.2f), 0, SimulationObject::STATIC_PLATFORM);
             
             if (includeDynamicObjects){

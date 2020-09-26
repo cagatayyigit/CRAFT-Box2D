@@ -33,15 +33,15 @@ namespace svqa {
 			AddTargetBasket(b2Vec2(getExtremeCases(c,17, 20), -1.2f), 0.0f); 
             
             // inclined
-            AddStaticObject(b2Vec2(-13.0f, 17.0f), 7 * M_PI / 8, SimulationObject::STATIC_PLATFORM);  // -13 17
+            AddStaticObject(b2Vec2(getExtremeCases(c,-15, -12), getExtremeCases(c,16, 18)), 7 * M_PI / 8, SimulationObject::STATIC_PLATFORM);  // -13 17
             
             AddStaticObject(b2Vec2(  7.0f, getExtremeCases(c,8, 9)), 7 * M_PI / 8, SimulationObject::STATIC_PLATFORM);  //  8 < y < 9
 
             // mid
-            AddStaticObject(b2Vec2(-10.0f, 8.5f), M_PI, SimulationObject::STATIC_PLATFORM);
+            AddStaticObject(b2Vec2(-10.0f, getExtremeCases(c,8.0f, 9.0f)), M_PI, SimulationObject::STATIC_PLATFORM);
             
-            float x = getExtremeCases(c,11, 33);
-            AddStaticObject(b2Vec2(10.0f, 22.0f), - x * M_PI / (x+2), SimulationObject::STATIC_PLATFORM);  // -13 17
+            float x = getExtremeCases(c,10, 34);
+            AddStaticObject(b2Vec2(10.0f, getExtremeCases(c,21,23)), - x * M_PI / (x+2), SimulationObject::STATIC_PLATFORM);  // -13 17
             
             
             if (includeDynamicObjects) {

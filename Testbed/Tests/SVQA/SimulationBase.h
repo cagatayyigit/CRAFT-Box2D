@@ -102,8 +102,8 @@ namespace svqa {
                  TakeSnapshotOfTheWorldEveryXFrame(30, "/Users/cagatayyigit/Desktop/snapshots/");
             }
            
-            bool include_dynamic = m_pSettings->includeDynamicObjects;
-            if ( include_dynamic == false && m_StepCount == 2) {
+            
+            if (m_StepCount == 1) {
                  // Take screenshot at the beginning for object segmentation.
                 TakeScreenshotForStatic("/Users/cagatayyigit/Desktop/static_ss/");
             }
@@ -174,7 +174,7 @@ namespace svqa {
            
             
             time_point input = std::chrono::system_clock::now();
-            std::string s =  "sid"+simulation_id + "_" + min_mean_max_random;//serializeTimePoint(input, "%H:%M:%S");
+            std::string s =  "sid_"+simulation_id + "_" + min_mean_max_random;//serializeTimePoint(input, "%H:%M:%S");
             
             outputFilename << output_folder_path << s << ".png";
             RENDERER->SaveAsImage(outputFilename.str());

@@ -34,19 +34,23 @@ namespace svqa {
 
             
             /// TODO: Make statics random
-            AddStaticObject(b2Vec2(-18.0f, 23.0f), 0, SimulationObject::STATIC_PLATFORM);
-            AddStaticObject(b2Vec2(-8.0f, 23.0f), 0, SimulationObject::STATIC_PLATFORM);
-            AddStaticObject(b2Vec2(-2.0f, 23.0f), 0, SimulationObject::STATIC_PLATFORM);
+            float h1 = getExtremeCases(c, 22, 24);
+            AddStaticObject(b2Vec2(-18.0f,h1), 0, SimulationObject::STATIC_PLATFORM);
+            AddStaticObject(b2Vec2(-8.0f, h1), 0, SimulationObject::STATIC_PLATFORM);
+            AddStaticObject(b2Vec2(-2.0f, h1), 0, SimulationObject::STATIC_PLATFORM);
             
             
-            AddStaticObject(b2Vec2(-18.0f, 16.0f), 0, SimulationObject::STATIC_PLATFORM);
-            AddStaticObject(b2Vec2(-9.0f, 16.0f), 0, SimulationObject::STATIC_PLATFORM);
+            float h2 = getExtremeCases(c, 15, 17);
+            AddStaticObject(b2Vec2(-18.0f,h2), 0, SimulationObject::STATIC_PLATFORM);
+            AddStaticObject(b2Vec2(-9.0f, h2), 0, SimulationObject::STATIC_PLATFORM);
             
-            AddStaticObject(b2Vec2(-18.0f, 10.0f), 0, SimulationObject::STATIC_PLATFORM);
+            float h3 = getExtremeCases(c, 9, 11);
+            AddStaticObject(b2Vec2(-18.0f, h3), 0, SimulationObject::STATIC_PLATFORM);
             
-            AddStaticObject(b2Vec2(-18.0f, 4.0f), 0, SimulationObject::STATIC_PLATFORM);
-            AddStaticObject(b2Vec2(-4.0f, 4.0f), 0, SimulationObject::STATIC_PLATFORM);
-            AddStaticObject(b2Vec2(9.5f, 4.0f), 0, SimulationObject::STATIC_PLATFORM);
+            float h4 = getExtremeCases(c, 3, 5);
+            AddStaticObject(b2Vec2(-18.0f, h4), 0, SimulationObject::STATIC_PLATFORM);
+            AddStaticObject(b2Vec2(-4.0f,  h4), 0, SimulationObject::STATIC_PLATFORM);
+            AddStaticObject(b2Vec2(9.5f,   h4), 0, SimulationObject::STATIC_PLATFORM);
             
             
             if (includeDynamicObjects){

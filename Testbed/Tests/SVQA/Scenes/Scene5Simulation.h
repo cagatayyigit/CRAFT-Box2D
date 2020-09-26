@@ -40,7 +40,7 @@ namespace svqa {
             
             AddStaticObject(b2Vec2(getExtremeCases(c,8.0f, 13.0f), 21.0f), 30 * M_PI / getExtremeCases(c,31.0f, 35.0f), SimulationObject::STATIC_PLATFORM);
             AddStaticObject(b2Vec2(16.0f, 6.0f), - 15 * M_PI / getExtremeCases(c,16.0f, 19.0f), SimulationObject::STATIC_PLATFORM);
-            AddStaticObject(b2Vec2(12.0f, 14.0f), 0, SimulationObject::STATIC_PLATFORM);
+            AddStaticObject(b2Vec2(12.0f, getExtremeCases(c,12,14)), 0, SimulationObject::STATIC_PLATFORM);
             
             
             if(includeDynamicObjects){

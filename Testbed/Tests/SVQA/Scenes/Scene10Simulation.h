@@ -31,14 +31,17 @@ namespace svqa {
             
             
             // Basket
-            AddTargetBasket(b2Vec2(getExtremeCases(c,3.0, 5.0), -1.2f), 0.0f);
+            AddTargetBasket(b2Vec2(getExtremeCases(c,2.0, 6.0), -1.2f), 0.0f);
             
             // top
             float height = getExtremeCases(c,26, 30);
             AddStaticObject(b2Vec2(-8.0f, height),44 * M_PI / getExtremeCases(c,51.2, 57.0),  SimulationObject::STATIC_PLATFORM);
             
             // Middle Right Floor dynamic basket
-            AddStaticObject(b2Vec2(11.0f, 17.0f), 0, SimulationObject::STATIC_PLATFORM);
+            AddStaticObject(b2Vec2(getExtremeCases(c, 9, 13), getExtremeCases(c, 16, 18)),
+                            0, SimulationObject::STATIC_PLATFORM);
+            
+            
             // Middle Inclined Left  Floor
             AddStaticObject(b2Vec2(-17.0f, 17.0f), 43 * M_PI / getExtremeCases(c,51.2, 57.0), SimulationObject::STATIC_PLATFORM);
             
@@ -47,7 +50,8 @@ namespace svqa {
             AddStaticObject(b2Vec2(x, 10.0f),- 46 * M_PI / getExtremeCases(c,51.2, 57.0),SimulationObject::STATIC_PLATFORM);
             
             // Bottom Left  Floor
-            AddStaticObject(b2Vec2(-8.0f, 8.0f), 0, SimulationObject::STATIC_PLATFORM);
+            AddStaticObject(b2Vec2(getExtremeCases(c, -10, -6), getExtremeCases(c, 5, 10)),
+                            0, SimulationObject::STATIC_PLATFORM);
             
             
             if (includeDynamicObjects) {

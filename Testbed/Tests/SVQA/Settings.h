@@ -30,8 +30,9 @@ namespace svqa
         std::string inputScenePath;
         std::string outputVideoPath;
         std::string outputJSONPath;
-        bool includeDynamicObjects;
+
         std::string min_mean_max_random;
+        bool includeDynamicObjects;
         
         void to_json(json& j) {
             j.emplace("simulationID", (int)this->simulationID);
@@ -55,7 +56,7 @@ namespace svqa
             j.at("outputVideoPath").get_to(this->outputVideoPath);
             j.at("outputJSONPath").get_to(this->outputJSONPath);
             j.at("stepCount").get_to(this->stepCount);
-            j.at("includeDynamicObjects").get_to(this->includeDynamicObjects);
+            j.at("includeDynamicObjects").get_to(this->includeDynamicObjects); 
             j.at("min_mean_max_random").get_to(this->min_mean_max_random);
         }
     };

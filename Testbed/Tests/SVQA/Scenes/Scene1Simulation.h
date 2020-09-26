@@ -34,14 +34,14 @@ namespace svqa {
 			AddTargetBasket(b2Vec2(getExtremeCases(c,-3.0, 3.0), -1.2f), 0.0f);
 
             // Bottom Left  Floor
-            AddStaticObject(b2Vec2(-12.0f, 6.0f), 0, SimulationObject::STATIC_PLATFORM);
+            AddStaticObject(b2Vec2(getExtremeCases(c, -13.0f, -11.0f), getExtremeCases(c, 5.0f, 7.0f)), 0, SimulationObject::STATIC_PLATFORM);
 			
             // Bottom Right Floor
-            AddStaticObject(b2Vec2(12.0f, 6.0f), 0, SimulationObject::STATIC_PLATFORM);
+            AddStaticObject(b2Vec2(getExtremeCases(c, 11.0f, 13.0f), getExtremeCases(c, 5.0f, 7.0f)), 0, SimulationObject::STATIC_PLATFORM);
             
 
 			// Bottom Left  Vertical Floor
-			AddStaticObject(b2Vec2(-18.0f, 16.0f), 4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
+			AddStaticObject(b2Vec2(-18.0f, getExtremeCases(c, 15.0f, 17.0f)), 4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
 
 			// Middle Left  Floor
 			AddStaticObject(b2Vec2(-5.0f, 18.0f), 51 * M_PI / getExtremeCases(c,51.2, 57.0), SimulationObject::STATIC_PLATFORM);

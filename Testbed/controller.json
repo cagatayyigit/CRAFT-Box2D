@@ -1,12 +1,12 @@
 {
-    "simulationID": 4,
+    "simulationID": 3,
     "offline": false,
     "outputVideoPath": "output.mpg",
     "outputJSONPath": "output.json",
     "width": 1024,
     "height": 1024,
     "inputScenePath": "",
-    "includeDynamicObjects": false,
+    "includeDynamicObjects": true,
     "min_mean_max_random": "max",
-    "stepCount": 3
+    "stepCount": 200
 }
