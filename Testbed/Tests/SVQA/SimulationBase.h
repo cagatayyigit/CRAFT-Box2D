@@ -95,17 +95,17 @@ namespace svqa {
             if (m_bGeneratingFromJSON) {
                 if (m_StepCount == 1) {
                      // Take screenshot at the beginning for object segmentation.
-                    TakeScreenshot("/Users/cagatayyigit/Desktop/screenshots/");
+                    TakeScreenshot("./screenshots/dynamics_ss/");
                 }
             }
             else {
-                 TakeSnapshotOfTheWorldEveryXFrame(30, "/Users/cagatayyigit/Desktop/snapshots/");
+                 TakeSnapshotOfTheWorldEveryXFrame(30);
             }
            
             
-            if (m_StepCount == 1) {
+            if (!(m_pSettings->includeDynamicObjects) && m_StepCount == 1) {
                  // Take screenshot at the beginning for object segmentation.
-                TakeScreenshotForStatic("/Users/cagatayyigit/Desktop/static_ss/");
+                TakeScreenshotForStatic();
             }
             
             
@@ -139,44 +139,24 @@ namespace svqa {
 			return m_StepCount == m_pSettings->stepCount;
 		}
         
-        void TakeSnapshotOfTheWorldEveryXFrame(int x, std::string output_folder_path){
-            
+        void TakeSnapshotOfTheWorldEveryXFrame(int x){
             std::string current_step  = std::to_string(m_StepCount);
             std::string simulation_id = std::to_string(m_pSettings->simulationID);
             
             // Take snapshot of the world every 5 frames for object segmentation.
-            if (m_StepCount == 1 || m_StepCount % x == 0)
-            {
-                //std::string fn = "./snapshots/frame" + std::to_string(m_StepCount) + ".json";
-                std::string fn = output_folder_path + simulation_id + "_" + current_step + ".json";
+            if (m_StepCount == 1 || m_StepCount % x == 0){
+                std::string fn = "./snapshots/" + simulation_id + "_" + current_step + ".json";
                 TakeSceneSnapshot(fn);
             }
+        }
+        
 
-        }
-        
-        //-------------------------------
-        using time_point = std::chrono::system_clock::time_point;
-        std::string serializeTimePoint( const time_point& time, const std::string& format)
-        {
-            
-            std::time_t tt = std::chrono::system_clock::to_time_t(time);
-            std::tm tm = *std::gmtime(&tt); //GMT (UTC)
-            //std::tm tm = *std::localtime(&tt); //Locale time-zone, usually UTC by default.
-            std::stringstream ss;
-            ss << std::put_time( &tm, format.c_str() );
-            return  ss.str();
-        }
-        
-        void TakeScreenshotForStatic(std::string output_folder_path) {
+        void TakeScreenshotForStatic() {
             std::stringstream outputFilename;
             std::string simulation_id = std::to_string(m_pSettings->simulationID);
-            std::string min_mean_max_random = m_pSettings->min_mean_max_random; 
-           
-            
-            time_point input = std::chrono::system_clock::now();
-            std::string s =  "sid_"+simulation_id + "_" + min_mean_max_random;//serializeTimePoint(input, "%H:%M:%S");
-            
-            outputFilename << output_folder_path << s << ".png";
+            std::string min_mean_max_random = m_pSettings->min_mean_max_random;
+            std::string s =  "./screenshots/statics_ss/sid_"+simulation_id + "_" + min_mean_max_random;
+            outputFilename << s << ".png";
             RENDERER->SaveAsImage(outputFilename.str());
         }
         
@@ -190,8 +170,7 @@ namespace svqa {
                     return max;
             return RandomFloatFromHardware(min, max);
         }
-        
-        //-------------------------------
+
         
         void TakeScreenshot(std::string output_folder_path) {
             std::stringstream outputFilename;
