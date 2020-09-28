@@ -54,6 +54,7 @@ namespace svqa {
             
             
             if (includeDynamicObjects){
+                
                 AddRandomDynamicObject(
                     b2Vec2(getExtremeCases(c,-17.0f, -15.0f), 24.5f),
                     b2Vec2(getExtremeCases(c,5.0f, 15.0f), 0.0f),
@@ -80,6 +81,7 @@ namespace svqa {
                     0b100,
                     SimulationObject::Shape::CIRCLE
                 );
+                
             }
 
 			

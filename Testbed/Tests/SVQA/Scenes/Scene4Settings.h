@@ -10,8 +10,6 @@ namespace svqa
 
 		Scene4Settings() {}
 
-        bool includeDynamicObjects;
-        int  min_mean_max_random;
 
         void to_json(json& j) {
             Settings::to_json(j);
