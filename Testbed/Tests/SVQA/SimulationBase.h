@@ -66,12 +66,15 @@ namespace svqa {
 				// Generate scene from JSON file if inputScenePath is not blank and the scene is not already generated.
 				if (isGeneratingFromJSON() && !m_bSceneRegenerated) {
 					GenerateSceneFromJson(m_pSettings->inputScenePath);
+                    
 				}
 				else InitializeScene();
 
 				setSceneInitialized(true);
+                
 			}
-
+            
+            
 			// Take snapshot of the scene in the beginning of the simulation.
 			if (isSceneInitialized() && !m_bSceneSnapshotTaken) {
 				m_StartSceneStateJSON = SimulationBase::GetSceneStateJSONObject(m_SceneJSONState, m_StepCount);
@@ -81,25 +84,31 @@ namespace svqa {
 
 			Simulation::Step(settings);
             
-            // Take screenshot at the beginning for object segmentation.
-            if (m_StepCount == 1)
-            {
-                TakeScreenshot();
-            }
-            
-            // Take snapshot of the world every 5 frames for object segmentation.
-            if (m_StepCount == 1 || m_StepCount % 5 == 0)
-            {
-                std::string fn = "./snapshots/" + std::to_string(m_StepCount) + ".json";
-                TakeSceneSnapshot(fn);
-            }
-
 			if (shouldTerminateSimulation()) {
 				m_EndSceneStateJSON = SimulationBase::GetSceneStateJSONObject(m_SceneJSONState, m_StepCount);
 				TerminateSimulation();
 			}
             
 			DetectStartTouchingEvents();
+            
+
+            if (m_bGeneratingFromJSON) {
+                if (m_StepCount == 1) {
+                     // Take screenshot at the beginning for object segmentation.
+                    TakeScreenshot("./screenshots/dynamics_ss/");
+                }
+            }
+            else {
+                 TakeSnapshotOfTheWorldEveryXFrame(30);
+            }
+           
+            
+            if (!(m_pSettings->includeDynamicObjects) && m_StepCount == 1) {
+                 // Take screenshot at the beginning for object segmentation.
+                TakeScreenshotForStatic();
+            }
+            
+            
 		}
 
 		/// Gets the common settings object
@@ -130,9 +139,47 @@ namespace svqa {
 			return m_StepCount == m_pSettings->stepCount;
 		}
         
-        void TakeScreenshot() {
+        void TakeSnapshotOfTheWorldEveryXFrame(int x){
+            std::string current_step  = std::to_string(m_StepCount);
+            std::string simulation_id = std::to_string(m_pSettings->simulationID);
+            
+            // Take snapshot of the world every 5 frames for object segmentation.
+            if (m_StepCount == 1 || m_StepCount % x == 0){
+                std::string fn = "./snapshots/" + simulation_id + "_" + current_step + ".json";
+                TakeSceneSnapshot(fn);
+            }
+        }
+        
+
+        void TakeScreenshotForStatic() {
             std::stringstream outputFilename;
-            outputFilename << "./snapshots/" << m_pSettings->inputScenePath << "_frame_" << m_StepCount << ".png";
+            std::string simulation_id = std::to_string(m_pSettings->simulationID);
+            std::string min_mean_max_random = m_pSettings->min_mean_max_random;
+            std::string s =  "./screenshots/statics_ss/sid_"+simulation_id + "_" + min_mean_max_random;
+            outputFilename << s << ".png";
+            RENDERER->SaveAsImage(outputFilename.str());
+        }
+        
+        
+        float getExtremeCases(std::string x, float min, float max){
+            if (x.compare("min") == 0)
+                    return min;
+            if (x.compare("mean") == 0)
+                    return (min + max) / 2.0;
+            if (x.compare("max") == 0)
+                    return max;
+            return RandomFloatFromHardware(min, max);
+        }
+
+        
+        void TakeScreenshot(std::string output_folder_path) {
+            std::stringstream outputFilename;
+            
+            std::string s = m_pSettings->inputScenePath;
+            std::string png_name = (s.substr(s.find("id") , s.find(".json")));
+            int l = png_name.length();
+            png_name = png_name.substr(0,l -5);
+            outputFilename << output_folder_path << png_name << ".png";
             RENDERER->SaveAsImage(outputFilename.str());
         }
         
