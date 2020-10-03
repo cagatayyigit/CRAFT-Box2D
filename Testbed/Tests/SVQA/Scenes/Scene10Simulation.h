@@ -52,7 +52,7 @@ namespace svqa {
                             0, SimulationObject::STATIC_PLATFORM);
             
             
-            if (!m_bIncludeDynamicObjects) {
+            if (m_bIncludeDynamicObjects) {
                 
                 AddRandomDynamicObject(
                     b2Vec2(-8.0f, height + 4.0f),
