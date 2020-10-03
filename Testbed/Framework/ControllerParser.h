@@ -30,67 +30,67 @@ namespace svqa {
         json j;
         bool fileLoadRes = JSONHelper::loadJSON(j, inputFile);
         if(fileLoadRes) {
-            set.from_json(j);    
-			if (set.simulationID == SimulationID::ID_ObstructionDemo) {
-				ObstructionDemoSettings::Ptr setPtr = std::make_shared<ObstructionDemoSettings>();
-				setPtr->from_json(j);
-				return std::make_shared<ObstructionDemoSimulation>(setPtr);
-			}
-			else if (set.simulationID == SimulationID::ID_Scene1) {
-				Scene1Settings::Ptr setPtr = std::make_shared<Scene1Settings>();
-				setPtr->from_json(j);
-				return std::make_shared<Scene1Simulation>(setPtr);
-			}
-			else if (set.simulationID == SimulationID::ID_Scene2) {
-				Scene2Settings::Ptr setPtr = std::make_shared<Scene2Settings>();
-				setPtr->from_json(j);
-				return std::make_shared<Scene2Simulation>(setPtr);
-			}
-			else if (set.simulationID == SimulationID::ID_Scene3) {
-				Scene3Settings::Ptr setPtr = std::make_shared<Scene3Settings>();
-				setPtr->from_json(j);
-				return std::make_shared<Scene3Simulation>(setPtr);
-			}
-			else if (set.simulationID == SimulationID::ID_Scene4) {
-				Scene4Settings::Ptr setPtr = std::make_shared<Scene4Settings>();
-				setPtr->from_json(j);
-				return std::make_shared<Scene4Simulation>(setPtr);
-			}
-			else if (set.simulationID == SimulationID::ID_Scene5) {
-				Scene5Settings::Ptr setPtr = std::make_shared<Scene5Settings>();
-				setPtr->from_json(j);
-				return std::make_shared<Scene5Simulation>(setPtr);
-			}
-			else if (set.simulationID == SimulationID::ID_Scene6) {
-				Scene6Settings::Ptr setPtr = std::make_shared<Scene6Settings>();
-				setPtr->from_json(j);
-				return std::make_shared<Scene6Simulation>(setPtr);
-			}
-			else if (set.simulationID == SimulationID::ID_Scene7) {
-				Scene7Settings::Ptr setPtr = std::make_shared<Scene7Settings>();
-				setPtr->from_json(j);
-				return std::make_shared<Scene7Simulation>(setPtr);
-			}
-			else if (set.simulationID == SimulationID::ID_Scene8) {
-				Scene8Settings::Ptr setPtr = std::make_shared<Scene8Settings>();
-				setPtr->from_json(j);
-				return std::make_shared<Scene8Simulation>(setPtr);
-			}
-			else if (set.simulationID == SimulationID::ID_Scene9) {
-				Scene9Settings::Ptr setPtr = std::make_shared<Scene9Settings>();
-				setPtr->from_json(j);
-				return std::make_shared<Scene9Simulation>(setPtr);
-			}
-			else if (set.simulationID == SimulationID::ID_Scene10) {
-				Scene10Settings::Ptr setPtr = std::make_shared<Scene10Settings>();
-				setPtr->from_json(j);
-				return std::make_shared<Scene10Simulation>(setPtr);
-			}
-			else if (set.simulationID == SimulationID::ID_Scene11) {
-				Scene11Settings::Ptr setPtr = std::make_shared<Scene11Settings>();
-				setPtr->from_json(j);
-				return std::make_shared<Scene11Simulation>(setPtr);
-			}
+            set.from_json(j);
+            if (set.simulationID == SimulationID::ID_ObstructionDemo) {
+                ObstructionDemoSettings::Ptr setPtr = std::make_shared<ObstructionDemoSettings>();
+                setPtr->from_json(j);
+                return std::make_shared<ObstructionDemoSimulation>(setPtr);
+            }
+            else if (set.simulationID == SimulationID::ID_Scene1) {
+                Scene1Settings::Ptr setPtr = std::make_shared<Scene1Settings>();
+                setPtr->from_json(j);
+                return std::make_shared<Scene1Simulation>(setPtr);
+            }
+            else if (set.simulationID == SimulationID::ID_Scene2) {
+                Scene2Settings::Ptr setPtr = std::make_shared<Scene2Settings>();
+                setPtr->from_json(j);
+                return std::make_shared<Scene2Simulation>(setPtr);
+            }
+            else if (set.simulationID == SimulationID::ID_Scene3) {
+                Scene3Settings::Ptr setPtr = std::make_shared<Scene3Settings>();
+                setPtr->from_json(j);
+                return std::make_shared<Scene3Simulation>(setPtr);
+            }
+            else if (set.simulationID == SimulationID::ID_Scene4) {
+                Scene4Settings::Ptr setPtr = std::make_shared<Scene4Settings>();
+                setPtr->from_json(j);
+                return std::make_shared<Scene4Simulation>(setPtr);
+            }
+            else if (set.simulationID == SimulationID::ID_Scene5) {
+                Scene5Settings::Ptr setPtr = std::make_shared<Scene5Settings>();
+                setPtr->from_json(j);
+                return std::make_shared<Scene5Simulation>(setPtr);
+            }
+            else if (set.simulationID == SimulationID::ID_Scene6) {
+                Scene6Settings::Ptr setPtr = std::make_shared<Scene6Settings>();
+                setPtr->from_json(j);
+                return std::make_shared<Scene6Simulation>(setPtr);
+            }
+            else if (set.simulationID == SimulationID::ID_Scene7) {
+                Scene7Settings::Ptr setPtr = std::make_shared<Scene7Settings>();
+                setPtr->from_json(j);
+                return std::make_shared<Scene7Simulation>(setPtr);
+            }
+            else if (set.simulationID == SimulationID::ID_Scene8) {
+                Scene8Settings::Ptr setPtr = std::make_shared<Scene8Settings>();
+                setPtr->from_json(j);
+                return std::make_shared<Scene8Simulation>(setPtr);
+            }
+            else if (set.simulationID == SimulationID::ID_Scene9) {
+                Scene9Settings::Ptr setPtr = std::make_shared<Scene9Settings>();
+                setPtr->from_json(j);
+                return std::make_shared<Scene9Simulation>(setPtr);
+            }
+            else if (set.simulationID == SimulationID::ID_Scene10) {
+                Scene10Settings::Ptr setPtr = std::make_shared<Scene10Settings>();
+                setPtr->from_json(j);
+                return std::make_shared<Scene10Simulation>(setPtr);
+            }
+            else if (set.simulationID == SimulationID::ID_Scene11) {
+                Scene11Settings::Ptr setPtr = std::make_shared<Scene11Settings>();
+                setPtr->from_json(j);
+                return std::make_shared<Scene11Simulation>(setPtr);
+            }
         }
         return nullptr;
         

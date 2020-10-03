@@ -49,6 +49,8 @@ namespace svqa {
 			m_pCausalGraph = CausalGraph::create();
 			m_pCausalGraph->addEvent(StartEvent::create());
 			m_bGeneratingFromJSON = m_pSettings->inputScenePath.compare("") != 0;
+            m_bIncludeDynamicObjects = m_pSettings->includeDynamicObjectsInTheScene;
+            m_sStaticObjectOrientationType = m_pSettings->staticObjectPositioningType;
 
 			if (!isGeneratingFromJSON()) {
 				CreateBoundaries();
@@ -71,9 +73,7 @@ namespace svqa {
 				else InitializeScene();
 
 				setSceneInitialized(true);
-                
 			}
-            
             
 			// Take snapshot of the scene in the beginning of the simulation.
 			if (isSceneInitialized() && !m_bSceneSnapshotTaken) {
@@ -90,7 +90,6 @@ namespace svqa {
 			}
             
 			DetectStartTouchingEvents();
-            
 
             if (m_bGeneratingFromJSON) {
                 if (m_StepCount == 1) {
@@ -103,7 +102,7 @@ namespace svqa {
             }
            
             
-            if (!(m_pSettings->includeDynamicObjects) && m_StepCount == 1) {
+            if (!(m_pSettings->includeDynamicObjectsInTheScene) && m_StepCount == 1) {
                  // Take screenshot at the beginning for object segmentation.
                 TakeScreenshotForStatic();
             }
@@ -154,7 +153,7 @@ namespace svqa {
         void TakeScreenshotForStatic() {
             std::stringstream outputFilename;
             std::string simulation_id = std::to_string(m_pSettings->simulationID);
-            std::string min_mean_max_random = m_pSettings->min_mean_max_random;
+            std::string min_mean_max_random = m_pSettings->staticObjectPositioningType;
             std::string s =  "./screenshots/statics_ss/sid_"+simulation_id + "_" + min_mean_max_random;
             outputFilename << s << ".png";
             RENDERER->SaveAsImage(outputFilename.str());
@@ -249,6 +248,8 @@ namespace svqa {
 		bool			m_bSceneInitialized;
 		bool			m_bGeneratingFromJSON;
 		bool			m_bSceneSnapshotTaken;
+        bool            m_bIncludeDynamicObjects;
+        std::string     m_sStaticObjectOrientationType;
 
 		int randWithBound(const int& bound)
 		{

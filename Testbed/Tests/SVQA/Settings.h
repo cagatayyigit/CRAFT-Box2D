@@ -31,8 +31,8 @@ namespace svqa
         std::string outputVideoPath;
         std::string outputJSONPath;
 
-        std::string min_mean_max_random;
-        bool includeDynamicObjects;
+        std::string staticObjectPositioningType;
+        bool includeDynamicObjectsInTheScene;
         
         void to_json(json& j) {
             j.emplace("simulationID", (int)this->simulationID);
@@ -43,8 +43,8 @@ namespace svqa
             j.emplace("outputVideoPath", this->outputVideoPath);
             j.emplace("outputJSONPath", this->outputJSONPath);
             j.emplace("stepCount", this->stepCount);
-            j.emplace("includeDynamicObjects", this->includeDynamicObjects);
-            j.emplace("min_mean_max_random",   this->min_mean_max_random); 
+            j.emplace("includeDynamicObjects", this->includeDynamicObjectsInTheScene);
+            j.emplace("staticObjectPositioningType",   this->staticObjectPositioningType);
         }
 
         void from_json(const json& j) {
@@ -56,8 +56,25 @@ namespace svqa
             j.at("outputVideoPath").get_to(this->outputVideoPath);
             j.at("outputJSONPath").get_to(this->outputJSONPath);
             j.at("stepCount").get_to(this->stepCount);
-            j.at("includeDynamicObjects").get_to(this->includeDynamicObjects); 
-            j.at("min_mean_max_random").get_to(this->min_mean_max_random);
+            auto includeDynamicObjectsInTheScene = j.find("includeDynamicObjects");
+            if (includeDynamicObjectsInTheScene != j.end())
+            {
+                this->includeDynamicObjectsInTheScene = *includeDynamicObjectsInTheScene;
+            }
+            auto staticObjectPositioningType = j.find("staticObjectPositioningType");
+            if (staticObjectPositioningType != j.end())
+            {
+                std::string value = *staticObjectPositioningType;
+                if (value != "min"
+                    && value != "mean"
+                    && value != "max"
+                    && value != "random")
+                {
+                    throw "Static object positioning type must be one of the following: min, mean, max, random";
+                }
+                
+                this->staticObjectPositioningType = value;
+            }
         }
     };
 }
