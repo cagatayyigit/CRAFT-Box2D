@@ -56,11 +56,17 @@ namespace svqa
             j.at("outputVideoPath").get_to(this->outputVideoPath);
             j.at("outputJSONPath").get_to(this->outputJSONPath);
             j.at("stepCount").get_to(this->stepCount);
+            
             auto includeDynamicObjectsInTheScene = j.find("includeDynamicObjects");
             if (includeDynamicObjectsInTheScene != j.end())
             {
                 this->includeDynamicObjectsInTheScene = *includeDynamicObjectsInTheScene;
             }
+            else
+            {
+                this->includeDynamicObjectsInTheScene = true;
+            }
+            
             auto staticObjectPositioningType = j.find("staticObjectPositioningType");
             if (staticObjectPositioningType != j.end())
             {
@@ -74,6 +80,10 @@ namespace svqa
                 }
                 
                 this->staticObjectPositioningType = value;
+            }
+            else
+            {
+                this->staticObjectPositioningType = "random";
             }
         }
     };
