@@ -61,8 +61,8 @@ namespace svqa {
                 
                 
                 AddRandomDynamicObject(
-                    b2Vec2(-19.0f,  22.0f),
-                    b2Vec2(0.0f, 0.0f)
+                    b2Vec2(-19.0f,  22.0f),
+                    b2Vec2(0.0f, 0.0f)
                 );
                 
                 AddRandomDynamicObject(
