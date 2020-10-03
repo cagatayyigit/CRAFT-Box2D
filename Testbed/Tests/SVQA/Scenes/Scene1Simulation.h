@@ -50,7 +50,7 @@ namespace svqa {
             
             if (m_bIncludeDynamicObjects) {
                 // Stationary Bottom-Left
-                float32 leftBottomCircleCoorX = (getExtremeCases(m_sStaticObjectOrientationType,-15.0, -10.0));
+                float32 leftBottomCircleCoorX = (getExtremeCases(m_sStaticObjectOrientationType,-10.0, -7.0));
                 AddRandomDynamicObject(
                     b2Vec2(leftBottomCircleCoorX, 9.0f),
                     b2Vec2(0.0f, 0.0f)
