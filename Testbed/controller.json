@@ -3,10 +3,8 @@
     "offline": false,
     "outputVideoPath": "output.mpg",
     "outputJSONPath": "output.json",
-    "width": 1024,
-    "height": 1024,
-    "inputScenePath": "",
-    "includeDynamicObjects": true,
-    "staticObjectPositioningType": "random",
-    "stepCount": 200
+    "width": 256,
+    "height": 256,
+    "inputScenePath": "002421.json",
+    "stepCount": 600
 }

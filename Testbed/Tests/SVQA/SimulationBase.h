@@ -93,8 +93,8 @@ namespace svqa {
 
             if (m_bGeneratingFromJSON) {
                 if (m_StepCount == 1) {
-                     // Take screenshot at the beginning for object segmentation.
-                    TakeScreenshot("./screenshots/dynamics_ss/");
+                    // Take screenshot at the beginning for object segmentation.
+                    // TakeScreenshot("./screenshots/dynamics_ss/");
                 }
             }
             else {
@@ -215,21 +215,37 @@ namespace svqa {
 			json j;
 			bool fileLoadRes = JSONHelper::loadJSON(j, filename);
 			if (fileLoadRes) {
-				auto sceneStatesItr = j.find("scene_states");
-				if (sceneStatesItr != j.end()) {
-					for (const auto& sceneJson : *sceneStatesItr) {
-						int step;
-						sceneJson.at("step").get_to(step);
-						if (step == 0) {
-							m_SceneJSONState.loadFromJSON(*sceneJson.find("scene"), m_world);
-							m_bSceneRegenerated = true;
-							break;
-						}
-					}
-				} else {
-                    // If this JSON object is just a snapshot that doesn't contain causal graph.
-                    m_SceneJSONState.loadFromJSON(j, m_world);
-                    m_bSceneRegenerated = true;
+                auto outputWithVariations = j.find("original_video_output");
+                if (outputWithVariations != j.end())
+                {
+                    // If this is a full simulation output with variations.
+                    auto sceneStatesItr = j["original_video_output"].find("scene_states");
+                    for (const auto& sceneJson : *sceneStatesItr) {
+                        int step;
+                        sceneJson.at("step").get_to(step);
+                        if (step == 0) {
+                            m_SceneJSONState.loadFromJSON(*sceneJson.find("scene"), m_world);
+                            m_bSceneRegenerated = true;
+                            break;
+                        }
+                    }
+                } else {
+                    auto sceneStatesItr = j.find("scene_states");
+                    if (sceneStatesItr != j.end()) {
+                        for (const auto& sceneJson : *sceneStatesItr) {
+                            int step;
+                            sceneJson.at("step").get_to(step);
+                            if (step == 0) {
+                                m_SceneJSONState.loadFromJSON(*sceneJson.find("scene"), m_world);
+                                m_bSceneRegenerated = true;
+                                break;
+                            }
+                        }
+                    } else {
+                        // If this JSON object is just a snapshot that doesn't contain causal graph.
+                        m_SceneJSONState.loadFromJSON(j, m_world);
+                        m_bSceneRegenerated = true;
+                    }
                 }
 			}
 		}
