@@ -60,7 +60,7 @@ namespace svqa {
 		/// Derived simulations must call this in order to construct causal graph
 		virtual void Step(SettingsBase* settings) override
 		{
-			LOG_PROGRESS("Step Count:", std::to_string(m_StepCount) + "/" + std::to_string(m_pSettings->stepCount));
+			if (m_StepCount % 100 == 0) LOG_PROGRESS("Step Count:", std::to_string(m_StepCount) + "/" + std::to_string(m_pSettings->stepCount));
 
 			if (!isSceneInitialized()) {
 				LOG("Initializing simulation objects...");
@@ -94,11 +94,11 @@ namespace svqa {
             if (m_bGeneratingFromJSON) {
                 if (m_StepCount == 1) {
                     // Take screenshot at the beginning for object segmentation.
-                    // TakeScreenshot("./screenshots/dynamics_ss/");
+                    if (m_pSettings->screenshotOutputFolder.compare("") != 0)
+                        TakeScreenshot(m_pSettings->screenshotOutputFolder);
                 }
-            }
-            else {
-                 TakeSnapshotOfTheWorldEveryXFrame(30);
+                if (m_pSettings->snapshotOutputFolder.compare("") != 0)
+                    TakeSnapshotOfTheWorldEveryXFrame(30, m_pSettings->snapshotOutputFolder);
             }
            
             
@@ -138,13 +138,13 @@ namespace svqa {
 			return m_StepCount == m_pSettings->stepCount;
 		}
         
-        void TakeSnapshotOfTheWorldEveryXFrame(int x){
+        void TakeSnapshotOfTheWorldEveryXFrame(int x, std::string snapshotOutputFolder){
             std::string current_step  = std::to_string(m_StepCount);
             std::string simulation_id = std::to_string(m_pSettings->simulationID);
             
             // Take snapshot of the world every 5 frames for object segmentation.
             if (m_StepCount == 1 || m_StepCount % x == 0){
-                std::string fn = "./snapshots/" + simulation_id + "_" + current_step + ".json";
+                std::string fn =  snapshotOutputFolder + simulation_id + "_" + current_step + ".json";
                 TakeSceneSnapshot(fn);
             }
         }
@@ -179,6 +179,7 @@ namespace svqa {
             int l = png_name.length();
             png_name = png_name.substr(0,l -5);
             outputFilename << output_folder_path << png_name << ".png";
+            LOG("Screenshot: " + outputFilename.str());
             RENDERER->SaveAsImage(outputFilename.str());
         }
         

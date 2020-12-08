@@ -33,6 +33,8 @@ namespace svqa
 
         std::string staticObjectPositioningType;
         bool includeDynamicObjectsInTheScene;
+        std::string screenshotOutputFolder;
+        std::string snapshotOutputFolder;
         
         void to_json(json& j) {
             j.emplace("simulationID", (int)this->simulationID);
@@ -45,6 +47,8 @@ namespace svqa
             j.emplace("stepCount", this->stepCount);
             j.emplace("includeDynamicObjects", this->includeDynamicObjectsInTheScene);
             j.emplace("staticObjectPositioningType",   this->staticObjectPositioningType);
+            j.emplace("screenshotOutputFolder",   this->screenshotOutputFolder);
+            j.emplace("snapshotOutputFolder",   this->snapshotOutputFolder);
         }
 
         void from_json(const json& j) {
@@ -65,6 +69,26 @@ namespace svqa
             else
             {
                 this->includeDynamicObjectsInTheScene = true;
+            }
+            
+            auto screenshotOutputFolder = j.find("screenshotOutputFolder");
+            if (screenshotOutputFolder != j.end())
+            {
+                this->screenshotOutputFolder = *screenshotOutputFolder;
+            }
+            else
+            {
+                this->screenshotOutputFolder = "";
+            }
+            
+            auto snapshotOutputFolder = j.find("snapshotOutputFolder");
+            if (snapshotOutputFolder != j.end())
+            {
+                this->snapshotOutputFolder = *snapshotOutputFolder;
+            }
+            else
+            {
+                this->snapshotOutputFolder = "";
             }
             
             auto staticObjectPositioningType = j.find("staticObjectPositioningType");
