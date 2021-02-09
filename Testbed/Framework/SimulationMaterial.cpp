@@ -7,7 +7,7 @@
 
 #include "SimulationMaterial.h"
 
-const std::string SimulationMaterial::metalFilePath = "Data/Textures/eyes.jpg";
+const std::string SimulationMaterial::metalFilePath = "Data/Textures/metal.png";
 const std::string SimulationMaterial::rubberFilePath = "Data/Textures/rubber.png";
 const std::string SimulationMaterial::eyesFilePath = "Data/Textures/eyes.jpg";
 b2VisTexture::Ptr SimulationMaterial::metalTexture;
