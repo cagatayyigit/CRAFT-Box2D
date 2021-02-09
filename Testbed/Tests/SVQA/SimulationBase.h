@@ -293,7 +293,7 @@ namespace svqa {
 			b2BodyDef bd;
 			bd.position = pos;
 			bd.angle = angleInRadians;
-
+			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::TYPE::METAL);
 			BODY *basketBody = (BODY*)m_world->CreateBody(&bd);
 
 #if !USE_DEBUG_DRAW
@@ -323,7 +323,7 @@ namespace svqa {
 			{
 				sensorVertices[i] *= 0.99f; // To not detect container event from the outside of the container.
 			}
-
+			basketBody->setTexture(mat.getTexture());
 			ObjectState::AddSensorBody(m_world, SimulationObject::SENSOR_BASKET, pos, angleInRadians, sensorVertices, 4, basketBody, b2Color(0.9f, 0.9f, 0.9f));
 		}
 
@@ -451,7 +451,7 @@ namespace svqa {
 			bd.position = position;
 			bd.angle = angle;
 			BODY* body = (BODY*)m_world->CreateBody(&bd);
-
+			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::TYPE::METAL);
 			b2FixtureDef fd = b2FixtureDef();
 			fd.density = object.getDensity();
 			fd.restitution = object.getRestitution();
@@ -460,7 +460,7 @@ namespace svqa {
 			body->CreateFixture(&fd);
 
 			body->setColor(object.getColor());
-
+			body->setTexture(mat.getTexture());
 			auto objectState = ObjectState::create(body, object.mShape, object.mColor, object.mSize);
 			body->SetUserData(objectState.get());
 
