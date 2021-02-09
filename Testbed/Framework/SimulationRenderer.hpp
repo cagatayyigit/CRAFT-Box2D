@@ -12,7 +12,7 @@
 #include "Box2D/Box2D.h"
 #include <string>
 
-#define RENDER_TEXTURES 0
+#define RENDER_TEXTURES 1
 
 struct b2AABB;
 struct GLRenderPoints;
