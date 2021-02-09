@@ -1,27 +1,30 @@
+﻿//
+//  SimulationMaterial.cpp
+//  Testbed
+//
+//  Created by Tayfun Ateş on 6.10.2019.
+//
+
 #include "SimulationMaterial.h"
 
-const std::string SimulationMaterial::filePath = "Data/Textures/metal.jpg";
-b2VisTexture::Ptr SimulationMaterial::materialTextures;
+const std::string SimulationMaterial::metalFilePath = "Data/Textures/metal.png";
+const std::string SimulationMaterial::rubberFilePath = "Data/Textures/rubber.png";
+b2VisTexture::Ptr SimulationMaterial::metalTexture;
+b2VisTexture::Ptr SimulationMaterial::rubberTexture;
 
 b2VisTexture::Ptr SimulationMaterial::getTexture()
 {
-    if (!SimulationMaterial::materialTextures) {
-        SimulationMaterial::materialTextures = b2VisTexture::Ptr(new b2VisTexture(SimulationMaterial::filePath, 0));
+    if (!SimulationMaterial::metalTexture) {
+        SimulationMaterial::metalTexture = b2VisTexture::Ptr(new b2VisTexture(SimulationMaterial::metalFilePath, SimulationMaterial::METAL));
+    }
+
+    if (!SimulationMaterial::rubberTexture) {
+        SimulationMaterial::rubberTexture = b2VisTexture::Ptr(new b2VisTexture(SimulationMaterial::rubberFilePath, SimulationMaterial::RUBBER));
     }
 
     if (type == METAL) {
-        return b2VisTexture::Ptr(new b2VisTexture(SimulationMaterial::materialTextures->getTextureId(),
-            SimulationMaterial::materialTextures->getAtlasWidth(),
-            SimulationMaterial::materialTextures->getAtlasHeight(),
-            b2Vec2(0.0f, 0.0f),
-            b2Vec2(15.0f, 15.0f)));
+        return SimulationMaterial::metalTexture;
     }
 
-    return b2VisTexture::Ptr(new b2VisTexture(SimulationMaterial::materialTextures->getTextureId(),
-        SimulationMaterial::materialTextures->getAtlasWidth(),
-        SimulationMaterial::materialTextures->getAtlasHeight(),
-        b2Vec2(0.0f, 16.0f),
-        b2Vec2(15.0f, 31.0f)));
-
+    return SimulationMaterial::rubberTexture;
 }
-

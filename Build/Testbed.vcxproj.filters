@@ -64,6 +64,9 @@
     <Filter Include="Tests\SVQA\Scenes\Scene11">
       <UniqueIdentifier>{99f28967-e67d-4b92-9025-c087250e6e42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data\Textures">
+      <UniqueIdentifier>{509a2266-0e45-4010-964f-8eaa5c48020e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Testbed\Framework\Camera.hpp">
@@ -265,6 +268,9 @@
     <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene11Settings.h">
       <Filter>Tests\SVQA\Scenes\Scene11</Filter>
     </ClInclude>
+    <ClInclude Include="..\Testbed\Framework\SimulationMaterial.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Testbed\Framework\Camera.cpp">
@@ -363,6 +369,9 @@
     <ClCompile Include="..\Testbed\Framework\SVQA\ContainerEndUpEvent.cpp">
       <Filter>Framework\SVQA</Filter>
     </ClCompile>
+    <ClCompile Include="..\Testbed\Framework\SimulationMaterial.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Testbed\Data\DroidSans.ttf">
@@ -376,5 +385,13 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Testbed.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Testbed\Data\Textures\terrain.jpg">
+      <Filter>Data\Textures</Filter>
+    </Image>
+    <Image Include="..\Testbed\Data\Textures\metal.png">
+      <Filter>Data\Textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>

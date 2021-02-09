@@ -189,6 +189,7 @@
     <ClInclude Include="..\Testbed\Framework\DebugDraw.h" />
     <ClInclude Include="..\Testbed\Framework\Simulation.h" />
     <ClInclude Include="..\Testbed\Framework\SimulationDefines.h" />
+    <ClInclude Include="..\Testbed\Framework\SimulationMaterial.h" />
     <ClInclude Include="..\Testbed\Framework\SimulationRenderer.hpp" />
     <ClInclude Include="..\Testbed\Framework\SVQA\CausalEvent.hpp" />
     <ClInclude Include="..\Testbed\Framework\SVQA\CausalEvents.h" />
@@ -257,6 +258,7 @@
     <ClCompile Include="..\Testbed\Framework\DebugDraw.cpp" />
     <ClCompile Include="..\Testbed\Framework\Simulation.cpp" />
     <ClCompile Include="..\Testbed\Framework\SimulationMain.cpp" />
+    <ClCompile Include="..\Testbed\Framework\SimulationMaterial.cpp" />
     <ClCompile Include="..\Testbed\Framework\SimulationRenderer.cpp" />
     <ClCompile Include="..\Testbed\Framework\SVQA\CausalEvent.cpp" />
     <ClCompile Include="..\Testbed\Framework\SVQA\CausalGraph.cpp" />
@@ -299,6 +301,10 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Testbed.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Testbed\Data\Textures\metal.png" />
+    <Image Include="..\Testbed\Data\Textures\terrain.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
