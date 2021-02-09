@@ -19,6 +19,7 @@ public:
     {
         METAL = 0,
         RUBBER = 1,
+        EYES = 2,
     };
 
     SimulationMaterial(TYPE t)
@@ -43,13 +44,17 @@ public:
 private:
     static const std::string metalFilePath;
     static const std::string rubberFilePath;
+    static const std::string eyesFilePath;
+
     static b2VisTexture::Ptr metalTexture;
     static b2VisTexture::Ptr rubberTexture;
+    static b2VisTexture::Ptr eyesTexture;
 };
 
 NLOHMANN_JSON_SERIALIZE_ENUM(SimulationMaterial::TYPE, {
     {SimulationMaterial::METAL, "metal"},
-    {SimulationMaterial::RUBBER, "rubber"}
+    {SimulationMaterial::RUBBER, "rubber"},
+    {SimulationMaterial::EYES, "eyes"},
     })
 
 #endif /* SimulationMaterial_h */
