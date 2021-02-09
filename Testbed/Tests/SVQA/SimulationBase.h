@@ -22,6 +22,7 @@
 #include "SceneState.h" 
 #include <sstream>
 #include <string>
+#include <Testbed/Framework/SimulationMaterial.h>
 
 #define LOG(str) std::cout << "[LOG] " << str << std::endl
 #define LOG_PROGRESS(str, progress) std::cout << "[LOG] " << str << " " << progress <<  "\r"
@@ -363,7 +364,7 @@ namespace svqa {
 			SimulationObject object = SimulationObject(shapeType, colorType, sizeType);
 
 			ShapePtr shape = object.getShape();
-
+			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::TYPE::METAL);
 			b2BodyDef bd;
 			bd.type = b2_dynamicBody;
 			bd.position = position;
@@ -381,7 +382,7 @@ namespace svqa {
 			body->CreateFixture(&fd);
 
 			body->setColor(object.getColor());
-
+			body->setTexture(mat.getTexture());
 			auto objectState = ObjectState::create(body, object.mShape, object.mColor, object.mSize);
 			body->SetUserData(objectState.get());
 
