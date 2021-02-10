@@ -422,7 +422,8 @@ struct GLRenderTriangles
             "void main(void)\n"
             "{\n"
             "    vec4 texCol = (f_matIndex==0) ? texture(metalTexture, f_texCoord) : texture(rubberTexture, f_texCoord);\n"
-            "    color = vec4(texCol.r * f_color.r, texCol.g * f_color.g, texCol.b * f_color.b, f_color.a);\n"
+            "    if (texCol.r <= 0.05 && texCol.g >= 0.95 && texCol.b <= 0.05){ color = f_color; } \n"
+            "    else {color = texCol;} \n"
             "}\n";
         
         m_textureUniforms = std::vector<GLint>(2, -1);
