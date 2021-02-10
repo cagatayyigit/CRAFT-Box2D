@@ -451,7 +451,7 @@ namespace svqa {
 			bd.position = position;
 			bd.angle = angle;
 			BODY* body = (BODY*)m_world->CreateBody(&bd);
-			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::TYPE::METAL);
+			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::TYPE::RUBBER);
 			b2FixtureDef fd = b2FixtureDef();
 			fd.density = object.getDensity();
 			fd.restitution = object.getRestitution();
