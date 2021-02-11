@@ -243,7 +243,24 @@ void b2VisWorld::DrawTexturedShape(b2Fixture* fixture, const b2Transform& xf, co
         break;
             
     case b2Shape::e_chain:
-        {
+        { 
+            float width = 0.1f;
+            
+            b2ChainShape* chain = (b2ChainShape*)fixture->GetShape();
+            int32 count = chain->m_count;
+            const b2Vec2* vertices = chain->m_vertices;
+            
+            b2Vec2 v1 = b2Mul(xf, vertices[0]);
+            
+            for (int32 i = 1; i < count; ++i)
+            {
+                b2Vec2 v2 = b2Mul(xf, vertices[i]);
+                //m_debugDraw->DrawSegment(v1, v2, color);
+                m_debugDraw->DrawTexturedRectangleChain(v1, v2, color, width, glTextureId, textureMaterialId);
+                v1 = v2;
+            } 
+
+            /*
             b2ChainShape* chain = (b2ChainShape*)fixture->GetShape();
             int32 count = chain->m_count;
             const b2Vec2* vertices = chain->m_vertices;
@@ -274,6 +291,7 @@ void b2VisWorld::DrawTexturedShape(b2Fixture* fixture, const b2Transform& xf, co
                 m_debugDraw->DrawSegment(v1, vn, ghostColor);
                 m_debugDraw->DrawCircle(vn, 0.1f, ghostColor);
             }
+            */
         }
         break;
             

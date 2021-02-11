@@ -91,6 +91,8 @@ public:
     
     virtual void DrawRectangleChain(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color, float width) = 0;
 
+	virtual void DrawTexturedRectangleChain(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color, float width, uint32 glTexId, int matTexId) = 0;
+
 	/// Draw a transform. Choose your own length scale.
 	/// @param xf a transform.
 	virtual void DrawTransform(const b2Transform& xf) = 0;
