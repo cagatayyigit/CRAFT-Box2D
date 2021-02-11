@@ -187,7 +187,7 @@ public:
         case TRIANGLE:
             return std::make_shared<b2PolygonShape>(getPolygon(length + 1.5f, 3));
         case CIRCLE:
-            return std::make_shared<b2CircleShape>(getCircle(length));
+            return std::make_shared<b2PolygonShape>(getPolygon(length, 16));
         case STATIC_RAMP:
             return std::make_shared<b2PolygonShape>(getRightTriangle(3.0f, 3));
         case STATIC_TABLE:
