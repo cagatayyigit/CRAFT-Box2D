@@ -14,6 +14,7 @@
 #include "Box2D/Extension/b2VisBody.hpp"
 #include "Box2D/Extension/b2VisWorld.hpp"
 #include "SimulationDefines.h"
+#include "SimulationMaterial.h"
 
 using json = nlohmann::json;
 
@@ -162,6 +163,27 @@ public:
 		bd.fixedRotation = fixedRotation;
 
 		body = (BODY*)toWorld->CreateBody(&bd);
+		
+		SimulationMaterial eyesMat = SimulationMaterial(SimulationMaterial::TYPE::EYES);
+		SimulationMaterial platformMat = SimulationMaterial(SimulationMaterial::TYPE::PLATFORM);
+		 
+		switch (shape)
+		{
+		case SimulationObject::CUBE: 
+		case SimulationObject::TRIANGLE: 
+		case SimulationObject::CIRCLE:
+			body->setTexture(eyesMat.getTexture());
+			break;
+		case SimulationObject::STATIC_RAMP: 
+		case SimulationObject::STATIC_PLATFORM: 
+		case SimulationObject::STATIC_BASKET: 
+		case SimulationObject::STATIC_TABLE: 
+		case SimulationObject::STATIC_LEFT_BOUNDARY: 
+		case SimulationObject::STATIC_RIGHT_BOUNDARY: 
+		case SimulationObject::STATIC_BOTTOM_BOUNDARY:
+			body->setTexture(platformMat.getTexture());
+			break;
+		}
 
 		b2FixtureDef fd = b2FixtureDef();
 		fd.friction = friction;
@@ -227,6 +249,9 @@ public:
 		sensorFd.isSensor = true;
 		sensorFd.filter.categoryBits = category;
 		sensorBody->CreateFixture(&sensorFd);
+
+		SimulationMaterial mat = SimulationMaterial(SimulationMaterial::TYPE::SENSOR);
+		sensorBody->setTexture(mat.getTexture());
 
 		sensorBody->SetUserData(attachedBody);
 	}

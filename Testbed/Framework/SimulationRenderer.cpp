@@ -417,23 +417,25 @@ struct GLRenderTriangles
             "in vec2 f_texCoord;\n"
             "flat in int f_matIndex;\n"
             "out vec4 color;\n"
-            "uniform sampler2D metalTexture;\n"
-            "uniform sampler2D rubberTexture;\n"
+            "uniform sampler2D eyesTexture;\n" 
             "void main(void)\n"
             "{\n"
-            "    vec4 texCol = (f_matIndex==0) ? texture(metalTexture, f_texCoord) : texture(rubberTexture, f_texCoord);\n"
-            "    if (texCol.r <= 0.05 && texCol.g >= 0.95 && texCol.b <= 0.05){ color = f_color; } \n"
-            "    else {color = texCol;} \n"
-            "    if ((f_matIndex!=0)) { color = vec4(0.0, 0.0,0.0, 1.0);}"
+            "    if (f_matIndex==1) { color = vec4(0.0, 0.0, 0.0, 1.0); }" // If platform
+            "    else if (f_matIndex==2) { color = vec4(0.9, 0.9, 0.9, 1.0); } \n" // If Sensor body
+            "    else { \n"
+            "        vec4 texCol = (f_matIndex==0) ? texture(eyesTexture, f_texCoord) : vec4(0.0,1.0,0.0,1.0);\n"
+            "        if ((texCol.r <= 0.05 && texCol.g >= 0.95 && texCol.b <= 0.05)) { color = f_color; } \n"
+            "        else { color = texCol; } \n"
+            "    } \n"
+            "   "
             "}\n";
         
-        m_textureUniforms = std::vector<GLint>(2, -1);
-        m_textureIds = std::vector<GLint>(2, -1);
+        m_textureUniforms = std::vector<GLint>(1, -1);
+        m_textureIds = std::vector<GLint>(1, -1);
 
         m_programId = sCreateShaderProgram(vs, fs);
         m_projectionUniform = glGetUniformLocation(m_programId, "projectionMatrix");
-        m_textureUniforms[0] = (glGetUniformLocation(m_programId, "metalTexture"));
-        m_textureUniforms[1] = (glGetUniformLocation(m_programId, "rubberTexture"));
+        m_textureUniforms[0] = (glGetUniformLocation(m_programId, "eyesTexture"));
         m_vertexAttribute = 0;
         m_colorAttribute = 1;
         m_TextureCoordAttribute = 2;
@@ -534,12 +536,18 @@ struct GLRenderTriangles
             glBindTexture(GL_TEXTURE_2D, m_textureIds[0]);
             glUniform1i(m_textureUniforms[0], 0);
         }
-        
-        if(m_textureIds[1]>0) {
-            glActiveTexture(GL_TEXTURE1); // activate the texture unit first before binding texture
-            glBindTexture(GL_TEXTURE_2D, m_textureIds[1]);
-            glUniform1i(m_textureUniforms[1], 1);
-        }
+
+        //if (m_textureIds[1] > 0) {
+        //    glActiveTexture(GL_TEXTURE1); // activate the texture unit first before binding texture
+        //    glBindTexture(GL_TEXTURE_2D, m_textureIds[1]);
+        //    glUniform1i(m_textureUniforms[1], 1);
+        //}
+        //
+        //if (m_textureIds[2] > 0) {
+        //    glActiveTexture(GL_TEXTURE2); // activate the texture unit first before binding texture
+        //    glBindTexture(GL_TEXTURE_2D, m_textureIds[2]);
+        //    glUniform1i(m_textureUniforms[2], 2);
+        //}
         
         glEnable(GL_BLEND);
         glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

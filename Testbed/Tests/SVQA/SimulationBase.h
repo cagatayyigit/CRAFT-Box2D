@@ -52,10 +52,6 @@ namespace svqa {
 			m_bGeneratingFromJSON = m_pSettings->inputScenePath.compare("") != 0;
             m_bIncludeDynamicObjects = m_pSettings->includeDynamicObjectsInTheScene;
             m_sStaticObjectOrientationType = m_pSettings->staticObjectPositioningType;
-
-			if (!isGeneratingFromJSON()) {
-				CreateBoundaries();
-			}
 		}
 
 		/// Derived simulations must call this in order to construct causal graph
@@ -65,6 +61,10 @@ namespace svqa {
 
 			if (!isSceneInitialized()) {
 				LOG("Initializing simulation objects...");
+
+				if (!isGeneratingFromJSON()) {
+					CreateBoundaries();
+				}
 
 				// Generate scene from JSON file if inputScenePath is not blank and the scene is not already generated.
 				if (isGeneratingFromJSON() && !m_bSceneRegenerated) {
@@ -293,7 +293,7 @@ namespace svqa {
 			b2BodyDef bd;
 			bd.position = pos;
 			bd.angle = angleInRadians;
-			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::TYPE::RUBBER);
+			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::TYPE::PLATFORM);
 			BODY *basketBody = (BODY*)m_world->CreateBody(&bd);
 
 #if !USE_DEBUG_DRAW
@@ -335,10 +335,12 @@ namespace svqa {
 			boundaries.push_back(SimulationObject::STATIC_BOTTOM_BOUNDARY);
 
 			for (auto bound : boundaries) {
-				b2BodyDef bd;
-				BODY* boundBody = (BODY*)m_world->CreateBody(&bd);
 
 				SimulationObject boundaryObject = SimulationObject(bound, SimulationObject::BLACK, SimulationObject::LARGE);
+				b2BodyDef bd;
+				BODY* boundBody = (BODY*)m_world->CreateBody(&bd);
+				SimulationMaterial mat = SimulationMaterial(SimulationMaterial::TYPE::PLATFORM);
+				boundBody->setTexture(mat.getTexture());
 #if !USE_DEBUG_DRAW
 				boundBody->setColor(boundaryObject.getColor());
 #endif
@@ -350,7 +352,7 @@ namespace svqa {
 				fd.density = boundaryObject.getDensity();
 				fd.restitution = boundaryObject.getRestitution();
 				fd.shape = shape.get();
-				boundBody->CreateFixture(&fd);
+				boundBody->CreateFixture(&fd); 
 
 				auto objectState = ObjectState::create(boundBody, boundaryObject.mShape, boundaryObject.mColor, boundaryObject.mSize);
 				boundBody->SetUserData(objectState.get());
@@ -364,7 +366,7 @@ namespace svqa {
 			SimulationObject object = SimulationObject(shapeType, colorType, sizeType);
 
 			ShapePtr shape = object.getShape();
-			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::TYPE::METAL);
+			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::TYPE::EYES);
 			b2BodyDef bd;
 			bd.type = b2_dynamicBody;
 			bd.position = position;
@@ -451,7 +453,7 @@ namespace svqa {
 			bd.position = position;
 			bd.angle = angle;
 			BODY* body = (BODY*)m_world->CreateBody(&bd);
-			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::TYPE::RUBBER);
+			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::TYPE::PLATFORM);
 			b2FixtureDef fd = b2FixtureDef();
 			fd.density = object.getDensity();
 			fd.restitution = object.getRestitution();
