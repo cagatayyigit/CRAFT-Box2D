@@ -293,7 +293,7 @@ namespace svqa {
 			b2BodyDef bd;
 			bd.position = pos;
 			bd.angle = angleInRadians;
-			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::TYPE::METAL);
+			SimulationMaterial mat = SimulationMaterial(SimulationMaterial::TYPE::RUBBER);
 			BODY *basketBody = (BODY*)m_world->CreateBody(&bd);
 
 #if !USE_DEBUG_DRAW
