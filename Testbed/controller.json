@@ -7,5 +7,5 @@
   "height": 256,
   "inputScenePath": "output.json",
   "stepCount": 600,
-  "noiseAmount": 0.2
+  "noiseAmount": 0.02
 }

@@ -209,19 +209,22 @@ public:
 		if (bd.type != 0) { // if not static
 			float randomFloat = RandomFloatFromHardware(-1.0, 1.0);
 
-			float new_pos_x = bd.position.x + (10.0 * amount * randomFloat);
-			float new_pos_y = bd.position.y + (10.0 * amount * randomFloat);
-			printf("*************\nrandom: %f\n", randomFloat);
-			printf("old_pos_x: %f  new_pos_x: %f\n", bd.position.x, new_pos_x);
-			bd.position = b2Vec2(new_pos_x, new_pos_y);
-
 			float new_angle = bd.angle + (bd.angle * amount * randomFloat);
 			bd.angle = new_angle;
 
 			float new_linear_velocity_x = bd.linearVelocity.x + (bd.linearVelocity.x * amount * randomFloat);
 			float new_linear_velocity_y = bd.linearVelocity.y + (bd.linearVelocity.y * amount * randomFloat);
-			printf("old_vel_x: %f  new_vel_x: %f\n", bd.linearVelocity.x, new_linear_velocity_x);
+			float velocity_change = bd.linearVelocity.x / new_linear_velocity_x;
+			printf("old_vel_x: %f  new_vel_x: %f velociy_change: %f\n", bd.linearVelocity.x, new_linear_velocity_x, velocity_change);
+			
 			bd.linearVelocity = b2Vec2(new_linear_velocity_x, new_linear_velocity_y);
+
+
+			float new_pos_x = bd.position.x + (10.0 * amount * randomFloat * velocity_change);
+			float new_pos_y = bd.position.y + (10.0 * amount * randomFloat * velocity_change);
+			printf("*************\nrandom: %f\n", randomFloat);
+			printf("old_pos_x: %f  new_pos_x: %f\n", bd.position.x, new_pos_x);
+			bd.position = b2Vec2(new_pos_x, new_pos_y);
 		}
 		return bd;
 	}
