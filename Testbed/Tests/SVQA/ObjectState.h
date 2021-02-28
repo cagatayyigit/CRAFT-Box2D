@@ -65,7 +65,6 @@ public:
 
 		std::string result = basePath + shStr + "_" + szStr + "_" + colStr  + ".png";
 
-		//return "\"C:\\Users\\Cagatay\\Projects\\SVQA\\SVQA-Box2D\\Testbed\\Data\\Images\\" + type + "_" + color + ".png";
 		return result;
 	}
 
@@ -108,7 +107,7 @@ public:
         j.emplace("size", size);
 	}
 
-	void from_json(const json& j, WORLD* toWorld) {
+	void from_json(const json& j, WORLD* toWorld,  float noiseAmount) {
 		bool active, bullet, allowSleep, awake, fixedRotation;
 		float angle, angVel, linearDamp, angDamp;
 		float gravityScale, friction, restitution, density;
@@ -146,9 +145,6 @@ public:
 		j.at("massData-I").get_to(massData.I);
         
 
-		
-
-
         auto simObject = SimulationObject(shape, color, size);
 		ShapePtr shapePtr = simObject.getShape();
 
@@ -162,7 +158,7 @@ public:
 		bd.angularDamping = angDamp;
 
 		// Add Noise 
-		bd = addNoiseToDynamicObject(bd, 0.01);
+		bd = addNoiseToDynamicObject(bd, noiseAmount);
 
 
 		bd.allowSleep = allowSleep;
@@ -217,12 +213,8 @@ public:
 			float new_pos_y = bd.position.y + (bd.position.y * amount * randomFloat);
 			printf("random: %f\n", randomFloat);
 			printf("old_pos_x: %f  new_pos_x: %f\n", bd.position.x, new_pos_x);
-
 			bd.position = b2Vec2(new_pos_x, new_pos_y);
 
-			
-
-			
 			float new_angle = bd.angle + (bd.angle * amount * randomFloat);
 			bd.angle = new_angle;
 

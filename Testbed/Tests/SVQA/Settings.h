@@ -30,6 +30,7 @@ namespace svqa
         std::string inputScenePath;
         std::string outputVideoPath;
         std::string outputJSONPath;
+        float noiseAmount;
 
         std::string staticObjectPositioningType;
         bool includeDynamicObjectsInTheScene;
@@ -49,6 +50,7 @@ namespace svqa
             j.emplace("staticObjectPositioningType",   this->staticObjectPositioningType);
             j.emplace("screenshotOutputFolder",   this->screenshotOutputFolder);
             j.emplace("snapshotOutputFolder",   this->snapshotOutputFolder);
+            j.emplace("noiseAmount", this->noiseAmount);
         }
 
         void from_json(const json& j) {
@@ -60,6 +62,7 @@ namespace svqa
             j.at("outputVideoPath").get_to(this->outputVideoPath);
             j.at("outputJSONPath").get_to(this->outputJSONPath);
             j.at("stepCount").get_to(this->stepCount);
+            j.at("noiseAmount").get_to(this->noiseAmount);
             
             auto includeDynamicObjectsInTheScene = j.find("includeDynamicObjects");
             if (includeDynamicObjectsInTheScene != j.end())

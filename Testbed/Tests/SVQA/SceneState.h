@@ -29,7 +29,7 @@ struct SceneState {
 		objects.clear();
 	}
 
-	bool loadFromJSON(const json& j, WORLD* toWorld)
+	bool loadFromJSON(const json& j, WORLD* toWorld, float noiseAmount)
 	{
 		//FIXME: Read directions and apply transformation if they can be updated
 		auto objectsJsonItr = j.find(objectsKey);
@@ -40,20 +40,20 @@ struct SceneState {
 			auto objectsJson = *objectsJsonItr;
 			for (auto& [key, value] : objectsJson.items()) {
 				ObjectState::Ptr oState = std::make_shared<ObjectState>();
-				oState->from_json(value, toWorld);
+				oState->from_json(value, toWorld, noiseAmount); 
 				add(oState);
 			}
 			return true;
 		}
 	}
 
-	bool loadFromJSONFile(std::string fromFile, WORLD* toWorld) {
+	bool loadFromJSONFile(std::string fromFile, WORLD* toWorld, float noiseAmount) {
 		if (toWorld) {
 			json j;
 			bool fileLoadRes = JSONHelper::loadJSON(j, fromFile);
 
 			if (fileLoadRes) {
-				return loadFromJSON(j, toWorld);
+				return loadFromJSON(j, toWorld, noiseAmount);
 			}
 		}
 		return false;
