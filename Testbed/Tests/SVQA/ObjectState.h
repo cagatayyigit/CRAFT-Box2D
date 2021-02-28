@@ -209,27 +209,19 @@ public:
 		if (bd.type != 0) { // if not static
 			float randomFloat = RandomFloatFromHardware(-1.0, 1.0);
 
-			float new_pos_x = bd.position.x + (bd.position.x * amount * randomFloat);
-			float new_pos_y = bd.position.y + (bd.position.y * amount * randomFloat);
-			printf("random: %f\n", randomFloat);
+			float new_pos_x = bd.position.x + (10.0 * amount * randomFloat);
+			float new_pos_y = bd.position.y + (10.0 * amount * randomFloat);
+			printf("*************\nrandom: %f\n", randomFloat);
 			printf("old_pos_x: %f  new_pos_x: %f\n", bd.position.x, new_pos_x);
 			bd.position = b2Vec2(new_pos_x, new_pos_y);
 
 			float new_angle = bd.angle + (bd.angle * amount * randomFloat);
 			bd.angle = new_angle;
 
-			float linear_velocity_x = bd.linearVelocity.x + (bd.linearVelocity.x * amount * randomFloat);
-			float linear_velocity_y = bd.linearVelocity.y + (bd.linearVelocity.y * amount * randomFloat);
-			bd.linearVelocity = b2Vec2(linear_velocity_x, linear_velocity_y);
-
-			float new_angular_velocity = bd.angularVelocity + (bd.angularVelocity * amount * randomFloat);
-			bd.angularVelocity = new_angular_velocity;
-
-			float new_linear_damping = bd.linearDamping + (bd.linearDamping * amount * randomFloat);
-			bd.angularVelocity = new_linear_damping;
-
-			float new_angular_damping = bd.angularDamping + (bd.angularDamping * amount * randomFloat);
-			bd.angularVelocity = new_angular_damping;
+			float new_linear_velocity_x = bd.linearVelocity.x + (bd.linearVelocity.x * amount * randomFloat);
+			float new_linear_velocity_y = bd.linearVelocity.y + (bd.linearVelocity.y * amount * randomFloat);
+			printf("old_vel_x: %f  new_vel_x: %f\n", bd.linearVelocity.x, new_linear_velocity_x);
+			bd.linearVelocity = b2Vec2(new_linear_velocity_x, new_linear_velocity_y);
 		}
 		return bd;
 	}
