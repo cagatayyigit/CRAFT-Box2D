@@ -5,6 +5,6 @@
     "outputJSONPath": "output.json",
     "width": 256,
     "height": 256,
-    "inputScenePath": "",
+    "inputScenePath": "output.json",
     "stepCount": 600
 }
