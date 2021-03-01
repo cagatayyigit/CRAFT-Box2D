@@ -214,7 +214,15 @@ public:
 
 			float new_linear_velocity_x = bd.linearVelocity.x + (bd.linearVelocity.x * amount * randomFloat);
 			float new_linear_velocity_y = bd.linearVelocity.y + (bd.linearVelocity.y * amount * randomFloat);
-			float velocity_change = bd.linearVelocity.x / new_linear_velocity_x;
+
+			float velocity_change;
+			if (new_linear_velocity_x != 0) {
+				velocity_change  = bd.linearVelocity.x / new_linear_velocity_x;
+			}
+			else {
+				velocity_change = 0.0;
+			}
+			
 			printf("old_vel_x: %f  new_vel_x: %f velociy_change: %f\n", bd.linearVelocity.x, new_linear_velocity_x, velocity_change);
 			
 			bd.linearVelocity = b2Vec2(new_linear_velocity_x, new_linear_velocity_y);
