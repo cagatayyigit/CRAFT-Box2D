@@ -62,7 +62,6 @@ namespace svqa
             j.at("outputVideoPath").get_to(this->outputVideoPath);
             j.at("outputJSONPath").get_to(this->outputJSONPath);
             j.at("stepCount").get_to(this->stepCount);
-            j.at("noiseAmount").get_to(this->noiseAmount);
             
             auto includeDynamicObjectsInTheScene = j.find("includeDynamicObjects");
             if (includeDynamicObjectsInTheScene != j.end())
@@ -111,6 +110,16 @@ namespace svqa
             else
             {
                 this->staticObjectPositioningType = "random";
+            }
+
+            auto noiseAmount = j.find("noiseAmount");
+            if (noiseAmount != j.end())
+            {
+                this->noiseAmount = *noiseAmount;
+            } 
+            else
+            {
+                this->noiseAmount = 0.0;
             }
         }
     };

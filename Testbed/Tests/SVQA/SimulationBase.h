@@ -51,10 +51,6 @@ namespace svqa {
 			m_bGeneratingFromJSON = m_pSettings->inputScenePath.compare("") != 0;
             m_bIncludeDynamicObjects = m_pSettings->includeDynamicObjectsInTheScene;
             m_sStaticObjectOrientationType = m_pSettings->staticObjectPositioningType;
-
-			if (!isGeneratingFromJSON()) {
-				CreateBoundaries();
-			}
 		}
 
 		/// Derived simulations must call this in order to construct causal graph
@@ -64,6 +60,10 @@ namespace svqa {
 
 			if (!isSceneInitialized()) {
 				LOG("Initializing simulation objects...");
+
+				if (!isGeneratingFromJSON()) {
+					CreateBoundaries();
+				}
 
 				// Generate scene from JSON file if inputScenePath is not blank and the scene is not already generated.
 				if (isGeneratingFromJSON() && !m_bSceneRegenerated) {
