@@ -226,7 +226,8 @@ namespace svqa {
                         sceneJson.at("step").get_to(step);
                         if (step == 0) {
 							
-                            m_SceneJSONState.loadFromJSON(*sceneJson.find("scene"), m_world, m_pSettings->noiseAmount);
+                            m_SceneJSONState.loadFromJSON(*sceneJson.find("scene"), m_world,
+								m_pSettings->noiseAmount, m_pSettings->perturbationSeed);
                             m_bSceneRegenerated = true;
                             break;
                         }
@@ -241,14 +242,16 @@ namespace svqa {
 							printf("noiseAmount: %f\n", m_pSettings->noiseAmount);
 
                             if (step == 0) {
-                                m_SceneJSONState.loadFromJSON(*sceneJson.find("scene"), m_world, m_pSettings->noiseAmount);
+                                m_SceneJSONState.loadFromJSON(*sceneJson.find("scene"), m_world, 
+									m_pSettings->noiseAmount, m_pSettings->perturbationSeed);
                                 m_bSceneRegenerated = true;
                                 break;
                             }
                         }
                     } else {
                         // If this JSON object is just a snapshot that doesn't contain causal graph.
-                        m_SceneJSONState.loadFromJSON(j, m_world, m_pSettings->noiseAmount);
+                        m_SceneJSONState.loadFromJSON(j, m_world,
+							m_pSettings->noiseAmount, m_pSettings->perturbationSeed);
                         m_bSceneRegenerated = true;
                     }
                 }

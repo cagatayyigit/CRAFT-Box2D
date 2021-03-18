@@ -84,6 +84,13 @@ inline float32 RandomFloatFromHardware(float32 lo, float32 hi)
 	return distr(eng);
 }
 
+inline float32 RandomFloatWithSeed(float32 lo, float32 hi, int seed)
+{
+	std::mt19937 eng(seed); // seed the generator
+	std::uniform_real_distribution<> distr(lo, hi); // define the range 
+	return distr(eng);
+}
+
 inline int RandomInteger(int lo, int hi)
 {
 	std::random_device rd; // obtain a random number from hardware

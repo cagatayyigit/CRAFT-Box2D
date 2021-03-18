@@ -107,7 +107,7 @@ public:
         j.emplace("size", size);
 	}
 
-	void from_json(const json& j, WORLD* toWorld,  float noiseAmount) {
+	void from_json(const json& j, WORLD* toWorld,  float noiseAmount, int perturbationSeed) {
 		bool active, bullet, allowSleep, awake, fixedRotation;
 		float angle, angVel, linearDamp, angDamp;
 		float gravityScale, friction, restitution, density;
@@ -158,7 +158,7 @@ public:
 		bd.angularDamping = angDamp;
 
 		// Add Noise 
-		bd = addNoiseToDynamicObject(bd, noiseAmount);
+		bd = AddNoiseToDynamicObject(bd, noiseAmount, perturbationSeed);
 
 
 		bd.allowSleep = allowSleep;
@@ -205,9 +205,9 @@ public:
 	}
 
 
-	b2BodyDef addNoiseToDynamicObject(b2BodyDef bd, float amount) {
+	b2BodyDef AddNoiseToDynamicObject(b2BodyDef bd, float amount, int perturbationSeed) {
 		if (bd.type != 0) { // if not static
-			float randomFloat = RandomFloatFromHardware(-1.0, 1.0);
+			float randomFloat = RandomFloatWithSeed(-1.0, 1.0, perturbationSeed);
 
 			float new_angle = bd.angle + (bd.angle * amount * randomFloat);
 			bd.angle = new_angle;
