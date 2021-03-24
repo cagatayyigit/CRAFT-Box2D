@@ -14,6 +14,7 @@
 #include "Box2D/Extension/b2VisBody.hpp"
 #include "Box2D/Extension/b2VisWorld.hpp"
 #include "SimulationDefines.h"
+#include "Simulation.h"
 #include "SimulationMaterial.h"
 
 using json = nlohmann::json;
@@ -65,7 +66,6 @@ public:
 
 		std::string result = basePath + shStr + "_" + szStr + "_" + colStr  + ".png";
 
-		//return "\"C:\\Users\\Cagatay\\Projects\\SVQA\\SVQA-Box2D\\Testbed\\Data\\Images\\" + type + "_" + color + ".png";
 		return result;
 	}
 
@@ -108,7 +108,7 @@ public:
         j.emplace("size", size);
 	}
 
-	void from_json(const json& j, WORLD* toWorld) {
+	void from_json(const json& j, WORLD* toWorld,  float noiseAmount, int perturbationSeed) {
 		bool active, bullet, allowSleep, awake, fixedRotation;
 		float angle, angVel, linearDamp, angDamp;
 		float gravityScale, friction, restitution, density;
@@ -145,6 +145,7 @@ public:
 		j.at("massData-centerY").get_to(massData.center.y);
 		j.at("massData-I").get_to(massData.I);
         
+
         auto simObject = SimulationObject(shape, color, size);
 		ShapePtr shapePtr = simObject.getShape();
 
@@ -156,6 +157,10 @@ public:
 		bd.angularVelocity = angVel;
 		bd.linearDamping = linearDamp;
 		bd.angularDamping = angDamp;
+
+		// Add Noise 
+		bd = AddNoiseToDynamicObject(bd, noiseAmount, perturbationSeed);
+
 
 		bd.allowSleep = allowSleep;
 		bd.awake = awake;
@@ -219,6 +224,39 @@ public:
 		    AddSensorBody(toWorld, SimulationObject::SENSOR_BASKET, bd.position, angle, sensorVertices, 4, body, b2Color(0.9f, 0.9f, 0.9f));
 		}
 
+	}
+
+
+	b2BodyDef AddNoiseToDynamicObject(b2BodyDef bd, float amount, int perturbationSeed) {
+		if (bd.type != 0) { // if not static
+			float randomFloat = RandomFloatWithSeed(-1.0, 1.0, perturbationSeed);
+
+			float new_angle = bd.angle + (bd.angle * amount * randomFloat);
+			bd.angle = new_angle;
+
+			float new_linear_velocity_x = bd.linearVelocity.x + (bd.linearVelocity.x * amount * randomFloat);
+			float new_linear_velocity_y = bd.linearVelocity.y + (bd.linearVelocity.y * amount * randomFloat);
+
+			float velocity_change;
+			if (new_linear_velocity_x != 0) {
+				velocity_change  = bd.linearVelocity.x / new_linear_velocity_x;
+			}
+			else {
+				velocity_change = 0.0;
+			}
+			
+			printf("old_vel_x: %f  new_vel_x: %f velociy_change: %f\n", bd.linearVelocity.x, new_linear_velocity_x, velocity_change);
+			
+			bd.linearVelocity = b2Vec2(new_linear_velocity_x, new_linear_velocity_y);
+
+
+			float new_pos_x = bd.position.x + (10.0 * amount * randomFloat * velocity_change);
+			float new_pos_y = bd.position.y + (10.0 * amount * randomFloat * velocity_change);
+			printf("*************\nrandom: %f\n", randomFloat);
+			printf("old_pos_x: %f  new_pos_x: %f\n", bd.position.x, new_pos_x);
+			bd.position = b2Vec2(new_pos_x, new_pos_y);
+		}
+		return bd;
 	}
 
 	// TODO: Move this to some sensible place, I put it temporarily because I couldn't access it from SimulationBase.h, possibly because of
