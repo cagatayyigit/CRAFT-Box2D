@@ -111,7 +111,7 @@ namespace svqa {
             
             if (!(m_pSettings->includeDynamicObjectsInTheScene) && m_StepCount == 1) {
                  // Take screenshot at the beginning for object segmentation.
-                TakeScreenshotForStatic();
+                TakeScreenshotForStaticObjects();
             }
             
             
@@ -155,9 +155,8 @@ namespace svqa {
                 TakeSceneSnapshot(fn);
             }
         }
-        
 
-        void TakeScreenshotForStatic() {
+        void TakeScreenshotForStaticObjects() {
             std::stringstream outputFilename;
             std::string simulation_id = std::to_string(m_pSettings->simulationID);
             std::string min_mean_max_random = m_pSettings->staticObjectPositioningType;
@@ -165,8 +164,7 @@ namespace svqa {
             outputFilename << s << ".png";
             RENDERER->SaveAsImage(outputFilename.str());
         }
-        
-        
+
         float getExtremeCases(std::string x, float min, float max){
             if (x.compare("min") == 0)
                     return min;
@@ -177,7 +175,6 @@ namespace svqa {
             return RandomFloatFromHardware(min, max);
         }
 
-        
         void TakeScreenshot(std::string output_folder_path) {
             std::stringstream outputFilename;
             
@@ -281,11 +278,6 @@ namespace svqa {
 		bool			m_bSceneSnapshotTaken;
         bool            m_bIncludeDynamicObjects;
         std::string     m_sStaticObjectOrientationType;
-
-		int randWithBound(const int& bound)
-		{
-			return (rand() & (RAND_LIMIT)) % bound;
-		}
 
 		virtual bool isSceneStable()
 		{
@@ -404,9 +396,6 @@ namespace svqa {
 			m_SceneJSONState.add(objectState);
 		}
 
-		
-
-
 		void AddRandomDynamicObject(b2Vec2 position, b2Vec2 velocity, int sh_sz_cl = 0b000, 
 									SimulationObject::Shape shapeType = SimulationObject::getRandomShape(),
 									SimulationObject::Size sizeType = SimulationObject::getRandomSize(),
@@ -442,7 +431,6 @@ namespace svqa {
 				// TODO: Implement the rest
 			}
 		}
-
 
 		bool CheckIfObjectIsUnique(SimulationObject::Shape shapeType, SimulationObject::Color colorType, SimulationObject::Size sizeType) {
             std::vector<int> temp;

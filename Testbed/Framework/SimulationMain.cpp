@@ -147,11 +147,6 @@ int main(int c, char** args)
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 	}
 
-	//		if(settings->offline)
-	//    {
-	//        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-	//    }
-
 #ifdef _MSC_VER
 	mainWindow = glfwCreateWindow(g_camera.m_width, g_camera.m_height, title, NULL, NULL);
 #else 
@@ -165,7 +160,6 @@ int main(int c, char** args)
 	}
 
 	glfwMakeContextCurrent(mainWindow);
-
 
 #ifdef _MSC_VER
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
