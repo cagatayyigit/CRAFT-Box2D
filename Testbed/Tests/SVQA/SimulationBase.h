@@ -45,6 +45,8 @@ namespace svqa {
 		SimulationBase(Settings::Ptr _settings_)
 		{
 			m_pSettings = _settings_;
+			SET_FILE_OUTPUT_TRUE(m_pSettings->outputVideoPath)
+			
 			m_nDistinctColorUsed = 8;
 
 			m_pCausalGraph = CausalGraph::create();
@@ -77,11 +79,11 @@ namespace svqa {
 			}
             
 			// Take snapshot of the scene in the beginning of the simulation.
-			if (isSceneInitialized() && !m_bSceneSnapshotTaken) {
+			/*if (isSceneInitialized() && !m_bSceneSnapshotTaken) {
 				m_StartSceneStateJSON = SimulationBase::GetSceneStateJSONObject(m_SceneJSONState, m_StepCount);
 				m_bSceneSnapshotTaken = true;
 				TakeSceneSnapshot("snapshot.json");
-			} 
+			} */
 
 			Simulation::Step(settings);
             

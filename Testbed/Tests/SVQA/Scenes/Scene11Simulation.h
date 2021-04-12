@@ -13,7 +13,7 @@ namespace svqa {
         typedef std::shared_ptr<Scene11Simulation> Ptr;
         Scene11Simulation(Scene11Settings::Ptr settings) : SimulationBase(settings)
         {
-            SET_FILE_OUTPUT_TRUE(m_pSettings->outputVideoPath)
+
         }
         
         virtual SimulationID getIdentifier() override
