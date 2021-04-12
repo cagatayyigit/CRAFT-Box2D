@@ -23,6 +23,7 @@
 		7C4127F92348BC5C002E75BA /* SimulationRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4127F62348BC5B002E75BA /* SimulationRenderer.cpp */; };
 		7C4127FA2348BC5C002E75BA /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C4127F72348BC5B002E75BA /* Camera.cpp */; };
 		7C6D1CDC23813A4E00BB74E0 /* SimulationMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C6D1CDB23813A4E00BB74E0 /* SimulationMain.cpp */; };
+		7C777AE1261F6B4D000CC369 /* SimulationMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C777AE0261F6B4D000CC369 /* SimulationMaterial.cpp */; };
 		7C92AD30234E40A30074BFB6 /* rubber.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C92AD2F234E40A20074BFB6 /* rubber.png */; };
 		7C92AD32234E40D10074BFB6 /* metal.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C92AD31234E40D00074BFB6 /* metal.png */; };
 		7C99153023E1EA2900D5FF39 /* EndEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C99152E23E1EA2900D5FF39 /* EndEvent.cpp */; };
@@ -127,6 +128,8 @@
 		7C6D1CDB23813A4E00BB74E0 /* SimulationMain.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SimulationMain.cpp; path = ../Testbed/Framework/SimulationMain.cpp; sourceTree = "<group>"; };
 		7C6D1CDF2381443D00BB74E0 /* ControllerParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ControllerParser.h; path = ../Testbed/Framework/ControllerParser.h; sourceTree = "<group>"; };
 		7C6D1CE2238156E400BB74E0 /* VideoWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VideoWriter.h; path = ../Testbed/Framework/VideoWriter.h; sourceTree = "<group>"; };
+		7C777ADF261F6B4D000CC369 /* SimulationMaterial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimulationMaterial.h; path = ../Testbed/Framework/SimulationMaterial.h; sourceTree = "<group>"; };
+		7C777AE0261F6B4D000CC369 /* SimulationMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimulationMaterial.cpp; path = ../Testbed/Framework/SimulationMaterial.cpp; sourceTree = "<group>"; };
 		7C92AD25234E37500074BFB6 /* SimulationObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationObject.h; sourceTree = "<group>"; };
 		7C92AD2F234E40A20074BFB6 /* rubber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rubber.png; sourceTree = "<group>"; };
 		7C92AD31234E40D00074BFB6 /* metal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = metal.png; sourceTree = "<group>"; };
@@ -348,6 +351,8 @@
 				955B2487BD95DD39A5316AC7 /* Simulation.cpp */,
 				4571AE516B97DE03D29ED491 /* Simulation.h */,
 				7C6D1CDB23813A4E00BB74E0 /* SimulationMain.cpp */,
+				7C777AE0261F6B4D000CC369 /* SimulationMaterial.cpp */,
+				7C777ADF261F6B4D000CC369 /* SimulationMaterial.h */,
 				7C6D1CDF2381443D00BB74E0 /* ControllerParser.h */,
 				7C6D1CE2238156E400BB74E0 /* VideoWriter.h */,
 			);
@@ -512,6 +517,7 @@
 				7C99153023E1EA2900D5FF39 /* EndEvent.cpp in Sources */,
 				1DA68C23E1124DD51FB5F263 /* vulkan.c in Sources */,
 				F27E1831B5E9D9E3F48D7E71 /* window.c in Sources */,
+				7C777AE1261F6B4D000CC369 /* SimulationMaterial.cpp in Sources */,
 				6308CDA25CCA8A1496C98BE2 /* imgui.cpp in Sources */,
 				C7C8F36A1F2E665CD13C81AA /* imgui_demo.cpp in Sources */,
 				FE580E1C55BD810E07CB9C5C /* imgui_draw.cpp in Sources */,
@@ -565,26 +571,26 @@
 				HEADER_SEARCH_PATHS = (
 					/usr/local/Cellar/libpng/1.6.37/include/,
 					"/usr/local/Cellar/nlohmann-json/3.7.0/include/",
-					/usr/local/Cellar/ffmpeg/4.2.1/include/,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/include/,
 				);
 				INSTALL_PATH = /usr/local/bin;
-				LD_RUNPATH_SEARCH_PATHS = "/usr/local/Cellar/libpng/1.6.37/lib/ /usr/local/Cellar/ffmpeg/4.2.1/lib/";
+				LD_RUNPATH_SEARCH_PATHS = "/usr/local/Cellar/libpng/1.6.37/lib/ /usr/local/Cellar/ffmpeg/4.3.1_9/lib/";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				OTHER_LDFLAGS = (
 					/usr/local/Cellar/libpng/1.6.37/lib/libpng16.dylib,
 					/usr/local/Cellar/libpng/1.6.37/lib/libpng16.16.dylib,
 					/usr/local/Cellar/libpng/1.6.37/lib/libpng.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavcodec.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavfilter.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavresample.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavutil.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavutil.56.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavutil.56.31.100.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libpostproc.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libswscale.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavformat.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavdevice.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/lib/libavcodec.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/lib/libavfilter.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/lib/libavresample.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/lib/libavutil.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/lib/libavutil.56.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/lib/libavutil.56.51.100.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/lib/libpostproc.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/lib/libswscale.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/lib/libavformat.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/lib/libavdevice.dylib,
 				);
 				PRODUCT_NAME = Testbed;
 			};
@@ -601,26 +607,26 @@
 				HEADER_SEARCH_PATHS = (
 					/usr/local/Cellar/libpng/1.6.37/include/,
 					"/usr/local/Cellar/nlohmann-json/3.7.0/include/",
-					/usr/local/Cellar/ffmpeg/4.2.1/include/,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/include/,
 				);
 				INSTALL_PATH = /usr/local/bin;
-				LD_RUNPATH_SEARCH_PATHS = "/usr/local/Cellar/libpng/1.6.37/lib/ /usr/local/Cellar/ffmpeg/4.2.1/lib/";
+				LD_RUNPATH_SEARCH_PATHS = "/usr/local/Cellar/libpng/1.6.37/lib/ /usr/local/Cellar/ffmpeg/4.3.1_9/lib/";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				OTHER_LDFLAGS = (
 					/usr/local/Cellar/libpng/1.6.37/lib/libpng16.dylib,
 					/usr/local/Cellar/libpng/1.6.37/lib/libpng16.16.dylib,
 					/usr/local/Cellar/libpng/1.6.37/lib/libpng.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavcodec.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavfilter.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavresample.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavutil.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavutil.56.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavutil.56.31.100.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libpostproc.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libswscale.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavformat.dylib,
-					/usr/local/Cellar/ffmpeg/4.2.1/lib/libavdevice.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/lib/libavcodec.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/lib/libavfilter.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/lib/libavresample.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/lib/libavutil.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/lib/libavutil.56.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/lib/libavutil.56.51.100.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/lib/libpostproc.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/lib/libswscale.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/lib/libavformat.dylib,
+					/usr/local/Cellar/ffmpeg/4.3.1_9/lib/libavdevice.dylib,
 				);
 				PRODUCT_NAME = Testbed;
 			};
