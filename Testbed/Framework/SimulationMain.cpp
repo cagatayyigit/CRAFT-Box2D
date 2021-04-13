@@ -35,9 +35,11 @@
 #include "ControllerParser.h"
 #include <time.h>
 
+#ifdef _MSC_VER
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <crtdbg.h> 
+#endif
 
 //
 namespace
@@ -114,7 +116,9 @@ void renderLoop(Simulation* simulation, SettingsBase* settings)
 
 int main(int c, char** args)
 {
+#ifdef _MSC_VER
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_CHECK_ALWAYS_DF | _CRTDBG_LEAK_CHECK_DF);
+#endif
 	// To produce random numbers rather than getting same numbers on every run.
 	srand(time(NULL) + 42);
 
@@ -190,8 +194,10 @@ int main(int c, char** args)
 	g_debugDraw.Destroy();
 	ImGui_ImplGlfwGL3_Shutdown();
 	glfwTerminate(); 
-	
+
+#ifdef _MSC_VER
 	_CrtDumpMemoryLeaks();
+#endif
 
 	return 0;
 }
