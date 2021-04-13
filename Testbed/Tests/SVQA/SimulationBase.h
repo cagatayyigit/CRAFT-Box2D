@@ -84,11 +84,13 @@ namespace svqa {
 			}
             
 			// Take snapshot of the scene in the beginning of the simulation.
-			/*if (isSceneInitialized() && !m_bSceneSnapshotTaken) {
+			if (isSceneInitialized() && !m_bSceneSnapshotTaken) {
 				m_StartSceneStateJSON = SimulationBase::GetSceneStateJSONObject(m_SceneJSONState, m_StepCount);
 				m_bSceneSnapshotTaken = true;
+
+				// TODO: This is probably not needed, delete with caution
 				TakeSceneSnapshot("snapshot.json");
-			} */
+			} 
 
 			Simulation::Step(settings);
             
