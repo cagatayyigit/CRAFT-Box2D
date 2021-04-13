@@ -48,6 +48,7 @@ namespace svqa {
 
 		SimulationBase(Settings::Ptr _settings_)
 		{
+			m_bSceneInitialized = false;
 			m_pSettings = _settings_;
 			SET_FILE_OUTPUT_TRUE(m_pSettings->outputVideoPath)
 			
