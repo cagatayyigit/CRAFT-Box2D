@@ -573,7 +573,7 @@ struct GLRenderTriangles
     int32 m_count;
 
     GLuint m_vaoId;
-    GLuint m_vboIds[3];
+    GLuint m_vboIds[4];
     GLuint m_programId;
     GLint m_projectionUniform;
     std::vector<GLint> m_textureUniforms;
