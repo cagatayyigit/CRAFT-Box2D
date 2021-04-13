@@ -26,6 +26,7 @@ extern "C" {
 }
 
 #include "Testbed/imgui/imgui.h"
+#include <iostream>
 
 #define BUFFER_OFFSET(x)  ((const void*) (x))
 
@@ -420,13 +421,13 @@ struct GLRenderTriangles
             "uniform sampler2D eyesTexture;\n" 
             "void main(void)\n"
             "{\n"
-            "    if (f_matIndex==1) { color = vec4(0.0, 0.0, 0.0, 1.0); }" // If platform
-            "    else if (f_matIndex==2) { color = vec4(0.9, 0.9, 0.9, 1.0); } \n" // If Sensor body
-            "    else { \n"
+            //"    if (f_matIndex==1) { color = vec4(0.0, 0.0, 0.0, 1.0); }" // If platform
+            //"    else if (f_matIndex==2) { color = vec4(0.9, 0.9, 0.9, 1.0); } \n" // If Sensor body
+            //"    else { \n"
             "        vec4 texCol = (f_matIndex==0) ? texture(eyesTexture, f_texCoord) : vec4(0.0,1.0,0.0,1.0);\n"
             "        if ((texCol.r <= 0.05 && texCol.g >= 0.95 && texCol.b <= 0.05)) { color = f_color; } \n"
             "        else { color = texCol; } \n"
-            "    } \n"
+            //"    } \n"
             "   "
             "}\n";
         
@@ -727,10 +728,10 @@ SimulationRenderer::SimulationRenderer()
 //
 SimulationRenderer::~SimulationRenderer()
 {
-    if (m_RGBArray != NULL)
+    if (m_PixelBuffer != NULL)
     {
-        free(m_RGBArray);
-        m_RGBArray = NULL;
+        free(m_PixelBuffer);
+        m_PixelBuffer = NULL;
     }
 }
 
@@ -1134,9 +1135,9 @@ void SimulationRenderer::SaveAsImage(std::string path)
     
     sCheckGLError();
     
-    flipVertically(m_RGBArray, m_nWidth, m_nHeight, 3);
-    save_png_libpng(path.c_str(), m_RGBArray, m_nWidth, m_nHeight);
-    flipVertically(m_RGBArray, m_nWidth, m_nHeight, 3);
+    flipVertically(m_PixelBuffer, m_nWidth, m_nHeight, 3);
+    save_png_libpng(path.c_str(), m_PixelBuffer, m_nWidth, m_nHeight);
+    flipVertically(m_PixelBuffer, m_nWidth, m_nHeight, 3);
 }
 
 //
@@ -1149,16 +1150,16 @@ void SimulationRenderer::Flush()
     unsigned int width = m_nWidth;
     unsigned int height = m_nHeight;
     
-    glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, m_RGBArray);
-
-    if(writingToVideo()) {
-        videoFlush(m_RGBArray, width, height);
+    glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, m_PixelBuffer); 
+    
+    if (writingToVideo()) {
+        videoFlush(m_PixelBuffer, width, height);
     }
 }
 
 void SimulationRenderer::Finish()
 {
-    if(writingToVideo()) {
+    if (writingToVideo()) {
         deinit();
     }
 }
@@ -1178,9 +1179,14 @@ void SimulationRenderer::setFileOutput(const std::string& filePath, const int& w
     m_nWidth = width;
     m_nHeight = height;
 
-    m_RGBArray = (unsigned char*)malloc(sizeof(unsigned char) * 3 * width * height);
-    
-    if(writingToVideo())
+    if (m_PixelBuffer != NULL) {
+        free(m_PixelBuffer);
+        m_PixelBuffer = NULL;
+    }
+
+    m_PixelBuffer = (unsigned char*)malloc(sizeof(unsigned char) * 3 * width * height);
+
+    if (writingToVideo())
     {
         init(m_sPath, m_nWidth, m_nHeight);
     }

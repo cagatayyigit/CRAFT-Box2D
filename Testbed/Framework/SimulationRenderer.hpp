@@ -86,7 +86,7 @@ private:
     int m_nWidth;
     int m_nHeight;
 
-    unsigned char* m_RGBArray = NULL;
+    unsigned char* m_PixelBuffer = NULL;
 };
 
 #if USE_DEBUG_DRAW

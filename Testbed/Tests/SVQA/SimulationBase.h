@@ -329,6 +329,7 @@ namespace svqa {
 				sensorVertices[i] *= 0.99f; // To not detect container event from the outside of the container.
 			}
 			basketBody->setTexture(mat.getTexture());
+
 			ObjectState::AddSensorBody(m_world, SimulationObject::SENSOR_BASKET, pos, angleInRadians, sensorVertices, 4, basketBody, b2Color(0.9f, 0.9f, 0.9f));
 		}
 
