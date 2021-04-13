@@ -431,8 +431,8 @@ struct GLRenderTriangles
             "   "
             "}\n";
         
-        m_textureUniforms = std::vector<GLint>(1, -1);
-        m_textureIds = std::vector<GLint>(1, -1);
+        m_textureUniforms = std::vector<GLint>(3, -1);
+        m_textureIds = std::vector<GLint>(3, -1);
 
         m_programId = sCreateShaderProgram(vs, fs);
         m_projectionUniform = glGetUniformLocation(m_programId, "projectionMatrix");
