@@ -30,6 +30,8 @@ namespace svqa
         std::string inputScenePath;
         std::string outputVideoPath;
         std::string outputJSONPath;
+        float noiseAmount;
+        int perturbationSeed;
 
         std::string staticObjectPositioningType;
         bool includeDynamicObjectsInTheScene;
@@ -49,6 +51,8 @@ namespace svqa
             j.emplace("staticObjectPositioningType",   this->staticObjectPositioningType);
             j.emplace("screenshotOutputFolder",   this->screenshotOutputFolder);
             j.emplace("snapshotOutputFolder",   this->snapshotOutputFolder);
+            j.emplace("noiseAmount", this->noiseAmount);
+            j.emplace("perturbationSeed", this->perturbationSeed);
         }
 
         void from_json(const json& j) {
@@ -108,6 +112,26 @@ namespace svqa
             else
             {
                 this->staticObjectPositioningType = "random";
+            }
+
+            auto noiseAmount = j.find("noiseAmount");
+            if (noiseAmount != j.end())
+            {
+                this->noiseAmount = *noiseAmount;
+            }
+            else
+            {
+                this->noiseAmount = 0.0;
+            }
+
+            auto perturbationSeed = j.find("perturbationSeed");
+            if (perturbationSeed != j.end())
+            {
+                this->perturbationSeed = *perturbationSeed;
+            }
+            else
+            {
+                this->perturbationSeed = 42;
             }
         }
     };

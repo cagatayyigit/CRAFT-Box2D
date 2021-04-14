@@ -132,18 +132,18 @@ void ffmpeg_encoder_encode_frame(uint8_t *rgb) {
     }
 }
 
-void flipVertically(unsigned char *pixels_buffer, const unsigned int width, const unsigned int height, const int bytes_per_pixel)
+void flipVertically(unsigned char *buffer, const unsigned int width, const unsigned int height, const int bytes_per_pixel)
 {
     const unsigned int rows = height / 2; // Iterate only half the buffer to get a full flip
     const unsigned int row_stride = width * bytes_per_pixel;
     unsigned char* temp_row = (unsigned char*)malloc(row_stride);
 
-    for (int rowIndex = 0; rowIndex < rows; rowIndex++)
+    for (unsigned int row_index = 0; row_index < rows; row_index++)
     {
-        unsigned char* source = pixels_buffer + rowIndex * row_stride;
-        unsigned char* target = pixels_buffer + (height - rowIndex - 1) * row_stride;
-        memcpy(temp_row, source, row_stride);
-        memcpy(source,   target, row_stride);
+        unsigned char* source = buffer + (row_index * row_stride);
+        unsigned char* target = buffer + ((height - row_index - 1) * row_stride);
+        memcpy(temp_row, source,   row_stride);
+        memcpy(source,   target,   row_stride);
         memcpy(target,   temp_row, row_stride);
     }
 
@@ -170,6 +170,5 @@ void deinit()
     ffmpeg_encoder_finish();
     pts = 0;
 }
-
 
 #endif /* VideoWriter_h */

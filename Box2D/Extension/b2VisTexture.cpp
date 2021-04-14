@@ -181,6 +181,11 @@ b2VisTexture::b2VisTexture(const std::string& filePath, const int& materialIndex
     }
 }
 
+b2VisTexture::b2VisTexture(const int& materialIndex) 
+{
+    m_nMaterialIndex = materialIndex;
+}
+
 b2VisTexture::~b2VisTexture()
 {
     if(m_bOwner && m_nTexId>0) {

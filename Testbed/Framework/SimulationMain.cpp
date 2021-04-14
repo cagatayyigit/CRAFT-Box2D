@@ -35,7 +35,11 @@
 #include "ControllerParser.h"
 #include <time.h>
 
-
+#ifdef _MSC_VER
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h> 
+#endif
 
 //
 namespace
@@ -112,6 +116,9 @@ void renderLoop(Simulation* simulation, SettingsBase* settings)
 
 int main(int c, char** args)
 {
+#ifdef _MSC_VER
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_CHECK_ALWAYS_DF | _CRTDBG_LEAK_CHECK_DF);
+#endif
 	// To produce random numbers rather than getting same numbers on every run.
 	srand(time(NULL) + 42);
 
@@ -147,11 +154,6 @@ int main(int c, char** args)
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 	}
 
-	//		if(settings->offline)
-	//    {
-	//        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-	//    }
-
 #ifdef _MSC_VER
 	mainWindow = glfwCreateWindow(g_camera.m_width, g_camera.m_height, title, NULL, NULL);
 #else 
@@ -165,7 +167,6 @@ int main(int c, char** args)
 	}
 
 	glfwMakeContextCurrent(mainWindow);
-
 
 #ifdef _MSC_VER
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -192,6 +193,11 @@ int main(int c, char** args)
 
 	g_debugDraw.Destroy();
 	ImGui_ImplGlfwGL3_Shutdown();
-	glfwTerminate();
+	glfwTerminate(); 
+
+#ifdef _MSC_VER
+	_CrtDumpMemoryLeaks();
+#endif
+
 	return 0;
 }

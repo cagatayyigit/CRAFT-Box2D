@@ -22,7 +22,11 @@
 #include "SceneState.h" 
 #include <sstream>
 #include <string>
+#ifdef _MSC_VER
 #include <Testbed/Framework/SimulationMaterial.h>
+#else
+#include "SimulationMaterial.h"
+#endif
 
 #define LOG(str) std::cout << "[LOG] " << str << std::endl
 #define LOG_PROGRESS(str, progress) std::cout << "[LOG] " << str << " " << progress <<  "\r"
@@ -44,7 +48,10 @@ namespace svqa {
 
 		SimulationBase(Settings::Ptr _settings_)
 		{
+			m_bSceneInitialized = false;
 			m_pSettings = _settings_;
+			SET_FILE_OUTPUT_TRUE(m_pSettings->outputVideoPath)
+			
 			m_nDistinctColorUsed = 8;
 
 			m_pCausalGraph = CausalGraph::create();
@@ -80,6 +87,8 @@ namespace svqa {
 			if (isSceneInitialized() && !m_bSceneSnapshotTaken) {
 				m_StartSceneStateJSON = SimulationBase::GetSceneStateJSONObject(m_SceneJSONState, m_StepCount);
 				m_bSceneSnapshotTaken = true;
+
+				// TODO: This is probably not needed, delete with caution
 				TakeSceneSnapshot("snapshot.json");
 			} 
 
@@ -105,7 +114,7 @@ namespace svqa {
             
             if (!(m_pSettings->includeDynamicObjectsInTheScene) && m_StepCount == 1) {
                  // Take screenshot at the beginning for object segmentation.
-                TakeScreenshotForStatic();
+                TakeScreenshotForStaticObjects();
             }
             
             
@@ -149,9 +158,8 @@ namespace svqa {
                 TakeSceneSnapshot(fn);
             }
         }
-        
 
-        void TakeScreenshotForStatic() {
+        void TakeScreenshotForStaticObjects() {
             std::stringstream outputFilename;
             std::string simulation_id = std::to_string(m_pSettings->simulationID);
             std::string min_mean_max_random = m_pSettings->staticObjectPositioningType;
@@ -159,8 +167,7 @@ namespace svqa {
             outputFilename << s << ".png";
             RENDERER->SaveAsImage(outputFilename.str());
         }
-        
-        
+
         float getExtremeCases(std::string x, float min, float max){
             if (x.compare("min") == 0)
                     return min;
@@ -171,7 +178,6 @@ namespace svqa {
             return RandomFloatFromHardware(min, max);
         }
 
-        
         void TakeScreenshot(std::string output_folder_path) {
             std::stringstream outputFilename;
             
@@ -226,7 +232,9 @@ namespace svqa {
                         int step;
                         sceneJson.at("step").get_to(step);
                         if (step == 0) {
-                            m_SceneJSONState.loadFromJSON(*sceneJson.find("scene"), m_world);
+							
+                            m_SceneJSONState.loadFromJSON(*sceneJson.find("scene"), m_world,
+								m_pSettings->noiseAmount, m_pSettings->perturbationSeed);
                             m_bSceneRegenerated = true;
                             break;
                         }
@@ -237,15 +245,20 @@ namespace svqa {
                         for (const auto& sceneJson : *sceneStatesItr) {
                             int step;
                             sceneJson.at("step").get_to(step);
+
+							printf("noiseAmount: %f\n", m_pSettings->noiseAmount);
+
                             if (step == 0) {
-                                m_SceneJSONState.loadFromJSON(*sceneJson.find("scene"), m_world);
+                                m_SceneJSONState.loadFromJSON(*sceneJson.find("scene"), m_world, 
+									m_pSettings->noiseAmount, m_pSettings->perturbationSeed);
                                 m_bSceneRegenerated = true;
                                 break;
                             }
                         }
                     } else {
                         // If this JSON object is just a snapshot that doesn't contain causal graph.
-                        m_SceneJSONState.loadFromJSON(j, m_world);
+                        m_SceneJSONState.loadFromJSON(j, m_world,
+							m_pSettings->noiseAmount, m_pSettings->perturbationSeed);
                         m_bSceneRegenerated = true;
                     }
                 }
@@ -268,11 +281,6 @@ namespace svqa {
 		bool			m_bSceneSnapshotTaken;
         bool            m_bIncludeDynamicObjects;
         std::string     m_sStaticObjectOrientationType;
-
-		int randWithBound(const int& bound)
-		{
-			return (rand() & (RAND_LIMIT)) % bound;
-		}
 
 		virtual bool isSceneStable()
 		{
@@ -324,6 +332,7 @@ namespace svqa {
 				sensorVertices[i] *= 0.99f; // To not detect container event from the outside of the container.
 			}
 			basketBody->setTexture(mat.getTexture());
+
 			ObjectState::AddSensorBody(m_world, SimulationObject::SENSOR_BASKET, pos, angleInRadians, sensorVertices, 4, basketBody, b2Color(0.9f, 0.9f, 0.9f));
 		}
 
@@ -391,9 +400,6 @@ namespace svqa {
 			m_SceneJSONState.add(objectState);
 		}
 
-		
-
-
 		void AddRandomDynamicObject(b2Vec2 position, b2Vec2 velocity, int sh_sz_cl = 0b000, 
 									SimulationObject::Shape shapeType = SimulationObject::getRandomShape(),
 									SimulationObject::Size sizeType = SimulationObject::getRandomSize(),
@@ -429,7 +435,6 @@ namespace svqa {
 				// TODO: Implement the rest
 			}
 		}
-
 
 		bool CheckIfObjectIsUnique(SimulationObject::Shape shapeType, SimulationObject::Color colorType, SimulationObject::Size sizeType) {
             std::vector<int> temp;
@@ -471,14 +476,16 @@ namespace svqa {
 
 		void DetectStartTouchingEvents()
 		{
-			for (auto it = m_Contacts.begin(); it != m_Contacts.end(); it++) {
+			for (auto it = m_Contacts.begin(); it != m_Contacts.end(); ) {
 				if (m_StepCount - it->step > COLLISION_DETECTION_STEP_DIFF) {
 					//DETECTED StartTouching_Event
-					m_pCausalGraph->addEvent(StartTouchingEvent::create(it->step, (BODY*)it->contact->GetFixtureA()->GetBody(),
-						(BODY*)it->contact->GetFixtureB()->GetBody()));
+					m_pCausalGraph->addEvent(
+						StartTouchingEvent::create(it->step, (BODY*)it->contact->GetFixtureA()->GetBody(), (BODY*)it->contact->GetFixtureB()->GetBody())
+					);
 					m_StartedTouchingContacts.push_back(*it);
-					m_Contacts.erase(it--);
+					it = m_Contacts.erase(it);
 				}
+				else it++;
 			}
 		}
 
@@ -499,28 +506,36 @@ namespace svqa {
 			}
 			else if (sensorFixture->GetFilterData().categoryBits == SimulationObject::SENSOR_BASKET) {
 				// DETECTED ContainerEndUp_Event
-				m_pCausalGraph->addEvent(ContainerEndUpEvent::create(m_StepCount,
-					(BODY*)sensorFixture->GetBody()->GetUserData(), // The attached body of this sensor body.
-					(BODY*)otherFixture->GetBody()));
+				m_pCausalGraph->addEvent(
+					ContainerEndUpEvent::create(
+						m_StepCount,
+						(BODY*)sensorFixture->GetBody()->GetUserData(), // The attached body of this sensor body.
+						(BODY*)otherFixture->GetBody()
+					)
+				);
 			}
 		}
 
 		virtual void EndContact(b2Contact* contact)  override {
-			for (auto it = m_StartedTouchingContacts.begin(); it != m_StartedTouchingContacts.end(); it++) {
+			for (auto it = m_StartedTouchingContacts.begin(); it != m_StartedTouchingContacts.end(); ) {
 				if (it->contact == contact) {
 					//DETECTED EndTouching_Event
-					m_pCausalGraph->addEvent(EndTouchingEvent::create(m_StepCount, (BODY*)it->contact->GetFixtureA()->GetBody(),
-						(BODY*)it->contact->GetFixtureB()->GetBody()));
-					m_StartedTouchingContacts.erase(it--);
+					m_pCausalGraph->addEvent(
+						EndTouchingEvent::create(m_StepCount, (BODY*)it->contact->GetFixtureA()->GetBody(), (BODY*)it->contact->GetFixtureB()->GetBody())
+					);
+					it = m_StartedTouchingContacts.erase(it);
 				}
+				else it++;
 			}
-			for (auto it = m_Contacts.begin(); it != m_Contacts.end(); it++) {
+			for (auto it = m_Contacts.begin(); it != m_Contacts.end(); ) {
 				if (it->contact == contact) {
 					//DETECTED Collision_Event
-					m_pCausalGraph->addEvent(CollisionEvent::create(it->step, (BODY*)it->contact->GetFixtureA()->GetBody(),
-						(BODY*)it->contact->GetFixtureB()->GetBody()));
-					m_Contacts.erase(it--);
+					m_pCausalGraph->addEvent(
+						CollisionEvent::create(it->step, (BODY*)it->contact->GetFixtureA()->GetBody(), (BODY*)it->contact->GetFixtureB()->GetBody())
+					);
+					it = m_Contacts.erase(it);
 				}
+				else it++;
 			}
 		}
 

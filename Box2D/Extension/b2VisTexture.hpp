@@ -17,6 +17,7 @@ class b2VisTexture
 public:
     b2VisTexture(const unsigned int& texId, const int& atlasWidth, const int& atlasHeight, const b2Vec2& upperLeftInPixels, const b2Vec2& lowerRightInPixels);
     b2VisTexture(const std::string& filePath, const int& materialIndex);
+    b2VisTexture(const int& materialIndex);
     virtual ~b2VisTexture();
     
     //Getters

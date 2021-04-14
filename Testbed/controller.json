@@ -3,8 +3,8 @@
     "offline": false,
     "outputVideoPath": "output.mpg",
     "outputJSONPath": "output.json",
-    "width": 640,
-    "height": 640,
+    "width": 256,
+    "height": 256,
     "inputScenePath": "",
     "stepCount": 600
 }
