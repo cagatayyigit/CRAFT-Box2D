@@ -42,7 +42,8 @@ public:
         STATIC_TABLE = 6,
         STATIC_LEFT_BOUNDARY =7,
         STATIC_RIGHT_BOUNDARY = 8,
-        STATIC_BOTTOM_BOUNDARY = 9
+        STATIC_BOTTOM_BOUNDARY = 9,
+        STATIC_BALL = 10,
     };
     
     enum Color
@@ -105,6 +106,7 @@ public:
             case STATIC_LEFT_BOUNDARY: return "wall_l";
             case STATIC_RIGHT_BOUNDARY: return "wall_r"; //Check if using same value is ok!
             case STATIC_BOTTOM_BOUNDARY: return "ground";
+            case STATIC_BALL: return "static_ball";
             default: break;
         }
         return "";
@@ -170,6 +172,7 @@ public:
             case STATIC_LEFT_BOUNDARY:
             case STATIC_RIGHT_BOUNDARY:
             case STATIC_BOTTOM_BOUNDARY:
+            case STATIC_BALL:
                 return true;
             default: break;
         }
@@ -202,6 +205,8 @@ public:
             return std::make_shared<b2PolygonShape>(getRectangle(0.20, 25, b2Vec2(25.0f, 20.0f), 0.0f));
         case STATIC_BOTTOM_BOUNDARY:
             return std::make_shared<b2PolygonShape>(getRectangle(0.20, 25, b2Vec2(0.0f, -5.0f), M_PI / 2));
+        case STATIC_BALL:
+            return std::make_shared<b2PolygonShape>(getPolygon(3.0f, 128));
 		}
 		return nullptr;
 	}
@@ -363,6 +368,7 @@ NLOHMANN_JSON_SERIALIZE_ENUM(SimulationObject::Shape, {
     {SimulationObject::STATIC_LEFT_BOUNDARY, SimulationObject::getRepresentation(SimulationObject::STATIC_LEFT_BOUNDARY)},
     {SimulationObject::STATIC_RIGHT_BOUNDARY, SimulationObject::getRepresentation(SimulationObject::STATIC_RIGHT_BOUNDARY)},
     {SimulationObject::STATIC_BOTTOM_BOUNDARY, SimulationObject::getRepresentation(SimulationObject::STATIC_BOTTOM_BOUNDARY)},
+    {SimulationObject::STATIC_BALL, SimulationObject::getRepresentation(SimulationObject::STATIC_BALL)},
 	})
 
 NLOHMANN_JSON_SERIALIZE_ENUM( SimulationObject::Color, {

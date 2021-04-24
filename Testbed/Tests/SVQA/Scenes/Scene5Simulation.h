@@ -37,7 +37,9 @@ namespace svqa {
                             SimulationObject::STATIC_PLATFORM);
             AddStaticObject(b2Vec2(12.0f, getExtremeCases(m_sStaticObjectOrientationType,12,14)), 0, SimulationObject::STATIC_PLATFORM);
             
-            
+            AddStaticObject(b2Vec2(18.0f, getExtremeCases(m_sStaticObjectOrientationType, 12, 14)), 0, SimulationObject::STATIC_BALL);
+
+
             if(m_bIncludeDynamicObjects) {
                 
                 AddRandomDynamicObject(
