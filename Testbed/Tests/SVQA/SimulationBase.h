@@ -275,11 +275,11 @@ namespace svqa {
 	protected:
 		Settings::Ptr	m_pSettings;
 		unsigned short	m_nDistinctColorUsed;
-		bool			m_bSceneRegenerated;
-		bool			m_bSceneInitialized;
-		bool			m_bGeneratingFromJSON;
-		bool			m_bSceneSnapshotTaken;
-        bool            m_bIncludeDynamicObjects;
+		bool			m_bSceneRegenerated = false;
+		bool			m_bSceneInitialized = false;
+		bool			m_bGeneratingFromJSON = false;
+		bool			m_bSceneSnapshotTaken = false;
+        bool            m_bIncludeDynamicObjects = false;
         std::string     m_sStaticObjectOrientationType;
 
 		virtual bool isSceneStable()
