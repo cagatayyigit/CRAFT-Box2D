@@ -335,7 +335,7 @@ public:
 		chassis.Set(vertices, 6);
 		return chassis;
 	}
-    
+
     static b2ChainShape* getBasketShape()
     {
         b2ChainShape* shape = new b2ChainShape;

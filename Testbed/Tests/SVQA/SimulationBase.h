@@ -76,7 +76,6 @@ namespace svqa {
 				// Generate scene from JSON file if inputScenePath is not blank and the scene is not already generated.
 				if (isGeneratingFromJSON() && !m_bSceneRegenerated) {
 					GenerateSceneFromJson(m_pSettings->inputScenePath);
-                    
 				}
 				else InitializeScene();
 
@@ -325,12 +324,7 @@ namespace svqa {
 			// TODO: Code duplication: When we are trying to re-generate a simulation, we are adding sensor body from ObjectState.h.
 			b2Vec2* vertices = ((b2ChainShape*)fd.shape)->m_vertices;
 
-			b2Vec2 sensorVertices[4];
-			std::copy(vertices, vertices + 4, sensorVertices);
-			for (int i = 0; i < 4; i++)
-			{
-				sensorVertices[i] *= 0.99f; // To not detect container event from the outside of the container.
-			}
+			b2Vec2 sensorVertices[] = { b2Vec2(-3.300f, 2.5), b2Vec2(-2.465, -3.465), b2Vec2(2.465, -3.465), b2Vec2(3.300, 2.5) };
 			basketBody->setTexture(mat.getTexture());
 
 			ObjectState::AddSensorBody(m_world, SimulationObject::SENSOR_BASKET, pos, angleInRadians, sensorVertices, 4, basketBody, b2Color(0.9f, 0.9f, 0.9f));
