@@ -211,6 +211,8 @@
     <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene10Simulation.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene11Settings.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene11Simulation.h" />
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene12Settings.h" />
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene12Simulation.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene1Settings.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene1Simulation.h" />
     <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene2Settings.h" />

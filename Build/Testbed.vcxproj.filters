@@ -67,6 +67,9 @@
     <Filter Include="Data\Textures">
       <UniqueIdentifier>{509a2266-0e45-4010-964f-8eaa5c48020e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tests\SVQA\Scenes\Scene12">
+      <UniqueIdentifier>{e284d1a7-0f1b-45ab-a309-8ce6837552de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Testbed\Framework\Camera.hpp">
@@ -270,6 +273,12 @@
     </ClInclude>
     <ClInclude Include="..\Testbed\Framework\SimulationMaterial.h">
       <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene12Settings.h">
+      <Filter>Tests\SVQA\Scenes\Scene12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene12Simulation.h">
+      <Filter>Tests\SVQA\Scenes\Scene12</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
