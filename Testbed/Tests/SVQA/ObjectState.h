@@ -214,12 +214,7 @@ public:
 			// TODO: Fix code duplication: When we are not re-generating a simulation, we are adding sensor body from SimulationBase.h.
 			b2Vec2* vertices = ((b2ChainShape*)fd.shape)->m_vertices;
 
-			b2Vec2 sensorVertices[4];
-			std::copy(vertices, vertices + 4, sensorVertices);
-			for (int i = 0; i < 4; i++)
-			{
-				sensorVertices[i] *= 0.99f; // To not detect container event from the outside of the container.
-			}
+			b2Vec2 sensorVertices[] = { b2Vec2(-3.300f, 2.5), b2Vec2(-2.465, -3.465), b2Vec2(2.465, -3.465), b2Vec2(3.300, 2.5) };
 
 		    AddSensorBody(toWorld, SimulationObject::SENSOR_BASKET, bd.position, angle, sensorVertices, 4, body, b2Color(0.9f, 0.9f, 0.9f));
 		}
