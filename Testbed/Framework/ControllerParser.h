@@ -21,7 +21,14 @@
 #include "Scene10Simulation.h"
 #include "Scene11Simulation.h"
 #include "Scene12Simulation.h"
-
+#include "Scene13Simulation.h"
+#include "Scene14Simulation.h"
+#include "Scene15Simulation.h"
+#include "Scene16Simulation.h"
+#include "Scene17Simulation.h"
+#include "Scene18Simulation.h"
+#include "Scene19Simulation.h"
+#include "Scene20Simulation.h"
 #include "JSONHelper.h"
 
 namespace svqa {
@@ -96,6 +103,46 @@ namespace svqa {
                 Scene12Settings::Ptr setPtr = std::make_shared<Scene12Settings>();
                 setPtr->from_json(j);
                 return std::make_shared<Scene12Simulation>(setPtr);
+            }
+            else if (set.simulationID == SimulationID::ID_Scene13) {
+                Scene13Settings::Ptr setPtr = std::make_shared<Scene13Settings>();
+                setPtr->from_json(j);
+                return std::make_shared<Scene13Simulation>(setPtr);
+            }
+            else if (set.simulationID == SimulationID::ID_Scene14) {
+                Scene14Settings::Ptr setPtr = std::make_shared<Scene14Settings>();
+                setPtr->from_json(j);
+                return std::make_shared<Scene14Simulation>(setPtr);
+            }
+            else if (set.simulationID == SimulationID::ID_Scene15) {
+                Scene15Settings::Ptr setPtr = std::make_shared<Scene15Settings>();
+                setPtr->from_json(j);
+                return std::make_shared<Scene15Simulation>(setPtr);
+            }
+            else if (set.simulationID == SimulationID::ID_Scene16) {
+                Scene16Settings::Ptr setPtr = std::make_shared<Scene16Settings>();
+                setPtr->from_json(j);
+                return std::make_shared<Scene16Simulation>(setPtr);
+            }
+            else if (set.simulationID == SimulationID::ID_Scene17) {
+                Scene17Settings::Ptr setPtr = std::make_shared<Scene17Settings>();
+                setPtr->from_json(j);
+                return std::make_shared<Scene17Simulation>(setPtr);
+            }
+            else if (set.simulationID == SimulationID::ID_Scene18) {
+                Scene18Settings::Ptr setPtr = std::make_shared<Scene18Settings>();
+                setPtr->from_json(j);
+                return std::make_shared<Scene18Simulation>(setPtr);
+            }
+            else if (set.simulationID == SimulationID::ID_Scene19) {
+                Scene19Settings::Ptr setPtr = std::make_shared<Scene19Settings>();
+                setPtr->from_json(j);
+                return std::make_shared<Scene19Simulation>(setPtr);
+            }
+            else if (set.simulationID == SimulationID::ID_Scene20) {
+                Scene20Settings::Ptr setPtr = std::make_shared<Scene20Settings>();
+                setPtr->from_json(j);
+                return std::make_shared<Scene20Simulation>(setPtr);
             }
         }
         return nullptr;

@@ -23,6 +23,14 @@ enum SimulationID
 	ID_Scene10 = 10,
 	ID_Scene11 = 11,
 	ID_Scene12 = 12,
+	ID_Scene13 = 13,
+	ID_Scene14 = 14,
+	ID_Scene15 = 15,
+	ID_Scene16 = 16,
+	ID_Scene17 = 17,
+	ID_Scene18 = 18,
+	ID_Scene19 = 19,
+	ID_Scene20 = 20,
 };
 
 #endif /* SimulationID_h */

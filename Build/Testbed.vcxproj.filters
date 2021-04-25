@@ -70,6 +70,30 @@
     <Filter Include="Tests\SVQA\Scenes\Scene12">
       <UniqueIdentifier>{e284d1a7-0f1b-45ab-a309-8ce6837552de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tests\SVQA\Scenes\Scene13">
+      <UniqueIdentifier>{f3b266ce-df53-4e7a-bc86-f940b4509562}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\SVQA\Scenes\Scene14">
+      <UniqueIdentifier>{746c7da8-347f-4ae4-acfc-8b9a5880b868}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\SVQA\Scenes\Scene15">
+      <UniqueIdentifier>{d438839f-6296-41a8-9f93-9cb1c03e1699}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\SVQA\Scenes\Scene16">
+      <UniqueIdentifier>{2f28ddf2-06e3-40f3-b6f1-d19e40945f38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\SVQA\Scenes\Scene17">
+      <UniqueIdentifier>{44899f99-4b72-47cb-89f4-df93dd114ab5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\SVQA\Scenes\Scene18">
+      <UniqueIdentifier>{7bf8db54-7269-45e4-ab49-dcf03b10428d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\SVQA\Scenes\Scene19">
+      <UniqueIdentifier>{ef90c94d-79f5-4719-b5a8-5764ec8c26de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\SVQA\Scenes\Scene20">
+      <UniqueIdentifier>{ac4c2ba7-6b75-46c9-959e-f7b39edfda39}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Testbed\Framework\Camera.hpp">
@@ -279,6 +303,54 @@
     </ClInclude>
     <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene12Simulation.h">
       <Filter>Tests\SVQA\Scenes\Scene12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene13Settings.h">
+      <Filter>Tests\SVQA\Scenes\Scene13</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene13Simulation.h">
+      <Filter>Tests\SVQA\Scenes\Scene13</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene14Settings.h">
+      <Filter>Tests\SVQA\Scenes\Scene14</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene14Simulation.h">
+      <Filter>Tests\SVQA\Scenes\Scene14</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene15Settings.h">
+      <Filter>Tests\SVQA\Scenes\Scene15</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene15Simulation.h">
+      <Filter>Tests\SVQA\Scenes\Scene15</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene16Simulation.h">
+      <Filter>Tests\SVQA\Scenes\Scene16</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene16Settings.h">
+      <Filter>Tests\SVQA\Scenes\Scene16</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene17Settings.h">
+      <Filter>Tests\SVQA\Scenes\Scene17</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene17Simulation.h">
+      <Filter>Tests\SVQA\Scenes\Scene17</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene18Settings.h">
+      <Filter>Tests\SVQA\Scenes\Scene18</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene18Simulation.h">
+      <Filter>Tests\SVQA\Scenes\Scene18</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene19Settings.h">
+      <Filter>Tests\SVQA\Scenes\Scene19</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene19Simulation.h">
+      <Filter>Tests\SVQA\Scenes\Scene19</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene20Settings.h">
+      <Filter>Tests\SVQA\Scenes\Scene20</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Testbed\Tests\SVQA\Scenes\Scene20Simulation.h">
+      <Filter>Tests\SVQA\Scenes\Scene20</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
