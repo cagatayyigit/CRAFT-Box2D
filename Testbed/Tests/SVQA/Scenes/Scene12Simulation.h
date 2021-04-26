@@ -26,45 +26,70 @@ namespace svqa {
 
 
             // Basket
-            float basket_pos_x = getExtremeCases(m_sStaticObjectOrientationType, -1.0f, 1.0f);
-            AddTargetBasket(b2Vec2(0.0f, -1.2f), 0.0f);
+            float basket_pos_x = getExtremeCases(m_sStaticObjectOrientationType, -2.0f, 7.0f);
+            AddTargetBasket(b2Vec2(basket_pos_x, -1.2f), 0.0f);
             
+            // Right Most platform
+            AddStaticObject(
+                b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, 14.0f, 17.0f), getExtremeCases(m_sStaticObjectOrientationType, 13.0f, 17.0f)),
+                M_PI / getExtremeCases(m_sStaticObjectOrientationType, 3.5f, 5.0f),
+                SimulationObject::STATIC_PLATFORM);
+
             // Right platform
-            float right_platform_pos_x = 12.0f;
-            AddStaticObject(b2Vec2(right_platform_pos_x, 8.0f), M_PI / 5.0f, SimulationObject::STATIC_PLATFORM);
+            float right_platform_pos_x = 9.0f;
+            AddStaticObject(
+                b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, 7.0f, 10.0f), 19.0f), 
+                M_PI / 3.0f, 
+                SimulationObject::STATIC_PLATFORM);
+
+
+            // Mid platform
+            AddStaticObject(b2Vec2(-2.0f, 14.0f), -M_PI / 3.0f, SimulationObject::STATIC_PLATFORM);
+
 
             // Left platform
-            float left_platform_pos_x = -12.0f;
-            AddStaticObject(b2Vec2(left_platform_pos_x, 8.0f), -M_PI / 5.0f, SimulationObject::STATIC_PLATFORM);
-
-            // Static ball
-            float static_ball_pos_y = 13.0f;
-            AddStaticObject(b2Vec2(0.0f, static_ball_pos_y), 0, SimulationObject::STATIC_BALL);
+            AddStaticObject(
+                b2Vec2(-9.0f, getExtremeCases(m_sStaticObjectOrientationType, 10.0f, 15.0f)),
+                M_PI / -4.0f, 
+                SimulationObject::STATIC_PLATFORM);
 
 
+            // Left Static ball
+            AddStaticObject(b2Vec2(-2.0f, 27.0f), 0, SimulationObject::STATIC_BALL);
+
+            // Right Static ball
+            AddStaticObject(
+                b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, 5.5f, 8.0f), 33.0f),
+                0, 
+                SimulationObject::STATIC_BALL
+            );
 
             if (m_bIncludeDynamicObjects) {
 
                 
                 AddRandomDynamicObject(
-                    b2Vec2(right_platform_pos_x, 36.5f),
-                    b2Vec2(0.0f, 0.0f),
-                    0b000,
-                    SimulationObject::CIRCLE
+                    b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, -16.0f, -4.0f), 56.5f),
+                    b2Vec2(0.0f, 0.0f)
                 );
 
                 AddRandomDynamicObject(
-                    b2Vec2(left_platform_pos_x, 36.5f),
-                    b2Vec2(0.0f, 0.0f),
-                    0b000,
-                    SimulationObject::CIRCLE
+                    b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, -16.0f, -4.0f), 46.5f),
+                    b2Vec2(0.0f, 0.0f)
                 );
 
                 AddRandomDynamicObject(
-                    b2Vec2(0.1f, 36.5f),
-                    b2Vec2(0.0f, 0.0f),
-                    0b000,
-                    SimulationObject::CIRCLE
+                    b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, -4.0f, 6.0f), 56.5f),
+                    b2Vec2(0.0f, 0.0f)
+                );
+
+                AddRandomDynamicObject(
+                    b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, -4.0f, 9.0f), 49.5f),
+                    b2Vec2(0.0f, 0.0f)
+                );
+
+                AddRandomDynamicObject(
+                    b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, 6.0f, 12.0f), 48.5f),
+                    b2Vec2(0.0f, 0.0f)
                 );
 
             }
