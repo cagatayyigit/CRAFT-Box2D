@@ -24,7 +24,7 @@ namespace svqa {
         void InitializeScene() override {
             // Basket   
             float basket_pos_y = 10.0f;
-            float basket_pos_x = 12.0f;
+            float basket_pos_x = getExtremeCases(m_sStaticObjectOrientationType, 8.0f, 16.0f);
             AddTargetBasket(b2Vec2(basket_pos_x, basket_pos_y), 0.0f);
 
             // Right basket platform
@@ -35,7 +35,7 @@ namespace svqa {
             // Right inclined-platform     
             float right_incl_platform_angle = M_PI / 6.0f;
             float right_incl_platform_pos_x = 18.0f;
-            float right_incl_platform_pos_y = 28.0f;
+            float right_incl_platform_pos_y = getExtremeCases(m_sStaticObjectOrientationType, 25.0f, 29.0f);
             AddStaticObject(b2Vec2(right_incl_platform_pos_x, right_incl_platform_pos_y), 
                 right_incl_platform_angle,
                 SimulationObject::STATIC_PLATFORM);
@@ -59,21 +59,23 @@ namespace svqa {
             // Upper platform
             float upper_platform_pos_x = -12.0f;
             float upper_platform_pos_y = 36.0f;
-            AddStaticObject(b2Vec2(upper_platform_pos_x, upper_platform_pos_y), 0, SimulationObject::STATIC_PLATFORM);
+            AddStaticObject(b2Vec2(upper_platform_pos_x, upper_platform_pos_y), - M_PI / getExtremeCases(m_sStaticObjectOrientationType, 3.0f, 5.0f), SimulationObject::STATIC_PLATFORM);
 
             if (m_bIncludeDynamicObjects) 
             {
                 AddRandomDynamicObject(
-                    b2Vec2(b2Vec2(upper_platform_pos_x, upper_platform_pos_y + 1)),
+                    b2Vec2(b2Vec2(upper_platform_pos_x, upper_platform_pos_y + 4)),
                     b2Vec2(0.0f, 0.0f)
                 );
                 AddRandomDynamicObject(
-                    b2Vec2(b2Vec2(right_incl_platform_pos_x, right_incl_platform_pos_y + 1)),
+                    b2Vec2(b2Vec2(right_incl_platform_pos_x, right_incl_platform_pos_y + 5)),
                     b2Vec2(0.0f, 0.0f)
                 );
+
+                float v = getExtremeCases(m_sStaticObjectOrientationType, 15.0f, 23.0f);
                 AddRandomDynamicObject(
-                    b2Vec2(b2Vec2(left_lower_platform_pos_x, left_lower_platform_pos_y + 1)),
-                    b2Vec2(0.0f, 0.0f)
+                    b2Vec2(b2Vec2(left_lower_platform_pos_x - 2.0f , left_lower_platform_pos_y + 0.5f)),
+                    b2Vec2(v, v)
                 );
             }
         }
