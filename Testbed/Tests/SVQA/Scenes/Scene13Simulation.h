@@ -75,17 +75,20 @@ namespace svqa {
                 right_lower_platform_angle,
                 SimulationObject::STATIC_PLATFORM);
 
-            // Upper platform
-            float upper_platform_pos_x = getExtremeCases(m_sStaticObjectOrientationType, -14, -8);
-            float upper_platform_pos_y = getExtremeCases(m_sStaticObjectOrientationType, 32, 38);
-            AddStaticObject(b2Vec2(upper_platform_pos_x, upper_platform_pos_y), 0, SimulationObject::STATIC_PLATFORM);
-            
+
             if (m_bIncludeDynamicObjects) {
-                float upper_platform_object_offset = getExtremeCases(m_sStaticObjectOrientationType, -5, 5); 
+
                 AddRandomDynamicObject(
-                    b2Vec2(b2Vec2(upper_platform_pos_x + upper_platform_object_offset, upper_platform_pos_y + 1.5)),
-                    b2Vec2(0.0f, 0.0f)
+                    b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, static_ball_2_pos_x - 8, static_ball_2_pos_x + 8), getExtremeCases(m_sStaticObjectOrientationType, 35,48)),
+                    b2Vec2(0,0)
                 );
+
+                AddRandomDynamicObject(
+                    b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, static_ball_2_pos_x - 8, static_ball_2_pos_x + 8), getExtremeCases(m_sStaticObjectOrientationType, 35, 48)),
+                    b2Vec2(0, 0)
+                );
+
+
                 float right_lower_platform_object_offset = getExtremeCases(m_sStaticObjectOrientationType, -1, 1);
                 float right_lower_platform_object_speed = getExtremeCases(m_sStaticObjectOrientationType, -2, 0);
                 float right_lower_platform_object_velocity_x = right_lower_platform_object_speed * cos(right_lower_platform_angle);
