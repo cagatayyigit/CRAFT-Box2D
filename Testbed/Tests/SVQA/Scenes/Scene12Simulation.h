@@ -30,10 +30,21 @@ namespace svqa {
             AddTargetBasket(b2Vec2(basket_pos_x, -1.2f), 0.0f);
             
             // Right Most platform
+            float right_most_y = getExtremeCases(m_sStaticObjectOrientationType, 5.0f, 9.0f);
+            float right_most_x = getExtremeCases(m_sStaticObjectOrientationType, 14.0f, 17.0f);
             AddStaticObject(
-                b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, 14.0f, 17.0f), getExtremeCases(m_sStaticObjectOrientationType, 13.0f, 17.0f)),
-                M_PI / getExtremeCases(m_sStaticObjectOrientationType, 3.5f, 5.0f),
+                b2Vec2(right_most_x, right_most_y),
+                0,
                 SimulationObject::STATIC_PLATFORM);
+
+            // Left Most Platform
+            float left_most_y = getExtremeCases(m_sStaticObjectOrientationType, 25.0f, 35.0f);
+            float left_most_x = getExtremeCases(m_sStaticObjectOrientationType, -14.0f, -17.0f);
+            AddStaticObject(
+                b2Vec2(left_most_x, left_most_y),
+                -M_PI / getExtremeCases(m_sStaticObjectOrientationType, 3.5f, 4.0f),
+                SimulationObject::STATIC_PLATFORM);
+
 
             // Right platform
             float right_platform_pos_x = 9.0f;
@@ -68,8 +79,8 @@ namespace svqa {
 
                 
                 AddRandomDynamicObject(
-                    b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, -16.0f, -4.0f), 56.5f),
-                    b2Vec2(0.0f, 0.0f)
+                    b2Vec2(left_most_x - 3.0, left_most_y + 8.0f),
+                    b2Vec2(5.0f, 0.0f)
                 );
 
                 AddRandomDynamicObject(
@@ -88,8 +99,10 @@ namespace svqa {
                 );
 
                 AddRandomDynamicObject(
-                    b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, 6.0f, 12.0f), 48.5f),
-                    b2Vec2(0.0f, 0.0f)
+                    b2Vec2(right_most_x + 3.0, right_most_y + 3.0f),
+                    b2Vec2(-5.0f, 0.0f),
+                    0b100,
+                    SimulationObject::CIRCLE
                 );
 
             }
