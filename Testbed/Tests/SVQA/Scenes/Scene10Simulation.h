@@ -32,8 +32,7 @@ namespace svqa {
                             SimulationObject::STATIC_PLATFORM);
             
             // Middle Right Floor dynamic basket
-            AddStaticObject(b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, 9, 13), getExtremeCases(m_sStaticObjectOrientationType, 16, 18)),
-                            0, SimulationObject::STATIC_PLATFORM);
+           // AddStaticObject(b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, 9, 13), getExtremeCases(m_sStaticObjectOrientationType, 16, 18)), 0, SimulationObject::STATIC_PLATFORM);
             
             
             // Middle Inclined Left  Floor
@@ -43,12 +42,12 @@ namespace svqa {
             
             // Bottom Inclıned Right Floor
             float x = getExtremeCases(m_sStaticObjectOrientationType, 14, 18);
-            AddStaticObject(b2Vec2(x, 10.0f),
+            AddStaticObject(b2Vec2(x, 18.0f),
                             -46 * M_PI / getExtremeCases(m_sStaticObjectOrientationType, 51.2, 57.0),
                             SimulationObject::STATIC_PLATFORM);
             
             // Bottom Left  Floor
-            AddStaticObject(b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, -10, -6), getExtremeCases(m_sStaticObjectOrientationType, 5, 10)),
+            AddStaticObject(b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, -10, -6), getExtremeCases(m_sStaticObjectOrientationType, 3, 8)),
                             0, SimulationObject::STATIC_PLATFORM);
             
             
@@ -61,12 +60,12 @@ namespace svqa {
                 
                 
                 AddRandomDynamicObject(
-                    b2Vec2(-19.0f,  22.0f),
+                    b2Vec2(-19.0f, getExtremeCases(m_sStaticObjectOrientationType, 25, 36)),
                     b2Vec2(0.0f, 0.0f)
                 );
                 
                 AddRandomDynamicObject(
-                    b2Vec2(16.0f, 14.0f),
+                    b2Vec2(16.0f, getExtremeCases(m_sStaticObjectOrientationType, 29, 36)),
                     b2Vec2(0.0f, 0.0f)
                 );
             }
