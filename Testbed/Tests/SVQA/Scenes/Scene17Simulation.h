@@ -22,6 +22,10 @@ namespace svqa {
         }
         
         void InitializeScene() override {
+
+
+            // from SCENE 4
+            
             // Basket
             AddTargetBasket(b2Vec2(21.0f, -1.2f), 0.0f);
 
