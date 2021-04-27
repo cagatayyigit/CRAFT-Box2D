@@ -88,7 +88,7 @@ namespace svqa {
 				m_bSceneSnapshotTaken = true;
 
 				// TODO: This is probably not needed, delete with caution
-				TakeSceneSnapshot("snapshot.json");
+				// TakeSceneSnapshot("snapshot.json");
 			} 
 
 			Simulation::Step(settings);
