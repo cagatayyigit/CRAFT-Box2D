@@ -131,7 +131,7 @@ namespace svqa
             }
             else
             {
-                this->perturbationSeed = 42;
+                this->perturbationSeed = -1;
             }
         }
     };
