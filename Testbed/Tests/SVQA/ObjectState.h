@@ -224,7 +224,13 @@ public:
 
 	b2BodyDef AddNoiseToDynamicObject(b2BodyDef bd, float amount, int perturbationSeed) {
 		if (bd.type != 0) { // if not static
-			float randomFloat = RandomFloatWithSeed(-1.0, 1.0, perturbationSeed);
+			float randomFloat;
+			if (perturbationSeed == -1) { // If the seed not set, use random seed.
+				randomFloat = RandomFloatFromHardware(-1.0, 1.0);
+			} 
+			else {
+				randomFloat = RandomFloatWithSeed(-1.0, 1.0, perturbationSeed);
+			}
 
 			float new_angle = bd.angle + (bd.angle * amount * randomFloat);
 			bd.angle = new_angle;
