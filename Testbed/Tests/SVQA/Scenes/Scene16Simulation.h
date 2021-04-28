@@ -53,8 +53,8 @@ namespace svqa {
                 );
 
                 AddRandomDynamicObject(
-                    b2Vec2(-18.0f, 11.2f),
-                    b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, 5.0f, 10.0f), 0.0f),
+                    b2Vec2(18.0f, 11.2f),
+                    b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, -10.0f, -5.0f), 0.0f),
                     0b100,
                     SimulationObject::Shape::CIRCLE);
 
