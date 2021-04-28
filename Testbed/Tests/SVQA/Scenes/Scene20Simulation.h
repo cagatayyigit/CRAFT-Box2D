@@ -45,9 +45,9 @@ namespace svqa {
                 float y3 = getExtremeCases(m_sStaticObjectOrientationType, 42, 46);
 
 
-                AddRandomDynamicObject(b2Vec2(10, y3), b2Vec2(0.0f, 0.0f));
-                AddRandomDynamicObject(b2Vec2(1, y3-4), b2Vec2(0.0f, 0.0f));
-                AddRandomDynamicObject(b2Vec2(-10, y3-12), b2Vec2(0.0f, 0.0f), 0b100, SimulationObject::TRIANGLE);
+                AddRandomDynamicObject(b2Vec2(10, y3), b2Vec2(-1.0f, -1.0f));
+                AddRandomDynamicObject(b2Vec2(1, y3-4), b2Vec2(-1.0f, -1.0f));
+                AddRandomDynamicObject(b2Vec2(-10, y3-12), b2Vec2(-1.5f, -1.5f), 0b100, SimulationObject::TRIANGLE);
             }
 
 
