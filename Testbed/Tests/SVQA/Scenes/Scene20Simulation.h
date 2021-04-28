@@ -33,7 +33,7 @@ namespace svqa {
 
 
             float y2 = getExtremeCases(m_sStaticObjectOrientationType, 13, 16);
-            AddStaticObject(b2Vec2(-18, y2), -M_PI / 4, SimulationObject::STATIC_PLATFORM);
+            AddStaticObject(b2Vec2(-18, y2), -M_PI / getExtremeCases(m_sStaticObjectOrientationType, 4, 5), SimulationObject::STATIC_PLATFORM);
 
 
             AddStaticObject(b2Vec2(-8, 28),  M_PI / 6, SimulationObject::STATIC_PLATFORM);
@@ -42,9 +42,12 @@ namespace svqa {
 
             if (m_bIncludeDynamicObjects) {
                
-                AddRandomDynamicObject(b2Vec2(10, 42.0f), b2Vec2(0.0f, 0.0f));
-                AddRandomDynamicObject(b2Vec2(1, 38.0f), b2Vec2(0.0f, 0.0f));
-                AddRandomDynamicObject(b2Vec2(-10, 30.0f), b2Vec2(0.0f, 0.0f), 0b100, SimulationObject::TRIANGLE);
+                float y3 = getExtremeCases(m_sStaticObjectOrientationType, 42, 46);
+
+
+                AddRandomDynamicObject(b2Vec2(10, y3), b2Vec2(0.0f, 0.0f));
+                AddRandomDynamicObject(b2Vec2(1, y3-4), b2Vec2(0.0f, 0.0f));
+                AddRandomDynamicObject(b2Vec2(-10, y3-12), b2Vec2(0.0f, 0.0f), 0b100, SimulationObject::TRIANGLE);
             }
 
 
