@@ -29,7 +29,7 @@ namespace svqa {
 
             float y = getExtremeCases(m_sStaticObjectOrientationType, 6, 8);
             AddStaticObject(b2Vec2(0, y), 0, SimulationObject::STATIC_PLATFORM);
-            AddStaticObject(b2Vec2(6, y), 0, SimulationObject::STATIC_PLATFORM);
+            AddStaticObject(b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, 3, 7), y), 0, SimulationObject::STATIC_PLATFORM);
 
 
             float y2 = getExtremeCases(m_sStaticObjectOrientationType, 13, 16);
