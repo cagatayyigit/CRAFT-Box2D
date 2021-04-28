@@ -40,10 +40,7 @@ namespace svqa {
             // Left Most Platform
             float left_most_y = getExtremeCases(m_sStaticObjectOrientationType, 25.0f, 35.0f);
             float left_most_x = getExtremeCases(m_sStaticObjectOrientationType, -14.0f, -17.0f);
-            AddStaticObject(
-                b2Vec2(left_most_x, left_most_y),
-                -M_PI / getExtremeCases(m_sStaticObjectOrientationType, 3.5f, 4.0f),
-                SimulationObject::STATIC_PLATFORM);
+
 
 
             // Right platform
@@ -68,12 +65,6 @@ namespace svqa {
             // Left Static ball
             AddStaticObject(b2Vec2(-2.0f, 27.0f), 0, SimulationObject::STATIC_BALL);
 
-            // Right Static ball
-            AddStaticObject(
-                b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, 5.5f, 8.0f), 33.0f),
-                0, 
-                SimulationObject::STATIC_BALL
-            );
 
             if (m_bIncludeDynamicObjects) {
 
@@ -83,10 +74,13 @@ namespace svqa {
                     b2Vec2(5.0f, 0.0f)
                 );
 
-                AddRandomDynamicObject(
+                /*
+                                AddRandomDynamicObject(
                     b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, -16.0f, -4.0f), 46.5f),
                     b2Vec2(0.0f, 0.0f)
                 );
+
+                */
 
                 AddRandomDynamicObject(
                     b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, -4.0f, 6.0f), 56.5f),
