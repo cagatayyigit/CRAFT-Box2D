@@ -27,11 +27,13 @@ namespace svqa {
             AddTargetBasket(b2Vec2(getExtremeCases(m_sStaticObjectOrientationType, 15, 20), -1.2f), 0.0f);
 
 
-            AddStaticObject(b2Vec2(0, 7), 0, SimulationObject::STATIC_PLATFORM);
-            AddStaticObject(b2Vec2(6, 7), 0, SimulationObject::STATIC_PLATFORM);
+            float y = getExtremeCases(m_sStaticObjectOrientationType, 6, 8);
+            AddStaticObject(b2Vec2(0, y), 0, SimulationObject::STATIC_PLATFORM);
+            AddStaticObject(b2Vec2(6, y), 0, SimulationObject::STATIC_PLATFORM);
 
 
-            AddStaticObject(b2Vec2(-18, 15), -M_PI / 4, SimulationObject::STATIC_PLATFORM);
+            float y2 = getExtremeCases(m_sStaticObjectOrientationType, 13, 16);
+            AddStaticObject(b2Vec2(-18, y2), -M_PI / 4, SimulationObject::STATIC_PLATFORM);
 
 
             AddStaticObject(b2Vec2(-8, 28),  M_PI / 6, SimulationObject::STATIC_PLATFORM);
