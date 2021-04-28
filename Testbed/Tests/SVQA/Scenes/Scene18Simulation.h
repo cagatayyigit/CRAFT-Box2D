@@ -41,10 +41,7 @@ namespace svqa {
             AddStaticObject(b2Vec2(-18.0f, getExtremeCases(m_sStaticObjectOrientationType, 15.0f, 17.0f)),
                 4 * M_PI / 5, SimulationObject::STATIC_PLATFORM);
 
-            // Middle Left  Floor
-            AddStaticObject(b2Vec2(-5.0f, 18.0f), 51 * M_PI / getExtremeCases(m_sStaticObjectOrientationType, 51.2, 57.0),
-                SimulationObject::STATIC_PLATFORM);
-
+   
 
             AddStaticObject(b2Vec2(-4.0f, 25.0f), 0, SimulationObject::STATIC_BALL);
 
