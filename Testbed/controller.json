@@ -1,10 +1,13 @@
 {
-    "simulationID": 15,
-    "offline": false,
-    "outputVideoPath": "output.mpg",
-    "outputJSONPath": "output.json",
-    "width": 256,
-    "height": 256,
-    "inputScenePath": "",
-    "stepCount": 600
+  "simulationID": 15,
+  "offline": false,
+  "outputVideoPath": "output.mpg",
+  "outputJSONPath": "output.json",
+  "width": 256,
+  "height": 256,
+  "inputScenePath": "",
+  "stepCount": 600,
+  "screenshotOutputFolder": "",
+  "includeDynamicObjects": true,
+  "staticObjectOrientationType": "mean"
 }

@@ -113,7 +113,7 @@ namespace svqa {
             
             if (!(m_pSettings->includeDynamicObjectsInTheScene) && m_StepCount == 1) {
                  // Take screenshot at the beginning for object segmentation.
-                TakeScreenshotForStaticObjects();
+                TakeScreenshotForStaticObjects(m_pSettings->screenshotOutputFolder);
             }
             
             
@@ -158,12 +158,12 @@ namespace svqa {
             }
         }
 
-        void TakeScreenshotForStaticObjects() {
+        void TakeScreenshotForStaticObjects(std::string output_folder_path) {
             std::stringstream outputFilename;
             std::string simulation_id = std::to_string(m_pSettings->simulationID);
             std::string min_mean_max_random = m_pSettings->staticObjectPositioningType;
-            std::string s =  "./screenshots/statics_ss/sid_"+simulation_id + "_" + min_mean_max_random;
-            outputFilename << s << ".png";
+            std::string s =  "/sid_"+simulation_id + "_" + min_mean_max_random;
+            outputFilename << output_folder_path << s << ".png";
             RENDERER->SaveAsImage(outputFilename.str());
         }
 
