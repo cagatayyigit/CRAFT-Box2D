@@ -9,5 +9,5 @@
   "stepCount": 600,
   "screenshotOutputFolder": "",
   "includeDynamicObjects": true,
-  "staticObjectOrientationType": "mean"
+  "staticObjectPositioningType": "mean"
 }
