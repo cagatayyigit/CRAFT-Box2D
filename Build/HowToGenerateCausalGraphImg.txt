@@ -1,0 +1,5 @@
+go to: intuitive-physics\simulation\2d\SVQA-Box2D\Build
+
+create: graph.txt
+copy&paste: causal graph text to the graph.txt
+run command: dot -Tpng graph.txt -o graph.png
