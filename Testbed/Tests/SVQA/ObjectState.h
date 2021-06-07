@@ -184,8 +184,9 @@ public:
 		case SimulationObject::STATIC_BASKET: 
 		case SimulationObject::STATIC_TABLE: 
 		case SimulationObject::STATIC_LEFT_BOUNDARY: 
-		case SimulationObject::STATIC_RIGHT_BOUNDARY: 
+		case SimulationObject::STATIC_RIGHT_BOUNDARY:
 		case SimulationObject::STATIC_BOTTOM_BOUNDARY:
+		case SimulationObject::STATIC_BALL:
 			body->setTexture(platformMat.getTexture());
 			break;
 		}
