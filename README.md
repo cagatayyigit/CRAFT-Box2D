@@ -1,6 +1,17 @@
-This is an extension to famous 2D physics engine [Box2D](https://github.com/erincatto/box2d).
+# CRAFT-Box2D
 
-box2d provides 2-dimensional physics engine for our simulations. To draw simulated objects, we extended it and add the following classes. Some of them are derived from their counterparts in box2d.
+The simulator that we used to render 2D physics simulations which output simulation data used to generate questions. You can go to [here](./data_generation/2d/CRAFT-Box2D) for detailed explanations.
+
+**CRAFT: A Benchmark for Causal Reasoning About Forces and inTeractions**
+<br>Tayfun Ates*, M. Samil Atesoglu*, Cagatay Yigit*, Ilker Kesen, Mert Kobas, Erkut Erdem, Aykut Erdem, Tilbe Goksun, Deniz Yuret
+<br>*NeurIPS 2021 Submission, Datasets and Benchmarks Track*
+
+[OpenReview Preprint](https://openreview.net/pdf?id=GVe2IvtZtVY), [Project Website](https://sites.google.com/view/craft-benchmark) 
+
+The dataset is available on [Zenodo](https://zenodo.org/record/4904783).
+___
+
+Box2D provides 2-dimensional physics engine for our simulations. To draw simulated objects, we extended it and add the following classes. Some of them are derived from their counterparts in box2d.
 
 - b2VisBody
 - b2VisWorld
