@@ -1,6 +1,6 @@
 # CRAFT-Box2D
 
-The simulator that we used to render 2D physics simulations which output simulation data used to generate questions. You can go to [here](./data_generation/2d/CRAFT-Box2D) for detailed explanations.
+The simulator that we used to render 2D physics simulations which output simulation data used to generate questions. You can go to [here](https://github.com/hucvl/craft) for detailed explanations.
 
 **CRAFT: A Benchmark for Causal Reasoning About Forces and inTeractions**
 <br>Tayfun Ates*, M. Samil Atesoglu*, Cagatay Yigit*, Ilker Kesen, Mert Kobas, Erkut Erdem, Aykut Erdem, Tilbe Goksun, Deniz Yuret
